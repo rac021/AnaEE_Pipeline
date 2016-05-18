@@ -19,8 +19,10 @@ else
 	fi
        
 	if docker history -q $DEFAULT_BLZ_IMAGE >/dev/null 2>&1; then
+	    container_id=`docker images -q $DEFAULT_BLZ_IMAGE `
 	    echo "$DEFAULT_BLZ_IMAGE already exist, remove it..."
-	    docker rmi -f $DEFAULT_BLZ_IMAGE
+	    echo "Conainer ID : $container_id "
+	    docker rmi -f $container_id
 	fi
 
 	export BLZ_IMAGE=$DEFAULT_BLZ_IMAGE
