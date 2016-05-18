@@ -1,6 +1,6 @@
 # AnaEE_Pipeline
 
-the script `00_master_pipeline.sh` `BUILD` and `DEPLOY` Blazegraph cluster.
+the script `00_master_pipeline.sh` **`BUILD`** and **`DEPLOY`** Blazegraph cluster.
 
 00_master_pipeline.sh parameters :
  
