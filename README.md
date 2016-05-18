@@ -2,7 +2,7 @@
 
 the script `00_master_pipeline.sh` **`BUILD`** and **`DEPLOY`** Blazegraph cluster.
 
-######sudo find . -name "*.sh" -exec chmod +x {} \;
+<h6>sudo find . -name "*.sh" -exec chmod +x {} \; </h6>
 
 00_master_pipeline.sh Parameters :
  
@@ -13,6 +13,6 @@ the script `00_master_pipeline.sh` **`BUILD`** and **`DEPLOY`** Blazegraph clust
 Ex :
 
     
-    ./00_master_pipeline.sh blz_img  ola_namespace
+    ######./00_master_pipeline.sh blz_img  ola_namespace
      
      
