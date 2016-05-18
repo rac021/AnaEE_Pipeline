@@ -71,8 +71,8 @@ if docker history -q $BLZ_IMAGE >/dev/null 2>&1; then
 
     # Run bigdata cluster using host_2 as EndPoint
     docker exec $HOST_2 ./nanoSparqlServer.sh 9999 ola &
-
-fi
+    
 else
 echo " $BLZ_IMAGE not found !! "
+fi
 
