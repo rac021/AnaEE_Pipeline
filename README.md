@@ -1,8 +1,7 @@
 # AnaEE_Pipeline
+<h5>sudo find . -name "*.sh" -exec chmod +x {} \; </h5>
 
 the script `00_master_pipeline.sh` **`BUILD`** and **`DEPLOY`** Blazegraph cluster.
-
-<h6>sudo find . -name "*.sh" -exec chmod +x {} \; </h6>
 
 00_master_pipeline.sh Parameters :
  
