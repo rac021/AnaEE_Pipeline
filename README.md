@@ -11,6 +11,6 @@ the script `00_master_pipeline.sh` **`BUILD`** and **`DEPLOY`** Blazegraph clust
 Ex :
 
     
-    ./00_master_pipeline.sh **blz_img**  **ola_namespace**
+    ./00_master_pipeline.sh blz_img  ola_namespace
      
      
