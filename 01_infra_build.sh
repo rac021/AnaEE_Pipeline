@@ -16,3 +16,4 @@ export BLZ_IMAGE=$DEFAULT_BLZ_IMAGE
 echo "building image : $DEFAULT_BLZ_IMAGE "
 
 docker build -t $BLZ_IMAGE Docker
+
