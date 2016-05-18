@@ -7,6 +7,7 @@
 -     $2 : Blazegraph_namespace
 
 Ex :
+
     ./master_pipeline.sh blz_img  ola_namespace
      
      
