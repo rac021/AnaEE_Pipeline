@@ -13,7 +13,7 @@ SUBNET="mynet123"
 SUBNET_CHECK=`docker network ls | grep $SUBNET`
 
 if [[ "${SUBNET_CHECK}" == *$SUBNET* ]]; then
-  echo "subnet already exsting ";
+  echo "subnet already existing ";
 else
   echo " create subnet $SUBNET "
   docker network create --subnet=192.168.56.250/24 $SUBNET # docker network rm mynet123
