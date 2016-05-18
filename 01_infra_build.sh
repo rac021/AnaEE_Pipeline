@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Note :
+# To be able to set environment variables, 
+# this script mut be launched using :  . ./01_infra_build.sh
+
 DEFAULT_BLZ_IMAGE="blazegraph"
 
   if test ! -z "$1" ; then
