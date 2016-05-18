@@ -27,10 +27,10 @@ SUBNET_CHECK=`docker network ls | grep $SUBNET`
 if docker history -q $BLZ_IMAGE >/dev/null 2>&1; then
 	    
     if [[ "${SUBNET_CHECK}" == *$SUBNET* ]]; then
-      echo "subnet already existing ";
+      echo "subnet - $SUBNET - already existing ";
     else
       echo " create subnet $SUBNET "
-      docker network create --subnet=192.168.56.250/24 $SUBNET # docker network rm mynet123
+      docker network create --subnet=192.168.56.250/24 $SUBNET # docker network rm $SUBNET
     fi
 
     $(docker inspect --format="{{ .State.Running }}" $HOST_0 2> /dev/null)
