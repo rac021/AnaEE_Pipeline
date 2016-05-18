@@ -6,7 +6,6 @@ the script `00_master_pipeline.sh` **`BUILD`** and **`DEPLOY`** Blazegraph clust
  
       $1 : image_docker_name  
 
-
       $2 : blazegraph_namespace 
 
 Ex : 
