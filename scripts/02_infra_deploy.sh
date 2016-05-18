@@ -6,8 +6,14 @@
 # Docker version min : 1.10 
 # $1 blazegraph nameSpace 
 
+DEFAULT_DOCKER_IMAGE_NAME="blazegraph"
+
 # get image docker name from environment
 BLZ_IMAGE=$DEFAULT_BLZ_IMAGE
+
+if test -z $BLZ_IMAGE ; then
+   BLZ_IMAGE=$DEFAULT_DOCKER_IMAGE_NAME
+fi
 
 # Default NameSpace
 NAMESPACE="ola"
