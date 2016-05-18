@@ -2,6 +2,8 @@
 
 the script `00_master_pipeline.sh` **`BUILD`** and **`DEPLOY`** Blazegraph cluster.
 
+######sudo find . -name "*.sh" -exec chmod +x {} \;
+
 00_master_pipeline.sh Parameters :
  
 -     $1 : Image_docker_name
