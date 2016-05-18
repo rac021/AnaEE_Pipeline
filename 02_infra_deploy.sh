@@ -4,6 +4,7 @@
 # To be able to get environment variables, 
 # this script mut be launched using :  . ./02_infra_deploy.sh
 # Docker version min : 1.10 
+# $1 blazegraph nameSpace 
 
 # get image docker name from environment
 BLZ_IMAGE=$DEFAULT_BLZ_IMAGE
