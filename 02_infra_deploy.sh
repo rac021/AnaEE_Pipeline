@@ -1,14 +1,16 @@
 #!/bin/bash
+
 # Docker version min : 1.10 
 
 # check if subnet exist, create it else 
-subnet=`docker network ls | grep mynet123`
-# docker network rm mynet123
-if [[ "${subnet}" == *mynet123* ]]; then
+
+SUBNET=`docker network ls | grep mynet123`
+
+if [[ "${SUBNET}" == *mynet123* ]]; then
   echo "subnet already exsting ";
 else
   echo " create subnet mynet123 "
-  docker network create --subnet=192.168.56.250/24 mynet123
+  docker network create --subnet=192.168.56.250/24 mynet123 # docker network rm mynet123
 fi
 
 docker run -d --net mynet123 --name host_2 \
