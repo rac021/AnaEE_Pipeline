@@ -6,7 +6,7 @@
 
 docker_file_path="Docker/Dockerfile"
 
-if [ ! -e "docker_file_path" ]
+if [ ! -e $docker_file_path ]
 
 then
     echo "$docker_file_path not found. have you clone project from git ? "
