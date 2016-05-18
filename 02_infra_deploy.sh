@@ -1,11 +1,13 @@
 #!/bin/bash
 
+# Note :
+# To be able to get environment variables, 
+# this script mut be launched using :  . ./02_infra_deploy.sh
 # Docker version min : 1.10 
 
-# check if subnet exist, create it else 
+NAMESPACE="ola"
 
 BLZ_IMAGE=$DEFAULT_BLZ_IMAGE
-
 
 HOST_0="HOST_0"
 HOST_1="HOST_1"
@@ -70,9 +72,9 @@ if docker history -q $BLZ_IMAGE >/dev/null 2>&1; then
     sleep 10 
 
     # Run bigdata cluster using host_2 as EndPoint
-    docker exec $HOST_2 ./nanoSparqlServer.sh 9999 ola &
+    docker exec $HOST_2 ./nanoSparqlServer.sh 9999 $NAMESPACE &
     
 else
-echo " $BLZ_IMAGE not found !! "
+echo " Image '$BLZ_IMAGE' not found !! "
 fi
 
