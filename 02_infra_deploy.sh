@@ -74,7 +74,7 @@ if docker history -q $BLZ_IMAGE >/dev/null 2>&1; then
            --ip 192.168.56.100 -p 9999:9999     \
            -it --entrypoint /bin/bash $BLZ_IMAGE -c "./bigdata start; while true; do sleep 1000; done "
 
-    echo "waiting for blazegraph cluter... "
+    echo "waiting for blazegraph Clutser... "
     sleep 10 
 
     # Run bigdata cluster using host_2 as EndPoint
