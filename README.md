@@ -1,6 +1,6 @@
 # AnaEE_Pipeline
 
- **master_pipeline Parameters : **
+ **master_pipeline Parameters :**
  
 -     $1 : Image_docker_name
      
