@@ -5,9 +5,15 @@
 # this script mut be launched using :  . ./02_infra_deploy.sh
 # Docker version min : 1.10 
 
+# get image docker name from environment
+BLZ_IMAGE=$DEFAULT_BLZ_IMAGE
+
+# Default NameSpace
 NAMESPACE="ola"
 
-BLZ_IMAGE=$DEFAULT_BLZ_IMAGE
+if test ! -z "$1" ; then
+   NAMESPACE=$1
+fi
 
 HOST_0="HOST_0"
 HOST_1="HOST_1"
@@ -77,4 +83,3 @@ if docker history -q $BLZ_IMAGE >/dev/null 2>&1; then
 else
 echo " Image '$BLZ_IMAGE' not found !! "
 fi
-
