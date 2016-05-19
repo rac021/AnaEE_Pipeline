@@ -30,8 +30,15 @@ else
 
 	export BLZ_IMAGE=$DEFAULT_BLZ_IMAGE
 
-	echo "Building Image : $DEFAULT_BLZ_IMAGE "
-
+	tput setaf 2
+	echo ""
+	echo "############################################"
+	echo "### Building Image : $DEFAULT_BLZ_IMAGE  ###"
+	echo "############################################"
+	echo ""
+	sleep 2
+	tput setaf 7
+	
 	docker build -t $DEFAULT_BLZ_IMAGE $DOCKER_FILE_PATH
 fi
 
