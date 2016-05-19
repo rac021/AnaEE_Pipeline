@@ -8,6 +8,9 @@ then
 . ./scripts/02_infra_deploy.sh $2
 
 else
-    echo "invalid argument please pass only two arguments "
+    echo "invalid argument : please pass exactly two arguments "
+    echo " arg_1 : Image_docker_name                           "
+    echo " arg_2 : Blazegraph_namespace                        "
+    
 fi
 
