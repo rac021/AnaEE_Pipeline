@@ -34,3 +34,4 @@ else
 
 	docker build -t $DEFAULT_BLZ_IMAGE $DOCKER_FILE_PATH
 fi
+
