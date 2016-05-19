@@ -4,31 +4,33 @@
 # To be able to set environment variables, 
 # this script mut be launched using :  . ./01_infra_build.sh
 
- # Default name of docker image
-DEFAULT_BLZ_IMAGE="blazegraph"
+CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-docker_file_path="Docker/Dockerfile"
+# Default name of docker image
+DEFAULT_BLZ_IMAGE="BLZ"
 
-if [ ! -e $docker_file_path ]
+DOCKER_FILE_PATH="$CURRENT_PATH/Docker"
+
+if [ ! -e $DOCKER_FILE_PATH ]
 
 then
-    echo "$docker_file_path not found. have you clone project from git ? "
+    echo "$CURRENT_PATH Not found !! Haa Project cloned from Git ? "
 else
        	if test ! -z "$1" ; then
 	   DEFAULT_BLZ_IMAGE=$1
 	fi
        
 	if docker history -q $DEFAULT_BLZ_IMAGE >/dev/null 2>&1; then
-	    container_id=`docker images -q $DEFAULT_BLZ_IMAGE `
+
+	    CONTAINER_ID=`docker images -q $DEFAULT_BLZ_IMAGE `
 	    echo "$DEFAULT_BLZ_IMAGE already exist, remove it..."
-	    echo "Conainer ID : $container_id "
-	    docker rmi -f $container_id
+	    echo "Conainer ID : $CONTAINER_ID "
+	    docker rmi -f $CONTAINER_ID
 	fi
 
 	export BLZ_IMAGE=$DEFAULT_BLZ_IMAGE
 
-	echo "building image : $DEFAULT_BLZ_IMAGE "
+	echo "Building Image : $DEFAULT_BLZ_IMAGE "
 
-	docker build -t $BLZ_IMAGE Docker
-
+	docker build -t $DEFAULT_BLZ_IMAGE $DOCKER_FILE_PATH
 fi
