@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo
 echo "Executing Script : $0 "
 echo ""
 
@@ -15,8 +16,6 @@ DIRECTORY_DATA_CONFIG="conf"
 TMP="tmp"
 
 if [ ! -d "$ROOT_PATH/$DIRECTORY_LIBS" ]; then
-cd $ROOT_PATH/$DIRECTORY_LIBS
-echo "create FOLER :      $ROOT_PATH/$DIRECTORY_LIBS "
 mkdir -p $ROOT_PATH/$DIRECTORY_LIBS
 fi
 if [ ! -d "$ROOT_PATH/$DIRECTORY_DATA" ]; then
@@ -31,6 +30,7 @@ fi
 if [ ! -d "$ROOT_PATH/$CURRENT_DIRECTORY/$DIRECTORY_DATA_CONFIG" ]; then
 mkdir -p $ROOT_PATH/$CURRENT_DIRECTORY/$DIRECTORY_DATA_CONFIG
 fi
+
 
 #######################
 #### Install yedGen ###
@@ -111,4 +111,5 @@ echo "#########################"
 echo ""
 sleep 2
 tput setaf 7
+
 
