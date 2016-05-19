@@ -6,27 +6,25 @@
 # Docker version min : 1.10 
 # $1 blazegraph nameSpace 
 
-DEFAULT_DOCKER_IMAGE_NAME="blazegraph"
+HOST_0="HOST_0"
+HOST_1="HOST_1"
+HOST_2="HOST_2"
+
+SUBNET="mynet123"
+
+DEFAULT_DOCKER_IMAGE_NAME="BLZ"
 
 # get image docker name from environment
 BLZ_IMAGE=$DEFAULT_BLZ_IMAGE
-
 if test -z $BLZ_IMAGE ; then
    BLZ_IMAGE=$DEFAULT_DOCKER_IMAGE_NAME
 fi
 
 # Default NameSpace
 NAMESPACE="ola"
-
 if test ! -z "$1" ; then
    NAMESPACE=$1
 fi
-
-HOST_0="HOST_0"
-HOST_1="HOST_1"
-HOST_2="HOST_2"
-
-SUBNET="mynet123"
 
 SUBNET_CHECK=`docker network ls | grep $SUBNET`
 
