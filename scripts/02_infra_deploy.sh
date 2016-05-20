@@ -6,11 +6,17 @@
 # Docker version min : 1.10 
 # $1 blazegraph nameSpace 
 
+PORT="9999"
+
 HOST_0="HOST_0"
 HOST_1="HOST_1"
 HOST_2="HOST_2"
 
 SUBNET="mynet123"
+
+# rw : read-write Mode 
+# ro : readOnly Mode 
+DEFAULT_MODE="rw"
 
 DEFAULT_DOCKER_IMAGE_NAME="BLZ"
 
@@ -83,7 +89,7 @@ if docker history -q $BLZ_IMAGE >/dev/null 2>&1; then
     sleep 10 
 
     # Run bigdata cluster using host_2 as EndPoint
-    docker exec $HOST_2 ./nanoSparqlServer.sh 9999 $NAMESPACE &
+    docker exec $HOST_2 ./nanoSparqlServer.sh $PORT $NAMESPACE $DEFAULT_MODE &
     
 else
 echo " Image '$BLZ_IMAGE' not found !! "
