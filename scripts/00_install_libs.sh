@@ -120,7 +120,6 @@ mv -v $ROOT_PATH/$DIRECTORY_LIBS/$TMP/$ONTOP_EXP_LOCATION \
       
 rm -rf $ROOT_PATH/$DIRECTORY_LIBS/$TMP/* $ROOT_PATH/$DIRECTORY_LIBS/$TMP/.git
 
-
 ##################################
 ###### Install CoreseInfer #######
 ##################################
