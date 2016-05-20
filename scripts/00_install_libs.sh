@@ -8,15 +8,14 @@ CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 CURRENT_DIRECTORY="scripts"
 ROOT_PATH="${CURRENT_PATH/'/'$CURRENT_DIRECTORY/''}"
 
+TMP="tmp"
+EXAMPLES="exemples"
 DIRECTORY_LIBS="libs"
 DIRECTORY_DATA="data"
 DIRECTORY_DATA_ONTOP="ontop"
 DIRECTORY_DATA_CORESE="corese"
 DIRECTORY_DATA_YEDGEN="yedGen"
 DIRECTORY_DATA_CONFIG="conf"
-TMP="tmp"
-EXAMPLES="exemples"
-
 
 YEDGEN_COMPILE_NAME="YedODBA-3.14.2-1.0-SNAPSHOT-jar-with-dependencies.jar"
 YEDGEN_TARGET_NAME="yedGen.jar"
@@ -29,7 +28,6 @@ ONTOP_EXP_LOCATION="src/main/resources/mapping/*"
 CORESE_COMPILE_NAME="CoreseInferMaven-1.0.0-jar-with-dependencies.jar "
 CORESE_TARGET_NAME="CoreseInfer.jar"
 CORESE_EXP_LOCATION="src/main/resources/*"
-
 
 if [ ! -d "$ROOT_PATH/$DIRECTORY_LIBS" ]; then
 mkdir -p $ROOT_PATH/$DIRECTORY_LIBS
@@ -114,8 +112,10 @@ mvn clean install assembly:single
 
 echo
 
-mv -v $ROOT_PATH$DIRECTORY_LIBS/$TMP/target/$ONTOP_COMPILE_NAME $ROOT_PATH/$DIRECTORY_LIB/$ONTOP_TARGET_NAME
-
+mv -v $ROOT_PATH/$DIRECTORY_LIBS/$TMP/target/$ONTOP_COMPILE_NAME \
+      $ROOT_PATH/$DIRECTORY_LIBS/$ONTOP_TARGET_NAME
+      
+sleep 10000
 mv -v $ROOT_PATH/$DIRECTORY_LIBS/$TMP/$ONTOP_EXP_LOCATION \
       $ROOT_PATH/$DIRECTORY_LIBS/$EXAMPLES/$DIRECTORY_DATA_ONTOP
       
