@@ -17,6 +17,20 @@ DIRECTORY_DATA_CONFIG="conf"
 TMP="tmp"
 EXAMPLES="exemples"
 
+
+YEDGEN_COMPILE_NAME="YedODBA-3.14.2-1.0-SNAPSHOT-jar-with-dependencies.jar"
+YEDGEN_TARGET_NAME="yedGen.jar"
+YEDGEN_EXP_LOCATION="src/main/resources/*"
+
+ONTOP_COMPILE_NAME="ontop-materializer-1.17.0-jar-with-dependencies.jar "
+ONTOP_TARGET_NAME="Ontop-Materializer.jar"
+ONTOP_EXP_LOCATION="src/main/resources/mapping/*"
+
+CORESE_COMPILE_NAME="CoreseInferMaven-1.0.0-jar-with-dependencies.jar "
+CORESE_TARGET_NAME="CoreseInfer.jar"
+CORESE_EXP_LOCATION="src/main/resources/*"
+
+
 if [ ! -d "$ROOT_PATH/$DIRECTORY_LIBS" ]; then
 mkdir -p $ROOT_PATH/$DIRECTORY_LIBS
 fi
@@ -48,24 +62,34 @@ if [ ! -d "$ROOT_PATH/$DIRECTORY_LIBS/$EXAMPLES/$DIRECTORY_DATA_YEDGEN" ]; then
 mkdir -p $ROOT_PATH/$DIRECTORY_LIBS/$EXAMPLES/$DIRECTORY_DATA_YEDGEN
 fi
 
+rm -rf $ROOT_PATH/$DIRECTORY_LIBS/$TMP
+
 #######################
 #### Install yedGen ###
 #######################
 
 tput setaf 2
-echo ""
+echo 
 echo "######################"
 echo "### Install yedGen ###"
 echo "######################"
-echo ""
+echo 
 sleep 2
 tput setaf 7
 
-git clone https://github.com/rac021/obdaYedGen-3.14.2.git $DIRECTORY_LIBS/$TMP
+git clone https://github.com/rac021/obdaYedGen-3.14.2.git $ROOT_PATH/$DIRECTORY_LIBS/$TMP
+
 cd $ROOT_PATH/$DIRECTORY_LIBS/$TMP
+
 mvn clean install assembly:single 
-mv $ROOT_PATH/$DIRECTORY_LIBS/$TMP/target/YedODBA-3.14.2-1.0-SNAPSHOT-jar-with-dependencies.jar \
-   $ROOT_PATH/$DIRECTORY_LIBS/YedODBA.jar
+
+echo 
+
+mv -v $ROOT_PATH/$DIRECTORY_LIBS/$TMP/target/$YEDGEN_COMPILE_NAME \
+      $ROOT_PATH/$DIRECTORY_LIBS/$YEDGEN_TARGET_NAME
+
+mv -v $ROOT_PATH/$DIRECTORY_LIBS/$TMP/$YEDGEN_EXP_LOCATION \
+      $ROOT_PATH/$DIRECTORY_LIBS/$EXAMPLES/$DIRECTORY_DATA_YEDGEN
 
 rm -rf $ROOT_PATH/$DIRECTORY_LIBS/$TMP/* $ROOT_PATH/$DIRECTORY_LIBS/$TMP/.git
 
@@ -83,11 +107,18 @@ sleep 2
 tput setaf 7
 
 git clone https://github.com/rac021/ontop-matarializer.git $ROOT_PATH/$DIRECTORY_LIBS/$TMP
-cd $ROOT_PATH/$DIRECTORY_LIBS/$TMP
-mvn clean install assembly:single
-mv $ROOT_PATH$DIRECTORY_LIBS/$TMP/target/ontop-materializer-1.17.0-jar-with-dependencies.jar \
-   $ROOT_PATH/$directoryInstall/ontop-materializer.jar
 
+cd $ROOT_PATH/$DIRECTORY_LIBS/$TMP
+
+mvn clean install assembly:single
+
+echo
+
+mv -v $ROOT_PATH$DIRECTORY_LIBS/$TMP/target/$ONTOP_COMPILE_NAME $ROOT_PATH/$DIRECTORY_LIB/$ONTOP_TARGET_NAME
+
+mv -v $ROOT_PATH/$DIRECTORY_LIBS/$TMP/$ONTOP_EXP_LOCATION \
+      $ROOT_PATH/$DIRECTORY_LIBS/$EXAMPLES/$DIRECTORY_DATA_ONTOP
+      
 rm -rf $ROOT_PATH/$DIRECTORY_LIBS/$TMP/* $ROOT_PATH/$DIRECTORY_LIBS/$TMP/.git
 
 
@@ -96,22 +127,29 @@ rm -rf $ROOT_PATH/$DIRECTORY_LIBS/$TMP/* $ROOT_PATH/$DIRECTORY_LIBS/$TMP/.git
 ##################################
 
 tput setaf 2
-echo ""
+echo 
 echo "###########################"
 echo "### Install CoreseInfer ###"
 echo "###########################"
-echo ""
+echo 
 sleep 2
 tput setaf 7
 
 git clone https://github.com/rac021/CoreseInfer.git $ROOT_PATH/$DIRECTORY_LIBS/$TMP
+
 cd $ROOT_PATH/$DIRECTORY_LIBS/$TMP
+
 mvn clean install assembly:single
-mv $ROOT_PATH/$DIRECTORY_LIBS/$TMP/target/CoreseInferMaven-1.0.0-jar-with-dependencies.jar \
-   $ROOT_PATH/$DIRECTORY_LIBS/CoreseInfer.jar
 
+echo
+
+mv -v $ROOT_PATH/$DIRECTORY_LIBS/$TMP/target/$CORESE_COMPILE_NAME \
+      $ROOT_PATH/$DIRECTORY_LIBS/$CORESE_TARGET_NAME
+
+mv -v $ROOT_PATH/$DIRECTORY_LIBS/$TMP/$CORESE_EXP_LOCATION \
+      $ROOT_PATH/$DIRECTORY_LIBS/$EXAMPLES/$DIRECTORY_DATA_CORESE
+      
 rm -rf $ROOT_PATH/$DIRECTORY_LIBS/$TMP/* $ROOT_PATH/$DIRECTORY_LIBS/$TMP/.git
-
 
 #########################
 #### Clean TMP folder ###
@@ -120,11 +158,10 @@ rm -rf $ROOT_PATH/$DIRECTORY_LIBS/$TMP/* $ROOT_PATH/$DIRECTORY_LIBS/$TMP/.git
 rm -rf $ROOT_PATH/$DIRECTORY_LIBS/$TMP/
 
 tput setaf 2
-echo ""
+echo 
 echo "#########################"
 echo "###  install success  ###"
 echo "#########################"
-echo ""
+echo 
 sleep 2
 tput setaf 7
-
