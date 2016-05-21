@@ -3,6 +3,8 @@
 if [ $# -eq 3 ] 
 then
 
+   chmod +x scripts/*
+     
   ./scripts/00_install_libs.sh 
 
   ./scripts/01_infra_build.sh  $1
