@@ -35,7 +35,7 @@ if [ $# -eq 1 ] ; then
 	fi
 
 else
-    echo " Invalid argument : please pass exactly One arguments "
-    echo " arg_1 : Image_Docker_Name                            "
+    echo " Invalid argument : please pass exactly One argument "
+    echo " arg_1 : Image_Docker_Name                           "
 fi
 
