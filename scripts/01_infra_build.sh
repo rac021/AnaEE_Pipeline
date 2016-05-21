@@ -11,7 +11,7 @@ if [ $# -eq 1 ] ; then
 	
 	if [ ! -e $DOCKER_FILE_PATH ]; then
 	
-	    echo "$CURRENT_PATH Not found !! Haa Project cloned from Git ? "
+	    echo "$CURRENT_PATH Not found !! Has Project cloned from Git ? "
 	
 	else
 		if docker history -q $DOCKER_BLZ_IMAGE >/dev/null 2>&1 ; then
