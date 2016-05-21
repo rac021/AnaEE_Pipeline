@@ -18,6 +18,11 @@ if [ $# -eq 4 ] ; then
 	# Get Default Mode : 'rw' for read-write Mode. 'ro' for readOnly Mode. 
 	DEFAULT_MODE=$4
 	
+	if [ "$DEFAULT_MODE" != "ro" ] && [ "$DEFAULT_MODE" != "rw" ] ; then 
+	echo "DEFAULT_MODE can only have 'rw' OR 'ro' values !!"
+	exit 2
+	fi 
+	
 	# Default interface
 	SUBNET="mynet123"
 	
