@@ -12,23 +12,24 @@ TMP="tmp_install"
 DOCS="Docs"
 EXAMPLES="Exemple"
 DIRECTORY_LIBS="libs"
+DIRECTORY_MAPPING="Mapping"
 DIRECTORY_DATA="data"
 DIRECTORY_DATA_ONTOP="ontop"
 DIRECTORY_DATA_CORESE="corese"
 DIRECTORY_DATA_YEDGEN="yedGen"
 DIRECTORY_DATA_CONFIG="conf"
 
-# Do not touche the YEDGEN_COMPILE_NAME
+# Do not touch the YEDGEN_COMPILE_NAME
 YEDGEN_COMPILE_NAME="YedODBA-3.14.2-1.0-SNAPSHOT-jar-with-dependencies.jar"
 YEDGEN_TARGET_NAME="yedGen.jar"
 YEDGEN_EXP_LOCATION="src/main/resources/*"
 
-# Do not touche the ONTOP_COMPILE_NAME
+# Do not touch the ONTOP_COMPILE_NAME
 ONTOP_COMPILE_NAME="ontop-materializer-1.17.0-jar-with-dependencies.jar "
 ONTOP_TARGET_NAME="Ontop-Materializer.jar"
 ONTOP_EXP_LOCATION="src/main/resources/mapping/*"
 
-# Do not touche the CORESE_COMPILE_NAME
+# Do not touch the CORESE_COMPILE_NAME
 CORESE_COMPILE_NAME="CoreseInferMaven-1.0.0-jar-with-dependencies.jar "
 CORESE_TARGET_NAME="CoreseInfer.jar"
 CORESE_EXP_LOCATION="src/main/resources/*"
@@ -39,6 +40,9 @@ DOCUMENTATION_FILE_NAME="README.md"
 
 if [ ! -d "$ROOT_PATH/$DIRECTORY_LIBS" ]; then
 mkdir -p $ROOT_PATH/$DIRECTORY_LIBS
+fi
+if [ ! -d "$ROOT_PATH/$DIRECTORY_MAPPING" ]; then
+mkdir -p $ROOT_PATH/$DIRECTORY_MAPPING
 fi
 if [ ! -d "$ROOT_PATH/$DIRECTORY_DATA" ]; then
 mkdir -p $ROOT_PATH/$DIRECTORY_DATA
@@ -189,4 +193,3 @@ echo "#########################"
 echo 
 sleep 2
 tput setaf 7
-
