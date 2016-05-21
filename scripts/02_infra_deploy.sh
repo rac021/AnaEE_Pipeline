@@ -37,22 +37,25 @@ if [ $# -eq 4 ] ; then
 	      docker network create --subnet=192.168.56.250/24 $SUBNET # docker network rm $SUBNET
 	    fi
 	
-	    $(docker inspect --format="{{ .State.Running }}" $HOST_0 2> /dev/null)
-	    if [ $? != 1 ]; then
-	      echo "Container $HOST_0 exists, remove it..."
+            EXIST=`docker inspect --format='{{.Name}}' $(sudo docker ps -aq --no-trunc) | grep $HOST_0`
+	    if [ ! -z $EXIST ]; then 
+	      echo "Container $HOST_0 already exists, remove..."
 	      docker rm -f $HOST_0
+	      echo "Container $HOST_0 removed !!"
 	    fi
 	    
-	    $(docker inspect --format="{{ .State.Running }}" $HOST_1 2> /dev/null)
-	    if [ $? != 1 ]; then
-	      echo "Container $HOST_1 exists, remove it..."
+            EXIST=`docker inspect --format='{{.Name}}' $(sudo docker ps -aq --no-trunc) | grep $HOST_1`
+	    if [ ! -z $EXIST ]; then 
+	      echo "Container $HOST_1 already exists, remove..."	    
 	      docker rm -f $HOST_1
+	      echo "Container $HOST_1 removed !!"	      
 	    fi
 	    
-	    $(docker inspect --format="{{ .State.Running }}" $HOST_2 2> /dev/null)
-	    if [ $? != 1 ]; then
-	      echo "Container $HOST_2 exists, remove it..."
+            EXIST=`docker inspect --format='{{.Name}}' $(sudo docker ps -aq --no-trunc) | grep $HOST_2`
+	    if [ ! -z $EXIST ]; then 
+	      echo "Container $HOST_2 already exists, remove..."
 	      docker rm -f $HOST_2
+	      echo "Container $HOST_2 removed !!"
 	    fi
 	
 	    docker run -d --net mynet123 --name $HOST_2 \
@@ -100,4 +103,3 @@ else
   echo " arg_4 : Mode : rw ( read-wrire) ;  ro ( readOnly )     "
   
 fi
-
