@@ -15,23 +15,22 @@ if [ $# -eq 7 ] ; then
 	HOST_1="blz_host_1"
 	HOST_2="blz_host_2"
 	
-	# IP per Host # Configurable
-	IP_HOST_0="192.168.56.200"
-	IP_HOST_1="192.168.56.201"
-	IP_HOST_2="192.168.56.202"
-		
 	# Get Image Docker Name
 	BLZ_IMAGE=$1
 	# Get NameSpace
 	NAMESPACE=$2
 	# Get Port Number
 	PORT=$3
+	# IP per Host # Configurable
+	IP_HOST_0=$4
+	IP_HOST_1=$5
+	IP_HOST_2=$6
 	# Get Default Mode : 
 	# 'rw' for read-write Mode
 	# 'ro' for readOnly Mode. 
-	DEFAULT_MODE=$4
+	DEFAULT_MODE=$7
 	
-	LOOP="while true; do sleep 1000; done"
+	LOOP=" while true; do sleep 1000; done "
 	
 	if [ "$DEFAULT_MODE" != "ro" ] && [ "$DEFAULT_MODE" != "rw" ] ; then 
 	echo "DEFAULT_MODE can only have 'rw' OR 'ro' values !!"
@@ -43,21 +42,21 @@ if [ $# -eq 7 ] ; then
 	
 	tput setaf 2
 	echo 
-	echo "################################ "
-	echo "######### Deploy Info ########## "
-	echo "-------------------------------- "
+	echo "##################################### "
+	echo "######### Deploy Info ############### "
+	echo "------------------------------------- "
 	echo
-	echo "##  SUBNET    : $SUBNET          "
+	echo "##  SUBNET    : $SUBNET               "
 	echo
-	echo "##  BLZ_IMAGE : $BLZ_IMAGE       "
-	echo "##  NAMESPACE : $NAMESPACE       "
-	echo "##  PORT      : $PORT            "
-	echo "##  HOST_0    : $HOST_0          "
-	echo "##  HOST_1    : $HOST_1          "
-	echo "##  HOST_2    : $HOST_2          "
-	echo "##  MODE      : $DEFAULT_MODE    "
+	echo "##  BLZ_IMAGE : $BLZ_IMAGE            "
+	echo "##  NAMESPACE : $NAMESPACE            "
+	echo "##  PORT      : $PORT                 "
+	echo "##  HOST_0    : $HOST_0 : $IP_HOST_0  "
+	echo "##  HOST_1    : $HOST_1 : $IP_HOST_1  "
+	echo "##  HOST_2    : $HOST_2 : $IP_HOST_2  "
+	echo "##  MODE      : $DEFAULT_MODE         "
 	echo
-	echo "################################ "
+	echo "##################################### "
 	echo 
 	sleep 2
 	tput setaf 7
@@ -134,11 +133,15 @@ if [ $# -eq 7 ] ; then
 
 else 
 
-  echo " Invalid arguments : please pass exactly Four arguments         "
-  echo " arg_1             : Image_docker_name                          "
-  echo " arg_2             : Blazegraph_namespace                       "
-  echo " arg_3             : Ports  number                              "
-  echo " arg_4             : Mode : rw ( read-wrire) ;  ro ( readOnly ) "
+    echo " Invalid arguments : please pass exactly Four arguments   "
+    echo " Invalid arguments :  please pass exactly Six arguments   "
+    echo " arg_1             :  Image_docker_name                   "
+    echo " arg_2             :  Blazegraph_namespace                "
+    echo " arg_3             :  Ports  number                       "
+    echo " arg_4             :  IP HOST_1                           "
+    echo " arg_5             :  IP HOST_2                           "
+    echo " arg_6             :  IP HOST_2                           "
+    echo " arg_7             :  READ-WRITE MODE ( ro : rw   )       "   
     
 fi
 
