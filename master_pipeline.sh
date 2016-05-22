@@ -20,6 +20,5 @@ else
     echo " arg_1             :  Image_docker_name                   "
     echo " arg_2             :  Blazegraph_namespace                "
     echo " arg_3             :  Ports  number                       "
-
 fi
 
