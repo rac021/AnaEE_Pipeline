@@ -131,10 +131,9 @@ if [ $# -eq 7 ] ; then
 	echo " Image '$BLZ_IMAGE' not found !! "
 	fi
 
-else 
+else
 
-    echo " Invalid arguments : please pass exactly Four arguments   "
-    echo " Invalid arguments :  please pass exactly Six arguments   "
+    echo " Invalid arguments :  please pass exactly Seven arguments "
     echo " arg_1             :  Image_docker_name                   "
     echo " arg_2             :  Blazegraph_namespace                "
     echo " arg_3             :  Ports  number                       "
