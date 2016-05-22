@@ -2,7 +2,7 @@
 
     CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-    CONFIG_FILE_PATH="$CURRENT_PATH/conf/hosts"
+    HOST_FILE_PATH="$CURRENT_PATH/conf/hosts"
       
     STATUS_FILE_PATH="$CURRENT_PATH/conf/status"
      
@@ -22,10 +22,10 @@
         sleep 2
       
         echo -e " \e[90m Cluster List ** "
-        echo -e " \e[90m $CONFIG_FILE_PATH "
+        echo -e " \e[90m $HOST_FILE_PATH "
         echo
         
-        for node in $(cat $CONFIG_FILE_PATH)  
+        for node in $(cat $HOST_FILE_PATH)  
         
         do  
             
@@ -64,9 +64,9 @@
         sleep 2
         
         echo -e " \e[90m Cluster List ** "
-        echo -e " \e[90m $CONFIG_FILE_PATH "
+        echo -e " \e[90m $HOST_FILE_PATH "
         
-        for node in $(cat $CONFIG_FILE_PATH)  
+        for node in $(cat $HOST_FILE_PATH)  
         do  
         
             tput setaf 6
