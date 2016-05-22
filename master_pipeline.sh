@@ -4,7 +4,7 @@
 # Do not touch the containers name : 
 # blz_host_0 - blz_host_1 - blz_host_2 rw
 
-if [ $# -eq 6 ] ; then
+if [ $# -eq 7 ] ; then
 
    chmod +x scripts/*
      
