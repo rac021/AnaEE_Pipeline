@@ -43,7 +43,8 @@ if [ $# -eq 4 ] ; then
 		      echo "Container $HOST_2 already exists, remove..."
 		      docker rm -f $HOST_2
 		      echo "Container $HOST_2 removed !!"
-	
+		    fi
+		    
 		    # Remove Image $DOCKER_BLZ_IMAGE if exists 
 		    CONTAINER_ID=`docker images -q $DOCKER_BLZ_IMAGE `
 		    echo "$DOCKER_BLZ_IMAGE already exist, remove it..."
