@@ -1,14 +1,14 @@
 #!/bin/bash
 
-if [ $# -eq 4 ] ; then
+if [ $# -eq 1 ] ; then
 
 	# Docker Image
 	DOCKER_BLZ_IMAGE=$1
 
 	# Hosts Names 
-	HOST_0=$2
-	HOST_1=$3
-	HOST_2=$4
+	HOST_0="blz_host_0"
+	HOST_1="blz_host_1"
+	HOST_2="blz_host_2"
 
 	tput setaf 2
 	echo 
@@ -81,11 +81,8 @@ if [ $# -eq 4 ] ; then
 	fi
 
 else
-    echo " Invalid arguments :  please pass exactly Four arguments "
-    echo " arg_1             :  Image_Docker_Name                  "
-    echo " arg_2             :  Container Name One                 "
-    echo " arg_3             :  Container Name Two                 "
-    echo " arg_4             :  Container Name Three               "
+    echo " Invalid arguments :  please pass exactly One argument "
+    echo " arg_1             :  Image_Docker_Name                "
     
 fi
 
