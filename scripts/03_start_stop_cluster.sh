@@ -2,9 +2,9 @@
 
     CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-    HOST_FILE_PATH="$CURRENT_PATH/conf/hosts"
+    HOSTS_FILE="$CURRENT_PATH/conf/hosts"
       
-    STATUS_FILE_PATH="$CURRENT_PATH/conf/status"
+    STATUS_FILE="$CURRENT_PATH/conf/status"
      
     NANO_END_POINT_FILE="$CURRENT_PATH/conf/nanoEndpoint"
     
@@ -22,10 +22,10 @@
         sleep 2
       
         echo -e " \e[90m Cluster List ** "
-        echo -e " \e[90m $HOST_FILE_PATH "
+        echo -e " \e[90m $HOSTS_FILE "
         echo
         
-        for node in $(cat $HOST_FILE_PATH)  
+        for node in $(cat $HOSTS_FILE)  
         
         do  
             
@@ -51,9 +51,12 @@
         sleep 10
         docker exec $NANO_END_POINT_HOST ./nanoSparqlServer.sh 9999 ola rw &
         
-        echo "1" > $STATUS_FILE_PATH
+        echo "1" > $STATUS_FILE
         
-    elif [ "$1" = "stop" ] ; then 
+    fi
+
+
+    if [ "$1" = "stop" ] ; then 
 
         tput setaf 2
         echo 
@@ -64,28 +67,21 @@
         sleep 2
         
         echo -e " \e[90m Cluster List ** "
-        echo -e " \e[90m $HOST_FILE_PATH "
+        echo -e " \e[90m $HOSTS_FILE "
         
-        for node in $(cat $HOST_FILE_PATH)  
-        do  
-        
+        for node in $(cat $HOSTS_FILE)  
+        do
             tput setaf 6
             echo 
             echo " -> Stopping Node $node "
             tput setaf 7
             
-            docker exec -d $node  /bin/sh -c "./bigdata stop "
+            docker exec -itd $node  /bin/sh -c "./bigdata stop "
             sleep 3
         
         done
         
-        echo "0" > $STATUS_FILE_PATH
+        echo "0" > $STATUS_FILE
         
         echo
-    
-    else
-    
-    echo " Invalid arguments :  please pass exactly Seven arguments "
-    echo " arg_1             :  start ot stop                       "       
-    
     fi
