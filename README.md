@@ -8,15 +8,18 @@
 
 -    `$3 : Ports  number `
 
--    `$4 : Container Name One `
+-    `$4 : IP Container HOST_1 `
 
--    `$5 : Container Name Two `
+-    `$5 : IP Container HOST_2 `
 
--    `$6 : Container Name Three `
+-    `$6 : IP Container HOST_3 `
+
+-    `$7 : READ-WRITE MODE `
+
 
 
 Ex :
 
-    ./master_pipeline.sh blz_img  ola 9999  HOST_1 HOST_2 HOST_3
+    ./master_pipeline.sh blz_img ola 9999 192.168.56.200 192.168.56.201 192.168.56.202 rw
      
      
