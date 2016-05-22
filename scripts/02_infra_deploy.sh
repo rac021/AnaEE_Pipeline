@@ -138,9 +138,9 @@ else
     echo " arg_1             :  Image_docker_name                   "
     echo " arg_2             :  Blazegraph_namespace                "
     echo " arg_3             :  Ports  number                       "
-    echo " arg_4             :  IP HOST_1                           "
-    echo " arg_5             :  IP HOST_2                           "
-    echo " arg_6             :  IP HOST_2                           "
+    echo " arg_4             :  IP Container HOST_1                 "
+    echo " arg_5             :  IP Container HOST_2                 "
+    echo " arg_6             :  IP Container HOST_3                 "
     echo " arg_7             :  READ-WRITE MODE ( ro : rw   )       "   
     
 fi
