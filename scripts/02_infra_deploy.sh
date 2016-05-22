@@ -37,27 +37,27 @@ if [ $# -eq 7 ] ; then
 	if docker history -q $BLZ_IMAGE >/dev/null 2>&1; then
 		    
 	    if [[ "${SUBNET_CHECK}" == *$SUBNET* ]]; then
-	      echo "subnet - $SUBNET - already existing "
+	      echo "subnet - $SUBNET - already exists "
 	    else
 	      echo " create subnet $SUBNET "
 	      docker network create --subnet=192.168.56.250/24 $SUBNET # docker network rm $SUBNET
 	    fi
 	
-            EXIST=`docker inspect --format='{{.Name}}' $(sudo docker ps -aq --no-trunc) | grep $HOST_0`
+            EXIST=`docker inspect --format='{{.Name}}' $( docker ps -aq --no-trunc) | grep $HOST_0`
 	    if [ ! -z $EXIST ]; then 
 	      echo "Container $HOST_0 already exists, remove..."
 	      docker rm -f $HOST_0
 	      echo "Container $HOST_0 removed !!"
 	    fi
 	    
-            EXIST=`docker inspect --format='{{.Name}}' $(sudo docker ps -aq --no-trunc) | grep $HOST_1`
+            EXIST=`docker inspect --format='{{.Name}}' $( docker ps -aq --no-trunc) | grep $HOST_1`
 	    if [ ! -z $EXIST ]; then 
 	      echo "Container $HOST_1 already exists, remove..."	    
 	      docker rm -f $HOST_1
 	      echo "Container $HOST_1 removed !!"	      
 	    fi
 	    
-            EXIST=`docker inspect --format='{{.Name}}' $(sudo docker ps -aq --no-trunc) | grep $HOST_2`
+            EXIST=`docker inspect --format='{{.Name}}' $( docker ps -aq --no-trunc) | grep $HOST_2`
 	    if [ ! -z $EXIST ]; then 
 	      echo "Container $HOST_2 already exists, remove..."
 	      docker rm -f $HOST_2
