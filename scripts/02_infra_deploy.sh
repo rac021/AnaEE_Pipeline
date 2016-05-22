@@ -32,6 +32,28 @@ if [ $# -eq 7 ] ; then
 	# Default interface
 	SUBNET="mynet123"
 	
+	tput setaf 2
+	echo 
+	echo "################################ "
+	echo "######### Deploy Info ########## "
+	echo "-------------------------------- "
+	
+	echo "##  SUBNET    : $SUBNET          "
+	
+	echo "##  BLZ_IMAGE : $BLZ_IMAGE       "
+	echo "##  NAMESPACE : $NAMESPACE       "
+	echo "##  PORT      : $PORT            "
+	echo "##  HOST_0    : $HOST_0          "
+	echo "##  HOST_1    : $HOST_1          "
+	echo "##  HOST_2    : $HOST_2          "
+	echo "##  MODE      : $DEFAULT_MODE    "
+	
+	echo "################################ "
+	echo 
+	sleep 2
+	tput setaf 7
+
+
 	SUBNET_CHECK=`docker network ls | grep $SUBNET`
 	
 	if docker history -q $BLZ_IMAGE >/dev/null 2>&1; then
