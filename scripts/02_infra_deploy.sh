@@ -36,7 +36,24 @@ if [ $# -eq 7 ] ; then
 	echo "DEFAULT_MODE can only have 'rw' OR 'ro' values !!"
 	exit 2
 	fi 
+
+	CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 	
+	HOST_FILE="$CURRENT_PATH/conf/hosts"
+      
+        STATUS_FILE="$CURRENT_PATH/conf/status"
+     
+        NANO_END_POINT_FILE="$CURRENT_PATH/conf/nanoEndpoint"
+    
+        NANO_END_POINT_HOST=`cat $NANO_END_POINT_FILE `
+    
+        touch $HOST_FILE
+    
+        touch $STATUS_FILE
+    
+        touch $NANO_END_POINT_FILE
+    
+    
 	# Default interface
 	SUBNET="mynet123"
 	
@@ -73,18 +90,22 @@ if [ $# -eq 7 ] ; then
 	      # docker network rm $SUBNET
 	    fi
 	
+            echo 
+
             EXIST=`docker inspect --format='{{.Name}}' $( docker ps -aq --no-trunc) | grep $HOST_0`
 	    if [ ! -z $EXIST ]; then 
 	      echo "Container $HOST_0 already exists, remove..."
 	      docker  rm  -f  $HOST_0
 	      echo "Container $HOST_0 removed !!"
+	      echo
 	    fi
 	    
             EXIST=`docker inspect --format='{{.Name}}' $( docker ps -aq --no-trunc) | grep $HOST_1`
 	    if [ ! -z $EXIST ]; then 
 	      echo "Container $HOST_1 already exists, remove..."	    
 	      docker  rm  -f  $HOST_1
-	      echo "Container $HOST_1 removed !!"	      
+	      echo "Container $HOST_1 removed !!"
+	      echo
 	    fi
 	    
             EXIST=`docker inspect --format='{{.Name}}' $( docker ps -aq --no-trunc) | grep $HOST_2`
@@ -92,43 +113,56 @@ if [ $# -eq 7 ] ; then
 	      echo "Container $HOST_2 already exists, remove..."
 	      docker  rm  -f  $HOST_2
 	      echo "Container $HOST_2 removed !!"
+	      echo
 	    fi
 	
 	    docker run -d --net mynet123 --name $HOST_2 \
 	           --add-host $HOST_0:$IP_HOST_0        \
 	           --add-host $HOST_1:$IP_HOST_1        \
 	           --add-host $HOST_2:$IP_HOST_2        \
-	           --ip $IP_HOST_2   -p   7777:9999     \
-	           --expose 9999                        \
+	           --ip $IP_HOST_2   -p   7777:$PORT    \
+	           --expose $PORT                       \
 	           -it --entrypoint /bin/bash $BLZ_IMAGE -c "./bigdata start ;$LOOP "
 	
+            echo "$HOST_2" >> $HOST_FILE
+    
 	    sleep 4
 	
 	    docker run -d --net mynet123 --name $HOST_1 \
 	           --add-host $HOST_0:$IP_HOST_0        \
 	           --add-host $HOST_1:$IP_HOST_1        \
 	           --add-host $HOST_2:$IP_HOST_2        \
-	           --ip $IP_HOST_1   -p   8888:9999     \
+	           --ip $IP_HOST_1  -p   8888:$PORT     \
 	           -it --entrypoint /bin/bash $BLZ_IMAGE -c "./bigdata start; $LOOP "
 	
+            echo "$HOST_1" >> $HOST_FILE
+    
 	    sleep 4 
 	
 	    docker run -d --net mynet123 --name $HOST_0 \
 	           --add-host $HOST_0:$IP_HOST_0        \
 	           --add-host $HOST_1:$IP_HOST_1        \
 	           --add-host $HOST_2:$IP_HOST_2        \
-	           --ip $IP_HOST_0  -p    9999:9999     \
+	           --ip $IP_HOST_0  -p   9999:$PORT     \
 	           -it --entrypoint /bin/bash $BLZ_IMAGE -c "./bigdata start; $LOOP "
 	
-	    echo "waiting for blazegraph Cluster... "
+	    echo "$HOST_0" >> $HOST_FILE
+            echo
+            echo "waiting for blazegraph Cluster.. ~ 10 s "
 	    
 	    sleep 10 
 	
-	    # Run bigdata cluster using host_2 as EndPoint
+	    # Use HOST_2 as EndPoint
 	    docker exec $HOST_2 ./nanoSparqlServer.sh $PORT $NAMESPACE $DEFAULT_MODE &
 	    
+	    echo "$HOST_2" > $NANO_END_POINT_FILE
+	    
+	    echo "1" > $STATUS_FILE	    
+	    
 	else
+	
 	echo " Image '$BLZ_IMAGE' not found !! "
+	
 	fi
 
 else
@@ -143,4 +177,3 @@ else
     echo " arg_7             :  READ-WRITE MODE ( ro : rw   )       "   
     
 fi
-
