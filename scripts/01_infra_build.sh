@@ -9,6 +9,22 @@ if [ $# -eq 4 ] ; then
 	HOST_0=$2
 	HOST_1=$3
 	HOST_2=$4
+
+	tput setaf 2
+	echo 
+	echo "################################# "
+	echo "######### Build Infra ########### "
+	echo "--------------------------------- "
+	echo
+	echo "##  BLZ_IMAGE : $DOCKER_BLZ_IMAGE "
+	echo "##  HOST_0    : $HOST_0           "
+	echo "##  HOST_1    : $HOST_1           "
+	echo "##  HOST_2    : $HOST_2           "
+	echo
+	echo "################################# "
+	echo 
+	sleep 2
+	tput setaf 7
 	
 	CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
