@@ -20,6 +20,12 @@
 
 Ex :
 
-    ./master_pipeline.sh blz_img ola 9999 192.168.56.10 192.168.56.20 192.168.56.30 rw
+    ./master_pipeline.sh blz_img \
+      ola                        \
+      9999                       \
+      192.168.56.10              \
+      192.168.56.20              \
+      192.168.56.30              \
+      rw
      
      
