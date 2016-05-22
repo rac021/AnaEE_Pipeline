@@ -17,6 +17,6 @@
 
 Ex :
 
-    ./master_pipeline.sh blz_img  ola_namespace 9999 HOST_1 HOST_2 HOST_3
+    ./master_pipeline.sh blz_img  ola_namespace 9999 HOST_1  HOST_2  HOST_3
      
      
