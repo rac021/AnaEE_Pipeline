@@ -37,9 +37,9 @@ if [ $# -eq 7 ] ; then
 	echo "################################ "
 	echo "######### Deploy Info ########## "
 	echo "-------------------------------- "
-	
+	echo
 	echo "##  SUBNET    : $SUBNET          "
-	
+	echo
 	echo "##  BLZ_IMAGE : $BLZ_IMAGE       "
 	echo "##  NAMESPACE : $NAMESPACE       "
 	echo "##  PORT      : $PORT            "
@@ -47,7 +47,7 @@ if [ $# -eq 7 ] ; then
 	echo "##  HOST_1    : $HOST_1          "
 	echo "##  HOST_2    : $HOST_2          "
 	echo "##  MODE      : $DEFAULT_MODE    "
-	
+	echo
 	echo "################################ "
 	echo 
 	sleep 2
