@@ -113,6 +113,7 @@ if [ $# -eq 7 ] ; then
 	           -it --entrypoint /bin/bash $BLZ_IMAGE -c "./bigdata start; while true; do sleep 1000; done "
 	
 	    echo "waiting for blazegraph Cluster... "
+	    
 	    sleep 10 
 	
 	    # Run bigdata cluster using host_2 as EndPoint
