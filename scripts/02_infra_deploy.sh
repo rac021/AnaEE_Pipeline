@@ -7,7 +7,7 @@
 # $3 PORT Number
 # $4 RW Mode
 
-if [ $# -eq 4 ] ; then
+if [ $# -eq 7 ] ; then
 
 	# Get Image Docker Name
 	BLZ_IMAGE=$1
@@ -15,8 +15,14 @@ if [ $# -eq 4 ] ; then
 	NAMESPACE=$2
 	# Get Port Number
 	PORT=$3
-	# Get Default Mode : 'rw' for read-write Mode. 'ro' for readOnly Mode. 
-	DEFAULT_MODE=$4
+	# Cluster 
+	HOST_0=$4
+	HOST_1=$5
+	HOST_2=$6
+	# Get Default Mode : 
+	# 'rw' for read-write Mode
+	# 'ro' for readOnly Mode. 
+	DEFAULT_MODE=$7
 	
 	if [ "$DEFAULT_MODE" != "ro" ] && [ "$DEFAULT_MODE" != "rw" ] ; then 
 	echo "DEFAULT_MODE can only have 'rw' OR 'ro' values !!"
@@ -26,17 +32,12 @@ if [ $# -eq 4 ] ; then
 	# Default interface
 	SUBNET="mynet123"
 	
-	# Cluster 
-	HOST_0="HOST_0"
-	HOST_1="HOST_1"
-	HOST_2="HOST_2"
-	
 	SUBNET_CHECK=`docker network ls | grep $SUBNET`
 	
 	if docker history -q $BLZ_IMAGE >/dev/null 2>&1; then
 		    
 	    if [[ "${SUBNET_CHECK}" == *$SUBNET* ]]; then
-	      echo "subnet - $SUBNET - already existing ";
+	      echo "subnet - $SUBNET - already existing "
 	    else
 	      echo " create subnet $SUBNET "
 	      docker network create --subnet=192.168.56.250/24 $SUBNET # docker network rm $SUBNET
@@ -101,10 +102,13 @@ if [ $# -eq 4 ] ; then
 
 else 
 
-  echo " Invalid argument : please pass exactly Four arguments  "
-  echo " arg_1 : Image_docker_name                              "
-  echo " arg_2 : Blazegraph_namespace                           "
-  echo " arg_3 : Ports  number                                  "
-  echo " arg_4 : Mode : rw ( read-wrire) ;  ro ( readOnly )     "
-  
+  echo " Invalid arguments : please pass exactly Four arguments         "
+  echo " arg_1             : Image_docker_name                          "
+  echo " arg_2             : Blazegraph_namespace                       "
+  echo " arg_3             : Ports  number                              "
+  echo " arg_4             : Container Name One                         "
+  echo " arg_5             : Container Name Two                         "
+  echo " arg_6             : Container Name Three                       "
+  echo " arg_7             : Mode : rw ( read-wrire) ;  ro ( readOnly ) "
+    
 fi
