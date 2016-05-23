@@ -68,9 +68,7 @@
         
         echo "1" > $STATUS_FILE
         
-    fi
-
-    if [ "$1" = "stop" ] ; then 
+    elif [ "$1" = "stop" ] ; then 
 
         tput setaf 2
         echo 
@@ -98,4 +96,10 @@
         echo "0" > $STATUS_FILE
         
         echo
+        
+    else 
+    
+        echo " Invalid arguments :  Please pass exactly One argument "
+        echo " arg_1             :  start - stop                     "
+    
     fi
