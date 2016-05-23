@@ -14,7 +14,7 @@
         tput setaf 6
         echo
         echo " Cluster should be running ... ? "
-        echo " if you are sure that the Cluster is OFF, you can turn STATUS in the "
+        echo " if you are sure that the Cluster is DOWN, you can turn STATUS in the "
         echo " file $STATUS_FILE "
         echo " to 0 to and then try to retstart it "
         echo " or just STOP and START Cluster "
