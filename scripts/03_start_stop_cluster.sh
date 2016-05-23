@@ -35,7 +35,6 @@
         echo
         
         for node in $(cat $HOSTS_FILE)  
-        
         do
             tput setaf 6
             echo " -> Starting Bigdata on Node $node "
@@ -44,7 +43,6 @@
             docker exec -d $node ./bigdata start
             echo
             sleep 4
-        
         done 
         
         tput setaf 2
@@ -83,15 +81,12 @@
             
             docker exec -itd $node  /bin/sh -c "./bigdata stop "
             sleep 3
-        
         done
         
         echo "0" > $STATUS_FILE
         echo
         
-    else 
-    
+    else
         echo " Invalid arguments :  Please pass exactly One argument "
         echo " arg_1             :  start - stop                     "
-    
     fi
