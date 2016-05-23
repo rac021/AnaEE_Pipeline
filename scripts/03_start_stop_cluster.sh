@@ -12,7 +12,21 @@
     
     
     if [ "$1" = "start" ] ; then 
-       
+  
+     STATUS=`cat $STATUS_FILE `
+    
+     if [ $STATUS = "1" ] ; then
+        tput setaf 6
+        echo
+        echo " Cluster should be running ... ? "
+        echo " if you are sure that the Cluster is OFF, you can turn STATUS in the "
+        echo " file $STATUS_FILE "
+        echo " to 0 to and then try to retstart it "
+        echo
+        tput setaf 7
+        exit 3
+     fi
+     
         tput setaf 2
         echo 
         echo "##################################### "
