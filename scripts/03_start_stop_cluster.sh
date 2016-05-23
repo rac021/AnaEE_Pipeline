@@ -22,6 +22,7 @@
         echo " if you are sure that the Cluster is OFF, you can turn STATUS in the "
         echo " file $STATUS_FILE "
         echo " to 0 to and then try to retstart it "
+        echo " or just STOP and START Cluster "
         echo
         tput setaf 7
         exit 3
@@ -68,7 +69,6 @@
         echo "1" > $STATUS_FILE
         
     fi
-
 
     if [ "$1" = "stop" ] ; then 
 
