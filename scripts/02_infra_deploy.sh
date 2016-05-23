@@ -38,21 +38,14 @@ if [ $# -eq 7 ] ; then
 	fi 
 
 	CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-	
 	HOST_FILE="$CURRENT_PATH/conf/hosts"
-      
         STATUS_FILE="$CURRENT_PATH/conf/status"
-     
         NANO_END_POINT_FILE="$CURRENT_PATH/conf/nanoEndpoint"
-    
         NANO_END_POINT_HOST=`cat $NANO_END_POINT_FILE `
     
         touch $HOST_FILE
-    
         touch $STATUS_FILE
-    
         touch $NANO_END_POINT_FILE
-    
     
 	# Default interface
 	SUBNET="mynet123"
@@ -91,7 +84,6 @@ if [ $# -eq 7 ] ; then
 	    fi
 	
             echo 
-
             EXIST=`docker inspect --format='{{.Name}}' $( docker ps -aq --no-trunc) | grep $HOST_0`
 	    if [ ! -z $EXIST ]; then 
 	      echo "Container $HOST_0 already exists, remove..."
@@ -125,7 +117,6 @@ if [ $# -eq 7 ] ; then
 	           -it --entrypoint /bin/bash $BLZ_IMAGE -c "./bigdata start; $LOOP "
 	
             echo "$HOST_2" >> $HOST_FILE
-    
 	    sleep 4
 	
 	    docker run -d --net mynet123 --name $HOST_1 \
@@ -136,7 +127,6 @@ if [ $# -eq 7 ] ; then
 	           -it --entrypoint /bin/bash $BLZ_IMAGE -c "./bigdata start; $LOOP "
 	
             echo "$HOST_1" >> $HOST_FILE
-    
 	    sleep 4 
 	
 	    docker run -d --net mynet123 --name $HOST_0 \
@@ -149,24 +139,18 @@ if [ $# -eq 7 ] ; then
 	    echo "$HOST_0" >> $HOST_FILE
             echo
             echo "waiting for blazegraph Cluster.. ~ 10 s "
-	    
 	    sleep 10 
 	
 	    # Use HOST_2 as EndPoint
 	    docker exec $HOST_2 ./nanoSparqlServer.sh $PORT $NAMESPACE $DEFAULT_MODE &
 	    
 	    echo "$HOST_2" > $NANO_END_POINT_FILE
-	    
 	    echo "1" > $STATUS_FILE	    
 	    
 	else
-	
-	echo " Image '$BLZ_IMAGE' not found !! "
-	
+	   echo " Image '$BLZ_IMAGE' not found !! "
 	fi
-
 else
-
     echo " Invalid arguments :  please pass exactly Seven arguments "
     echo " arg_1             :  Image_docker_name                   "
     echo " arg_2             :  Blazegraph_namespace                "
@@ -175,5 +159,4 @@ else
     echo " arg_5             :  IP Container HOST_2                 "
     echo " arg_6             :  IP Container HOST_3                 "
     echo " arg_7             :  READ-WRITE MODE ( ro : rw   )       "   
-    
 fi
