@@ -1,15 +1,10 @@
 #!/bin/bash
 
     CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
     HOSTS_FILE="$CURRENT_PATH/conf/hosts"
-      
     STATUS_FILE="$CURRENT_PATH/conf/status"
-     
     NANO_END_POINT_FILE="$CURRENT_PATH/conf/nanoEndpoint"
-    
     NANO_END_POINT_HOST=`cat $NANO_END_POINT_FILE `
-    
     
     if [ "$1" = "start" ] ; then 
   
@@ -27,7 +22,6 @@
         tput setaf 7
         exit 3
      fi
-     
         tput setaf 2
         echo 
         echo "##################################### "
@@ -42,8 +36,7 @@
         
         for node in $(cat $HOSTS_FILE)  
         
-        do  
-            
+        do
             tput setaf 6
             echo " -> Starting Bigdata on Node $node "
             sleep 2
@@ -94,7 +87,6 @@
         done
         
         echo "0" > $STATUS_FILE
-        
         echo
         
     else 
