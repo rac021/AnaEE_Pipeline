@@ -122,7 +122,7 @@ if [ $# -eq 7 ] ; then
 	           --add-host $HOST_2:$IP_HOST_2        \
 	           --ip $IP_HOST_2   -p   7777:$PORT    \
 	           --expose $PORT                       \
-	           -it --entrypoint /bin/bash $BLZ_IMAGE -c "./bigdata start ;$LOOP "
+	           -it --entrypoint /bin/bash $BLZ_IMAGE -c "./bigdata start; $LOOP "
 	
             echo "$HOST_2" >> $HOST_FILE
     
