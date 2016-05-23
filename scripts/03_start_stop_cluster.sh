@@ -8,6 +8,13 @@
     
     if [ "$1" = "start" ] ; then 
   
+     if [ "$2" != "ro" ] && [ "$2" != "rw" ] ; then 
+       echo
+	   echo -e " \e[90m Must specify the starting Read-Write Mode : ro - rw "
+	   echo
+	   exit 2
+	 fi 
+        
      STATUS=`cat $STATUS_FILE `
     
      if [ $STATUS = "1" ] ; then
@@ -87,6 +94,7 @@
         echo
         
     else
-        echo " Invalid arguments :  Please pass exactly One argument "
-        echo " arg_1             :  start - stop                     "
+        echo " Invalid arguments :  Please pass One or Two arguments      "
+        echo " arg_1             :  start - stop                          "
+        echo " arg_2             :  Only if arg_1 = start, then : ro - rw "
     fi
