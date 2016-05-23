@@ -4,7 +4,11 @@
     HOSTS_FILE="$CURRENT_PATH/conf/hosts"
     STATUS_FILE="$CURRENT_PATH/conf/status"
     NANO_END_POINT_FILE="$CURRENT_PATH/conf/nanoEndpoint"
-    NANO_END_POINT_HOST=`cat $NANO_END_POINT_FILE `
+    
+    IFS=':' read -a INFO_NANO <<< `cat $NANO_END_POINT_FILE`
+    NANO_END_POINT_HOST=${INFO_NANO[0]}
+    NANO_END_POINT_PORT=${INFO_NANO[1]}
+    NAME_SPACE=${INFO_NANO[2]}
     
     if [ "$1" = "start" ] ; then 
   
@@ -15,6 +19,8 @@
 	   exit 2
 	 fi 
         
+     RW_MODE=$2
+     
      STATUS=`cat $STATUS_FILE `
     
      if [ $STATUS = "1" ] ; then
@@ -62,7 +68,7 @@
         echo    
         tput setaf 7
         sleep 10
-        docker exec $NANO_END_POINT_HOST ./nanoSparqlServer.sh 9999 ola rw &
+        docker exec $NANO_END_POINT_HOST ./nanoSparqlServer.sh $NANO_END_POINT_PORT $NAME_SPACE $RW_MODE &
         
         echo "1" > $STATUS_FILE
         
