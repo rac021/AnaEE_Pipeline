@@ -5,12 +5,6 @@
     STATUS_FILE="$CURRENT_PATH/conf/status"
     NANO_END_POINT_FILE="$CURRENT_PATH/conf/nanoEndpoint"
     
-    IFS=':' read -a INFO_NANO <<< `cat $NANO_END_POINT_FILE`
-    NANO_END_POINT_HOST=${INFO_NANO[0]}
-    NANO_END_POINT_IP=${INFO_NANO[1]}
-    NANO_END_POINT_PORT=${INFO_NANO[2]}
-    NAME_SPACE=${INFO_NANO[3]}
-    
     if [ "$1" = "start" ] ; then 
   
      if [ "$2" != "ro" ] && [ "$2" != "rw" ] ; then 
@@ -70,14 +64,22 @@
         tput setaf 7
         sleep 10
         
-        docker exec -dit $NANO_END_POINT_HOST ./nanoSparqlServer.sh $NANO_END_POINT_PORT $NAME_SPACE $RW_MODE
+        for LINE in `cat $NANO_END_POINT_FILE`; do
+   
+            IFS=’:’ read -ra INFO_NANO <<< "$LINE" 
+            NANO_END_POINT_HOST=${INFO_NANO[0]}
+            NANO_END_POINT_IP=${INFO_NANO[1]}
+            NANO_END_POINT_PORT=${INFO_NANO[2]}
+            NAME_SPACE=${INFO_NANO[3]}
         
-        echo -e "serviceURL: \e[93mhttp://$NANO_END_POINT_IP:$NANO_END_POINT_PORT"
-        #IP=`docker inspect --format '{{ .NetworkSettings.Networks.mynet123.IPAddress }}' blz_host_2`
-        # docker logs -f $NANO_END_POINT_HOST
-         
+            docker exec -dit $NANO_END_POINT_HOST ./nanoSparqlServer.sh $NANO_END_POINT_PORT $NAME_SPACE $RW_MODE
+            echo -e "\e[37m serviceURL: \e[93mhttp://$NANO_END_POINT_IP:$NANO_END_POINT_PORT"
+            sleep 1
+            #IP=`docker inspect --format '{{ .NetworkSettings.Networks.mynet123.IPAddress }}' blz_host_2`
+            # docker logs -f $NANO_END_POINT_HOST
+        done
+  
         echo "1" > $STATUS_FILE
-        
         echo  -e " \e[97m "
         
     elif [ "$1" = "stop" ] ; then 
