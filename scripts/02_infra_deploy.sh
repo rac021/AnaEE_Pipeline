@@ -144,7 +144,7 @@ if [ $# -eq 7 ] ; then
 	    # Use HOST_2 as EndPoint
 	    docker exec $HOST_2 ./nanoSparqlServer.sh $PORT $NAMESPACE $DEFAULT_MODE &
 	    
-	    echo "$HOST_2:$PORT:$NAMESPACE" > $NANO_END_POINT_FILE
+	    echo "$HOST_2:$IP_HOST_2:$PORT:$NAMESPACE" > $NANO_END_POINT_FILE
 	    echo "1" > $STATUS_FILE	    
 	    
 	else
