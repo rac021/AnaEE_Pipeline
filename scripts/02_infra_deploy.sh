@@ -140,13 +140,13 @@ if [ $# -eq 7 ] ; then
             echo
             echo "waiting for blazegraph Cluster.. ~ 10 s "
 	    sleep 10 
-	
+	    echo
 	    # Use HOST_2 as EndPoint
 	    docker exec -dit $HOST_2 ./nanoSparqlServer.sh $PORT $NAMESPACE $DEFAULT_MODE 
 	    
 	    echo "$HOST_2:$IP_HOST_2:$PORT:$NAMESPACE" > $NANO_END_POINT_FILE
 	    echo "1" > $STATUS_FILE	    
-	    echo -e "serviceURL:  \e[93mhttp://$IP_HOST_2:$PORT"
+	    echo -e "serviceURL: \e[93mhttp://$IP_HOST_2:$PORT"
 	    echo -e " \e[97m "
     
 	else
