@@ -41,6 +41,30 @@
         echo -e " \e[90m Cluster List ** "
         echo -e " \e[90m $HOSTS_FILE "
         echo
+     
+     
+             
+        for LINE in `cat $NANO_END_POINT_FILE`; do
+   
+          IFS=’:’ read -ra INFO_NANO <<< "$LINE" 
+          CONTAINER=${INFO_NANO[0]}
+                      
+          RUNNING=$(docker inspect --format="{{ .State.Running }}" $CONTAINER 2> /dev/null)
+            
+          if [ $? -eq 1 ]; then        
+           echo -e "\e[91m UNKNOWN - $CONTAINER does not exist. \e[37m "
+           echo
+           exit 3
+          fi
+
+          if [ "$RUNNING" == "false" ]; then
+           echo -e "\e[91m CRITICAL - $CONTAINER is not running. \e[37m "
+           echo
+           exit 2
+          fi
+   
+        done
+        
         
         for node in $(cat $HOSTS_FILE)  
         do
@@ -63,6 +87,7 @@
         echo    
         tput setaf 7
         sleep 10
+        
         
         for LINE in `cat $NANO_END_POINT_FILE`; do
    
@@ -115,4 +140,4 @@
         echo " arg_1             :  start - stop                          "
         echo " arg_2             :  Only if arg_1 = start, then : ro - rw "
     fi
-
+    
