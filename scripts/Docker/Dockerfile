@@ -41,7 +41,7 @@ RUN echo " ** Install Blazegraph_1_5_3 "  && \
     echo " ** Copy OverrideWebXml file "  && \
     cp /tmp/blazegraph_1_5_3_cluster_2_nodes/bigdata-war/src/WEB-INF/web.xml \ 
        /tmp/blazegraph_1_5_3_cluster_2_nodes/bigdata-war/src/WEB-INF/webWithConfReadOnly.xml \
-    /nas/bigdata/benchmark/bin/overrideWebXml && \
+    /nas/bigdata/benchmark/bin/overrideWebXml
     
 WORKDIR /nas/bigdata/benchmark/bin
 
