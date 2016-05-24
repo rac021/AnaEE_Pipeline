@@ -146,7 +146,8 @@ if [ $# -eq 7 ] ; then
 	    
 	    echo "$HOST_2:$IP_HOST_2:$PORT:$NAMESPACE" > $NANO_END_POINT_FILE
 	    echo "1" > $STATUS_FILE	    
-	    echo "serviceURL: http://$IP_HOST_2:$PORT"
+	    echo "serviceURL:  \e[93mhttp://$IP_HOST_2:$PORT"
+	    echo  -e " \e[97m "
     
 	else
 	   echo " Image '$BLZ_IMAGE' not found !! "
