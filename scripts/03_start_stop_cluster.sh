@@ -7,8 +7,9 @@
     
     IFS=':' read -a INFO_NANO <<< `cat $NANO_END_POINT_FILE`
     NANO_END_POINT_HOST=${INFO_NANO[0]}
-    NANO_END_POINT_PORT=${INFO_NANO[1]}
-    NAME_SPACE=${INFO_NANO[2]}
+    NANO_END_POINT_IP=${INFO_NANO[1]}
+    NANO_END_POINT_PORT=${INFO_NANO[2]}
+    NAME_SPACE=${INFO_NANO[3]}
     
     if [ "$1" = "start" ] ; then 
   
@@ -68,9 +69,14 @@
         echo    
         tput setaf 7
         sleep 10
-        docker exec $NANO_END_POINT_HOST ./nanoSparqlServer.sh $NANO_END_POINT_PORT $NAME_SPACE $RW_MODE &
         
-        echo "1" > $STATUS_FILE
+        docker exec -dit $NANO_END_POINT_HOST ./nanoSparqlServer.sh $NANO_END_POINT_PORT $NAME_SPACE $RW_MODE
+        
+        echo "serviceURL: http://$IP:$NANO_END_POINT_PORT"
+	echo "1" > $STATUS_FILE
+        echo  
+        #IP=`docker inspect --format '{{ .NetworkSettings.Networks.mynet123.IPAddress }}' blz_host_2`
+        # docker logs -f $NANO_END_POINT_HOST
         
     elif [ "$1" = "stop" ] ; then 
 
@@ -91,8 +97,9 @@
             echo 
             echo " -> Stopping Node $node "
             tput setaf 7
+
+            STOP=`docker exec -dit $node  /bin/sh -c "./bigdata stop "`
             
-            docker exec -itd $node  /bin/sh -c "./bigdata stop "
             sleep 3
         done
         
