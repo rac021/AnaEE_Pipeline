@@ -72,7 +72,7 @@
         
         docker exec -dit $NANO_END_POINT_HOST ./nanoSparqlServer.sh $NANO_END_POINT_PORT $NAME_SPACE $RW_MODE
         
-        echo -e "serviceURL:  \e[93mhttp://$NANO_END_POINT_IP:$NANO_END_POINT_PORT"
+        echo -e "serviceURL: \e[93mhttp://$NANO_END_POINT_IP:$NANO_END_POINT_PORT"
         #IP=`docker inspect --format '{{ .NetworkSettings.Networks.mynet123.IPAddress }}' blz_host_2`
         # docker logs -f $NANO_END_POINT_HOST
          
