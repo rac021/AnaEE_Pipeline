@@ -72,11 +72,13 @@
         
         docker exec -dit $NANO_END_POINT_HOST ./nanoSparqlServer.sh $NANO_END_POINT_PORT $NAME_SPACE $RW_MODE
         
-        echo "serviceURL: http://$NANO_END_POINT_IP:$NANO_END_POINT_PORT"
-	echo "1" > $STATUS_FILE
-        echo  
+        echo -e "serviceURL:  \e[93mhttp://$NANO_END_POINT_IP:$NANO_END_POINT_PORT"
         #IP=`docker inspect --format '{{ .NetworkSettings.Networks.mynet123.IPAddress }}' blz_host_2`
         # docker logs -f $NANO_END_POINT_HOST
+         
+        echo "1" > $STATUS_FILE
+        
+        echo  -e " \e[97m "
         
     elif [ "$1" = "stop" ] ; then 
 
@@ -104,7 +106,7 @@
         done
         
         echo "0" > $STATUS_FILE
-        echo
+        echo  -e " \e[97m "
         
     else
         echo " Invalid arguments :  Please pass One or Two arguments      "
