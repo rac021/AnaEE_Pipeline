@@ -41,8 +41,7 @@ if [ $# -eq 7 ] ; then
 	HOST_FILE="$CURRENT_PATH/conf/hosts"
         STATUS_FILE="$CURRENT_PATH/conf/status"
         NANO_END_POINT_FILE="$CURRENT_PATH/conf/nanoEndpoint"
-        NANO_END_POINT_HOST=`cat $NANO_END_POINT_FILE `
-    
+        
         > $HOST_FILE
         > $STATUS_FILE
         > $NANO_END_POINT_FILE
