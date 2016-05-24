@@ -43,9 +43,9 @@ if [ $# -eq 7 ] ; then
         NANO_END_POINT_FILE="$CURRENT_PATH/conf/nanoEndpoint"
         NANO_END_POINT_HOST=`cat $NANO_END_POINT_FILE `
     
-        touch $HOST_FILE
-        touch $STATUS_FILE
-        touch $NANO_END_POINT_FILE
+        > $HOST_FILE
+        > $STATUS_FILE
+        > $NANO_END_POINT_FILE
     
 	# Default interface
 	SUBNET="mynet123"
