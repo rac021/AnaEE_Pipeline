@@ -37,7 +37,7 @@ if [ $# -eq 1 ] ; then
 	else
 		if docker history -q $DOCKER_BLZ_IMAGE >/dev/null 2>&1 ; then
 	
-	            EXIST=`docker inspect --format='{{.Name}}' $(sudo docker ps -aq --no-trunc) | grep $HOST_0`
+	            EXIST=`docker inspect --format='{{.Name}}' $( docker ps -aq --no-trunc) | grep $HOST_0`
 	            # Remove $HOST_0 if exists 
 		    if [ ! -z $EXIST ]; then 
 		      echo "Container $HOST_0 already exists, remove..."
@@ -45,7 +45,7 @@ if [ $# -eq 1 ] ; then
 		      echo "Container $HOST_0 removed !!"
 		    fi
 		    
-	            EXIST=`docker inspect --format='{{.Name}}' $(sudo docker ps -aq --no-trunc) | grep $HOST_1`
+	            EXIST=`docker inspect --format='{{.Name}}' $( docker ps -aq --no-trunc) | grep $HOST_1`
 	            # Remove $HOST_1 if exists 	            
 		    if [ ! -z $EXIST ]; then 
 		      echo "Container $HOST_1 already exists, remove..."	    
@@ -53,7 +53,7 @@ if [ $# -eq 1 ] ; then
 		      echo "Container $HOST_1 removed !!"	      
 		    fi
 		    
-	            EXIST=`docker inspect --format='{{.Name}}' $(sudo docker ps -aq --no-trunc) | grep $HOST_2`
+	            EXIST=`docker inspect --format='{{.Name}}' $( docker ps -aq --no-trunc) | grep $HOST_2`
 	            # Remove $HOST_2 if exists 	            
 		    if [ ! -z $EXIST ]; then 
 		      echo "Container $HOST_2 already exists, remove..."
