@@ -83,25 +83,24 @@ if [ $# -eq 7 ] ; then
 	    fi
 	
             echo 
-            #EXIST=$(docker inspect --format="{{ .Name }}" $HOST_0 2> /dev/null)
-            EXIST=`docker inspect --format='{{.Name}}' $( docker ps -aq --no-trunc) | grep $HOST_0`
-	    if [ ! -z $EXIST ]; then 
+            EXIST=$(docker inspect --format="{{ .Name }}" $HOST_0 2> /dev/null)
+            if [ ! -z $EXIST ]; then 
 	      echo "Container $HOST_0 already exists, remove..."
 	      docker  rm  -f  $HOST_0
 	      echo "Container $HOST_0 removed !!"
 	      echo
 	    fi
 	    
-            EXIST=`docker inspect --format='{{.Name}}' $( docker ps -aq --no-trunc) | grep $HOST_1`
-	    if [ ! -z $EXIST ]; then 
+            EXIST=$(docker inspect --format="{{ .Name }}" $HOST_1 2> /dev/null)
+            if [ ! -z $EXIST ]; then 
 	      echo "Container $HOST_1 already exists, remove..."	    
 	      docker  rm  -f  $HOST_1
 	      echo "Container $HOST_1 removed !!"
 	      echo
 	    fi
 	    
-            EXIST=`docker inspect --format='{{.Name}}' $( docker ps -aq --no-trunc) | grep $HOST_2`
-	    if [ ! -z $EXIST ]; then 
+            EXIST=$(docker inspect --format="{{ .Name }}" $HOST_2 2> /dev/null)
+            if [ ! -z $EXIST ]; then 
 	      echo "Container $HOST_2 already exists, remove..."
 	      docker  rm  -f  $HOST_2
 	      echo "Container $HOST_2 removed !!"
