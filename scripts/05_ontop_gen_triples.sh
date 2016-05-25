@@ -7,23 +7,23 @@
   TTL="-ttl"
     
   tput setaf 2
-	echo 
-	echo " ######################################### "
-	echo " ######## Info Generation ################ "
-	echo " ----------------------------------------- "
-	echo
-	echo " ##  Script : $0                           " 
-	echo
-	echo " ##  OWL    : $OWL                         "
-	echo " ##  OBDA   : $OBDA                        "
+  echo 
+  echo " ######################################### "
+  echo " ######## Info Generation ################ "
+  echo " ----------------------------------------- "
+  echo
+  echo " ##  Script : $0                           " 
+  echo
+  echo " ##  OWL    : $OWL                         "
+  echo " ##  OBDA   : $OBDA                        "
   echo " ##  OUTPUT : $OUTPUT                      "
   echo " ##  QUERY  : $QUERY                       "
   echo " ##  TTL    : $TTL                         "
-	echo
-	echo " ######################################### "
-	echo 
-	sleep 1
-	tput setaf 7
+  echo
+  echo " ######################################### "
+  echo 
+  sleep 1
+  tput setaf 7
 	
   echo -e "\e[90m Strating Generation... \e[39m "
   echo
