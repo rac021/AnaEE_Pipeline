@@ -1,7 +1,7 @@
 #!/bin/bash
     
   INPUT="../data/yedGen"
-  OUTPUT="../Mapping/mapping.obda"
+  OUTPUT="../mapping/mapping.obda"
   EXTENSION=".graphml"
    
   tput setaf 2
