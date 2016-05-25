@@ -2,7 +2,7 @@
    
     checkIfContainersAreRunning() {
      
-     for LINE in `cat $1FILE`; do
+     for LINE in `cat $1`; do
      
        IFS=’:’ read -ra INFO_NANO <<< "$LINE" 
        CONTAINER=${INFO_NANO[0]}
