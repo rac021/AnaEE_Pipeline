@@ -187,9 +187,7 @@ rm -rf $ROOT_PATH/$DIRECTORY_LIBS/$TMP/
 
 tput setaf 2
 echo 
-echo "#########################"
-echo "###  install success  ###"
-echo "#########################"
+echo "###  install success  ########## "
 echo 
 sleep 2
 tput setaf 7
