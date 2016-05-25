@@ -83,6 +83,7 @@ if [ $# -eq 7 ] ; then
 	    fi
 	
             echo 
+            #EXIST=$(docker inspect --format="{{ .Name }}" $HOST_0 2> /dev/null)
             EXIST=`docker inspect --format='{{.Name}}' $( docker ps -aq --no-trunc) | grep $HOST_0`
 	    if [ ! -z $EXIST ]; then 
 	      echo "Container $HOST_0 already exists, remove..."
