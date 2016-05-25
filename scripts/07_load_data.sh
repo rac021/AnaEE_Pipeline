@@ -18,7 +18,7 @@
         if [ -f "$DATA_DIR/sparql" ] ; then
           rm -f "$DATA_DIR/sparql"
         fi
-    
+
         sleep 1  # Waits 1 second.
 
         cd $DATA_DIR
@@ -26,7 +26,7 @@
         for FILE in `ls -a *.*`
           do
             echo "---------------------"
-            echo "Upload file : $FILE" 
+            echo -e "\e[39m Upload file :\e[92m $FILE \e[39m " 
             echo "---------------------"
             curl -D- -H 'Content-Type: text/turtle' --upload-file $FILE -X POST $ENDPOINT -O
             echo "---------------------"
@@ -34,7 +34,7 @@
         
     else 
         
-       echo " Oupss, config missed ! "
+       echo " Oupss, config missed !! "
  
     fi
     
