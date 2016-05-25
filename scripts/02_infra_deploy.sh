@@ -140,7 +140,7 @@ if [ $# -eq 7 ] ; then
 	
 	    echo "$HOST_0" >> $HOST_FILE
             echo
-            echo "\e[94m waiting for blazegraph Cluster.. ~ 10 s  \e[39m "
+            echo -e "\e[94m waiting for blazegraph Cluster.. ~ 10 s  \e[39m "
 	    sleep 10 
 	    echo
 	    
