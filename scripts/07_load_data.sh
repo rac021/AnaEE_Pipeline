@@ -6,24 +6,26 @@
     
     if [ -f $NANO_END_POINT_FILE ] ; then
     
-      FIRST_END_POINT=$(head -n 1 $NANO_END_POINT_FILE )
-      
-      IFS=’:’ read -ra INFO_NANO <<< "$FIRST_END_POINT" 
-        
-      NANO_END_POINT_IP=${INFO_NANO[1]}
-      NANO_END_POINT_PORT=${INFO_NANO[2]}
-        
-      ENDPOINT="http://$NANO_END_POINT_IP:$NANO_END_POINT_PORT/bigdata/sparql"
+        FIRST_END_POINT=$(head -n 1 $NANO_END_POINT_FILE )
 
-      echo " endpoint ==> $ENDPOINT"
-       
-      sleep 1  # Waits 1 second.
-
+        IFS=’:’ read -ra INFO_NANO <<< "$FIRST_END_POINT" 
+        NANO_END_POINT_IP=${INFO_NANO[1]}
+        NANO_END_POINT_PORT=${INFO_NANO[2]}
+            
+        ENDPOINT="http://$NANO_END_POINT_IP:$NANO_END_POINT_PORT/bigdata/sparql"
+    
+        # Remove a sparql file automaticly created by blazegraph
+        if [ -f "$DATA_DIR/sparql" ] ; then
+          rm -f "$DATA_DIR/sparql"
+        fi
+    
         
-      cd $DATA_DIR
-       
-      for FILE in `ls -a *.*`
-         do
+        sleep 1  # Waits 1 second.
+
+        cd $DATA_DIR
+        
+        for FILE in `ls -a *.*`
+          do
             echo "---------------------"
             echo "Upload file : $FILE" 
             echo "---------------------"
@@ -31,8 +33,9 @@
             echo "---------------------"
         done
         
-        else 
+    else 
         
-           echo " Oupss, config missed ! "
+       echo " Oupss, config missed ! "
+ 
     fi
     
