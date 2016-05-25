@@ -1,8 +1,8 @@
 #!/bin/bash
     
-  OWL="../Mapping/ontology.owl"
+  OWL="../mapping/ontology.owl"
   TTL="../data/ontop/ontopMaterializedTriples.ttl"
-  QUERY="select ?S ?P ?O { ?S ?P ?O } "
+  QUERY=" SELECT ?S ?P ?O { ?S ?P ?O } "
   OUTPUT="../data/corese"
   f="100000"
   F="n3"
