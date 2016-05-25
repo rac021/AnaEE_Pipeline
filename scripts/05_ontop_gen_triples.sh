@@ -29,13 +29,14 @@
   echo
         
   java  -Xms1024M -Xmx2048M -cp ../libs/Ontop-Materializer.jar ontop.Main_1_17 \
-  -owl  $OWL                                                                   \
-  -obda $OBDA                                                                  \
-  -out  $OUTPUT                                                                \
-  -q    $QUERY                                                                 \
+  -owl  "$OWL"                                                                 \
+  -obda "$OBDA"                                                                \
+  -out  "$OUTPUT"                                                              \
+  -q    "$QUERY"                                                               \
   $TTL
-     
+   
+  echo
   echo -e "\e[36m Triples Generated in : $OUTPUT \e[39m "
   echo
         
-        
+  
