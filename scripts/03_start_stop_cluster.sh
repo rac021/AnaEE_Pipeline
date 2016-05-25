@@ -1,5 +1,27 @@
 #!/bin/bash
+   
+    checkIfContainersAreRunning() {
+     
+     for LINE in `cat $1FILE`; do
+     
+       IFS=’:’ read -ra INFO_NANO <<< "$LINE" 
+       CONTAINER=${INFO_NANO[0]}
+       RUNNING=$(docker inspect --format="{{ .State.Running }}" $CONTAINER 2> /dev/null)
+            
+       if [ $? -eq 1 ]; then        
+         echo -e "\e[91m UNKNOWN - Container $CONTAINER does not exist. \e[37m "
+         echo
+         exit 3
+       fi
 
+       if [ "$RUNNING" == "false" ]; then
+         echo -e "\e[91m CRITICAL - Container $CONTAINER is not running. \e[37m "
+         echo
+         exit 2
+       fi
+     done
+    } 
+      
     CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     HOSTS_FILE="$CURRENT_PATH/conf/hosts"
     STATUS_FILE="$CURRENT_PATH/conf/status"
@@ -38,43 +60,24 @@
         tput setaf 7
         sleep 2
       
-        echo -e " \e[90m Cluster List ** "
-        echo -e " \e[90m $HOSTS_FILE "
+        echo -e " \e[37m** Cluster List "
+        echo -e "   \e[90m $HOSTS_FILE "
+        echo -e " \e[37m** NanoEndpoint List  "
+        echo -e "   \e[90m $NANO_END_POINT_FILE "
         echo
-     
-     
-             
-        for LINE in `cat $NANO_END_POINT_FILE`; do
-   
-          IFS=’:’ read -ra INFO_NANO <<< "$LINE" 
-          CONTAINER=${INFO_NANO[0]}
-                      
-          RUNNING=$(docker inspect --format="{{ .State.Running }}" $CONTAINER 2> /dev/null)
-            
-          if [ $? -eq 1 ]; then        
-           echo -e "\e[91m UNKNOWN - $CONTAINER does not exist. \e[37m "
-           echo
-           exit 3
-          fi
 
-          if [ "$RUNNING" == "false" ]; then
-           echo -e "\e[91m CRITICAL - $CONTAINER is not running. \e[37m "
-           echo
-           exit 2
-          fi
-   
-        done
-        
-        
+        checkIfContainersAreRunning $HOSTS_FILE  
+        checkIfContainersAreRunning $NANO_END_POINT_FILE 
+      
         for node in $(cat $HOSTS_FILE)  
         do
             tput setaf 6
             echo " -> Starting Bigdata on Node $node "
-            sleep 2
+            sleep 1
             tput setaf 7
             docker exec -d $node ./bigdata start
             echo
-            sleep 4
+            sleep 3
         done 
         
         tput setaf 2
@@ -82,15 +85,12 @@
         echo " => Running nanoSparqlServer  ~ 10 s   "
         tput setaf 7
 
-        echo -e "  \e[90m nanoEndpoint List ** "
-        echo -e "  \e[90m $NANO_END_POINT_FILE "
         echo    
         tput setaf 7
         sleep 10
-        
-        
+
         for LINE in `cat $NANO_END_POINT_FILE`; do
-   
+            
             IFS=’:’ read -ra INFO_NANO <<< "$LINE" 
             NANO_END_POINT_HOST=${INFO_NANO[0]}
             NANO_END_POINT_IP=${INFO_NANO[1]}
@@ -120,14 +120,26 @@
         echo -e " \e[90m Cluster List ** "
         echo -e " \e[90m $HOSTS_FILE "
         
-        for node in $(cat $HOSTS_FILE)  
+        for CONTAINER in $(cat $HOSTS_FILE)  
         do
             tput setaf 6
             echo 
-            echo " -> Stopping Node $node "
+            echo " -> Stopping Node $CONTAINER "
             tput setaf 7
-
-            STOP=`docker exec -dit $node  /bin/sh -c "./bigdata stop "`
+       
+            RUNNING=$(docker inspect --format="{{ .State.Running }}" $CONTAINER 2> /dev/null)
+                    
+            if [ $? -eq 1 ]; then        
+                echo -e "\e[91m UNKNOWN - $CONTAINER does not exist. \e[37m "
+                
+            
+             elif [ "$RUNNING" == "false" ]; then
+                 echo -e "\e[91m    Container $CONTAINER Exited ! \e[37m "
+            
+             elif [ "$RUNNING" == "true" ]; then
+                 docker exec -dit $CONTAINER  /bin/sh -c "./bigdata stop "
+            
+            fi            
             
             sleep 3
         done
