@@ -2,7 +2,7 @@
     
   OWL="../Mapping/ontology.owl"
   TTL="../data/ontop/ontopMaterializedTriples.ttl"
-  QUERY="select ?S ?P ?O { ?S ?P ?O } "
+  QUERY=" SELECT ?S ?P ?O { ?S ?P ?O } "
   OUTPUT="../data/corese"
     
   tput setaf 2
