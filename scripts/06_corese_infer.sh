@@ -35,7 +35,6 @@
   -ilv t                                                           \
   -F   n3 
       
-    
   echo -e "\e[36m Triples Generated in : $OUTPUT \e[39m "
   echo
         
