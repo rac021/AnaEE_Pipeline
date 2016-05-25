@@ -130,12 +130,11 @@
             RUNNING=$(docker inspect --format="{{ .State.Running }}" $CONTAINER 2> /dev/null)
                     
             if [ $? -eq 1 ]; then        
-                echo -e "\e[91m UNKNOWN - $CONTAINER does not exist. \e[37m "
+                echo -e "\e[91m UNKNOWN - Container $CONTAINER does not exist. \e[37m "
                 
-            
              elif [ "$RUNNING" == "false" ]; then
-                 echo -e "\e[91m    Container $CONTAINER Exited ! \e[37m "
-            
+                 echo -e "\e[91m CRITICAL - Container $CONTAINER is not running. \e[37m "
+                 
              elif [ "$RUNNING" == "true" ]; then
                  docker exec -dit $CONTAINER  /bin/sh -c "./bigdata stop "
             
