@@ -1,7 +1,7 @@
 #!/bin/bash
     
-  OWL="../Mapping/ontology.owl"
-  OBDA="../Mapping/mapping.obda"
+  OWL="../mapping/ontology.owl"
+  OBDA="../mapping/mapping.obda"
   OUTPUT="../data/ontop/ontopMaterializedTriples.ttl"
   QUERY="SELECT ?S ?P ?O { ?S ?P ?O } "
   TTL="-ttl"
