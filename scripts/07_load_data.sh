@@ -19,7 +19,6 @@
           rm -f "$DATA_DIR/sparql"
         fi
     
-        
         sleep 1  # Waits 1 second.
 
         cd $DATA_DIR
