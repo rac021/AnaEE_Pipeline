@@ -164,6 +164,7 @@ if [ $# -eq 7 ] ; then
     
 	else
 	   echo " Image '$BLZ_IMAGE' not found !! "
+	   echo 
 	fi
 else
     echo " Invalid arguments :  please pass exactly Seven arguments "
