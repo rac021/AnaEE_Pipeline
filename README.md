@@ -32,7 +32,7 @@ Ex :
      
 Projects instaled : 
 
-   [a link test]( https://github.com/rac021/blazegraph_1_5_3_cluster_2_nodes)
+   [a https://github.com/rac021/blazegraph_1_5_3_cluster_2_nodes ]( https://github.com/rac021/blazegraph_1_5_3_cluster_2_nodes)
    
    [a link]( https://github.com/rac021/obdaYedGen-3.14.2)
    
