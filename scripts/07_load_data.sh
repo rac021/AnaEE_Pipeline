@@ -16,12 +16,12 @@
     
         timeout 1 bash -c "cat < /dev/null > /dev/tcp/$NANO_END_POINT_IP/$NANO_END_POINT_PORT" 2> /dev/null
          
-         if [ $? != 0 ] ; then 
+        if [ $? != 0 ] ; then 
           echo
           echo -e " \e[31m ENDPOINT $ENDPOINT Not reachable !! \e[39m"
           echo
           exit 3
-         fi 
+        fi 
 
         # Remove a sparql file automaticly created by blazegraph
         if [ -f "$DATA_DIR/sparql" ] ; then
