@@ -20,7 +20,7 @@
       echo -e " \e[31m ENDPOINT $ENDPOINT Not reachable !! \e[39m"
       echo
       exit 3
-   fi 
+    fi 
 
     tput setaf 2
   	echo 
