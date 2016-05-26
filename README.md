@@ -30,7 +30,7 @@ Ex :
       rw
      
      
-Projects instaled : 
+Included Projects : 
 
    [https://github.com/rac021/blazegraph_1_5_3_cluster_2_nodes]( https://github.com/rac021/blazegraph_1_5_3_cluster_2_nodes)
    
