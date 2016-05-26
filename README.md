@@ -14,7 +14,7 @@
 
 -    `$6 : IP Container HOST_3 `
 
--    `$7 : READ-WRITE MODE `
+-    `$7 : READ-WRITE MODE ( ro - rw )`
 
 
 
