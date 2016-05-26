@@ -8,13 +8,15 @@
        CONTAINER=${INFO_NANO[0]}
        RUNNING=$(docker inspect --format="{{ .State.Running }}" $CONTAINER 2> /dev/null)
             
-       if [ $? -eq 1 ]; then        
+       if [ $? -eq 1 ]; then   
+         echo
          echo -e "\e[91m UNKNOWN - Container $CONTAINER does not exist. \e[37m "
          echo
          exit 3
        fi
 
        if [ "$RUNNING" == "false" ]; then
+         echo
          echo -e "\e[91m CRITICAL - Container $CONTAINER is not running. \e[37m "
          echo
          exit 2
