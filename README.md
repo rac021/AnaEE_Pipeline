@@ -32,13 +32,11 @@ Ex :
      
 Projects instaled : 
 
-    https://github.com/rac021/blazegraph_1_5_3_cluster_2_nodes
-    
-    https://github.com/rac021/obdaYedGen-3.14.2
-    
-    https://github.com/rac021/CoreseInfer
-    
-    https://github.com/rac021/ontop-matarializer
-    
-    
-    
+   [a link]( https://github.com/rac021/blazegraph_1_5_3_cluster_2_nodes)
+   
+   [a link]( https://github.com/rac021/obdaYedGen-3.14.2)
+   
+   [a link]( https://github.com/rac021/CoreseInfer)
+   
+   [a link]( https://github.com/rac021/ontop-matarializer)
+   
