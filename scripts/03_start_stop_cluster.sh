@@ -30,7 +30,7 @@
     if [ "$1" = "start" ] ; then 
   
      if [ "$2" != "ro" ] && [ "$2" != "rw" ] ; then 
-       echo
+       	   echo
 	   echo -e " \e[90m Must specify the starting Read-Write Mode : ro - rw \e[39m "
 	   echo
 	   exit 2
