@@ -167,7 +167,8 @@ if [ $# -eq 7 ] ; then
 	   echo 
 	fi
 else
-    echo " Invalid arguments :  please pass exactly Seven arguments "
+    echo
+    echo " Invalid arguments :  Please pass exactly Seven arguments "
     echo " arg_1             :  Image_docker_name                   "
     echo " arg_2             :  Blazegraph_namespace                "
     echo " arg_3             :  Ports  number                       "
@@ -175,5 +176,6 @@ else
     echo " arg_5             :  IP Container HOST_2                 "
     echo " arg_6             :  IP Container HOST_3                 "
     echo " arg_7             :  READ-WRITE MODE ( ro : rw   )       "   
+    echo
 fi
 
