@@ -107,6 +107,7 @@ if [ $# -eq 7 ] ; then
 	      echo
 	    fi
 	
+	    # --privileged=true -i -v /data1/Downloads:/Downloads 
 	    echo -e "\e[36m Run Container $HOST_2 \e[39m "
 	    docker run -d --net mynet123 --name $HOST_2 \
 	           --add-host $HOST_0:$IP_HOST_0        \
