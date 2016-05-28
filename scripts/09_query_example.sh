@@ -45,7 +45,7 @@
      	        ?uri a oboe-core:Measurement .
    	          ?uri oboe-core:hasValue ?unite
            }
-           LIMIT 2
+           LIMIT 3
    ' \
    -H 'Accept:application/json'
    
