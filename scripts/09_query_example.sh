@@ -28,7 +28,9 @@
   	echo "## Query Demo usning Curl ##                          "
   	echo "----------------------------- "
   	echo
-  	echo " EndPoint : $ENDPOINT                                 "
+  	echo " ## Script   : $0                                     " 
+  	echo
+  	echo " ## EndPoint : $ENDPOINT                              "
   	echo
   	echo "----------------------------------------------------- "
   	echo 
