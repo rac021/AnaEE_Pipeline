@@ -125,7 +125,6 @@
                   echo " Container  $NAME_INSTANCE already exists, remove..."
                   docker  rm  -f  $NAME_INSTANCE > /dev/null
                   echo " Container  $NAME_INSTANCE removed !!"
-                  echo
                 fi
 
                 fuser -k $HOST_PORT/tcp 
@@ -151,7 +150,7 @@
                 fi
                 
                 echo " ---------------------------------------------------------------- "
-                echo
+                
             done
             
             echo
