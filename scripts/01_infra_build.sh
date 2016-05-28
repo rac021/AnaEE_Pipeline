@@ -12,18 +12,17 @@ if [ $# -eq 1 ] ; then
 
 	tput setaf 2
 	echo 
-	echo "################################# "
-	echo "######### Build Infra ########### "
-	echo "--------------------------------- "
+	echo -e "################################# "
+	echo -e "######### Build Infra ########### "
+	echo -e "--------------------------------- "
+        echo -e "\e[90m$0        \e[32m            "
 	echo
-	echo "##  Script    : $0                "
+	echo -e "##  BLZ_IMAGE : $DOCKER_BLZ_IMAGE "
+	echo -e "##  HOST_0    : $HOST_0           "
+	echo -e "##  HOST_1    : $HOST_1           "
+	echo -e "##  HOST_2    : $HOST_2           "
 	echo
-	echo "##  BLZ_IMAGE : $DOCKER_BLZ_IMAGE "
-	echo "##  HOST_0    : $HOST_0           "
-	echo "##  HOST_1    : $HOST_1           "
-	echo "##  HOST_2    : $HOST_2           "
-	echo
-	echo "################################# "
+	echo -e "################################# "
 	echo 
 	sleep 2
 	tput setaf 7
