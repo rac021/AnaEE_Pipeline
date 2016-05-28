@@ -10,19 +10,19 @@
   
   tput setaf 2
   echo 
-  echo -e " ######################################### "
-  echo -e " ######## Info Generation ################ "
-  echo -e " ----------------------------------------- "
-  echo -e "\e[90m$0        \e[32m                     "
+  echo -e " ######################################################### "
+  echo -e " ######## Info Generation ################################ "
+  echo -e " --------------------------------------------------------- "
+  echo -e "\e[90m$0        \e[32m                                     "
   echo
-  echo -e " ##  OWL      : $OWL                       "
-  echo -e " ##  TTL      : $TTL                       "
-  echo -e " ##  QUERY    : $QUERY                     "
-  echo -e " ##  OUTPUT   : $OUTPUT                    "
-  echo -e " ##  FORMAT   : $F                         "
-  echo -e " ##  FRAGMENT : $f                         "
+  echo -e " ##  OWL      : $OWL                                       "  
+  echo -e " ##  TTL      : $TTL                                       "
+  echo -e " ##  QUERY    : $QUERY                                     "
+  echo -e " ##  OUTPUT   : $OUTPUT                                    "
+  echo -e " ##  FORMAT   : $F                                         "
+  echo -e " ##  FRAGMENT : $f                                         "
   echo
-  echo " ############################################ "
+  echo -e " ######################################################### "
   echo 
   sleep 1
   tput setaf 7
