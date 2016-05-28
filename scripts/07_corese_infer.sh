@@ -28,7 +28,13 @@
   echo 
   sleep 1
   tput setaf 7
-	
+
+
+  if [ ! -f $OWL ]  || [ ! -f $TTL ]  ; then
+     echo -e "\e[91m Missing OWL or TTL Files ! \e[39m "
+     exit 3
+  fi
+  
   echo -e "\e[90m Strating Generation... \e[39m "
   echo
 
