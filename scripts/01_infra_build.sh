@@ -16,6 +16,8 @@ if [ $# -eq 1 ] ; then
 	echo "######### Build Infra ########### "
 	echo "--------------------------------- "
 	echo
+	echo "##  Script    : $0                "
+	echo
 	echo "##  BLZ_IMAGE : $DOCKER_BLZ_IMAGE "
 	echo "##  HOST_0    : $HOST_0           "
 	echo "##  HOST_1    : $HOST_1           "
