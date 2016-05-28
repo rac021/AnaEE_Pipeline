@@ -24,15 +24,14 @@
 
     tput setaf 2
   	echo 
-  	echo "----------------------------------------------------- "
-  	echo "## Query Demo usning Curl ##                          "
-  	echo "----------------------------- "
+  	echo "-------------------------------------------------------- "
+  	echo -e "## Query Demo usning Curl ##                          "
+  	echo -e "-----------------------------                         "
+  	echo -e "\e[90m$0    \e[32m                                    "
+   	echo
+  	echo -e " ## EndPoint : $ENDPOINT                              "
   	echo
-  	echo " ## Script   : $0                                     " 
-  	echo
-  	echo " ## EndPoint : $ENDPOINT                              "
-  	echo
-  	echo "----------------------------------------------------- "
+  	echo -e "----------------------------------------------------- "
   	echo 
   	sleep 2
   	tput setaf 7
