@@ -21,8 +21,8 @@
   sleep 1
   tput setaf 7
 	
-  if [ ! -f $OUTPUT ] ; then
-     echo -e "\e[91m File  $OUTPUT  not found ! \e[39m "
+  if [ ! -d $INPUT ] ; then
+     echo -e "\e[91m $INPUT is not a valid Directory ! \e[39m "
      exit 3
   fi
 
