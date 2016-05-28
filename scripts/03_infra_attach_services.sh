@@ -10,36 +10,36 @@
 
 if [ $# -eq 7 ] ; then
 
-	# Get Image Docker Name
-	BLZ_IMAGE=$1
-	BASE_NAME_CONTAINER=$2
-	NUMBER_INSTANCE=$3
-	START_IP=$4
-	# Get NameSpace
-	NAMESPACE=$5
-	# Get Port Number
-	PORT=$6
-	# Get Default Mode : 
-	# 'rw' for read-write Mode
-	# 'ro' for readOnly Mode. 
-	DEFAULT_MODE=$7
+    # Get Image Docker Name
+    BLZ_IMAGE=$1
+    BNAME_CONTAINER=$2
+    START_IP=$3
+    NUMBER_INSTANCE=$4
+    # Get NameSpace
+    NAMESPACE=$5
+    # Get Port Number
+    PORT=$6
+    # Get Default Mode : 
+    # 'rw' for read-write Mode
+    # 'ro' for readOnly Mode. 
+    DEFAULT_MODE=$7
 
-	# Default interface
-	SUBNET="mynet123"
+    # Default interface
+    SUBNET="mynet123"
 
-	LOOP=" while true; do sleep 1000; done "
+    LOOP=" while true; do sleep 1000; done "
 	
-	if [ "$DEFAULT_MODE" != "ro" ] && [ "$DEFAULT_MODE" != "rw" ] ; then 
-	  echo "DEFAULT_MODE can only have 'rw' OR 'ro' values !!"
-	  exit 2
-	fi 
+    if [ "$DEFAULT_MODE" != "ro" ] && [ "$DEFAULT_MODE" != "rw" ] ; then 
+      echo "DEFAULT_MODE can only have 'rw' OR 'ro' values !!"
+      exit 2
+    fi 
 
-if docker history -q $BLZ_IMAGE >/dev/null 2>&1; then
+   if docker history -q $BLZ_IMAGE >/dev/null 2>&1; then
 
 	CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 	HOST_FILE="$CURRENT_PATH/conf/hosts"
-  STATUS_FILE="$CURRENT_PATH/conf/statusServices"
-  NANO_END_POINT_FILE="$CURRENT_PATH/conf/nanoEndpoint"
+        STATUS_FILE="$CURRENT_PATH/conf/statusServices"
+        NANO_END_POINT_FILE="$CURRENT_PATH/conf/nanoEndpoint"
 
 	tput setaf 2
 	echo 
@@ -47,66 +47,94 @@ if docker history -q $BLZ_IMAGE >/dev/null 2>&1; then
 	echo "############ Attach Info ################ "
 	echo "----------------------------------------- "
 	echo
-	echo "##  SUBNET       : $SUBNET                "
+	echo "##  SUBNET          : $SUBNET             "
 	echo
-	echo "##  BLZ_IMAGE    : $BLZ_IMAGE             "
-	echo "##  NAMESPACE    : $NAMESPACE             "
-	echo "##  PORT         : $PORT                  "
-	echo "##  NBR_INSTANCE : $NUMBER_INSTANCE       "
-	echo "##  MODE         : $DEFAULT_MODE          "
+	echo "##  BLZ_IMAGE       : $BLZ_IMAGE          "
+	echo "##  BN_CONTAINERNBR : $BNAME_CONTAINER    "
+	echo "##  START_IP        : $START_IP           "
+	echo "##  PORT            : $PORT               "
+	echo "##  NBR_INSTANCE    : $NUMBER_INSTANCE    "
+	echo "##  NAMESPACE       : $NAMESPACE          "
 	echo
 	echo "######################################### "
 	echo 
 	sleep 2
 	tput setaf 7
 
-  # CLEAN NANO ENDPOINT FILE
-  for LINE in `cat $NANO_END_POINT_FILE`; do
-            
-    IFS=’:’ read -ra INFO_NANO <<< "$LINE" 
-    NANO_END_POINT_HOST=${INFO_NANO[0]}
-    NANO_END_POINT_IP=${INFO_NANO[1]}
-    NANO_END_POINT_PORT=${INFO_NANO[2]}
-    NAME_SPACE=${INFO_NANO[3]}
-    echo
+    # CLEAN NANO ENDPOINT FILE
     
-    EXIST=$(docker inspect --format="{{ .Name }}" $NANO_END_POINT_HOST 2> /dev/null)
-    if [ ! -z $EXIST ]; then 
-      echo "Container $NANO_END_POINT_HOST already exists, remove..."
-      docker  rm  -f  $NANO_END_POINT_HOST
-      echo "Container $NANO_END_POINT_HOST removed !!"
-      echo
-    fi
-  done
+    echo -e " Cleaning existing Clients in : $NANO_END_POINT_FILE "
+    
+    for LINE in `cat $NANO_END_POINT_FILE`; do
+                
+        IFS=’:’ read -ra INFO_NANO <<< "$LINE" 
+        NANO_END_POINT_HOST=${INFO_NANO[0]}
+        NANO_END_POINT_IP=${INFO_NANO[1]}
+        NANO_END_POINT_PORT=${INFO_NANO[2]}
+        NAME_SPACE=${INFO_NANO[3]}
+        
+        EXIST=$(docker inspect --format="{{ .Name }}" $NANO_END_POINT_HOST 2> /dev/null)
+        if [ ! -z $EXIST ]; then 
+        echo "Container $NANO_END_POINT_HOST already exists, remove..."
+        docker  rm  -f  $NANO_END_POINT_HOST
+        echo "Container $NANO_END_POINT_HOST removed !!"
+        echo
+        fi
+    done
+    
+    > $NANO_END_POINT_FILE
   
-  > $NANO_END_POINT_FILE
-  
-  # PROCESS IP  
-  i1=192; i2=168; i3=56; i4=0
-  eval printf -v ip "%s\ " $i1.$i2.$i3.{$i4..$NUMBER_INSTANCE}
+    echo -e " Done ! "
+    echo 
+    
+    # PROCESS IP  
+    IFS=’.’ read -ra S_IP <<< "$START_IP" 
+    i1=${S_IP[0]} ; i2=${S_IP[1]} ; i3=${S_IP[2]}; i4=${S_IP[3]}
+    
+    HOST_PORT=$PORT
+    
+    let END=$i4+$NUMBER_INSTANCE
+    
+    for (( n=$i4; n<$END ; n++ )) ; do
+        
+        IP=$i1"."$i2"."$i3"."$i4
+      
+        NAME_INSTANCE=$BNAME_CONTAINER"_"$IP
+        
+        EXIST=$(docker inspect --format="{{ .Name }}" $NAME_INSTANCE 2> /dev/null)
+        if [ ! -z $EXIST ]; then 
+        echo " Container $NAME_INSTANCE already exists, remove..."
+        docker  rm  -f  $NAME_INSTANCE
+        echo " Container $NAME_INSTANCE removed !!"
+        echo
+        fi
 
-  for IP in $ip ; do
-    
-    NAME_INSTANCE=$BASE_NAME_CONTAINER_$IP
-    
-    EXIST=$(docker inspect --format="{{ .Name }}" $NAME_INSTANCE 2> /dev/null)
-    
-    if [ ! -z $EXIST ]; then 
-      echo "Container $NAME_INSTANCE already exists, remove..."
-      docker  rm  -f  $NAME_INSTANCE
-      echo "Container $NAME_INSTANCE removed !!"
-      echo
-    fi
-
-    docker run -d --net mynet123 --name blz_host_69 \
-	             --ip 192.168.56.50  -p   5555:6981    \
-	             -it --entrypoint /bin/bash blz_final -c " ./nanoSparqlServer.sh $PORT $NAMESPACE $DEFAULT_MODE ; $LOOP  "
-	  
-	  echo "$HOST_0:$IP_HOST_0:$PORT:$NAMESPACE" >> $NANO_END_POINT_FILE
-	  echo -e "\e[39m serviceURL: \e[93mhttp://$IP_HOST_0:$PORT"
+        fuser -k $HOST_PORT/tcp 
+        
+        docker run -d --net  $SUBNET                                                      \
+                      --name $NAME_INSTANCE                                               \
+                      --ip   $IP                                                          \
+                      -p     $HOST_PORT:$PORT                                             \
+                      -it                                                                 \
+                      --entrypoint /bin/bash $BLZ_IMAGE                                   \
+                      -c " ./nanoSparqlServer.sh $PORT $NAMESPACE $DEFAULT_MODE ; $LOOP " > /dev/null
+        
+        echo "$NAME_INSTANCE:$IP:$PORT:$NAMESPACE" >> $NANO_END_POINT_FILE
+        echo -e "\e[39m serviceURL: \e[93mhttp://$IP:$PORT  -  Published port : $HOST_PORT "
+        
+        let "HOST_PORT++"
+        let "i4++"
+        
+        if [ $i4 -eq "255" ]; then
+           i4=0;
+           let "i3++"
+        fi
+        
+        echo "---------------------------------------------------------------------- "
+    done
      
-  done
- 
+    echo
+  
  else
     echo " Image '$BLZ_IMAGE' not found !! "
     echo 
@@ -115,11 +143,11 @@ else
     echo
     echo " Invalid arguments :  Please pass exactly Seven arguments "
     echo " arg_1             :  Image_docker_name                   "
-    echo " arg_2             :  Blazegraph_namespace                "
-    echo " arg_3             :  Ports  number                       "
-    echo " arg_4             :  IP Container HOST_1                 "
-    echo " arg_5             :  IP Container HOST_2                 "
-    echo " arg_6             :  IP Container HOST_3                 "
+    echo " arg_2             :  Base name Container                 "
+    echo " arg_3             :  Start IP                            "
+    echo " arg_4             :  Number Instances                    "
+    echo " arg_5             :  NameSpace                           "
+    echo " arg_6             :  Port                                "
     echo " arg_7             :  READ-WRITE MODE ( ro : rw   )       "   
     echo
 fi
