@@ -57,21 +57,21 @@
             
             tput setaf 2
             echo 
-            echo "######################################### "
-            echo "############ Attach Info ################ "
-            echo "----------------------------------------- "
+            echo -e "######################################### "
+            echo -e "############ Attach Info ################ "
+            echo -e "----------------------------------------- "
+            echo -e "\e[90m$0          \e[32m                  "
+            echo 
+            echo -e "##  SUBNET          : $SUBNET             "
             echo
-            echo "##  Script          : $0                  "
-            echo "##  SUBNET          : $SUBNET             "
+            echo -e "##  BLZ_IMAGE       : $BLZ_IMAGE          "
+            echo -e "##  BN_CONTAINERNBR : $BNAME_CONTAINER    "
+            echo -e "##  START_IP        : $START_IP           "
+            echo -e "##  PORT            : $PORT               "
+            echo -e "##  NBR_INSTANCE    : $NUMBER_INSTANCE    "
+            echo -e "##  NAMESPACE       : $NAMESPACE          "
             echo
-            echo "##  BLZ_IMAGE       : $BLZ_IMAGE          "
-            echo "##  BN_CONTAINERNBR : $BNAME_CONTAINER    "
-            echo "##  START_IP        : $START_IP           "
-            echo "##  PORT            : $PORT               "
-            echo "##  NBR_INSTANCE    : $NUMBER_INSTANCE    "
-            echo "##  NAMESPACE       : $NAMESPACE          "
-            echo
-            echo "######################################### "
+            echo -e "######################################### "
             echo 
             sleep 1
             tput setaf 7
