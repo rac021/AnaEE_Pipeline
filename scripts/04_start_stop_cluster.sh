@@ -143,6 +143,31 @@
             sleep 3
         done
         
+        for CONTAINER in $(cat $NANO_END_POINT_FILE ) ; do
+        
+       	    IFS=’:’ read -ra INFO_NANO <<< "$CONTAINER" 
+       	    H_CONTAINER=${INFO_NANO[0]}
+       	    
+            tput setaf 6
+            echo 
+            echo " -> Stopping Node $H_CONTAINER "
+            tput setaf 7
+       
+            RUNNING=$(docker inspect --format="{{ .State.Running }}" $H_CONTAINER 2> /dev/null)
+                    
+            if [ $? -eq 1 ]; then        
+                echo -e "\e[91m UNKNOWN - Container $H_CONTAINER does not exist. \e[37m "
+                
+            elif [ "$RUNNING" == "false" ]; then
+                 echo -e "\e[91m CRITICAL - Container $H_CONTAINER is not running. \e[37m "
+                 
+            elif [ "$RUNNING" == "true" ]; then
+                 docker exec -dit $H_CONTAINER  /bin/sh -c "./bigdata stop "
+            fi            
+            
+            sleep 3
+        done
+        
         echo "0" > $STATUS_FILE
         echo  -e " \e[97m "
         
