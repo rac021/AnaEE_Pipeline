@@ -27,7 +27,9 @@
 	
   echo -e "\e[90m Strating Generation... \e[39m "
   echo
-        
+  
+  cd $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+  
   java  -Xms1024M -Xmx2048M -cp ../libs/Ontop-Materializer.jar ontop.Main_1_17 \
   -owl  "$OWL"                                                                 \
   -obda "$OBDA"                                                                \
