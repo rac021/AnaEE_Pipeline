@@ -81,8 +81,9 @@
             HOSTS_FILE="$CURRENT_PATH/conf/hosts"
             NANO_END_POINT_FILE="$CURRENT_PATH/conf/nanoEndpoint"
             
-            echo -e "\e[90m Cleaning existing Clients in :\e[39m $NANO_END_POINT_FILE "
-            
+            echo -e "\e[90m Cleaning existing Clients in :\e[39m "
+            echo -e "\e[90m $NANO_END_POINT_FILE \e[39m "
+             
             for LINE in `cat $NANO_END_POINT_FILE`; do
                         
                 IFS=’:’ read -ra INFO_NANO <<< "$LINE" 
@@ -144,12 +145,13 @@
                 let "HOST_PORT++"
                 let "i4++"
                 
-                if [ $i4 -eq "255" ]; then
-                i4=0;
+                if [ $i4 -eq "255" ] ; then
+                i4=0
                 let "i3++"
                 fi
                 
                 echo " ---------------------------------------------------------------- "
+                echo
             done
             
             echo
