@@ -48,7 +48,7 @@
    -H 'Accept:application/json'
    
    echo ; echo 
-   echo -e "\e[94m ecoInfo © 2016 \e[39m "
+   echo -e "\e[94m Powered By BlazeGraph & ecoInfo © 2016 \e[39m "
    echo
    
   else 
