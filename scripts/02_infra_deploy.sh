@@ -55,6 +55,7 @@ if [ $# -eq 7 ] ; then
 	echo "######### Deploy Info ############### "
 	echo "------------------------------------- "
 	echo
+	echo "##  Script    : $0                    "
 	echo "##  SUBNET    : $SUBNET               "
 	echo
 	echo "##  BLZ_IMAGE : $BLZ_IMAGE            "
