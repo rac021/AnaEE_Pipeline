@@ -30,7 +30,7 @@
          exit 3
         fi
         
-        # Remove a sparql file automaticly created by blazegraph
+        # Remove a sparql file automatically created by blazegraph
         if [ -f "$DATA_DIR/sparql" ] ; then
           rm -f "$DATA_DIR/sparql"
         fi
