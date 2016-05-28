@@ -25,6 +25,11 @@
           exit 3
         fi 
 
+        if [ ! -d $DATA_DIR ] ; then
+         echo -e "\e[91m $DATA_DIR is not valid Directory ! \e[39m "
+         exit 3
+        fi
+        
         # Remove a sparql file automaticly created by blazegraph
         if [ -f "$DATA_DIR/sparql" ] ; then
           rm -f "$DATA_DIR/sparql"
