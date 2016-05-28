@@ -34,6 +34,21 @@
 
         cd $DATA_DIR
         
+        tput setaf 2
+        echo 
+        echo " ######################################### "
+        echo " ######## Info Load Data ################# "
+        echo " ----------------------------------------- "
+        echo
+        echo " ##  Script   : $0                         " 
+        echo
+        echo " ##  ENDPOINT : $ENDPOINT                  "
+        echo
+        echo " ######################################### "
+        echo 
+        sleep 1
+        tput setaf 7
+        
         for FILE in `ls -a *.*`
           do
             echo "---------------------"
