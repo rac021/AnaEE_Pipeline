@@ -47,6 +47,8 @@
    ' \
    -H 'Accept:application/json'
    
+   echo
+   
   else 
         
    echo " Oupss, config missed !! "
