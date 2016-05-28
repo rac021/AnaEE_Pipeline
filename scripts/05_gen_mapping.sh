@@ -22,7 +22,9 @@
   tput setaf 7
 	
   echo -e "\e[90m Strating Generation... \e[39m "
-        
+
+  cd $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
   java -cp ../libs/yedGen.jar Main -d $INPUT -out $OUTPUT -ext $EXTENSION
 
   echo -e "\e[36m Mapping generated in : $OUTPUT \e[39m "
