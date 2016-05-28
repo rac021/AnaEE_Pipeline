@@ -27,7 +27,8 @@ RUN echo " ** Install tools "  && \
     mkdir nas && \
     mkdir data && \
     chown -R anaee:anaee nas && \
-    chown -R anaee:anaee data
+    chown -R anaee:anaee data && \
+    sysctl -w vm.swappiness=0
     
 USER anaee
 
