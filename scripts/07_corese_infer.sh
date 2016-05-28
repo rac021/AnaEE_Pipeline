@@ -32,6 +32,8 @@
   echo -e "\e[90m Strating Generation... \e[39m "
   echo
 
+  cd $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
   java -Xms1024M -Xmx2048M -cp ../libs/CoreseInfer.jar corese.Main \
   -owl "$OWL"                                                      \
   -nt  "$TTL"                                                      \
