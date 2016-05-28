@@ -137,7 +137,7 @@
                             -c " ./nanoSparqlServer.sh $PORT $NAMESPACE $DEFAULT_MODE ; $LOOP " > /dev/null
                 
                 echo "$NAME_INSTANCE:$IP:$PORT:$NAMESPACE" >> $NANO_END_POINT_FILE
-                echo -e "\e[39m serviceURL: \e[93mhttp://$IP:$PORT  -  Published port : $HOST_PORT "
+                echo -e "\e[39m serviceURL: \e[93mhttp://$IP:$PORT  -  Published port : $HOST_PORT \e[39m"
                 
                 let "HOST_PORT++"
                 let "i4++"
