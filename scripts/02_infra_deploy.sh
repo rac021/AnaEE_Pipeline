@@ -51,22 +51,22 @@ if [ $# -eq 7 ] ; then
 	
 	tput setaf 2
 	echo 
-	echo "##################################### "
-	echo "######### Deploy Info ############### "
-	echo "------------------------------------- "
+	echo -e "##################################### "
+	echo -e "######### Deploy Info ############### "
+	echo -e "------------------------------------- "
+        echo -e "\e[90m$0     \e[32m                   "
 	echo
-	echo "##  Script    : $0                    "
-	echo "##  SUBNET    : $SUBNET               "
+	echo -e "##  SUBNET    : $SUBNET               "
 	echo
-	echo "##  BLZ_IMAGE : $BLZ_IMAGE            "
-	echo "##  NAMESPACE : $NAMESPACE            "
-	echo "##  PORT      : $PORT                 "
-	echo "##  HOST_0    : $HOST_0 : $IP_HOST_0  "
-	echo "##  HOST_1    : $HOST_1 : $IP_HOST_1  "
-	echo "##  HOST_2    : $HOST_2 : $IP_HOST_2  "
-	echo "##  MODE      : $DEFAULT_MODE         "
+	echo -e "##  BLZ_IMAGE : $BLZ_IMAGE            "
+	echo -e "##  NAMESPACE : $NAMESPACE            "
+	echo -e "##  PORT      : $PORT                 "
+	echo -e "##  HOST_0    : $HOST_0 : $IP_HOST_0  "
+	echo -e "##  HOST_1    : $HOST_1 : $IP_HOST_1  "
+	echo -e "##  HOST_2    : $HOST_2 : $IP_HOST_2  "
+	echo -e "##  MODE      : $DEFAULT_MODE         "
 	echo
-	echo "##################################### "
+	echo -e "##################################### "
 	echo 
 	sleep 2
 	tput setaf 7
