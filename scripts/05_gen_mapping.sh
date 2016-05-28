@@ -6,17 +6,17 @@
    
   tput setaf 2
   echo 
-  echo " ######################################### "
-  echo " ######## Info Generation ################ "
-  echo " ----------------------------------------- "
+  echo -e " ######################################### "
+  echo -e " ######## Info Generation ################ "
+  echo -e " ----------------------------------------- "
+  echo -e "\e[90m$0         \e[32m                    "
   echo
-  echo " ##  Script    : $0                        " 
-  echo " ##  INPUT     : $INPUT                    "
-  echo " ##  EXTENTION : $EXTENSION                "
+  echo -e " ##  INPUT     : $INPUT                    "
+  echo -e " ##  EXTENTION : $EXTENSION                "
   echo
-  echo " ##  OUTPUT    : $OUTPUT                   "
+  echo -e " ##  OUTPUT    : $OUTPUT                   "
   echo
-  echo " ######################################### "
+  echo -e " ######################################### "
   echo 
   sleep 1
   tput setaf 7
