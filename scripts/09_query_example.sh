@@ -47,11 +47,13 @@
    ' \
    -H 'Accept:application/json'
    
+   echo ; echo 
+   echo -e "\e[94m ecoInfo © 2016 \e[39m "
    echo
    
   else 
         
-   echo " Oupss, config missed !! "
+   echo -e "\e[91m Oupss, config missed !!\e[39m "
  
   fi
     
