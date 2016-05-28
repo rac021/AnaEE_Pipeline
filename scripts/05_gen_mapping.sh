@@ -21,6 +21,11 @@
   sleep 1
   tput setaf 7
 	
+  if [ ! -f $OUTPUT ] ; then
+     echo -e "\e[91m File  $OUTPUT  not found ! \e[39m "
+     exit 3
+  fi
+
   echo -e "\e[90m Strating Generation... \e[39m "
 
   cd $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
