@@ -151,14 +151,13 @@
             done
             
             echo
-        
+            
         else
            echo " Image '$BLZ_IMAGE' not found !! "
            echo 
         fi
     
    else
-   
         echo
         echo " Invalid arguments :  Please pass exactly Seven arguments "
         echo " arg_1             :  Image_docker_name                   "
