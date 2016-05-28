@@ -44,7 +44,7 @@
         echo -e " ######################################### "
         echo -e " ######## Info Load Data ################# "
         echo -e " ----------------------------------------- "
-        echo -e "\e[90m$0        \e[32m                     "
+        echo -e " \e[90m$0        \e[32m                    "
         echo
         echo -e " ##  ENDPOINT : $ENDPOINT                  "
         echo
