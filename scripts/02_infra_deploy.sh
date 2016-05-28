@@ -117,7 +117,7 @@ if [ $# -eq 7 ] ; then
 	           --add-host $HOST_2:$IP_HOST_2        \
 	           --ip $IP_HOST_2   -p   7777:$PORT    \
 	           --expose $PORT                       \
-	           -it --entrypoint /bin/bash $BLZ_IMAGE -c "./bigdata start; $LOOP "
+	           -it --entrypoint /bin/bash $BLZ_IMAGE -c "./bigdata start; $LOOP " > /dev/null
 	
             echo "$HOST_2" >> $HOST_FILE
 	    sleep 4
@@ -129,10 +129,10 @@ if [ $# -eq 7 ] ; then
 	           --add-host $HOST_1:$IP_HOST_1        \
 	           --add-host $HOST_2:$IP_HOST_2        \
 	           --ip $IP_HOST_1  -p   8888:$PORT     \
-	           -it --entrypoint /bin/bash $BLZ_IMAGE -c "./bigdata start; $LOOP "
+	           -it --entrypoint /bin/bash $BLZ_IMAGE -c "./bigdata start; $LOOP " > /dev/null
 	
-            echo "$HOST_1" >> $HOST_FILE
-	    sleep 4 
+           echo "$HOST_1" >> $HOST_FILE
+	   sleep 4 
 	
 	   echo -e "\e[36m Run Container $HOST_0 \e[39m "
 	    docker run -d --net mynet123 --name $HOST_0 \
@@ -141,7 +141,7 @@ if [ $# -eq 7 ] ; then
 	           --add-host $HOST_1:$IP_HOST_1        \
 	           --add-host $HOST_2:$IP_HOST_2        \
 	           --ip $IP_HOST_0  -p   9999:$PORT     \
-	           -it --entrypoint /bin/bash $BLZ_IMAGE -c "./bigdata start; $LOOP "
+	           -it --entrypoint /bin/bash $BLZ_IMAGE -c "./bigdata start; $LOOP " > /dev/null
 	
 	    echo "$HOST_0" >> $HOST_FILE
             echo
