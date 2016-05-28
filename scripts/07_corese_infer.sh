@@ -29,7 +29,8 @@
   sleep 1
   tput setaf 7
 
-
+  cd $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+ 
   if [ ! -f $OWL ]  || [ ! -f $TTL ]  ; then
      echo -e "\e[91m Missing OWL or TTL Files ! \e[39m "
      exit 3
@@ -37,8 +38,6 @@
   
   echo -e "\e[90m Strating Generation... \e[39m "
   echo
-
-  cd $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
   java -Xms1024M -Xmx2048M -cp ../libs/CoreseInfer.jar corese.Main \
   -owl "$OWL"                                                      \
