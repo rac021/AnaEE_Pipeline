@@ -141,24 +141,24 @@ if [ $# -eq 7 ] ; then
 	
 	    echo "$HOST_0" >> $HOST_FILE
             echo
-            echo -e "\e[94m waiting for blazegraph Cluster.. ~ 10 s  \e[39m "
-	    sleep 10 
+            echo -e "\e[94m waiting for blazegraph Cluster.. ~ 8s  \e[39m "
+	    sleep 8 
 	    echo
 	    
 	    # Start EndPoint blz_host_0
-	    docker exec -dit $HOST_0 ./nanoSparqlServer.sh $PORT $NAMESPACE $DEFAULT_MODE 
-	    echo "$HOST_0:$IP_HOST_0:$PORT:$NAMESPACE" >> $NANO_END_POINT_FILE
-	    echo -e "\e[39m serviceURL: \e[93mhttp://$IP_HOST_0:$PORT"
-	    echo
+	    #docker exec -dit $HOST_0 ./nanoSparqlServer.sh $PORT $NAMESPACE $DEFAULT_MODE 
+	    #echo "$HOST_0:$IP_HOST_0:$PORT:$NAMESPACE" >> $NANO_END_POINT_FILE
+	    #echo -e "\e[39m serviceURL: \e[93mhttp://$IP_HOST_0:$PORT"
+	    #echo
 	    # Start EndPoint blz_host_1
-	    docker exec -dit $HOST_1 ./nanoSparqlServer.sh $PORT $NAMESPACE $DEFAULT_MODE 
-	    echo "$HOST_1:$IP_HOST_1:$PORT:$NAMESPACE" >> $NANO_END_POINT_FILE
-	    echo -e "\e[39m serviceURL: \e[93mhttp://$IP_HOST_1:$PORT"
-	    echo	    
+	    #docker exec -dit $HOST_1 ./nanoSparqlServer.sh $PORT $NAMESPACE $DEFAULT_MODE 
+	    #echo "$HOST_1:$IP_HOST_1:$PORT:$NAMESPACE" >> $NANO_END_POINT_FILE
+	    #echo -e "\e[39m serviceURL: \e[93mhttp://$IP_HOST_1:$PORT"
+	    #echo	    
 	    # Start EndPoint blz_host_2
-	    docker exec -dit $HOST_2 ./nanoSparqlServer.sh $PORT $NAMESPACE $DEFAULT_MODE 
-	    echo "$HOST_2:$IP_HOST_2:$PORT:$NAMESPACE" >> $NANO_END_POINT_FILE
-	    echo -e "\e[39m serviceURL: \e[93mhttp://$IP_HOST_2:$PORT"
+	    #docker exec -dit $HOST_2 ./nanoSparqlServer.sh $PORT $NAMESPACE $DEFAULT_MODE 
+	    #echo "$HOST_2:$IP_HOST_2:$PORT:$NAMESPACE" >> $NANO_END_POINT_FILE
+	    #echo -e "\e[39m serviceURL: \e[93mhttp://$IP_HOST_2:$PORT"
 	    
 	    echo "1" > $STATUS_FILE	    
 	    echo -e " \e[97m "
