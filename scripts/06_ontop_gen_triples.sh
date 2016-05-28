@@ -8,19 +8,18 @@
     
   tput setaf 2
   echo 
-  echo " ######################################### "
-  echo " ######## Info Generation ################ "
-  echo " ----------------------------------------- "
+  echo -e " ######################################### "
+  echo -e " ######## Info Generation ################ "
+  echo -e " ----------------------------------------- "
+  echo -e "\e[90m$0      \e[32m                       "
   echo
-  echo " ##  Script : $0                           " 
+  echo -e " ##  OWL    : $OWL                         "
+  echo -e " ##  OBDA   : $OBDA                        "
+  echo -e " ##  OUTPUT : $OUTPUT                      "
+  echo -e " ##  QUERY  : $QUERY                       "
+  echo -e " ##  TTL    : $TTL                         "
   echo
-  echo " ##  OWL    : $OWL                         "
-  echo " ##  OBDA   : $OBDA                        "
-  echo " ##  OUTPUT : $OUTPUT                      "
-  echo " ##  QUERY  : $QUERY                       "
-  echo " ##  TTL    : $TTL                         "
-  echo
-  echo " ######################################### "
+  echo -e " ######################################### "
   echo 
   sleep 1
   tput setaf 7
