@@ -120,10 +120,10 @@
                 
                 EXIST=$(docker inspect --format="{{ .Name }}" $NAME_INSTANCE 2> /dev/null)
                 if [ ! -z $EXIST ]; then 
-                echo " Container  $NAME_INSTANCE already exists, remove..."
-                docker  rm  -f  $NAME_INSTANCE > /dev/null
-                echo " Container  $NAME_INSTANCE removed !!"
-                echo
+                  echo " Container  $NAME_INSTANCE already exists, remove..."
+                  docker  rm  -f  $NAME_INSTANCE > /dev/null
+                  echo " Container  $NAME_INSTANCE removed !!"
+                  echo
                 fi
 
                 fuser -k $HOST_PORT/tcp 
