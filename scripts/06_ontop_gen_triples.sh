@@ -25,6 +25,8 @@
   sleep 1
   tput setaf 7
 
+  cd $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+ 
   if [ ! -f $OWL ]  || [ ! -f $OBDA ]  ; then
      echo -e "\e[91m Missing OWL or OBDA Files ! \e[39m "
      exit 3
@@ -32,8 +34,6 @@
   
   echo -e "\e[90m Strating Generation... \e[39m "
   echo
-  
-  cd $( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
   
   java  -Xms1024M -Xmx2048M -cp ../libs/Ontop-Materializer.jar ontop.Main_1_17 \
   -owl  "$OWL"                                                                 \
