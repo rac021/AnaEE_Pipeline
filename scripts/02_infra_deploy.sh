@@ -124,7 +124,7 @@ if [ $# -eq 7 ] ; then
 	
 	    echo -e "\e[36m Run Container $HOST_1 \e[39m "
 	    docker run -d --net mynet123 --name $HOST_1 \
-	    	   --memory-swappiness=0		\	    
+	    	   --memory-swappiness=0		\
 	           --add-host $HOST_0:$IP_HOST_0        \
 	           --add-host $HOST_1:$IP_HOST_1        \
 	           --add-host $HOST_2:$IP_HOST_2        \
@@ -136,8 +136,8 @@ if [ $# -eq 7 ] ; then
 	
 	   echo -e "\e[36m Run Container $HOST_0 \e[39m "
 	    docker run -d --net mynet123 --name $HOST_0 \
-	    	   --memory-swappiness=0		\	    
-	           --add-host $HOST_0:$IP_HOST_0        \
+	    	   --memory-swappiness=0		\
+  	           --add-host $HOST_0:$IP_HOST_0        \
 	           --add-host $HOST_1:$IP_HOST_1        \
 	           --add-host $HOST_2:$IP_HOST_2        \
 	           --ip $IP_HOST_0  -p   9999:$PORT     \
