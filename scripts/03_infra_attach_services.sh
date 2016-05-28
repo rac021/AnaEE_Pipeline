@@ -128,13 +128,13 @@
 
                 fuser -k $HOST_PORT/tcp 
                 
-                docker run -d --net $SUBNET                                                     \
-                            --name  $NAME_INSTANCE                                              \
-                            --ip    $IP                                                         \
-                            -p      $HOST_PORT:$PORT                                            \
-                            -it                                                                 \
-                            --memory-swappiness=0		                                          \
-                            --entrypoint /bin/bash $BLZ_IMAGE                                   \
+                docker run  -d                                                                  \
+                            --net  $SUBNET                                                      \
+                            --name $NAME_INSTANCE                                               \
+                            --ip   $IP                                                          \
+                            -p     $HOST_PORT:$PORT                                             \
+                           --memory-swappiness=0                                                \
+                            --entrypoint /bin/bash -it $BLZ_IMAGE                               \
                             -c " ./nanoSparqlServer.sh $PORT $NAMESPACE $DEFAULT_MODE ; $LOOP " > /dev/null
                 
                 echo "$NAME_INSTANCE:$IP:$PORT:$NAMESPACE" >> $NANO_END_POINT_FILE
