@@ -1,8 +1,15 @@
 #!/bin/bash
 
+tput setaf 2
+echo 
+echo -e " ##################################### "
+echo -e " ######### Info Install ############## "
+echo -e " ------------------------------------- "
+echo -e " \e[90m$0     \e[32m                   "
 echo
-echo "Executing Script : $0 "
-echo ""
+echo -e " ##################################### "
+echo 
+sleep 2
 
 CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 CURRENT_DIRECTORY="scripts"
@@ -40,45 +47,59 @@ DOCUMENTATION_FILE_NAME="README.md"
 
 if [ ! -d "$ROOT_PATH/$DIRECTORY_LIBS" ]; then
 mkdir -p $ROOT_PATH/$DIRECTORY_LIBS
+echo -e " \e[90m created folder : $ROOT_PATH/$DIRECTORY_LIBS \e[32m "
 fi
 if [ ! -d "$ROOT_PATH/$DIRECTORY_MAPPING" ]; then
 mkdir -p $ROOT_PATH/$DIRECTORY_MAPPING
+echo -e " \e[90m created folder : $ROOT_PATH/$DIRECTORY_MAPPING \e[32m "
 fi
 if [ ! -d "$ROOT_PATH/$DIRECTORY_DATA" ]; then
 mkdir -p $ROOT_PATH/$DIRECTORY_DATA
+echo -e " \e[90m created folder : $ROOT_PATH/$DIRECTORY_DATA \e[32m  "
 fi
 if [ ! -d "$ROOT_PATH/$DIRECTORY_LIBS/$DOCS" ]; then
 mkdir -p $ROOT_PATH/$DIRECTORY_LIBS/$DOCS
+echo -e " \e[90m created folder : $ROOT_PATH/$DIRECTORY_LIBS/$DOCS \e[32m  "
 fi
 if [ ! -d "$ROOT_PATH/$DIRECTORY_DATA/$DIRECTORY_DATA_ONTOP" ]; then
 mkdir $ROOT_PATH/$DIRECTORY_DATA/$DIRECTORY_DATA_ONTOP
+echo -e " \e[90m created folder : $ROOT_PATH/$DIRECTORY_DATA/$DIRECTORY_DATA_ONTOP \e[32m  "
 fi
 if [ ! -d "$ROOT_PATH/$DIRECTORY_DATA/$DIRECTORY_DATA_CORESE" ]; then
 mkdir -p $ROOT_PATH/$DIRECTORY_DATA/$DIRECTORY_DATA_CORESE
+echo -e " \e[90m created folder : $ROOT_PATH/$DIRECTORY_DATA/$DIRECTORY_DATA_CORESE \e[32m  "
 fi
 if [ ! -d "$ROOT_PATH/$DIRECTORY_DATA/$DIRECTORY_DATA_YEDGEN" ]; then
 mkdir -p $ROOT_PATH/$DIRECTORY_DATA/$DIRECTORY_DATA_YEDGEN
+echo -e " \e[90m created folder : $ROOT_PATH/$DIRECTORY_DATA/$DIRECTORY_DATA_YEDGEN \e[32m  "
 fi
 if [ ! -d "$ROOT_PATH/$CURRENT_DIRECTORY/$DIRECTORY_DATA_CONFIG" ]; then
 mkdir -p $ROOT_PATH/$CURRENT_DIRECTORY/$DIRECTORY_DATA_CONFIG
+echo -e " \e[90m created folder : $ROOT_PATH/$CURRENT_DIRECTORY/$DIRECTORY_DATA_CONFIG \e[32m  "
 fi
 if [ ! -d "$ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_ONTOP" ]; then
 mkdir -p $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_ONTOP
+echo -e " \e[90m created folder : $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_ONTOP \e[32m  "
 fi
 if [ ! -d "$ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_ONTOP/$EXAMPLES" ]; then
 mkdir -p $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_ONTOP/$EXAMPLES
+echo -e " \e[90m created folder : $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_ONTOP/$EXAMPLES \e[32m  "
 fi
 if [ ! -d "$ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_CORESE" ]; then
 mkdir -p $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_CORESE
+echo -e " \e[90m created folder : $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_CORESES \e[32m  "
 fi
 if [ ! -d "$ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_CORESE/$EXAMPLES" ]; then
 mkdir -p $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_CORESE/$EXAMPLES
+echo -e " \e[90m created folder : $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_CORESE/$EXAMPLES \e[32m  "
 fi
 if [ ! -d "$ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN" ]; then
 mkdir -p $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN
+echo -e " \e[90m created folder : $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGE \e[32m  "
 fi
 if [ ! -d "$ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN/$EXAMPLES" ]; then
 mkdir -p $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN/$EXAMPLES
+echo -e " \e[90m created folder : $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN/$EXAMPLES \e[32m  "
 fi
 
 rm -rf $ROOT_PATH/$DIRECTORY_LIBS/$TMP
@@ -89,9 +110,9 @@ rm -rf $ROOT_PATH/$DIRECTORY_LIBS/$TMP
 
 tput setaf 2
 echo 
-echo "######################"
-echo "### Install yedGen ###"
-echo "######################"
+echo "###########################"
+echo "##### Install yedGen ######"
+echo "###########################"
 echo 
 sleep 2
 tput setaf 7
