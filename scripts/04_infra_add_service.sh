@@ -106,7 +106,7 @@
               
             echo " ---------------------------------------------------------------- "
             echo
-            echo -e " Joining CLuster... ~ 10 s "
+            echo -e " Joining cluster... ~ 10 s "
             sleep 8
             echo -e " Done ! "
             echo
