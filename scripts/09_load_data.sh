@@ -29,24 +29,26 @@
         
         TRYING=5
         
-        for COUNT in {1..$TRYING} ; do
+        for (( COUNT=1; COUNT<=$TRYING; COUNT++ )) ; do
         
             timeout 1 bash -c "cat < /dev/null > /dev/tcp/$NANO_END_POINT_IP/$NANO_END_POINT_PORT" 2> /dev/null
-         
+           
             if [ $? != 0 ] ; then 
-              echo " attempt $COUNT : Try again ... "
-              if [ $COUNT -eq $TRYING] ; then
+               
+              if [ $COUNT == 1 ] ; then echo ; fi 
+               
+              echo " attempt $COUNT : Try again .. "
+              if [ $COUNT == $TRYING ] ; then
                 echo
-                echo -e " \e[31m ENDPOINT $ENDPOINT Not reachable !! \e[39m"
+                echo -e "\e[31m ENDPOINT $ENDPOINT Not reachable !! \e[39m"
                 echo
                 exit 3
               fi
             else 
               break
             fi 
-    
-        done
         
+        done
         
         if [ ! -d $DATA_DIR ] ; then
              echo -e "\e[91m $DATA_DIR is not valid Directory ! \e[39m "
