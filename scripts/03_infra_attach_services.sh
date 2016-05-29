@@ -153,7 +153,10 @@
                 echo " ---------------------------------------------------------------- "
                 
             done
-            sleep 2
+            echo
+            echo -e " Wait... ~ 10 s "
+            sleep 8
+            echo -e " Done ! "
             echo
             
         else
