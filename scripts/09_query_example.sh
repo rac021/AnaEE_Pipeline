@@ -49,7 +49,7 @@
    -H 'Accept:application/json'
    
    echo ; echo 
-   echo -e " \e[47m\e[30m Powered by EcoInfo & BlazeGraph © 2016 \e[49m\e[39m "
+   echo -e " \e[47m\e[30m Powered by EcoInfo-Orleans & Ontop Corese BlazeGraph © 2016 \e[49m\e[39m "
    echo
    
   else 
