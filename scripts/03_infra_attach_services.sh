@@ -154,7 +154,7 @@
                 
             done
             echo
-            echo -e " Wait... ~ 10 s "
+            echo -e " Joining cluster... ~ 10 s "
             sleep 8
             echo -e " Done ! "
             echo
