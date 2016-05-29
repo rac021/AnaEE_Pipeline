@@ -57,22 +57,22 @@
             
             tput setaf 2
             echo 
-            echo -e "######################################### "
-            echo -e "############ Attach Info ################ "
-            echo -e "----------------------------------------- "
-            echo -e "\e[90m$0              \e[32m              "
+            echo -e " ######################################### "
+            echo -e " ############ Attach Service ############# "
+            echo -e " ----------------------------------------- "
+            echo -e " \e[90m$0              \e[32m              "
             echo 
-            echo -e "##  SUBNET          : $SUBNET             "
+            echo -e " ##  SUBNET          : $SUBNET             "
             echo
-            echo -e "##  BLZ_IMAGE       : $BLZ_IMAGE          "
-            echo -e "##  BN_CONTAINERNBR : $BNAME_CONTAINER    "
-            echo -e "##  START_IP        : $START_IP           "
-            echo -e "##  PORT            : $PORT               "
-            echo -e "##  NBR_INSTANCE    : $NUMBER_INSTANCE    "
-            echo -e "##  NAMESPACE       : $NAMESPACE          "
-            echo -e "##                  : $DEFAULT_MODE       "
+            echo -e " ##  BLZ_IMAGE       : $BLZ_IMAGE          "
+            echo -e " ##  BN_CONTAINERNBR : $BNAME_CONTAINER    "
+            echo -e " ##  START_IP        : $START_IP           "
+            echo -e " ##  PORT            : $PORT               "
+            echo -e " ##  NBR_INSTANCE    : $NUMBER_INSTANCE    "
+            echo -e " ##  NAMESPACE       : $NAMESPACE          "
+            echo -e " ##                  : $DEFAULT_MODE       "
             echo
-            echo -e "######################################### "
+            echo -e " ######################################### "
             echo 
             sleep 1
             tput setaf 7
@@ -162,7 +162,7 @@
             echo
             echo -e "\e[94m Joining cluster... ~ 10 s \e[39m "
             sleep 8
-            echo -e "\e[94m Cluster joined \e[39m "
+            echo -e "\e[33m Cluster joined \e[39m "
             echo
             
         else
