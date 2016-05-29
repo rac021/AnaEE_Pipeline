@@ -24,21 +24,35 @@
         NANO_END_POINT_PORT=${INFO_NANO[2]}
             
         ENDPOINT="http://$NANO_END_POINT_IP:$NANO_END_POINT_PORT/bigdata/sparql"
-    
-        timeout 1 bash -c "cat < /dev/null > /dev/tcp/$NANO_END_POINT_IP/$NANO_END_POINT_PORT" 2> /dev/null
-         
-        if [ $? != 0 ] ; then 
-          echo
-          echo -e " \e[31m ENDPOINT $ENDPOINT Not reachable !! \e[39m"
-          echo
-          exit 3
-        fi 
-
-        if [ ! -d $DATA_DIR ] ; then
-         echo -e "\e[91m $DATA_DIR is not valid Directory ! \e[39m "
-         exit 3
-        fi
         
+        echo ;echo -e " Try connection : $ENDPOINT "
+        
+        TRYING=5
+        
+        for COUNT in {1..$TRYING} ; do
+        
+            timeout 1 bash -c "cat < /dev/null > /dev/tcp/$NANO_END_POINT_IP/$NANO_END_POINT_PORT" 2> /dev/null
+         
+            if [ $? != 0 ] ; then 
+              echo " attempt $COUNT : Try again ... "
+              if [ $COUNT -eq $TRYING] ; then
+                echo
+                echo -e " \e[31m ENDPOINT $ENDPOINT Not reachable !! \e[39m"
+                echo
+                exit 3
+              fi
+            else 
+              break
+            fi 
+    
+        done
+        
+        
+        if [ ! -d $DATA_DIR ] ; then
+             echo -e "\e[91m $DATA_DIR is not valid Directory ! \e[39m "
+             exit 3
+        fi
+            
         # Remove a sparql file automatically created by blazegraph
         if [ -f "$DATA_DIR/sparql" ] ; then
           rm -f "$DATA_DIR/sparql"
