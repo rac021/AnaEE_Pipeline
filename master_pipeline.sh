@@ -14,7 +14,7 @@ if [ $# -eq 7 ] ; then
 
   ./scripts/02_infra_deploy.sh $1 $2 $3 $4 $5 $6 $7
 
-  ./scripts/03_infra_attach_services.sh $1 blz_client 192.168.56.200 3 $2 $3 $7
+  ./scripts/03_infra_attach_services.sh $1 blz_client 192.168.56.200 1 $2 $3 $7
   
   ./scripts/06_gen_mapping.sh
   
