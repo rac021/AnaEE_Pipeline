@@ -51,22 +51,22 @@ if [ $# -eq 7 ] ; then
 	
 	tput setaf 2
 	echo 
-	echo -e "##################################### "
-	echo -e "######### Deploy Info ############### "
-	echo -e "------------------------------------- "
-        echo -e "\e[90m$0     \e[32m                   "
+	echo -e " ##################################### "
+	echo -e " ######### Deploy Info ############### "
+	echo -e " ------------------------------------- "
+        echo -e " \e[90m$0     \e[32m                   "
 	echo
-	echo -e "##  SUBNET    : $SUBNET               "
+	echo -e " ##  SUBNET    : $SUBNET               "
 	echo
-	echo -e "##  BLZ_IMAGE : $BLZ_IMAGE            "
-	echo -e "##  NAMESPACE : $NAMESPACE            "
-	echo -e "##  PORT      : $PORT                 "
-	echo -e "##  HOST_0    : $HOST_0 : $IP_HOST_0  "
-	echo -e "##  HOST_1    : $HOST_1 : $IP_HOST_1  "
-	echo -e "##  HOST_2    : $HOST_2 : $IP_HOST_2  "
-	echo -e "##  MODE      : $DEFAULT_MODE         "
+	echo -e " ##  BLZ_IMAGE : $BLZ_IMAGE            "
+	echo -e " ##  NAMESPACE : $NAMESPACE            "
+	echo -e " ##  PORT      : $PORT                 "
+	echo -e " ##  HOST_0    : $HOST_0 : $IP_HOST_0  "
+	echo -e " ##  HOST_1    : $HOST_1 : $IP_HOST_1  "
+	echo -e " ##  HOST_2    : $HOST_2 : $IP_HOST_2  "
+	echo -e " ##  MODE      : $DEFAULT_MODE         "
 	echo
-	echo -e "##################################### "
+	echo -e " ##################################### "
 	echo 
 	sleep 2
 	tput setaf 7
@@ -76,7 +76,7 @@ if [ $# -eq 7 ] ; then
 	if docker history -q $BLZ_IMAGE >/dev/null 2>&1; then
 		    
 	    if [[ "${SUBNET_CHECK}" == *$SUBNET* ]]; then
-	      echo "subnet - $SUBNET - already exists "
+	      echo " subnet - $SUBNET - already exists "
 	    else
 	      echo " create subnet $SUBNET "
 	      docker network create --subnet=192.168.56.250/24 $SUBNET 
@@ -86,25 +86,25 @@ if [ $# -eq 7 ] ; then
             echo 
             EXIST=$(docker inspect --format="{{ .Name }}" $HOST_0 2> /dev/null)
             if [ ! -z $EXIST ]; then 
-	      echo "Container $HOST_0 already exists, remove..."
+	      echo " Container $HOST_0 already exists, remove..."
 	      docker  rm  -f  $HOST_0
-	      echo "Container $HOST_0 removed !!"
+	      echo " Container $HOST_0 removed !!"
 	      echo
 	    fi
 	    
             EXIST=$(docker inspect --format="{{ .Name }}" $HOST_1 2> /dev/null)
             if [ ! -z $EXIST ]; then 
-	      echo "Container $HOST_1 already exists, remove..."	    
+	      echo " Container $HOST_1 already exists, remove..."	    
 	      docker  rm  -f  $HOST_1
-	      echo "Container $HOST_1 removed !!"
+	      echo " Container $HOST_1 removed !!"
 	      echo
 	    fi
 	    
             EXIST=$(docker inspect --format="{{ .Name }}" $HOST_2 2> /dev/null)
             if [ ! -z $EXIST ]; then 
-	      echo "Container $HOST_2 already exists, remove..."
+	      echo " Container $HOST_2 already exists, remove..."
 	      docker  rm  -f  $HOST_2
-	      echo "Container $HOST_2 removed !!"
+	      echo " Container $HOST_2 removed !!"
 	      echo
 	    fi
 	
@@ -147,6 +147,7 @@ if [ $# -eq 7 ] ; then
             echo
             echo -e "\e[94m waiting for blazegraph Cluster.. ~ 8s  \e[39m "
 	    sleep 8 
+	    echo -e " .. "
 	    echo
 	    
 	    # Start EndPoint blz_host_0
