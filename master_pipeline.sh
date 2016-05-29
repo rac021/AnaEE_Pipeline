@@ -16,15 +16,15 @@ if [ $# -eq 7 ] ; then
 
   ./scripts/03_infra_attach_services.sh $1 blz_client 192.168.56.200 3 $2 $3 $7
   
-  ./scripts/05_gen_mapping.sh
+  ./scripts/06_gen_mapping.sh
   
-  ./scripts/06_ontop_gen_triples.sh
+  ./scripts/07_ontop_gen_triples.sh
   
-  ./scripts/07_corese_infer.sh
+  ./scripts/08_corese_infer.sh
   
-  ./scripts/08_load_data.sh
+  ./scripts/09_load_data.sh
   
-  ./scripts/09_query_example.sh
+  ./scripts/10_query_example.sh
   
 else
 
