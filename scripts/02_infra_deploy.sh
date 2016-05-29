@@ -165,7 +165,7 @@ if [ $# -eq 7 ] ; then
 	    #echo -e "\e[39m serviceURL: \e[93mhttp://$IP_HOST_2:$PORT"
 	    
 	    echo "1" > $STATUS_FILE	    
-	    echo -e " \e[97m "
+	    #echo -e " \e[97m "
     
 	else
 	   echo " Image '$BLZ_IMAGE' not found !! "
