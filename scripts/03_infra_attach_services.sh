@@ -96,9 +96,9 @@
                 EXIST=$(docker inspect --format="{{ .Name }}" $NANO_END_POINT_HOST 2> /dev/null)
                 if [ ! -z $EXIST ]; then 
                 echo
-                echo " Container $NANO_END_POINT_HOST  already exists, remove..."
+                echo " Container $NANO_END_POINT_HOST  already exists, remove... "
                 docker  rm  -f  $NANO_END_POINT_HOST > /dev/null
-                echo " Container $NANO_END_POINT_HOST  removed !!"
+                echo " Container $NANO_END_POINT_HOST  removed !! "
                 fi
             done
             
@@ -139,7 +139,7 @@
                             --entrypoint /bin/bash -it $BLZ_IMAGE                               \
                             -c " ./nanoSparqlServer.sh $PORT $NAMESPACE $DEFAULT_MODE ; $LOOP " > /dev/null
                 
-                echo "$NAME_INSTANCE:$IP:$PORT:$NAMESPACE" >> $NANO_END_POINT_FILE
+                echo "$NAME_INSTANCE:$IP:$PORT:$NAMESPACE:$DEFAULT_MODE" >> $NANO_END_POINT_FILE
                 echo -e "\e[39m serviceURL: \e[93mhttp://$IP:$PORT  -  Published port : $HOST_PORT \e[39m"
                 
                 let "HOST_PORT++"
