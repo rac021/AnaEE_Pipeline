@@ -45,7 +45,8 @@
   -f   "$f"                                                        \
   -ilv "$ilt"                                                      \
   -F   "$F" 
-   
+  
+  echo 
   echo -e "\e[36m Triples Generated in : $OUTPUT \e[39m "
   echo
         
