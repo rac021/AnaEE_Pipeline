@@ -106,7 +106,10 @@
               
             echo " ---------------------------------------------------------------- "
             echo
-            
+            echo -e " Joining CLuster... ~ 10 s "
+            sleep 8
+            echo -e " Done ! "
+            echo
         else
            echo " Image '$BLZ_IMAGE' not found !! "
            echo 
