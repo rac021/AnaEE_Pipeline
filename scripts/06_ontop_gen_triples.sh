@@ -34,7 +34,7 @@
   echo -e "\e[90m Strating Generation... \e[39m "
   echo
   
-  java  -Xms1024M -Xmx2048M -cp ../libs/Ontop-Materializer.jar ontop.Main_1_17 \
+  java  -Xms1024M -Xmx2048M -cp ../libs/Ontop-Materializer.jar ontop.Main_1_18 \
   -owl  "$OWL"                                                                 \
   -obda "$OBDA"                                                                \
   -out  "$OUTPUT"                                                              \
