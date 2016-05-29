@@ -70,6 +70,7 @@
             echo -e "##  PORT            : $PORT               "
             echo -e "##  NBR_INSTANCE    : $NUMBER_INSTANCE    "
             echo -e "##  NAMESPACE       : $NAMESPACE          "
+            echo -e "##                  : $DEFAULT_MODE       "
             echo
             echo -e "######################################### "
             echo 
