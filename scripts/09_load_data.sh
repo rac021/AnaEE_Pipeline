@@ -8,8 +8,17 @@
     
     if [ -f $NANO_END_POINT_FILE ] ; then
     
-        FIRST_END_POINT=$(head -n 1 $NANO_END_POINT_FILE )
+        RW_PATTERN=":rw$"
+        FIRST_END_POINT=`grep -m1 $RW_PATTERN $NANO_END_POINT_FILE`
 
+        if [ -z $FIRST_END_POINT ] ; then 
+           echo
+           echo -e "\e[91m No EndPoint Read-Write mode found \e[39m "
+           echo -e " \e[93m   -> $NANO_END_POINT_FILE \e[39m "
+           echo
+           exit 3
+        fi
+        
         IFS=’:’ read -ra INFO_NANO <<< "$FIRST_END_POINT" 
         NANO_END_POINT_IP=${INFO_NANO[1]}
         NANO_END_POINT_PORT=${INFO_NANO[2]}
