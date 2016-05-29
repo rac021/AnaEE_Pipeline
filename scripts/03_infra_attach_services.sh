@@ -81,6 +81,7 @@
             
             HOSTS_FILE="$CURRENT_PATH/conf/hosts"
             NANO_END_POINT_FILE="$CURRENT_PATH/conf/nanoEndpoint"
+            CLEANED=false
             
             echo -e "\e[90m Cleaning existing Clients in :\e[39m "
             echo -e "\e[90m $NANO_END_POINT_FILE \e[39m "
@@ -99,13 +100,18 @@
                 echo " Container $NANO_END_POINT_HOST  already exists, remove... "
                 docker  rm  -f  $NANO_END_POINT_HOST > /dev/null
                 echo " Container $NANO_END_POINT_HOST  removed !! "
+                CLEANED=true
                 fi
             done
             
             > $NANO_END_POINT_FILE
+            
+            if [ "$CLEANED" = true ] ; then
+               echo -e " Cleanded ! "
+            else
+              echo -e " No existing EndPoint "
+            fi
             echo
-            echo -e " Done ! "
-            echo 
             
             # PROCESS IP  
             IFS=’.’ read -ra S_IP <<< "$START_IP" 
