@@ -25,7 +25,7 @@ YEDGEN_TARGET_NAME="yedGen.jar"
 YEDGEN_EXP_LOCATION="src/main/resources/*"
 
 # Do not touch the ONTOP_COMPILE_NAME
-ONTOP_COMPILE_NAME="ontop-materializer-1.17.0-jar-with-dependencies.jar "
+ONTOP_COMPILE_NAME="ontop-materializer-1.18.0-jar-with-dependencies.jar "
 ONTOP_TARGET_NAME="Ontop-Materializer.jar"
 ONTOP_EXP_LOCATION="src/main/resources/mapping/*"
 
