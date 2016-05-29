@@ -160,9 +160,9 @@
                 
             done
             echo
-            echo -e " Joining cluster... ~ 10 s "
+            echo -e "\e[94m Joining cluster... ~ 10 s \e[39m "
             sleep 8
-            echo -e " Done ! "
+            echo -e "\e[94m Cluster joined \e[39m "
             echo
             
         else
