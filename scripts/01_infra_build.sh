@@ -58,18 +58,22 @@ if [ $# -eq 1 ] ; then
 	            
         echo -e " \e[90m Cleaning existing Clients in :\e[39m "
         echo -e " \e[90m $NANO_END_POINT_FILE \e[39m "
-             
-        for LINE in `cat $NANO_END_POINT_FILE`; do
+        
+        if [ -f $NANO_END_POINT_FILE ]; then
+        
+          for LINE in `cat $NANO_END_POINT_FILE`; do
                       
-          IFS=’:’ read -ra INFO_NANO <<< "$LINE" 
-          NANO_END_POINT_HOST=${INFO_NANO[0]}
-          NANO_END_POINT_IP=${INFO_NANO[1]}
-          NANO_END_POINT_PORT=${INFO_NANO[2]}
-          NAME_SPACE=${INFO_NANO[3]}
+            IFS=’:’ read -ra INFO_NANO <<< "$LINE" 
+            NANO_END_POINT_HOST=${INFO_NANO[0]}
+            NANO_END_POINT_IP=${INFO_NANO[1]}
+            NANO_END_POINT_PORT=${INFO_NANO[2]}
+            NAME_SPACE=${INFO_NANO[3]}
 	   
-	  removeContainerIfExists $NANO_END_POINT_HOST
+	    removeContainerIfExists $NANO_END_POINT_HOST
          
-        done
+          done
+          
+	fi
 	            
         > $NANO_END_POINT_FILE
             
@@ -80,11 +84,13 @@ if [ $# -eq 1 ] ; then
         fi
         echo
 	
-	for HOST in ${HOSTS[@]}
-	do
-	   removeContainerIfExists $HOST
-	done 
-	 
+	if [ -f $HOSTS_FILE ] ; then
+          for HOST in ${HOSTS[@]}
+	  do
+	    removeContainerIfExists $HOST
+	  done 
+	fi
+	
 	> $HOSTS_FILE
 	
         # Remove Image $DOCKER_BLZ_IMAGE if exists 
