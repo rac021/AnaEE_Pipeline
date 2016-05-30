@@ -2,6 +2,18 @@
 
 if [ $# -eq 1 ] ; then
 
+    removeContainerIfExists() {
+       CONTAINER=$1
+       EXIST=$(docker inspect --format="{{ .Name }}" $CONTAINER 2> /dev/null)
+       if [ ! -z $EXIST ]; then 
+          echo
+          echo " Container $CONTAINER  already exists, remove... "
+          docker  rm  -f   $CONTAINER > /dev/null
+          echo " Container $CONTAINER  removed !! "
+          CLEANED=true
+       fi
+    } 
+    
     # Docker Image
     DOCKER_BLZ_IMAGE=$1
 
@@ -10,6 +22,8 @@ if [ $# -eq 1 ] ; then
     HOST_1="blz_host_1"
     HOST_2="blz_host_2"
  
+    HOSTS=( $HOST_0 $HOST_01 $HOST_2 )
+ 	
     tput setaf 2
     echo 
     echo -e "################################# "
@@ -52,15 +66,9 @@ if [ $# -eq 1 ] ; then
           NANO_END_POINT_IP=${INFO_NANO[1]}
           NANO_END_POINT_PORT=${INFO_NANO[2]}
           NAME_SPACE=${INFO_NANO[3]}
-	                
-          EXIST=$(docker inspect --format="{{ .Name }}" $NANO_END_POINT_HOST 2> /dev/null)
-          if [ ! -z $EXIST ]; then 
-              echo
-              echo " Container $NANO_END_POINT_HOST  already exists, remove... "
-              docker  rm  -f  $NANO_END_POINT_HOST > /dev/null
-              echo " Container $NANO_END_POINT_HOST  removed !! "
-              CLEANED=true
-          fi
+	   
+	  removeContainerIfExists $NANO_END_POINT_HOST
+         
         done
 	            
         > $NANO_END_POINT_FILE
@@ -71,31 +79,14 @@ if [ $# -eq 1 ] ; then
             echo -e " No existing EndPoint "
         fi
         echo
-	            
-        EXIST=`docker inspect --format='{{.Name}}' $( docker ps -aq --no-trunc) | grep $HOST_0`
-        # Remove $HOST_0 if exists 
-        if [ ! -z $EXIST ]; then 
-           echo "Container $HOST_0 already exists, remove..."
-           docker rm -f $HOST_0
-           echo "Container $HOST_0 removed !!"
-        fi
-		    
-        EXIST=`docker inspect --format='{{.Name}}' $( docker ps -aq --no-trunc) | grep $HOST_1`
-        # Remove $HOST_1 if exists 	            
-        if [ ! -z $EXIST ]; then 
-          echo "Container $HOST_1 already exists, remove..."	    
-          docker rm -f $HOST_1
-          echo "Container $HOST_1 removed !!"	      
-        fi
-		    
-        EXIST=`docker inspect --format='{{.Name}}' $( docker ps -aq --no-trunc) | grep $HOST_2`
-        # Remove $HOST_2 if exists 	            
-        if [ ! -z $EXIST ]; then 
-          echo "Container $HOST_2 already exists, remove..."
-          docker rm -f $HOST_2
-          echo "Container $HOST_2 removed !!"
-        fi
-		    
+	
+	for HOST in ${HOSTS[@]}
+	do
+	   removeContainerIfExists $HOST
+	done 
+	 
+	> $HOSTS_FILE
+	
         # Remove Image $DOCKER_BLZ_IMAGE if exists 
         CONTAINER_ID=`docker images -q $DOCKER_BLZ_IMAGE `
         echo "$DOCKER_BLZ_IMAGE already exist, remove it..."
