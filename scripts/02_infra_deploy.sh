@@ -14,6 +14,12 @@ if [ $# -eq 7 ] ; then
 	HOST_0="blz_host_0"
 	HOST_1="blz_host_1"
 	HOST_2="blz_host_2"
+	# IP per Host # Configurable
+	IP_HOST_0=$4
+	IP_HOST_1=$5
+	IP_HOST_2=$6
+	
+	HOSTS=( $HOST_0 $HOST_01 $HOST_2 )
 	
 	# Get Image Docker Name
 	BLZ_IMAGE=$1
@@ -21,10 +27,6 @@ if [ $# -eq 7 ] ; then
 	NAMESPACE=$2
 	# Get Port Number
 	PORT=$3
-	# IP per Host # Configurable
-	IP_HOST_0=$4
-	IP_HOST_1=$5
-	IP_HOST_2=$6
 	# Get Default Mode : 
 	# 'rw' for read-write Mode
 	# 'ro' for readOnly Mode. 
@@ -32,9 +34,43 @@ if [ $# -eq 7 ] ; then
 	
 	LOOP=" while true; do sleep 1000; done "
 	
+        removeContainerIfExists() {
+          CONTAINER=$1
+          EXIST=$(docker inspect --format="{{ .Name }}" $CONTAINER 2> /dev/null)
+          if [ ! -z $EXIST ]; then 
+            echo
+            echo " Container $CONTAINER  already exists, remove... "
+            docker  rm  -f   $CONTAINER > /dev/null
+            echo " Container $CONTAINER  removed !! "
+            CLEANED=true
+          fi
+        }
+        
+        runContainer() {
+          HOST=$1
+          IP=$2
+          PORT=$3
+          FORWARD_PORT=$4
+          # --privileged=true -i -v /data1/Downloads:/Downloads 
+	  echo -e "\e[36m Run Container $HOST \e[39m "
+	  docker run -d --net mynet123 --name $HOST     \
+	  	     --memory-swappiness=0		\
+	             --add-host $HOST_0:$IP_HOST_0      \
+	             --add-host $HOST_1:$IP_HOST_1      \
+	             --add-host $HOST_2:$IP_HOST_2      \
+	             --ip $IP  -p  $FORWARD_PORT:$PORT  \
+	             --expose $PORT                     \
+	             -it --entrypoint /bin/bash $BLZ_IMAGE -c "./bigdata start; $LOOP " > /dev/null
+	
+          echo "$HOST_2" >> $HOST_FILE
+	  sleep 4
+	}
+
 	if [ "$DEFAULT_MODE" != "ro" ] && [ "$DEFAULT_MODE" != "rw" ] ; then 
-	echo " DEFAULT_MODE can only have 'rw' OR 'ro' values !!"
-	exit 2
+  	  echo
+	  echo " DEFAULT_MODE can only have 'rw' OR 'ro' values !!"
+	  echo
+	  exit 2
 	fi 
 
 	CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -84,90 +120,26 @@ if [ $# -eq 7 ] ; then
 	    fi
 	
             echo 
-            EXIST=$(docker inspect --format="{{ .Name }}" $HOST_0 2> /dev/null)
-            if [ ! -z $EXIST ]; then 
-	      echo " Container $HOST_0 already exists, remove..."
-	      docker  rm  -f  $HOST_0
-	      echo " Container $HOST_0 removed !!"
-	      echo
-	    fi
+            
+            for HOST in ${HOSTS[@]}
+	    do
+	       removeContainerIfExists $HOST
+	    done 
+	 	
+	    echo
 	    
-            EXIST=$(docker inspect --format="{{ .Name }}" $HOST_1 2> /dev/null)
-            if [ ! -z $EXIST ]; then 
-	      echo " Container $HOST_1 already exists, remove..."	    
-	      docker  rm  -f  $HOST_1
-	      echo " Container $HOST_1 removed !!"
-	      echo
-	    fi
-	    
-            EXIST=$(docker inspect --format="{{ .Name }}" $HOST_2 2> /dev/null)
-            if [ ! -z $EXIST ]; then 
-	      echo " Container $HOST_2 already exists, remove..."
-	      docker  rm  -f  $HOST_2
-	      echo " Container $HOST_2 removed !!"
-	      echo
-	    fi
+   	    runContainer  $HOST_2  $IP_HOST_2 $PORT 7777
+	    runContainer  $HOST_1  $IP_HOST_1 $PORT 8888
+	    runContainer  $HOST_0  $IP_HOST_0 $PORT 9999
 	
-	    # --privileged=true -i -v /data1/Downloads:/Downloads 
-	    echo -e "\e[36m Run Container $HOST_2 \e[39m "
-	    docker run -d --net mynet123 --name $HOST_2 \
-	    	   --memory-swappiness=0		\
-	           --add-host $HOST_0:$IP_HOST_0        \
-	           --add-host $HOST_1:$IP_HOST_1        \
-	           --add-host $HOST_2:$IP_HOST_2        \
-	           --ip $IP_HOST_2   -p   7777:$PORT    \
-	           --expose $PORT                       \
-	           -it --entrypoint /bin/bash $BLZ_IMAGE -c "./bigdata start; $LOOP " > /dev/null
-	
-            echo "$HOST_2" >> $HOST_FILE
-	    sleep 4
-	
-	    echo -e "\e[36m Run Container $HOST_1 \e[39m "
-	    docker run -d --net mynet123 --name $HOST_1 \
-	    	   --memory-swappiness=0		\
-	           --add-host $HOST_0:$IP_HOST_0        \
-	           --add-host $HOST_1:$IP_HOST_1        \
-	           --add-host $HOST_2:$IP_HOST_2        \
-	           --ip $IP_HOST_1  -p   8888:$PORT     \
-	           -it --entrypoint /bin/bash $BLZ_IMAGE -c "./bigdata start; $LOOP " > /dev/null
-	
-           echo "$HOST_1" >> $HOST_FILE
-	   sleep 4 
-	
-	   echo -e "\e[36m Run Container $HOST_0 \e[39m "
-	    docker run -d --net mynet123 --name $HOST_0 \
-	    	   --memory-swappiness=0		\
-  	           --add-host $HOST_0:$IP_HOST_0        \
-	           --add-host $HOST_1:$IP_HOST_1        \
-	           --add-host $HOST_2:$IP_HOST_2        \
-	           --ip $IP_HOST_0  -p   9999:$PORT     \
-	           -it --entrypoint /bin/bash $BLZ_IMAGE -c "./bigdata start; $LOOP " > /dev/null
-	
-	    echo "$HOST_0" >> $HOST_FILE
             echo
             echo -e "\e[94m waiting for blazegraph Cluster.. ~ 8s  \e[39m "
 	    sleep 8 
 	    echo -e " .. "
 	    echo
 	    
-	    # Start EndPoint blz_host_0
-	    #docker exec -dit $HOST_0 ./nanoSparqlServer.sh $PORT $NAMESPACE $DEFAULT_MODE 
-	    #echo "$HOST_0:$IP_HOST_0:$PORT:$NAMESPACE" >> $NANO_END_POINT_FILE
-	    #echo -e "\e[39m serviceURL: \e[93mhttp://$IP_HOST_0:$PORT"
-	    #echo
-	    # Start EndPoint blz_host_1
-	    #docker exec -dit $HOST_1 ./nanoSparqlServer.sh $PORT $NAMESPACE $DEFAULT_MODE 
-	    #echo "$HOST_1:$IP_HOST_1:$PORT:$NAMESPACE" >> $NANO_END_POINT_FILE
-	    #echo -e "\e[39m serviceURL: \e[93mhttp://$IP_HOST_1:$PORT"
-	    #echo	    
-	    # Start EndPoint blz_host_2
-	    #docker exec -dit $HOST_2 ./nanoSparqlServer.sh $PORT $NAMESPACE $DEFAULT_MODE 
-	    #echo "$HOST_2:$IP_HOST_2:$PORT:$NAMESPACE" >> $NANO_END_POINT_FILE
-	    #echo -e "\e[39m serviceURL: \e[93mhttp://$IP_HOST_2:$PORT"
-	    
 	    echo "1" > $STATUS_FILE	    
-	    #echo -e " \e[97m "
-    
+	
 	else
 	   echo " Image '$BLZ_IMAGE' not found !! "
 	   echo 
