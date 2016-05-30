@@ -58,6 +58,7 @@
               echo
               exit 3
            fi
+           
         done
         
         echo " Yeah Connected !! "
