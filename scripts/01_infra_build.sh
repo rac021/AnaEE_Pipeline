@@ -99,6 +99,8 @@ if [ $# -eq 1 ] ; then
         # echo " Conainer ID : $CONTAINER_ID "
         #docker rmi -f $CONTAINER_ID
         docker rmi -f $DOCKER_BLZ_IMAGE
+        # Remove untagged Images
+        docker rmi $(docker images | grep "^<none>" | awk "{print $3}")
         
     fi
 		
