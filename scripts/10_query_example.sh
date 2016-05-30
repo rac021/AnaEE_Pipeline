@@ -23,18 +23,18 @@
     fi 
 
     tput setaf 2
-  	echo 
-  	echo -e "-------------------------------------------------------- "
-  	echo -e "## Query Demo usning Curl ##                             "
-  	echo -e "-----------------------------                            "
-  	echo -e "\e[90m$0       \e[32m                                    "
-   	echo
-  	echo -e " ## EndPoint : $ENDPOINT                                 "
-  	echo
-  	echo -e "-------------------------------------------------------- "
-  	echo 
-  	sleep 2
-  	tput setaf 7
+    echo 
+    echo -e "-------------------------------------------------------- "
+    echo -e "## Query Demo usning Curl ##                             "
+    echo -e "-----------------------------                            "
+    echo -e "\e[90m$0       \e[32m                                    "
+    echo
+    echo -e " ## EndPoint : $ENDPOINT                                 "
+    echo
+    echo -e "-------------------------------------------------------- "
+    echo 
+    sleep 2
+    tput setaf 7
   	
     curl -X POST $ENDPOINT --data-urlencode \
     'query=PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
