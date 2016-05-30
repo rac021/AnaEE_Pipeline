@@ -88,7 +88,7 @@ if [ $# -eq 1 ] ; then
 	> $HOSTS_FILE
 	
         # Remove Image $DOCKER_BLZ_IMAGE if exists 
-        echo " $DOCKER_BLZ_IMAGE already exist, remove it... "
+        echo " Image  $DOCKER_BLZ_IMAGE already exist, remove it... "
         # CONTAINER_ID=`docker images -q $DOCKER_BLZ_IMAGE `
         # echo " Conainer ID : $CONTAINER_ID "
         #docker rmi -f $CONTAINER_ID
