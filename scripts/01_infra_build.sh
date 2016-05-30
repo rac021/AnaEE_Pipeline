@@ -2,85 +2,119 @@
 
 if [ $# -eq 1 ] ; then
 
-	# Docker Image
-	DOCKER_BLZ_IMAGE=$1
+    # Docker Image
+    DOCKER_BLZ_IMAGE=$1
 
-	# Hosts Names 
-	HOST_0="blz_host_0"
-	HOST_1="blz_host_1"
-	HOST_2="blz_host_2"
-
-	tput setaf 2
-	echo 
-	echo -e "################################# "
-	echo -e "######### Build Infra ########### "
-	echo -e "--------------------------------- "
-        echo -e "\e[90m$0        \e[32m            "
-	echo
-	echo -e "##  BLZ_IMAGE : $DOCKER_BLZ_IMAGE "
-	echo -e "##  HOST_0    : $HOST_0           "
-	echo -e "##  HOST_1    : $HOST_1           "
-	echo -e "##  HOST_2    : $HOST_2           "
-	echo
-	echo -e "################################# "
-	echo 
-	sleep 2
-	tput setaf 7
+    # Hosts Names 
+    HOST_0="blz_host_0"
+    HOST_1="blz_host_1"
+    HOST_2="blz_host_2"
+ 
+    tput setaf 2
+    echo 
+    echo -e "################################# "
+    echo -e "######### Build Infra ########### "
+    echo -e "--------------------------------- "
+    echo -e "\e[90m$0        \e[32m            "
+    echo
+    echo -e "##  BLZ_IMAGE : $DOCKER_BLZ_IMAGE "
+    echo -e "##  HOST_0    : $HOST_0           "
+    echo -e "##  HOST_1    : $HOST_1           "
+    echo -e "##  HOST_2    : $HOST_2           "
+    echo
+    echo -e "################################# "
+    echo 
+    sleep 2
+    tput setaf 7
 	
-	CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
-	DOCKER_FILE_PATH="$CURRENT_PATH/Docker"
+    CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+    DOCKER_FILE_PATH="$CURRENT_PATH/Docker"
 	
-	if [ ! -e $DOCKER_FILE_PATH ]; then
+    if [ ! -e $DOCKER_FILE_PATH ]; then
+        echo "$CURRENT_PATH Not found !! Has Project cloned from Git ? "
+        exit 2 
+    fi
 	
-	    echo "$CURRENT_PATH Not found !! Has Project cloned from Git ? "
+    if docker history -q $DOCKER_BLZ_IMAGE >/dev/null 2>&1 ; then
 	
-	else
-		if docker history -q $DOCKER_BLZ_IMAGE >/dev/null 2>&1 ; then
-	
-	            EXIST=`docker inspect --format='{{.Name}}' $( docker ps -aq --no-trunc) | grep $HOST_0`
-	            # Remove $HOST_0 if exists 
-		    if [ ! -z $EXIST ]; then 
-		      echo "Container $HOST_0 already exists, remove..."
-		      docker rm -f $HOST_0
-		      echo "Container $HOST_0 removed !!"
-		    fi
+        # CLEAN NANO ENDPOINT FILE
+        HOSTS_FILE="$CURRENT_PATH/conf/hosts"
+        NANO_END_POINT_FILE="$CURRENT_PATH/conf/nanoEndpoint"
+        CLEANED=false
+	            
+        echo -e "\e[90m Cleaning existing Clients in :\e[39m "
+        echo -e "\e[90m $NANO_END_POINT_FILE \e[39m "
+             
+        for LINE in `cat $NANO_END_POINT_FILE`; do
+                      
+          IFS=’:’ read -ra INFO_NANO <<< "$LINE" 
+          NANO_END_POINT_HOST=${INFO_NANO[0]}
+          NANO_END_POINT_IP=${INFO_NANO[1]}
+          NANO_END_POINT_PORT=${INFO_NANO[2]}
+          NAME_SPACE=${INFO_NANO[3]}
+	                
+          EXIST=$(docker inspect --format="{{ .Name }}" $NANO_END_POINT_HOST 2> /dev/null)
+          if [ ! -z $EXIST ]; then 
+              echo
+              echo " Container $NANO_END_POINT_HOST  already exists, remove... "
+              docker  rm  -f  $NANO_END_POINT_HOST > /dev/null
+              echo " Container $NANO_END_POINT_HOST  removed !! "
+              CLEANED=true
+          fi
+        done
+	            
+        > $NANO_END_POINT_FILE
+            
+        if [ "$CLEANED" = true ] ; then
+            echo -e " Cleanded ! "
+        else
+            echo -e " No existing EndPoint "
+        fi
+        echo
+	            
+        EXIST=`docker inspect --format='{{.Name}}' $( docker ps -aq --no-trunc) | grep $HOST_0`
+        # Remove $HOST_0 if exists 
+        if [ ! -z $EXIST ]; then 
+           echo "Container $HOST_0 already exists, remove..."
+           docker rm -f $HOST_0
+           echo "Container $HOST_0 removed !!"
+        fi
 		    
-	            EXIST=`docker inspect --format='{{.Name}}' $( docker ps -aq --no-trunc) | grep $HOST_1`
-	            # Remove $HOST_1 if exists 	            
-		    if [ ! -z $EXIST ]; then 
-		      echo "Container $HOST_1 already exists, remove..."	    
-		      docker rm -f $HOST_1
-		      echo "Container $HOST_1 removed !!"	      
-		    fi
+        EXIST=`docker inspect --format='{{.Name}}' $( docker ps -aq --no-trunc) | grep $HOST_1`
+        # Remove $HOST_1 if exists 	            
+        if [ ! -z $EXIST ]; then 
+          echo "Container $HOST_1 already exists, remove..."	    
+          docker rm -f $HOST_1
+          echo "Container $HOST_1 removed !!"	      
+        fi
 		    
-	            EXIST=`docker inspect --format='{{.Name}}' $( docker ps -aq --no-trunc) | grep $HOST_2`
-	            # Remove $HOST_2 if exists 	            
-		    if [ ! -z $EXIST ]; then 
-		      echo "Container $HOST_2 already exists, remove..."
-		      docker rm -f $HOST_2
-		      echo "Container $HOST_2 removed !!"
-		    fi
+        EXIST=`docker inspect --format='{{.Name}}' $( docker ps -aq --no-trunc) | grep $HOST_2`
+        # Remove $HOST_2 if exists 	            
+        if [ ! -z $EXIST ]; then 
+          echo "Container $HOST_2 already exists, remove..."
+          docker rm -f $HOST_2
+          echo "Container $HOST_2 removed !!"
+        fi
 		    
-		    # Remove Image $DOCKER_BLZ_IMAGE if exists 
-		    CONTAINER_ID=`docker images -q $DOCKER_BLZ_IMAGE `
-		    echo "$DOCKER_BLZ_IMAGE already exist, remove it..."
-		    echo "Conainer ID : $CONTAINER_ID "
-		    docker rmi -f $CONTAINER_ID
-		fi
+        # Remove Image $DOCKER_BLZ_IMAGE if exists 
+        CONTAINER_ID=`docker images -q $DOCKER_BLZ_IMAGE `
+        echo "$DOCKER_BLZ_IMAGE already exist, remove it..."
+        echo "Conainer ID : $CONTAINER_ID "
+        docker rmi -f $CONTAINER_ID
+	
+    fi
 		
-		tput setaf 2
-		echo ""
-		echo "############################################"
-		echo "### Building Image : $DOCKER_BLZ_IMAGE   ###"
-		echo "############################################"
-		echo ""
-		sleep 2
-		tput setaf 7
-		
-		docker build -t $DOCKER_BLZ_IMAGE $DOCKER_FILE_PATH
-	fi
-
+    tput setaf 2
+    echo "                                              "
+    echo " ############################################ "
+    echo " ### Building Image : $DOCKER_BLZ_IMAGE   ### "
+    echo " ############################################ "
+    echo "                                              "
+    sleep 2
+    tput setaf 7
+	  
+    docker build -t $DOCKER_BLZ_IMAGE $DOCKER_FILE_PATH
+	
 else
     echo " Invalid arguments :  please pass exactly One argument "
     echo " arg_1             :  Image_Docker_Name                "
