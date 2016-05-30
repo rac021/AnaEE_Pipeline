@@ -33,7 +33,7 @@ if [ $# -eq 7 ] ; then
 	LOOP=" while true; do sleep 1000; done "
 	
 	if [ "$DEFAULT_MODE" != "ro" ] && [ "$DEFAULT_MODE" != "rw" ] ; then 
-	echo "DEFAULT_MODE can only have 'rw' OR 'ro' values !!"
+	echo " DEFAULT_MODE can only have 'rw' OR 'ro' values !!"
 	exit 2
 	fi 
 
