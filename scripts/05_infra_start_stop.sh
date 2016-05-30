@@ -29,29 +29,30 @@
     
     if [ "$1" = "start" ] ; then 
   
-     if [ "$2" != "ro" ] && [ "$2" != "rw" ] ; then 
-       	   echo
-	   echo -e " \e[90m Must specify the starting Read-Write Mode : ro - rw \e[39m "
-	   echo
-	   exit 2
-	 fi 
+        if [ "$2" != "ro" ] && [ "$2" != "rw" ] ; then 
+          echo
+          echo -e " \e[90m Must specify the starting Read-Write Mode : ro - rw \e[39m "
+          echo
+          exit 2
+        fi 
+            
+        RW_MODE=$2
         
-     RW_MODE=$2
-     
-     STATUS=`cat $STATUS_FILE `
-    
-     if [ $STATUS = "1" ] ; then
-        tput setaf 6
-        echo
-        echo " Cluster should be running ... ? "
-        echo " if you are sure that the Cluster is DOWN, you can turn STATUS in the "
-        echo " file $STATUS_FILE "
-        echo " to 0 to and then try to retstart it "
-        echo " or just STOP and START Cluster "
-        echo
-        tput setaf 7
-        exit 3
-     fi
+        STATUS=`cat $STATUS_FILE `
+        
+        if [ $STATUS = "1" ] ; then
+          tput setaf 6
+          echo
+          echo " Cluster should be running ... ? "
+          echo " if you are sure that the Cluster is DOWN, you can turn STATUS in the "
+          echo " file $STATUS_FILE "
+          echo " to 0 to and then try to retstart it "
+          echo " or just STOP and START Cluster "
+          echo
+          tput setaf 7
+          exit 3
+        fi
+        
         tput setaf 2
         echo 
         echo "##################################### "
@@ -59,7 +60,7 @@
         echo "------------------------------------- "
         tput setaf 7
         sleep 2
-      
+        
         echo -e " \e[37m** Cluster List "
         echo -e "   \e[90m $HOSTS_FILE "
         echo -e " \e[37m** NanoEndpoint List  "
@@ -68,18 +69,18 @@
 
         checkIfContainersAreRunning $HOSTS_FILE  
         checkIfContainersAreRunning $NANO_END_POINT_FILE 
-      
+        
         for node in $(cat $HOSTS_FILE)  
         do
-            tput setaf 6
-            echo " -> Starting Bigdata on Node $node "
-            sleep 1
-            tput setaf 7
-            docker exec -d $node ./bigdata start
-            echo
-            sleep 3
+          tput setaf 6
+          echo " -> Starting Bigdata on Node $node "
+          sleep 1
+          tput setaf 7
+          docker exec -d $node ./bigdata start
+          echo
+          sleep 3
         done 
-        
+            
         tput setaf 2
         echo 
         echo " => Running nanoSparqlServer  ~ 10 s   "
@@ -91,85 +92,87 @@
 
         for LINE in `cat $NANO_END_POINT_FILE`; do
             
-            IFS=’:’ read -ra INFO_NANO <<< "$LINE" 
-            NANO_END_POINT_HOST=${INFO_NANO[0]}
-            NANO_END_POINT_IP=${INFO_NANO[1]}
-            NANO_END_POINT_PORT=${INFO_NANO[2]}
-            NAME_SPACE=${INFO_NANO[3]}
-        
-            docker exec -dit $NANO_END_POINT_HOST ./nanoSparqlServer.sh $NANO_END_POINT_PORT $NAME_SPACE $RW_MODE
-            echo -e "\e[37m serviceURL: \e[93mhttp://$NANO_END_POINT_IP:$NANO_END_POINT_PORT"
-            sleep 1
-            #IP=`docker inspect --format '{{ .NetworkSettings.Networks.mynet123.IPAddress }}' blz_host_2`
-            # docker logs -f $NANO_END_POINT_HOST
+          IFS=’:’ read -ra INFO_NANO <<< "$LINE" 
+          NANO_END_POINT_HOST=${INFO_NANO[0]}
+          NANO_END_POINT_IP=${INFO_NANO[1]}
+          NANO_END_POINT_PORT=${INFO_NANO[2]}
+          NAME_SPACE=${INFO_NANO[3]}
+            
+          docker exec -dit $NANO_END_POINT_HOST ./nanoSparqlServer.sh $NANO_END_POINT_PORT $NAME_SPACE $RW_MODE
+          echo -e "\e[37m serviceURL: \e[93mhttp://$NANO_END_POINT_IP:$NANO_END_POINT_PORT"
+          sleep 1
+          #IP=`docker inspect --format '{{ .NetworkSettings.Networks.mynet123.IPAddress }}' blz_host_2`
+          # docker logs -f $NANO_END_POINT_HOST
+          
         done
-  
+    
         echo "1" > $STATUS_FILE
         echo  -e " \e[97m "
-        
+            
     elif [ "$1" = "stop" ] ; then 
 
-        tput setaf 2
+      tput setaf 2
+      echo 
+      echo "##################################### "
+      echo "######## Stopping Cluster ########### "
+      echo "------------------------------------- "
+      tput setaf 7
+      sleep 2
+        
+      echo -e " \e[90m Cluster List ** "
+      echo -e " \e[90m $HOSTS_FILE "
+        
+      for CONTAINER in $(cat $HOSTS_FILE)  
+      do
+        tput setaf 6
         echo 
-        echo "##################################### "
-        echo "######## Stopping Cluster ########### "
-        echo "------------------------------------- "
+        echo " -> Stopping Node $CONTAINER "
         tput setaf 7
-        sleep 2
-        
-        echo -e " \e[90m Cluster List ** "
-        echo -e " \e[90m $HOSTS_FILE "
-        
-        for CONTAINER in $(cat $HOSTS_FILE)  
-        do
-            tput setaf 6
-            echo 
-            echo " -> Stopping Node $CONTAINER "
-            tput setaf 7
        
-            RUNNING=$(docker inspect --format="{{ .State.Running }}" $CONTAINER 2> /dev/null)
+        RUNNING=$(docker inspect --format="{{ .State.Running }}" $CONTAINER 2> /dev/null)
                     
-            if [ $? -eq 1 ]; then        
-                echo -e "\e[91m UNKNOWN - Container $CONTAINER does not exist. \e[37m "
-                
-             elif [ "$RUNNING" == "false" ]; then
-                 echo -e "\e[91m CRITICAL - Container $CONTAINER is not running. \e[37m "
+        if [ $? -eq 1 ]; then        
+           echo -e "\e[91m UNKNOWN - Container $CONTAINER does not exist. \e[37m "
+               
+        elif [ "$RUNNING" == "false" ]; then
+           echo -e "\e[91m CRITICAL - Container $CONTAINER is not running. \e[37m "
                  
-             elif [ "$RUNNING" == "true" ]; then
-                 docker exec -dit $CONTAINER  /bin/sh -c "./bigdata stop "
+        elif [ "$RUNNING" == "true" ]; then
+           docker exec -dit $CONTAINER  /bin/sh -c "./bigdata stop "
             
-            fi            
+        fi            
             
-            sleep 3
-        done
+        sleep 3
         
-        for CONTAINER in $(cat $NANO_END_POINT_FILE ) ; do
+      done
         
-       	    IFS=’:’ read -ra INFO_NANO <<< "$CONTAINER" 
-       	    H_CONTAINER=${INFO_NANO[0]}
+      for CONTAINER in $(cat $NANO_END_POINT_FILE ) ; do
+        
+         IFS=’:’ read -ra INFO_NANO <<< "$CONTAINER" 
+       	 H_CONTAINER=${INFO_NANO[0]}
        	    
-            tput setaf 6
-            echo 
-            echo " -> Stopping Node $H_CONTAINER "
-            tput setaf 7
+         tput setaf 6
+         echo 
+         echo " -> Stopping Node $H_CONTAINER "
+         tput setaf 7
        
-            RUNNING=$(docker inspect --format="{{ .State.Running }}" $H_CONTAINER 2> /dev/null)
-                    
-            if [ $? -eq 1 ]; then        
-                echo -e "\e[91m UNKNOWN - Container $H_CONTAINER does not exist. \e[37m "
+         RUNNING=$(docker inspect --format="{{ .State.Running }}" $H_CONTAINER 2> /dev/null)
+                   
+         if [ $? -eq 1 ]; then        
+            echo -e "\e[91m UNKNOWN - Container $H_CONTAINER does not exist. \e[37m "
                 
-            elif [ "$RUNNING" == "false" ]; then
-                 echo -e "\e[91m CRITICAL - Container $H_CONTAINER is not running. \e[37m "
+         elif [ "$RUNNING" == "false" ]; then
+            echo -e "\e[91m CRITICAL - Container $H_CONTAINER is not running. \e[37m "
                  
-            elif [ "$RUNNING" == "true" ]; then
-                 docker exec -dit $H_CONTAINER  /bin/sh -c "./bigdata stop "
-            fi            
+         elif [ "$RUNNING" == "true" ]; then
+            docker exec -dit $H_CONTAINER  /bin/sh -c "./bigdata stop "
+         fi            
             
-            sleep 3
-        done
+         sleep 3
+      done
         
-        echo "0" > $STATUS_FILE
-        echo  -e " \e[97m "
+      echo "0" > $STATUS_FILE
+      echo  -e " \e[97m "
         
     else
         echo " Invalid arguments :  Please pass One or Two arguments      "
@@ -177,3 +180,5 @@
         echo " arg_2             :  Only if arg_1 = start, then : ro - rw "
     fi
     
+
+  
