@@ -44,16 +44,16 @@
    	          ?uri oboe-core:hasValue ?unite
            }
            LIMIT 3
-   ' \
-   -H 'Accept:application/json'
+    ' \
+    -H 'Accept:application/json'
    
-   echo ; echo 
-   echo -e " \e[47m\e[30m Powered by EcoInfo-Orleans & Ontop Corese BlazeGraph © 2016 \e[49m\e[39m "
-   echo
+    echo ; echo 
+    echo -e " \e[47m\e[30m Powered by EcoInfo-Orleans & Ontop Corese BlazeGraph © 2016 \e[49m\e[39m "
+    echo
    
   else 
         
-   echo -e "\e[91m Oupss, config missed !!\e[39m "
+    echo -e "\e[91m Oupss, config missed !!\e[39m "
  
   fi
     
