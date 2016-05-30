@@ -94,7 +94,7 @@
         for FILE in `ls -a *.*`
           do
             echo " ---------------------                                                   "
-            echo -e " \e[39m Upload file :\e[92m $FILE \e[39m                              " 
+            echo -e " \e[39m Upload file :\e[92m $DATA_DIR/$FILE \e[39m                    " 
             echo " ----------------------------------------------------------------------- "
             echo
             curl -D- -H 'Content-Type: text/turtle' --upload-file $FILE -X POST $ENDPOINT -O
