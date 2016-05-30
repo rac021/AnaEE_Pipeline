@@ -110,9 +110,9 @@ rm -rf $ROOT_PATH/$DIRECTORY_LIBS/$TMP
 
 tput setaf 2
 echo 
-echo "###########################"
-echo "##### Install yedGen ######"
-echo "###########################"
+echo " ###########################"
+echo " ##### Install yedGen ######"
+echo " ###########################"
 echo 
 sleep 2
 tput setaf 7
@@ -144,11 +144,11 @@ rm -rf $ROOT_PATH/$DIRECTORY_LIBS/$TMP/* $ROOT_PATH/$DIRECTORY_LIBS/$TMP/.git
 ##################################
 
 tput setaf 2
-echo ""
-echo "##################################"
-echo "### Install Ontop-Materializer ###"
-echo "##################################"
-echo ""
+echo "                                    "
+echo " ################################## "
+echo " ### Install Ontop-Materializer ### "
+echo " ################################## "
+echo "                                    "
 sleep 2
 tput setaf 7
 
@@ -180,9 +180,9 @@ rm -rf $ROOT_PATH/$DIRECTORY_LIBS/$TMP/* $ROOT_PATH/$DIRECTORY_LIBS/$TMP/.git
 
 tput setaf 2
 echo 
-echo "###########################"
-echo "### Install CoreseInfer ###"
-echo "###########################"
+echo " ########################### "
+echo " ### Install CoreseInfer ### "
+echo " ########################### "
 echo 
 sleep 2
 tput setaf 7
@@ -214,7 +214,7 @@ rm -rf $ROOT_PATH/$DIRECTORY_LIBS/$TMP/
 
 tput setaf 2
 echo 
-echo "###  install success  ########## "
+echo " ###  install success  ########## "
 echo 
 sleep 2
 tput setaf 7
