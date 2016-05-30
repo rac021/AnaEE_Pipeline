@@ -19,7 +19,7 @@ if [ $# -eq 7 ] ; then
 	IP_HOST_1=$5
 	IP_HOST_2=$6
 	
-	HOSTS=( $HOST_0 $HOST_01 $HOST_2 )
+	HOSTS=( $HOST_0 $HOST_1 $HOST_2 )
 	
 	# Get Image Docker Name
 	BLZ_IMAGE=$1
