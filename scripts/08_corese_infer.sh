@@ -42,7 +42,8 @@
   -q   "$QUERY"                                                    \
   -out "$OUTPUT"                                                   \
   -f   "$f"                                                        \
-  -F   "$F" 
+  -F   "$F"                                                        \
+  -e
   
   echo 
   echo -e "\e[36m Triples Generated in : $OUTPUT \e[39m "
