@@ -5,9 +5,8 @@
   QUERY=" SELECT ?S ?P ?O { ?S ?P ?O } "
   OUTPUT="../data/corese"
   f="100000"
-  F="n3"
-  ilt="t"
-  
+  F="ttl"
+
   tput setaf 2
   echo 
   echo -e " ######################################################### "
@@ -39,11 +38,10 @@
 
   java -Xms1024M -Xmx2048M -cp ../libs/CoreseInfer.jar corese.Main \
   -owl "$OWL"                                                      \
-  -nt  "$TTL"                                                      \
+  -ttl  "$TTL"                                                     \
   -q   "$QUERY"                                                    \
   -out "$OUTPUT"                                                   \
   -f   "$f"                                                        \
-  -ilv "$ilt"                                                      \
   -F   "$F" 
   
   echo 
