@@ -10,42 +10,43 @@
 
 if [ $# -eq 7 ] ; then
 
+   # Get Image Docker Name
+   BLZ_IMAGE=$1
+
    # Cluster Host Name. Do not TOUCH 
    HOST_0="blz_host_0"
    HOST_1="blz_host_1"
    HOST_2="blz_host_2"
    # IP per Host # Configurable
-   IP_HOST_0=$4
-   IP_HOST_1=$5
-   IP_HOST_2=$6
-	
-   HOSTS=( $HOST_0 $HOST_1 $HOST_2 )
-	
-   # Get Image Docker Name
-   BLZ_IMAGE=$1
+   IP_HOST_0=$2
+   IP_HOST_1=$3
+   IP_HOST_2=$4
+
    # Get NameSpace
-   NAMESPACE=$2
+   NAMESPACE=$5
    # Get Port Number
-   PORT=$3
+   PORT=$6
    # Get Default Mode : 
    # 'rw' for read-write Mode
    # 'ro' for readOnly Mode. 
    DEFAULT_MODE=$7
 	
    LOOP=" while true; do sleep 1000; done "
-	
-   removeContainerIfExists() {
-     CONTAINER=$1
-     EXIST=$(docker inspect --format="{{ .Name }}" $CONTAINER 2> /dev/null)
-     if [ ! -z $EXIST ]; then 
-        echo
-        echo " Container $CONTAINER  already exists, remove... "
-        docker  rm  -f   $CONTAINER > /dev/null
-        echo " Container $CONTAINER  removed !! "
-        CLEANED=true
-     fi
-   }
-        
+
+   CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+   HOST_FILE="$CURRENT_PATH/conf/hosts"
+   STATUS_FILE="$CURRENT_PATH/conf/status"
+   NANO_END_POINT_FILE="$CURRENT_PATH/conf/nanoEndpoint"
+ 
+   removeAllContainerBasedOnImage() {
+      IMAGE=$1
+      echo
+      echo -e " Remove all containers based on images  $IMAGE "
+      docker ps -a | awk '{ print $1,$2 }' | grep $IMAGE | awk '{print $1 }' | xargs -I {} docker rm -f {}
+      echo -e " All containers removed !! "
+      echo
+   } 
+     
    runContainer() {
      HOST=$1
      IP=$2
@@ -62,8 +63,8 @@ if [ $# -eq 7 ] ; then
 	           --expose $PORT                     \
 	           -it --entrypoint /bin/bash $BLZ_IMAGE -c "./bigdata start; $LOOP " > /dev/null
 	
-     echo "$HOST_2" >> $HOST_FILE
-     sleep 4
+     echo "$HOST" >> $HOST_FILE
+     sleep 5
    }
 
    if [ "$DEFAULT_MODE" != "ro" ] && [ "$DEFAULT_MODE" != "rw" ] ; then 
@@ -72,15 +73,6 @@ if [ $# -eq 7 ] ; then
       echo
       exit 2
    fi 
-
-   CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-   HOST_FILE="$CURRENT_PATH/conf/hosts"
-   STATUS_FILE="$CURRENT_PATH/conf/status"
-   NANO_END_POINT_FILE="$CURRENT_PATH/conf/nanoEndpoint"
-        
-   > $HOST_FILE
-   > $STATUS_FILE
-   > $NANO_END_POINT_FILE
     
    # Default interface
    SUBNET="mynet123"
@@ -119,15 +111,12 @@ if [ $# -eq 7 ] ; then
          # docker network rm $SUBNET
      fi
 	
-     echo 
-            
-     for HOST in ${HOSTS[@]}
-     do
-        removeContainerIfExists $HOST
-     done 
-	 	
-     echo
-	    
+     removeAllContainerBasedOnImage $BLZ_IMAGE
+ 
+     > $HOST_FILE
+     > $STATUS_FILE
+     > $NANO_END_POINT_FILE
+    
      runContainer  $HOST_2  $IP_HOST_2 $PORT 7777
      runContainer  $HOST_1  $IP_HOST_1 $PORT 8888
      runContainer  $HOST_0  $IP_HOST_0 $PORT 9999
@@ -141,8 +130,8 @@ if [ $# -eq 7 ] ; then
      echo "1" > $STATUS_FILE	    
 	
    else
-     
       echo " Image '$BLZ_IMAGE' not found !! "
+      echo " Run script 01_infra_build.sh before "
       echo 
    fi
      
@@ -150,11 +139,11 @@ else
     echo
     echo " Invalid arguments :  Please pass exactly Seven arguments "
     echo " arg_1             :  Image_docker_name                   "
-    echo " arg_2             :  Blazegraph_namespace                "
-    echo " arg_3             :  Ports  number                       "
-    echo " arg_4             :  IP Container HOST_1                 "
-    echo " arg_5             :  IP Container HOST_2                 "
-    echo " arg_6             :  IP Container HOST_3                 "
+    echo " arg_2             :  IP Container HOST_1                 "
+    echo " arg_3             :  IP Container HOST_2                 "
+    echo " arg_4             :  IP Container HOST_3                 "
+    echo " arg_5             :  Blazegraph_namespace                "
+    echo " arg_6             :  Ports  number                       "
     echo " arg_7             :  READ-WRITE MODE ( ro : rw   )       "   
     echo
 fi
