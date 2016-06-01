@@ -17,7 +17,6 @@
 -    `$7 : READ-WRITE MODE ( ro - rw )`
 
 
-
 Ex :
 
     ./master_pipeline.sh  \
@@ -40,7 +39,7 @@ Included Projects :
    
    [https://github.com/rac021/ontop-matarializer]( https://github.com/rac021/ontop-matarializer)
    
-
+   
 
 Requirements :
 
