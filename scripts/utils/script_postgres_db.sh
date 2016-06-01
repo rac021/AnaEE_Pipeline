@@ -9,17 +9,17 @@
   \connect anaee_db ;  
 
   CREATE TABLE physicochimiebysitevariableyear (
-	site_code      	varchar(255),
-	site_name      	varchar(255),
-	datatype_code 	varchar(255), 
-	datatype_name 	varchar(255),
-	variable_code 	varchar(255),
-	variable_name 	varchar(255), 
-	unite_id        varchar(255),
-	unite_code      varchar(255),
-	unite_name      varchar(255),
-	year 	        varchar(255),
-	nb_data         integer     ,
+	site_code      	varchar(255) ,
+	site_name      	varchar(255) ,
+	datatype_code 	varchar(255) , 
+	datatype_name 	varchar(255) ,
+	variable_code 	varchar(255) ,
+	variable_name 	varchar(255) , 
+	unite_id        varchar(255) ,
+	unite_code      varchar(255) ,
+	unite_name      varchar(255) ,
+	year 	        varchar(255) ,
+	nb_data         integer      ,
 	
 	CONSTRAINT pk_site_datatype_variable PRIMARY KEY (site_code, datatype_code, variable_code )
   
