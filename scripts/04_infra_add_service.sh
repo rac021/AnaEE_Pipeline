@@ -132,7 +132,8 @@
             echo
             
         else
-           echo " Image '$BLZ_IMAGE' not found !! "
+           echo
+           echo -e "\e[91m Image '$BLZ_IMAGE' not found !! \e[39m "
            echo 
         fi
     
