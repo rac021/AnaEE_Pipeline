@@ -58,9 +58,10 @@
         echo " ##################################### "
         echo " ######## Starting Cluster ########### "
         echo " ------------------------------------- "
+        echo -e " \e[90m$0                   \e[32m  "
         tput setaf 7
         sleep 2
-        
+        echo
         echo -e " \e[37m** Cluster List "
         echo -e "   \e[90m $HOSTS_FILE "
         echo -e " \e[37m** NanoEndpoint List  "
@@ -116,6 +117,7 @@
       echo "##################################### "
       echo "######## Stopping Cluster ########### "
       echo "------------------------------------- "
+      echo -e " \e[90m$0                  \e[32m  "
       tput setaf 7
       sleep 2
         
