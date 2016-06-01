@@ -107,9 +107,30 @@
             echo " ---------------------------------------------------------------- "
             echo
             echo -e " Joining cluster... ~ 10 s "
-            sleep 8
-            echo -e " Done ! "
+            echo 
+            
+            ENDPOINT="http://$IP:$PORT/bigdata/namespace/$NAMESPACE/sparql"
+            RES=`curl -s -I $ENDPOINT | grep HTTP/1.1 | awk {'print $2'}`
+            
+            COUNT=0
+        
+            while [ -z $RES ] || [ $RES -ne 200 ] ;do
+        
+               sleep 1
+               RES=`curl -s -I $ENDPOINT | grep HTTP/1.1 | awk {'print $2'}`
+               let "COUNT++" 
+           
+               if  [ -z $RES ] || [ $RES != 200 ] ; then 
+                  if [ `expr $COUNT % 3` -eq 0 ] ; then
+                     echo -e " \e[90m -> attempt to join cluster on namespace $NAMESPACE .. \e[39m"
+                  fi
+               fi
+           
+            done
             echo
+            echo " Yeah Connected !! "
+            echo
+            
         else
            echo " Image '$BLZ_IMAGE' not found !! "
            echo 
