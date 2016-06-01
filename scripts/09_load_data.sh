@@ -72,7 +72,7 @@
           let "COUNT++" 
            
           if [ $RES != 200 ] ; then 
-             if [ `expr $COUNT % 5` -eq 0 ] ; then
+             if [ `expr $COUNT % 3` -eq 0 ] ; then
                 echo -e " attempt to join cluster on namespace $NANO_END_POINT_NAMESPACE .. "
              fi
           fi
@@ -91,7 +91,7 @@
           rm -f "$DATA_DIR/sparql"
         fi
 
-        sleep 1  # Waits 1 second.
+        sleep 0.5  # Waits 0.5 second.
 
         cd $DATA_DIR
         
