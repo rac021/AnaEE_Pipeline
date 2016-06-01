@@ -24,22 +24,23 @@
     echo
     echo -e " CLUSTER STATUS :  \e[42m \e[30m $STAT_SHOW \e[39m \e[49m  "
     echo
-    echo " ************************ "
-    echo " -- CLuster Hosts Name  "
-    echo " -----------------------------------------"
+    echo
+    echo " *********************** "
+    echo " Cluster Hosts Name      "
+    echo " ----------------------- "
     for node in $(cat $HOSTS_FILE)  
     do
       tput setaf 6
       sleep 0.4
       echo
-      echo " Node : $node "
+      echo "  -> Node : $node "
       echo
       tput setaf 7
     done 
     echo
-    echo " ************************ "
-    echo " -- CLuster Clients Name "
-    echo " -----------------------------------------"
+    echo " *********************** "
+    echo " Cluster Clients Name    "
+    echo " ----------------------- "
     
     tput setaf 6
     
@@ -52,7 +53,7 @@
       NAME_SPACE=${INFO_NANO[3]}
       RW_MODE=${INFO_NANO[4]}
       echo
-      echo " $NANO_END_POINT_HOST ** $NANO_END_POINT_IP ** $NANO_END_POINT_PORT ** $NAME_SPACE ** $RW_MODE"     
+      echo "  -> $NANO_END_POINT_HOST ** $NANO_END_POINT_IP ** $NANO_END_POINT_PORT ** $NAME_SPACE ** $RW_MODE"     
       sleep 0.4
       echo
     done
