@@ -47,3 +47,5 @@ Requirements :
     
 -    `CURL `
     
+-    `Postgres`
+
