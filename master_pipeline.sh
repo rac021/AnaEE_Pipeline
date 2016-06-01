@@ -6,8 +6,10 @@
 
 if [ $# -eq 7 ] ; then
 
-   chmod +x scripts/*
-     
+   chmod -R +x scripts/*
+   
+  ./scripts/utils/script_postgres_db.sh
+   
   ./scripts/00_install_libs.sh 
 
   ./scripts/01_infra_build.sh  $1
