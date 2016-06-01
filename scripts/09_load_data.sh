@@ -22,8 +22,9 @@
         IFS=’:’ read -ra INFO_NANO <<< "$FIRST_END_POINT" 
         NANO_END_POINT_IP=${INFO_NANO[1]}
         NANO_END_POINT_PORT=${INFO_NANO[2]}
-            
-        ENDPOINT="http://$NANO_END_POINT_IP:$NANO_END_POINT_PORT/bigdata/sparql"
+         NANO_END_POINT_NAMESPACE=${INFO_NANO[3]}
+         
+        ENDPOINT="http://$NANO_END_POINT_IP:$NANO_END_POINT_PORT/bigdata/namespace/$NANO_END_POINT_NAMESPACE/sparql"
         
         echo ; echo -e " Try connection : $ENDPOINT "
         
@@ -58,6 +59,23 @@
               echo
               exit 3
            fi
+           
+        done
+        
+        RES=`curl -s -I $ENDPOINT | grep HTTP/1.1 | awk {'print $2'}`
+        COUNT=0
+        
+         while [ $RES -ne 200 ] ;do
+        
+          sleep 1
+          RES=`curl -s -I $ENDPOINT | grep HTTP/1.1 | awk {'print $2'}`
+          let "COUNT++" 
+           
+          if [ $RES != 200 ] ; then 
+             if [ `expr $COUNT % 5` -eq 0 ] ; then
+                echo -e " attempt to join cluster on namespace $NANO_END_POINT_NAMESPACE .. "
+             fi
+          fi
            
         done
         
