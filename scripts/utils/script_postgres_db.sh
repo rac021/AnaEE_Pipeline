@@ -4,7 +4,28 @@
   PASSWORD="anaee_user"
   DATABASE="anaee_db"
   TABLE="physicochimiebysitevariableyear"
-      
+  
+  
+  tput setaf 2
+   echo 
+   echo -e " ##################################### "
+   echo -e " ######### Create DataBase ########### "
+   echo -e " ------------------------------------- "
+   echo -e " \e[90m$0        \e[32m                "
+   echo 
+   echo -e " ##  USER      : $USER                 "
+   echo
+   echo -e " ##  PASSWORD  : $PASSWOD              "
+   echo -e " ##  NAMESPACE : $NAMESPACE            "
+   echo -e " ##  DATABASE  : $DATABASE             "
+   echo -e " ##  TABLE     : $TABLE                "
+   echo
+   echo -e " ##################################### "
+   echo 
+   sleep 2
+   tput setaf 7
+
+    
   sudo -u postgres psql  << EOF
   
   DROP  DATABASE $DATABASE ;
