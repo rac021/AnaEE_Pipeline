@@ -87,11 +87,11 @@ if [ $# -eq 7 ] ; then
    echo -e " ##  SUBNET    : $SUBNET               "
    echo
    echo -e " ##  BLZ_IMAGE : $BLZ_IMAGE            "
-   echo -e " ##  NAMESPACE : $NAMESPACE            "
-   echo -e " ##  PORT      : $PORT                 "
    echo -e " ##  HOST_0    : $HOST_0 : $IP_HOST_0  "
    echo -e " ##  HOST_1    : $HOST_1 : $IP_HOST_1  "
    echo -e " ##  HOST_2    : $HOST_2 : $IP_HOST_2  "
+   echo -e " ##  NAMESPACE : $NAMESPACE            "
+   echo -e " ##  PORT      : $PORT                 "
    echo -e " ##  MODE      : $DEFAULT_MODE         "
    echo
    echo -e " ##################################### "
