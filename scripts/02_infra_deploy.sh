@@ -133,7 +133,7 @@ if [ $# -eq 7 ] ; then
      runContainer  $HOST_0  $IP_HOST_0 $PORT 9999
 	
      echo
-     echo -e "\e[94m waiting for blazegraph Cluster.. ~ 8s  \e[39m "
+     echo -e "\e[94m waiting for blazegraph Cluster.. ~ 10s  \e[39m "
      sleep 8 
      echo -e " .. "
      echo
