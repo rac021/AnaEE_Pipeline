@@ -14,8 +14,6 @@
 
     ENDPOINT="http://$NANO_END_POINT_IP:$NANO_END_POINT_PORT/bigdata/namespace/$NANO_END_POINT_NAMESPACE/sparql"
     
-    #timeout 1 bash -c "cat < /dev/null > /dev/tcp/$NANO_END_POINT_IP/$NANO_END_POINT_PORT" 2> /dev/null
-  
     RES=`curl -s -I $ENDPOINT | grep HTTP/1.1 | awk {'print $2'}`
     COUNT=0
     echo
@@ -48,7 +46,7 @@
     echo
     echo -e "-------------------------------------------------------- "
     echo 
-    sleep 2
+    sleep 1
     tput setaf 7
   	
     curl -X POST $ENDPOINT --data-urlencode \
