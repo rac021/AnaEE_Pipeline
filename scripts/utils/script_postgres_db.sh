@@ -4,7 +4,7 @@
   sudo -u postgres psql  << EOF
   CREATE USER anaee_user WITH PASSWORD 'anaee_user';
   CREATE DATABASE anaee_db TEMPLATE template0 ; 
-  GRANT ALL PRIVILEGES ON DATABASE anaee_db to anaee_user ;
+  GRANT ALL ON DATABASE anaee_db to anaee_user ;
   
   \connect anaee_db ;  
 
