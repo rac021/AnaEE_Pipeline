@@ -10,20 +10,35 @@
     IFS=’:’ read -ra INFO_NANO <<< "$FIRST_END_POINT" 
     NANO_END_POINT_IP=${INFO_NANO[1]}
     NANO_END_POINT_PORT=${INFO_NANO[2]}
-            
-    ENDPOINT="http://$NANO_END_POINT_IP:$NANO_END_POINT_PORT/bigdata/sparql"
-    
-    timeout 1 bash -c "cat < /dev/null > /dev/tcp/$NANO_END_POINT_IP/$NANO_END_POINT_PORT" 2> /dev/null
-         
-    if [ $? != 0 ] ; then 
-      echo
-      echo -e " \e[31m ENDPOINT $ENDPOINT Not reachable !! \e[39m"
-      echo
-      exit 3
-    fi 
+    NANO_END_POINT_NAMESPACE=${INFO_NANO[3]}
 
+    ENDPOINT="http://$NANO_END_POINT_IP:$NANO_END_POINT_PORT/bigdata/namespace/$NANO_END_POINT_NAMESPACE/sparql"
+    
+    #timeout 1 bash -c "cat < /dev/null > /dev/tcp/$NANO_END_POINT_IP/$NANO_END_POINT_PORT" 2> /dev/null
+  
+    RES=`curl -s -I $ENDPOINT | grep HTTP/1.1 | awk {'print $2'}`
+    COUNT=0
+    echo
+    
+    while [ -z $RES ] || [ $RES -ne 200 ] ;do
+       sleep 1
+       RES=`curl -s -I $ENDPOINT | grep HTTP/1.1 | awk {'print $2'}`
+       let "COUNT++" 
+           
+       if  [ -z $RES ] || [ $RES != 200 ] ; then 
+          if [ `expr $COUNT % 3` -eq 0 ] ; then
+              echo -e " \e[90m -> attempt to join cluster on namespace $NAMESPACE .. \e[39m"
+          fi
+          if [ $COUNT -eq 20 ] ; then
+              echo -e " \e[31m ENDPOINT $ENDPOINT Not reachable !! \e[39m"
+              echo
+              exit 3
+          fi
+       fi
+           
+    done
+    
     tput setaf 2
-    echo 
     echo -e "-------------------------------------------------------- "
     echo -e "## Query Demo usning Curl ##                             "
     echo -e "-----------------------------                            "
