@@ -65,16 +65,16 @@
         RES=`curl -s -I $ENDPOINT | grep HTTP/1.1 | awk {'print $2'}`
         COUNT=0
         
-         while [ $RES -ne 200 ] ;do
+         while  [ -z $RES ] || [ $RES -ne 200 ] ;do
         
           sleep 1
           RES=`curl -s -I $ENDPOINT | grep HTTP/1.1 | awk {'print $2'}`
           let "COUNT++" 
            
-          if [ $RES != 200 ] ; then 
-             if [ `expr $COUNT % 3` -eq 0 ] ; then
-                echo -e " attempt to join cluster on namespace $NANO_END_POINT_NAMESPACE .. "
-             fi
+          if  [ -z $RES ] || [ $RES -ne 200 ] ; then 
+              if [ `expr $COUNT % 3` -eq 0 ] ; then
+                 echo -e " attempt to join cluster on namespace $NANO_END_POINT_NAMESPACE .. "
+              fi
           fi
            
         done
