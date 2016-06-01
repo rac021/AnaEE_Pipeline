@@ -1,14 +1,21 @@
 #!/bin/bash
  
-
+  USER="anaee_user"
+  PASSWORD="anaee_user"
+  DATABASE="anaee_db"
+  TABLE="physicochimiebysitevariableyear"
+      
   sudo -u postgres psql  << EOF
-  CREATE USER anaee_user WITH PASSWORD 'anaee_user';
-  CREATE DATABASE anaee_db TEMPLATE template0 ; 
-  GRANT ALL ON DATABASE anaee_db to anaee_user ;
   
-  \connect anaee_db ;  
+  DROP  DATABASE $DATABASE ;
+  DROP  USER     $USER     ;
+ 
+  CREATE DATABASE $DATABASE TEMPLATE template0 ; 
+  CREATE USER $USER WITH PASSWORD '$PASSWORD'  ;
+  
+  \connect $DATABASE ;  
 
-  CREATE TABLE physicochimiebysitevariableyear (
+  CREATE TABLE $TABLE (
 	site_code      	varchar(255) ,
 	site_name      	varchar(255) ,
 	datatype_code 	varchar(255) , 
@@ -35,5 +42,7 @@
   INSERT INTO physicochimiebysitevariableyear VALUES ('s_code_8', 's_name_8', 'dtype_code_8', 'dtype_name_8', 'var_code_8', 'var_name_8', 'uni_id_8', 'uni_code_8','uni_name_8', '06-09-2015', 20) ;
   INSERT INTO physicochimiebysitevariableyear VALUES ('s_code_9', 's_name_9', 'dtype_code_9', 'dtype_name_9', 'var_code_9', 'var_name_9', 'uni_id_9', 'uni_code_9','uni_name_9', '06-09-2015', 21) ;
   INSERT INTO physicochimiebysitevariableyear VALUES ('s_code_10', 's_name_10', 'dtype_code_10', 'dtype_name_10', 'var_code_10', 'var_name_10', 'uni_id_10', 'uni_code_10','uni_name_10', '06-09-2015', 69) ;
-	
+
+  GRANT SELECT ON $TABLE to $USER ;	
+
 EOF
