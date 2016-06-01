@@ -68,7 +68,7 @@
             echo -e " ##  START_IP        : $IP                 "
             echo -e " ##  PORT            : $PORT               "
             echo -e " ##  NAMESPACE       : $NAMESPACE          "
-            echo -e " ##                  : $DEFAULT_MODE       "
+            echo -e " ##  MODE            : $DEFAULT_MODE       "
             echo
             echo -e " ######################################### "
             echo 
