@@ -38,7 +38,7 @@
     done 
     echo
     echo " ************************ "
-    echo " -- CLuster CLients Name "
+    echo " -- CLuster Clients Name "
     echo " -----------------------------------------"
     
     tput setaf 6
