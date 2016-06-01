@@ -28,16 +28,7 @@
     NANO_END_POINT_FILE="$CURRENT_PATH/conf/nanoEndpoint"
     
     if [ "$1" = "start" ] ; then 
-  
-        if [ "$2" != "ro" ] && [ "$2" != "rw" ] ; then 
-          echo
-          echo -e " \e[90m Must specify the starting Read-Write Mode : ro - rw \e[39m "
-          echo
-          exit 2
-        fi 
-            
-        RW_MODE=$2
-        
+       
         STATUS=`cat $STATUS_FILE `
         
         if [ $STATUS = "1" ] ; then
@@ -84,7 +75,7 @@
             
         tput setaf 2
         echo 
-        echo " => Running nanoSparqlServer  ~ 10 s   "
+        echo " => wait for Cluster ~ 10 s   "
         tput setaf 7
 
         echo    
@@ -98,15 +89,16 @@
           NANO_END_POINT_IP=${INFO_NANO[1]}
           NANO_END_POINT_PORT=${INFO_NANO[2]}
           NAME_SPACE=${INFO_NANO[3]}
+          RW_MODE=${INFO_NANO[4]}
             
           docker exec -dit $NANO_END_POINT_HOST ./nanoSparqlServer.sh $NANO_END_POINT_PORT $NAME_SPACE $RW_MODE
           echo -e "\e[37m serviceURL: \e[93mhttp://$NANO_END_POINT_IP:$NANO_END_POINT_PORT"
           sleep 1
           #IP=`docker inspect --format '{{ .NetworkSettings.Networks.mynet123.IPAddress }}' blz_host_2`
           # docker logs -f $NANO_END_POINT_HOST
-          
+         
         done
-    
+        sleep 2
         echo "1" > $STATUS_FILE
         echo  -e " \e[97m "
             
@@ -177,9 +169,9 @@
       echo  -e " \e[97m "
         
     else
-        echo " Invalid arguments :  Please pass One or Two arguments      "
-        echo " arg_1             :  start - stop                          "
-        echo " arg_2             :  Only if arg_1 = start, then : ro - rw "
+        echo " Invalid arguments :  Please pass One or One argument  "
+        echo " arg_1             :  start - stop                     "
+   
     fi
     
 
