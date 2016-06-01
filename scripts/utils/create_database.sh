@@ -24,7 +24,7 @@
    tput setaf 7
 
     
-  sudo -u postgres psql  << EOF
+  sudo -u postgres psql  2> /dev/null << EOF
   
   DROP  DATABASE $DATABASE ;
   DROP  USER     $USER     ;
