@@ -110,6 +110,7 @@
       echo "######## Stopping Cluster ########### "
       echo "------------------------------------- "
       echo -e " \e[90m$0                  \e[32m  "
+      echo
       tput setaf 7
       sleep 2
         
