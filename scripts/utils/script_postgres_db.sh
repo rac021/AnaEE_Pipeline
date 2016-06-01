@@ -46,3 +46,4 @@
   GRANT SELECT ON $TABLE to $USER ;	
 
 EOF
+
