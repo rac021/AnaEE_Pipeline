@@ -4,6 +4,14 @@
 # Do not touch the containers name : 
 # blz_host_0 - blz_host_1 - blz_host_2 rw
 
+# $1 BLZ_MAGE  
+# $2 IP_HOST_1  
+# $3 IP_HOST_2  
+# $4 IP_HOST_3   
+# $5 NAME_SPACE  
+# $6 PORT 
+# $7 RW-MODE
+
 if [ $# -eq 7 ] ; then
 
    chmod -R +x scripts/*
@@ -16,7 +24,7 @@ if [ $# -eq 7 ] ; then
 
   ./scripts/02_infra_deploy.sh $1 $2 $3 $4 $5 $6 $7
 
-  ./scripts/03_infra_attach_services.sh $1 blz_client 192.168.56.200 1 $2 $3 $7
+  ./scripts/03_infra_attach_services.sh $1 blz_client 192.168.56.200 1 $5 $6 $7
   
   ./scripts/06_gen_mapping.sh
   
@@ -32,11 +40,11 @@ else
 
     echo " Invalid arguments :  please pass exactly Seven arguments "
     echo " arg_1             :  Image_docker_name                   "
-    echo " arg_2             :  Blazegraph_namespace                "
-    echo " arg_3             :  Ports  number                       "
-    echo " arg_4             :  IP HOST_1                           "
-    echo " arg_5             :  IP HOST_2                           "
-    echo " arg_6             :  IP HOST_2                           "
+    echo " arg_2             :  IP HOST_1                           "
+    echo " arg_3             :  IP HOST_2                           "
+    echo " arg_4             :  IP HOST_2                           "
+    echo " arg_5             :  Blazegraph_namespace                "
+    echo " arg_6             :  Ports  number                       "
     echo " arg_7             :  READ-WRITE MODE ( ro : rw   )       "        
 fi
 
