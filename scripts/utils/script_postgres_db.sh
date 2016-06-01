@@ -49,7 +49,7 @@
 	
 	CONSTRAINT pk_site_datatype_variable PRIMARY KEY (site_code, datatype_code, variable_code )
   
-  );
+  ) ;
 
   INSERT INTO physicochimiebysitevariableyear VALUES ('s_code_01', 's_name_01', 'dtype_code_01', 'dtype_name_01', 'var_code_01', 'var_name_01', 'uni_id_01', 'uni_code_01','uni_name_01', '06-09-2001', 21) ;
   INSERT INTO physicochimiebysitevariableyear VALUES ('s_code_02', 's_name_02', 'dtype_code_02', 'dtype_name_02', 'var_code_02', 'var_name_02', 'uni_id_02', 'uni_code_02','uni_name_02', '06-09-2002', 81) ;
