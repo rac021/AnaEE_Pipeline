@@ -42,5 +42,7 @@ Included Projects :
 
 Requirements :
 
+    JAVA 8
+    
     CURL 
     
