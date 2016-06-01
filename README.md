@@ -4,15 +4,15 @@
  
 -    `$1 : Image_docker_name`
 
--    `$2 : Blazegraph_namespace`
+-    `$2 : IP Container HOST_1 `
 
--    `$3 : Ports  number `
+-    `$3 : IP Container HOST_2 `
 
--    `$4 : IP Container HOST_1 `
+-    `$4 : IP Container HOST_3 `
 
--    `$5 : IP Container HOST_2 `
+-    `$5 : Blazegraph_namespace`
 
--    `$6 : IP Container HOST_3 `
+-    `$6 : Ports  number `
 
 -    `$7 : READ-WRITE MODE ( ro - rw )`
 
@@ -21,11 +21,11 @@ Ex :
 
     ./master_pipeline.sh  \
       blz_img             \
-      ola                 \
-      9999                \
       192.168.56.10       \
       192.168.56.20       \
       192.168.56.30       \
+      ola                 \
+      9999                \
       rw
      
      
