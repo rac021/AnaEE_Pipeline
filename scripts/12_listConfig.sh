@@ -28,6 +28,7 @@
     echo " *********************** "
     echo " Cluster Hosts Name      "
     echo " ----------------------- "
+    
     for node in $(cat $HOSTS_FILE)  
     do
       tput setaf 6
@@ -37,6 +38,7 @@
       echo
       tput setaf 7
     done 
+    
     echo
     echo " *********************** "
     echo " Cluster Clients Name    "
@@ -52,10 +54,12 @@
       NANO_END_POINT_PORT=${INFO_NANO[2]}
       NAME_SPACE=${INFO_NANO[3]}
       RW_MODE=${INFO_NANO[4]}
+    
       echo
       echo "  -> $NANO_END_POINT_HOST ** $NANO_END_POINT_IP ** $NANO_END_POINT_PORT ** $NAME_SPACE ** $RW_MODE"     
       sleep 0.4
       echo
+    
     done
     
     tput setaf 7       
