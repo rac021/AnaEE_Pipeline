@@ -2,16 +2,13 @@
 
 if [ $# -eq 1 ] ; then
 
-    removeContainerIfExists() {
-       CONTAINER=$1
-       EXIST=$(docker inspect --format="{{ .Name }}" $CONTAINER 2> /dev/null)
-       if [ ! -z $EXIST ]; then 
-          echo
-          echo " Container $CONTAINER  already exists, remove... "
-          docker  rm  -f   $CONTAINER > /dev/null
-          echo " Container $CONTAINER  removed !! "
-          CLEANED=true
-       fi
+    removeAllContainerBasedOnImage() {
+        IMAGE=$1
+        echo
+        echo -e " Remove all containers based on images  $IMAGE "
+        docker ps -a | awk '{ print $1,$2 }' | grep $IMAGE | awk '{print $1 }' | xargs -I {} docker rm -f {}
+        echo -e " All containers removed !! "
+        echo
     } 
     
     # Docker Image
@@ -51,57 +48,21 @@ if [ $# -eq 1 ] ; then
 	
     if docker history -q $DOCKER_BLZ_IMAGE >/dev/null 2>&1 ; then
 	
-        # CLEAN NANO ENDPOINT FILE
-        HOSTS_FILE="$CURRENT_PATH/conf/hosts"
+	HOSTS_FILE="$CURRENT_PATH/conf/hosts"
         NANO_END_POINT_FILE="$CURRENT_PATH/conf/nanoEndpoint"
-        CLEANED=false
-	            
-        echo -e " \e[90m Cleaning existing Clients in :\e[39m "
-        echo -e " \e[90m $NANO_END_POINT_FILE \e[39m "
         
-        if [ -f $NANO_END_POINT_FILE ]; then
-        
-          for LINE in `cat $NANO_END_POINT_FILE`; do
-                      
-            IFS=’:’ read -ra INFO_NANO <<< "$LINE" 
-            NANO_END_POINT_HOST=${INFO_NANO[0]}
-            NANO_END_POINT_IP=${INFO_NANO[1]}
-            NANO_END_POINT_PORT=${INFO_NANO[2]}
-            NAME_SPACE=${INFO_NANO[3]}
-	   
-	    removeContainerIfExists $NANO_END_POINT_HOST
-         
-          done
-          
-	fi
-	            
+	removeAllContainerBasedOnImage $DOCKER_BLZ_IMAGE
+                    
         > $NANO_END_POINT_FILE
-            
-        if [ "$CLEANED" = true ] ; then
-            echo -e " Cleanded ! "
-        else
-            echo -e " No existing EndPoint "
-        fi
-        echo
-	
-	if [ -f $HOSTS_FILE ] ; then
-          for HOST in ${HOSTS[@]}
-	  do
-	    removeContainerIfExists $HOST
-	  done 
-	fi
-	
-	> $HOSTS_FILE
+        > $HOSTS_FILE
 	
         # Remove Image $DOCKER_BLZ_IMAGE if exists 
-        echo " Image  $DOCKER_BLZ_IMAGE already exist, remove it... "
-        # CONTAINER_ID=`docker images -q $DOCKER_BLZ_IMAGE `
-        # echo " Conainer ID : $CONTAINER_ID "
-        #docker rmi -f $CONTAINER_ID
+        echo " Remove Image  $DOCKER_BLZ_IMAGE ... "
         docker rmi -f $DOCKER_BLZ_IMAGE
-        # Remove untagged Images
-        docker rmi $(docker images | grep "^<none>" | awk "{print $3}")
-        
+        echo " Images removed !! "
+        echo
+    else 
+       echo " No image found.. "
     fi
 		
     tput setaf 2
