@@ -19,8 +19,6 @@ if [ $# -eq 1 ] ; then
     HOST_1="blz_host_1"
     HOST_2="blz_host_2"
  
-    HOSTS=( $HOST_0 $HOST_1 $HOST_2 )
- 	
     tput setaf 2
     echo 
     echo -e " ################################# "
