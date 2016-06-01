@@ -43,7 +43,7 @@ Included Projects :
 
 Requirements :
 
-    JAVA 8
+    `JAVA 8`
     
-    CURL 
+    `CURL `
     
