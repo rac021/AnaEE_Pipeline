@@ -46,7 +46,7 @@ Requirements :
 -    `JAVA 8`
     
 -    `MAVEN`
--    
+   
 -    `CURL `
     
 -    `Postgres`
