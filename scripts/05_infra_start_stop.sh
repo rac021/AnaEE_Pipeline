@@ -21,7 +21,19 @@
        fi
      done
     } 
-      
+    
+    isFreePort() {
+      PORT=$1
+      if ! lsof -i:$PORT > /dev/null
+      then
+        isFree="true"
+      else
+        echo
+        echo -e " Port $PORT is in use, please release it to continue "
+        echo
+      fi
+    }  
+    
     CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     HOSTS_FILE="$CURRENT_PATH/conf/hosts"
     STATUS_FILE="$CURRENT_PATH/conf/status"
@@ -90,7 +102,9 @@
           NANO_END_POINT_PORT=${INFO_NANO[2]}
           NAME_SPACE=${INFO_NANO[3]}
           RW_MODE=${INFO_NANO[4]}
-            
+           
+          isFreePort $NANO_END_POINT_PORT
+          
           docker exec -dit $NANO_END_POINT_HOST ./nanoSparqlServer.sh $NANO_END_POINT_PORT $NAME_SPACE $RW_MODE
           echo -e "\e[37m serviceURL: \e[93mhttp://$NANO_END_POINT_IP:$NANO_END_POINT_PORT"
           sleep 1
