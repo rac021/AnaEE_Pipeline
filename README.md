@@ -45,7 +45,11 @@ Requirements :
 
 -    `JAVA 8`
     
+-    `MAVEN`
+-    
 -    `CURL `
     
 -    `Postgres`
+
+-    `Docker 1.10 and +`
 
