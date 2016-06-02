@@ -27,7 +27,19 @@
         SUBNET="mynet123"
 
         LOOP=" while true; do sleep 1000; done "
-            
+      
+        isFreePort() {
+          PORT=$1
+          if ! lsof -i:$PORT > /dev/null
+          then
+            isFree="true"
+          else
+            echo
+            echo -e " Port $PORT is in use, please release it to continue "
+            echo
+          fi
+        }
+        
         if [ "$DEFAULT_MODE" != "ro" ] && [ "$DEFAULT_MODE" != "rw" ] ; then 
         echo "DEFAULT_MODE can only have 'rw' OR 'ro' values !!"
         exit 2
@@ -91,7 +103,8 @@
             echo 
                 
             fuser -k $PORT/tcp 
-                
+            isFreePort $PORT
+               
             docker run  -d                                                                  \
                         --net  $SUBNET                                                      \
                         --name $CONTAINER_NAME                                              \
