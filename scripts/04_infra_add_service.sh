@@ -42,8 +42,8 @@
         }
         
         if [ "$DEFAULT_MODE" != "ro" ] && [ "$DEFAULT_MODE" != "rw" ] ; then 
-        echo "DEFAULT_MODE can only have 'rw' OR 'ro' values !!"
-        exit 2
+            echo "DEFAULT_MODE can only have 'rw' OR 'ro' values !!"
+            exit 2
         fi 
 
         if docker history -q $BLZ_IMAGE >/dev/null 2>&1; then
@@ -55,16 +55,16 @@
             STATUS=`cat $STATUS_FILE `
             
             if [ $STATUS = "0" ] ; then
-            tput setaf 6
-            echo
-            echo " Cluster should be running ... ? "
-            echo " if you are sure that the Cluster is DOWN, you can turn STATUS in the "
-            echo " file $STATUS_FILE "
-            echo " to 0 to and then try to retstart it "
-            echo " or just STOP and START Cluster "
-            echo
-            tput setaf 7
-            exit 3
+               tput setaf 6
+               echo
+               echo " Cluster should be running ... ? "
+               echo " if you are sure that the Cluster is DOWN, you can turn STATUS in the "
+               echo " file $STATUS_FILE "
+               echo " to 0 to and then try to retstart it "
+               echo " or just STOP and START Cluster "
+               echo
+               tput setaf 7
+               exit 3
             fi
             
             tput setaf 2
