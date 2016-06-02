@@ -37,6 +37,7 @@
             echo
             echo -e " Port $PORT is in use, please release it to continue "
             echo
+            exit 3
           fi
         }
         
@@ -101,8 +102,7 @@
             fi
             
             echo 
-                
-            fuser -k $PORT/tcp 
+           
             isFreePort $PORT
                
             docker run  -d                                                                  \
