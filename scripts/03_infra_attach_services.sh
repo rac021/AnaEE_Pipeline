@@ -28,7 +28,19 @@
         SUBNET="mynet123"
 
         LOOP=" while true; do sleep 1000; done "
-            
+         
+        isFreePort() {
+          PORT=$1
+          if ! lsof -i:$PORT > /dev/null
+          then
+            isFree="true"
+          else
+            echo
+            echo -e " Port $PORT is in use, please release it to continue "
+            echo
+          fi
+        }
+        
         if [ "$DEFAULT_MODE" != "ro" ] && [ "$DEFAULT_MODE" != "rw" ] ; then 
         echo "DEFAULT_MODE can only have 'rw' OR 'ro' values !!"
         exit 2
@@ -96,11 +108,11 @@
                 
                 EXIST=$(docker inspect --format="{{ .Name }}" $NANO_END_POINT_HOST 2> /dev/null)
                 if [ ! -z $EXIST ]; then 
-                echo
-                echo " Container $NANO_END_POINT_HOST  already exists, remove... "
-                docker  rm  -f  $NANO_END_POINT_HOST > /dev/null
-                echo " Container $NANO_END_POINT_HOST  removed !! "
-                CLEANED=true
+                  echo
+                  echo " Container $NANO_END_POINT_HOST  already exists, remove... "
+                  docker  rm  -f  $NANO_END_POINT_HOST > /dev/null
+                  echo " Container $NANO_END_POINT_HOST  removed !! "
+                  CLEANED=true
                 fi
             done
             
@@ -135,6 +147,7 @@
                 fi
 
                 fuser -k $HOST_PORT/tcp 
+                isFreePort $HOST_PORT
                 
                 docker run  -d                                                                  \
                             --net  $SUBNET                                                      \
