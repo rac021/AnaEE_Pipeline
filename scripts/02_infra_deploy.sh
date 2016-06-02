@@ -38,6 +38,18 @@ if [ $# -eq 7 ] ; then
    STATUS_FILE="$CURRENT_PATH/conf/status"
    NANO_END_POINT_FILE="$CURRENT_PATH/conf/nanoEndpoint"
  
+   isFreePort() {
+      PORT=$1
+      if ! lsof -i:$PORT > /dev/null
+      then
+        isFree="true"
+      else
+        echo
+        echo -e " Port $PORT is in use, please release it to continue "
+        echo
+      fi
+   }
+    
    removeAllContainerBasedOnImage() {
       IMAGE=$1
       echo
@@ -110,7 +122,11 @@ if [ $# -eq 7 ] ; then
          docker network create --subnet=192.168.56.250/24 $SUBNET 
          # docker network rm $SUBNET
      fi
-	
+
+     isFreePort 7777
+     isFreePort 8888
+     isFreePort 9999
+     
      removeAllContainerBasedOnImage $BLZ_IMAGE
  
      > $HOST_FILE
