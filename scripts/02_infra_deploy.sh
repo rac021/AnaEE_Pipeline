@@ -47,6 +47,7 @@ if [ $# -eq 7 ] ; then
         echo
         echo -e " Port $PORT is in use, please release it to continue "
         echo
+        exit 3
       fi
    }
     
