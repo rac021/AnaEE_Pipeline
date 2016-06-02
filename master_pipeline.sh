@@ -37,7 +37,7 @@ if [ $# -eq 7 ] ; then
   ./scripts/10_query_example.sh
   
 else
-
+    echo
     echo " Invalid arguments :  please pass exactly Seven arguments "
     echo " arg_1             :  Image_docker_name                   "
     echo " arg_2             :  IP HOST_1                           "
@@ -46,5 +46,6 @@ else
     echo " arg_5             :  Blazegraph_namespace                "
     echo " arg_6             :  Ports  number                       "
     echo " arg_7             :  READ-WRITE MODE ( ro : rw   )       "        
+    echo
 fi
 
