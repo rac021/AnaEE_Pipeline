@@ -67,15 +67,21 @@ if [ $# -eq 7 ] ; then
      FORWARD_PORT=$4
      # --privileged=true -i -v /data1/Downloads:/Downloads 
      echo -e "\e[36m Run Container $HOST \e[39m "
-     docker run -d --net mynet123 --name $HOST        \
-       	           --memory-swappiness=0	      \
-	           --add-host $HOST_0:$IP_HOST_0      \
-	           --add-host $HOST_1:$IP_HOST_1      \
-	           --add-host $HOST_2:$IP_HOST_2      \
-	           --ip $IP  -p  $FORWARD_PORT:$PORT  \
-	           --expose $PORT                     \
-	           -it --entrypoint /bin/bash $BLZ_IMAGE -c "./bigdata start; $LOOP " > /dev/null
-	
+     RUNNING=$( docker run -d --net mynet123 --name $HOST     \
+       	                   --memory-swappiness=0	      \
+	                   --add-host $HOST_0:$IP_HOST_0      \
+	                   --add-host $HOST_1:$IP_HOST_1      \
+	                   --add-host $HOST_2:$IP_HOST_2      \
+	                   --ip $IP  -p  $FORWARD_PORT:$PORT  \
+	                   --expose $PORT                     \
+	                   -it --entrypoint /bin/bash $BLZ_IMAGE -c "./bigdata start; $LOOP "  2>&1 )
+
+     if [[ "$RUNNING" =~ "Error" ]]; then
+        echo
+        echo "$RUNNING"
+        echo
+        exit 3
+     fi	
      echo "$HOST" >> $HOST_FILE
      sleep 5
    }
