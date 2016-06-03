@@ -14,10 +14,10 @@
         BLZ_IMAGE=$1
         CONTAINER_NAME=$2
         IP=$3
-        # Get Port Number
-        PORT=$4
         # Get NameSpace
-        NAMESPACE=$5
+        NAMESPACE=$4
+         # Get Port Number
+        PORT=$5
         # Get Default Mode : 
         # 'rw' for read-write Mode
         # 'ro' for readOnly Mode. 
@@ -156,8 +156,8 @@
         echo " arg_1             :  Image_docker_name                   "
         echo " arg_2             :  Container Name                      "
         echo " arg_3             :  IP                                  "
-        echo " arg_4             :  Port                                "
-        echo " arg_5             :  NameSpace                           "
+        echo " arg_4             :  NameSpace                           "
+        echo " arg_5             :  Port                                "
         echo " arg_6             :  READ-WRITE MODE ( ro : rw   )       "   
         echo
    fi
