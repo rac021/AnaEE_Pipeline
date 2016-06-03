@@ -105,14 +105,21 @@
            
             isFreePort $PORT
                
-            docker run  -d                                                                  \
-                        --net  $SUBNET                                                      \
-                        --name $CONTAINER_NAME                                              \
-                        --ip   $IP                                                          \
-                        -p     $PORT:$PORT                                                  \
-                        --memory-swappiness=0                                               \
-                        --entrypoint /bin/bash -it $BLZ_IMAGE                               \
-                        -c " ./nanoSparqlServer.sh $PORT $NAMESPACE $DEFAULT_MODE ; $LOOP " > /dev/null
+            RUNNING=$( docker run  -d                                                    \
+                       --net  $SUBNET                                                    \
+                       --name $CONTAINER_NAME                                            \
+                       --ip   $IP                                                        \
+                       -p     $PORT:$PORT                                                \
+                       --memory-swappiness=0                                             \
+                       --entrypoint /bin/bash -it $BLZ_IMAGE                             \
+                       -c " ./nanoSparqlServer.sh $PORT $NAMESPACE $DEFAULT_MODE ; $LOOP " 2>&1 )
+            
+            if [[ "$RUNNING" =~ "Error" ]] ; then
+               echo
+               echo "$RUNNING"
+               echo
+               exit 3
+            fi    
                 
             echo "$CONTAINER_NAME:$IP:$PORT:$NAMESPACE:$DEFAULT_MODE" >> $NANO_END_POINT_FILE
             echo -e "\e[39m serviceURL: \e[93mhttp://$IP:$PORT  -  Published port : $PORT \e[39m"
