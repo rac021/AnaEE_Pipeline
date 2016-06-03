@@ -16,6 +16,8 @@ if [ $# -eq 7 ] ; then
 
    chmod -R +x scripts/*
    
+  ./scripts/utils/check_commands.sh
+  
   ./scripts/utils/create_database.sh
    
   ./scripts/00_install_libs.sh 
