@@ -55,7 +55,9 @@ if [ $# -eq 7 ] ; then
       IMAGE=$1
       echo
       echo -e " Remove all containers based on images  $IMAGE "
+      echo
       docker ps -a | awk '{ print $1,$2 }' | grep $IMAGE | awk '{print $1 }' | xargs -I {} docker rm -f {}
+      echo
       echo -e " All containers removed !! "
       echo
    } 
