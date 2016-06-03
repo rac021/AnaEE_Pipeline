@@ -56,16 +56,16 @@
             STATUS=`cat $STATUS_FILE `
             
             if [ $STATUS = "0" ] ; then
-            tput setaf 6
-            echo
-            echo " Cluster should be running ... ? "
-            echo " if you are sure that the Cluster is DOWN, you can turn STATUS in the "
-            echo " file $STATUS_FILE "
-            echo " to 0 to and then try to retstart it "
-            echo " or just STOP and START Cluster "
-            echo
-            tput setaf 7
-            exit 3
+               tput setaf 6
+               echo
+               echo " Cluster should be running ... ? "
+               echo " if you are sure that the Cluster is DOWN, you can turn STATUS in the "
+               echo " file $STATUS_FILE "
+               echo " to 0 to and then try to retstart it "
+               echo " or just STOP and START Cluster "
+               echo
+               tput setaf 7
+               exit 3
             fi
             
             tput setaf 2
@@ -150,14 +150,21 @@
                 fuser -k $HOST_PORT/tcp 
                 isFreePort $HOST_PORT
                 
-                docker run  -d                                                                  \
-                            --net  $SUBNET                                                      \
-                            --name $NAME_INSTANCE                                               \
-                            --ip   $IP                                                          \
-                            -p     $HOST_PORT:$PORT                                             \
-                           --memory-swappiness=0                                                \
-                            --entrypoint /bin/bash -it $BLZ_IMAGE                               \
-                            -c " ./nanoSparqlServer.sh $PORT $NAMESPACE $DEFAULT_MODE ; $LOOP " > /dev/null
+                RUNNING=$( docker run  -d                                                      \
+                           --net  $SUBNET                                                      \
+                           --name $NAME_INSTANCE                                               \
+                           --ip   $IP                                                          \
+                           -p     $HOST_PORT:$PORT                                             \
+                           --memory-swappiness=0                                               \
+                           --entrypoint /bin/bash -it $BLZ_IMAGE                               \
+                           -c " ./nanoSparqlServer.sh $PORT $NAMESPACE $DEFAULT_MODE ; $LOOP "  2>&1 )
+               
+                if [[ "$RUNNING" =~ "Error" ]]; then
+                   echo
+                   echo "$RUNNING"
+                   echo
+                   exit 3
+                fi
                 
                 echo "$NAME_INSTANCE:$IP:$PORT:$NAMESPACE:$DEFAULT_MODE" >> $NANO_END_POINT_FILE
                 echo -e "\e[39m serviceURL: \e[93mhttp://$IP:$PORT  -  Published port : $HOST_PORT \e[39m"
