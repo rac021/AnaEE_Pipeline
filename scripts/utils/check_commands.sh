@@ -14,7 +14,8 @@
      echo
      echo >&2 " Require JAVA but it's not installed.  Aborting. " ; 
      echo
-     exit 1 ;
+     kill -9 `ps --pid $$ -oppid=` ; 
+     exit
   }
   echo " java installed.. "
   sleep 0.4
@@ -23,7 +24,8 @@
      echo
      echo >&2 " Require CURL but it's not installed.  Aborting. " ; 
      echo
-     exit 1 ;
+     kill -9 `ps --pid $$ -oppid=` ; 
+     exit
   }
   echo " curl installed.. "
   sleep 0.4
@@ -32,7 +34,8 @@
      echo
      echo >&2 " Require POSTGRES but it's not installed.  Aborting. " ; 
      echo
-     exit 1 ;
+     kill -9 `ps --pid $$ -oppid=` ; 
+     exit
   }
   echo " postgres installed.. "
   sleep 0.4
@@ -41,7 +44,8 @@
      echo
      echo >&2 " Require MAVEN but it's not installed.  Aborting. " ; 
      echo
-     exit 1 ;
+     kill -9 `ps --pid $$ -oppid=` ; 
+     exit
   }
   echo " maven installed.. "
   sleep 0.4
@@ -50,7 +54,8 @@
      echo
      echo >&2 " Require DOCKER but it's not installed.  Aborting. " ; 
      echo
-     exit 1 ;
+     kill -9 `ps --pid $$ -oppid=` ; 
+     exit
   }
   echo " docker installed.. "
   sleep 0.4
