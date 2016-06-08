@@ -8,7 +8,7 @@ SELECT
 	unite.code AS unite_id,
 	unite.code AS unite_code,
 	unite.nom AS unite_name,
-	to_char( chimiesynthesisvalue.date , 'YYYY' : : text ) AS year,
+	to_char( chimiesynthesisvalue.date , 'YYYY'::text ) AS year,
 	count( * ) AS nb_data
 FROM
 	public.datatype
