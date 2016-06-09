@@ -83,7 +83,7 @@
               <y:Geometry height="30.0" width="587.8316908084139" x="-540.2995372576643" y="-799.4572799114078"/>
               <y:Fill color="#FFCC00" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="523.193359375" x="32.31916571670695" y="6.015625">prefix oboe-standard: &lt;http://ecoinformatics.org/oboe/oboe.1.0/oboe-standard.owl#&gt;<y:LabelModel>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="503.083984375" x="42.37385321670695" y="6.015625">prefix oboe-standard: http://ecoinformatics.org/oboe/oboe.1.0/oboe-standard.owl#<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
                 </y:LabelModel>
                 <y:ModelParameter>
@@ -100,7 +100,7 @@
               <y:Geometry height="30.0" width="587.8316908084139" x="-540.2995372576643" y="-744.9145598228156"/>
               <y:Fill color="#FFCC00" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="496.216796875" x="45.80744696670695" y="6.015625">prefix oboe-spatial: &lt;http://ecoinformatics.org/oboe/oboe.1.0/oboe-spatial.owl#&gt;<y:LabelModel>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="476.107421875" x="55.86213446670695" y="6.015625">prefix oboe-spatial: http://ecoinformatics.org/oboe/oboe.1.0/oboe-spatial.owl#<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
                 </y:LabelModel>
                 <y:ModelParameter>
@@ -117,7 +117,7 @@
               <y:Geometry height="30.0" width="587.8316908084139" x="-540.2995372576643" y="-698.8291196456312"/>
               <y:Fill color="#FFCC00" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="525.033203125" x="31.399243841706948" y="6.015625">prefix oboe-temporal: &lt;http://ecoinformatics.org/oboe/oboe.1.0/oboe-temporal.owl#&gt;<y:LabelModel>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="504.923828125" x="41.45393134170695" y="6.015625">prefix oboe-temporal: http://ecoinformatics.org/oboe/oboe.1.0/oboe-temporal.owl#<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
                 </y:LabelModel>
                 <y:ModelParameter>
