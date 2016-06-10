@@ -44,7 +44,8 @@
 
   GROUP BY ?site ?categName ?variable ?unite ?date
 
-  ORDER BY ?date 
+  ORDER BY ?date ?site
+
 
 
 ***************************************************************
