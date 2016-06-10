@@ -67,14 +67,13 @@ CONTRUCT :
 
   CONSTRUCT { 
   
-    :Variable :hasSiteName          ?site .
-    :Variable :hasCategName         ?categName .
-    :Variable :hasSiteVariableName  ?variable .
-    :Variable :hasSiteUnite         ?unite .
-    :Variable :hasSiteDate          ?date .
-    :Variable :hasSiteTotalVariable ?nbVariable .
+    :VariableSynthesis :hasSiteName          ?site .
+    :VariableSynthesis :hasCategName         ?categName .
+    :VariableSynthesis :hasVariableName      ?variable .
+    :VariableSynthesis :hasUnite             ?unite .
+    :VariableSynthesis :hasDate              ?date .
+    :VariableSynthesis :hasTotalVariable     ?nbVariable .
           
-    #?X vCard:FN ?name .
   }
   
   WHERE {
@@ -118,6 +117,8 @@ CONTRUCT :
   GROUP BY ?site ?categName ?variable ?unite ?date
 
   }
+
+
 
 
 ********************************************
