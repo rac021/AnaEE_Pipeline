@@ -1,5 +1,4 @@
-
-  PREFIX : <http://www.anaee-france.fr/ontology/anaee-france_ontology#> 
+PREFIX : <http://www.anaee-france.fr/ontology/anaee-france_ontology#> 
   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
   PREFIX oboe-core: <http://ecoinformatics.org/oboe/oboe.1.0/oboe-core.owl#> 
   PREFIX oboe-standard: <http://ecoinformatics.org/oboe/oboe.1.0/oboe-standards.owl#>
@@ -22,9 +21,11 @@
 
   ?categ rdfs:label ?categName .
 
-  ?obs_var_05 a oboe-core:Observation ; oboe-core:ofEntity :Nitrogen ; oboe-core:hasMeasurement ?measu_unit_06 ;
+  ?obs_var_05 a oboe-core:Observation ; oboe-core:ofEntity ?notVariableCategory ; oboe-core:hasMeasurement ?measu_unit_06 ;
                 oboe-core:hasContext+ ?obs_timeinstant_13 , ?obs_exPlot_15 .
-
+  
+  FILTER ( NOT EXISTS {  ?notVariableCategory  a  :VariableCategory  . })  .
+    
   ?measu_unit_06 a oboe-core:Measurement ; oboe-core:usesStandard ?unite .
 
   ?obs_timeinstant_13 a oboe-core:Observation ; oboe-core:ofEntity oboe-temporal:TimeInstant ; oboe-core:hasMeasurement ?measu_date_15 .
