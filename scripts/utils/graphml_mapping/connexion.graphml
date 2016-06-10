@@ -83,7 +83,7 @@
               <y:Geometry height="30.0" width="587.8316908084139" x="-540.2995372576643" y="-799.4572799114078"/>
               <y:Fill color="#FFCC00" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="503.083984375" x="42.37385321670695" y="6.015625">prefix oboe-standard: http://ecoinformatics.org/oboe/oboe.1.0/oboe-standard.owl#<y:LabelModel>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" height="17.96875" modelName="custom" textColor="#000000" visible="true" width="509.3359375" x="39.24787665420695" y="6.015625">prefix oboe-standard: http://ecoinformatics.org/oboe/oboe.1.0/oboe-standards.owl#<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
                 </y:LabelModel>
                 <y:ModelParameter>
