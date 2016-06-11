@@ -1,4 +1,31 @@
 
+
+
+   PREFIX : <http://www.anaee-france.fr/ontology/anaee-france_ontology#> 
+   PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+   PREFIX oboe-core: <http://ecoinformatics.org/oboe/oboe.1.0/oboe-core.owl#> 
+   PREFIX oboe-standard: <http://ecoinformatics.org/oboe/oboe.1.0/oboe-standards.owl#>
+   PREFIX oboe-temporal: <http://ecoinformatics.org/oboe/oboe.1.0/oboe-temporal.owl#>
+   PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+   SELECT DISTINCT ?site ?categName ?variable ?unite ?date  ?nbVariable WHERE {
+  
+     :VariableSynthesis :hasVariableUri      ?variableUri   .
+     
+     ?variableUri       :hasVariableName      ?variable    .
+     
+   	 ?variableUri       :hasSiteName          ?site        .
+     ?variableUri       :hasCategName         ?categName   .
+     ?variableUri       :hasUnite             ?unite       .
+    
+     ?variableUri       :hasDateUri           ?dateUri     .
+     ?dateUri           :hasDate              ?date        .
+     ?dateUri           :hasTotalVariable     ?nbVariable  .
+   
+  }
+
+
+*********************************************************************************************
     PREFIX : <http://www.anaee-france.fr/ontology/anaee-france_ontology#> 
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
     PREFIX oboe-core: <http://ecoinformatics.org/oboe/oboe.1.0/oboe-core.owl#> 
