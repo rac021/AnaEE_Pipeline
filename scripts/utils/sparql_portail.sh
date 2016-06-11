@@ -1,5 +1,5 @@
 
-PREFIX : <http://www.anaee-france.fr/ontology/anaee-france_ontology#> 
+    PREFIX : <http://www.anaee-france.fr/ontology/anaee-france_ontology#> 
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
     PREFIX oboe-core: <http://ecoinformatics.org/oboe/oboe.1.0/oboe-core.owl#> 
     PREFIX oboe-standard: <http://ecoinformatics.org/oboe/oboe.1.0/oboe-standards.owl#>
