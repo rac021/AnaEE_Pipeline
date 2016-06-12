@@ -19,8 +19,8 @@
 		 ?variableUri          :hasVariableName      ?variableName         .
 		 ?variableUri          :hasCategName         ?categName            .
 		 ?variableUri          :hasUnite             ?unite                .
- 		 ?variableUri          :relatedToSite        ?siteName             .
-		
+ 		
+ 		 ?idVariableSynthesis  :relatedToSite        ?siteName             .
  		 ?idVariableSynthesis  :hasTotalVariable     ?nbVariable           .
 		 ?idVariableSynthesis  :observedInDate       ?date                 .
 	    }
@@ -113,8 +113,8 @@
 			   ?variableUri      	 :hasVariableName      ?variableName         .
 			   ?variableUri          :hasCategName         ?categName            .
 			   ?variableUri          :hasUnite             ?unite                .
-	 		   ?variableUri          :relatedToSite        ?siteName             .
-		
+	 		   
+			   ?idVariableSynthesis  :relatedToSite        ?siteName             .
 	 		   ?idVariableSynthesis  :hasTotalVariable     ?nbVariable           .
 			   ?idVariableSynthesis  :observedInDate       ?date                 .
 			  		
