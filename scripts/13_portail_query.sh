@@ -23,7 +23,6 @@
 		
  		 ?idVariableSynthesis  :hasTotalVariable     ?nbVariable           .
 		 ?idVariableSynthesis  :observedInDate       ?date                 .
-	      		      
 	    }
 
 	    WHERE {
@@ -92,11 +91,9 @@
 	     }
 
 	     GROUP BY ?idVariableSynthesis  ?siteName ?categName ?variableUri ?variableName ?unite ?date 
- 
-    }
-
-   ' \
-    -H 'Accept:text/rdf+n3' >> $OUT
+           }
+        ' \
+        -H 'Accept:text/rdf+n3' > $OUT
    
     echo ; echo 
 
@@ -125,4 +122,3 @@
 		    
 		  ORDER BY ?siteName ?date '
 		  
-
