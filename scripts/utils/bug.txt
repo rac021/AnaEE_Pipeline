@@ -1,4 +1,106 @@
+  PREFIX : <http://www.anaee-france.fr/ontology/anaee-france_ontology#> 
+  PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> 
+  PREFIX oboe-core: <http://ecoinformatics.org/oboe/oboe.1.0/oboe-core.owl#> 
+  PREFIX oboe-standard: <http://ecoinformatics.org/oboe/oboe.1.0/oboe-standards.owl#>
+  PREFIX oboe-temporal: <http://ecoinformatics.org/oboe/oboe.1.0/oboe-temporal.owl#>
+  PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
+  SELECT ?site ?obs_exPlot_15  ?categName ?unite ?date (COUNT(*) as ?nbVariable) WHERE {
+
+  ?obs_var_1 a oboe-core:Observation ; oboe-core:ofEntity :Variable ; oboe-core:hasMeasurement ?measu_variable_02 ; 
+               oboe-core:hasContext ?obs_categ_03 , ?obs_var_05 .
+
+  ?measu_variable_02 a oboe-core:Measurement ; oboe-core:usesStandard :Anaee-franceVariableNamingStandard ; oboe-core:hasValue ?variableUri .
+
+  ?variableUri rdfs:label ?variable .
+
+  ?obs_categ_03 a oboe-core:Observation ; oboe-core:ofEntity :VariableCategory ; 
+                  oboe-core:hasMeasurement ?measu_categName_4 .  
+
+  ?measu_categName_4 a oboe-core:Measurement ; oboe-core:usesStandard :Anaee-franceVariableCategoryNamingStandard ; oboe-core:hasValue ?categ  .
+
+  ?categ rdfs:label ?categName .
+
+  ?obs_var_05 a oboe-core:Observation ; oboe-core:ofEntity ?notVariableCategory ; oboe-core:hasMeasurement ?measu_unit_06 ;
+                oboe-core:hasContext+ ?obs_timeinstant_13 , ?obs_exPlot_15 .
+  
+  FILTER ( NOT EXISTS {  ?notVariableCategory  a  :VariableCategory  . })  .
+    
+  ?measu_unit_06 a oboe-core:Measurement ; oboe-core:usesStandard ?unite .
+
+  ?obs_timeinstant_13 a oboe-core:Observation ; oboe-core:ofEntity oboe-temporal:TimeInstant ; oboe-core:hasMeasurement ?measu_date_14 .
+
+  ?measu_date_14 a oboe-core:Measurement ; oboe-core:hasValue ?date .
+
+
+  ?obs_exPlot_15 a oboe-core:Observation ; oboe-core:ofEntity :ExperimentalPlot ; oboe-core:hasContext ?obs_site_17 .
+
+  ?obs_site_17 a oboe-core:Observation ; oboe-core:ofEntity :ExperimentalSite ; oboe-core:hasMeasurement ?meas_siteName_18 .
+
+  ?meas_siteName_18 a oboe-core:Measurement ; oboe-core:usesStandard :Anaee-franceExperimentalSiteNamingStandard ; oboe-core:hasValue ?site .
+
+          
+  filter ( ?date = xsd:string("1966") ) .
+      
+      
+  #filter ( ?site = xsd:string("http://www.anaee-france.fr/ontology/anaee-france_ontology#AnnecyLake") ) .
+    
+ }
+
+  GROUP BY ?site ?obs_exPlot_15  ?categName  ?unite ?date 
+
+  ORDER BY ?date 
+
+
+------------------------------------------------------------------------------------------------
+
+SELECT
+	dt.code AS dty_code,
+	var.code AS var_code,
+	valeur_mesure_chimie_vmchimie.vmchimie_id AS value_id,
+	valeur_mesure_chimie_vmchimie.valeur AS value,
+	valeur_mesure_chimie_vmchimie.mchimie_id AS mesure_id,
+	sequence_chimie_schimie.schimie_id AS sequence_id,
+	plateforme_pla.code AS platform_code,
+	to_char( sequence_chimie_schimie.date_prelevement , 'YYYY' ) AS date,
+	public.site_glacpe_sit.nom,
+	mesure_chimie_mchimie.profondeurreelle
+FROM
+	datatype dt
+	INNER JOIN datatypevariableuniteglacpe dtvu
+	 ON dt.id = dtvu.dty_id
+	INNER JOIN variable_glacpe_varg var
+	 ON dtvu.var_id = var.id
+	INNER JOIN valeur_mesure_chimie_vmchimie
+	 ON var.id = valeur_mesure_chimie_vmchimie.var_id
+	INNER JOIN mesure_chimie_mchimie
+	 ON valeur_mesure_chimie_vmchimie.mchimie_id = mesure_chimie_mchimie.mchimie_id
+	INNER JOIN sous_sequence_chimie_sschimie
+	 ON mesure_chimie_mchimie.sschimie_id = sous_sequence_chimie_sschimie.sschimie_id
+	INNER JOIN sequence_chimie_schimie
+	 ON sous_sequence_chimie_sschimie.schimie_id = sequence_chimie_schimie.schimie_id
+	INNER JOIN plateforme_pla
+	 ON sous_sequence_chimie_sschimie.loc_id = plateforme_pla.loc_id
+	INNER JOIN public.site_glacpe_sit
+	 ON plateforme_pla.id = public.site_glacpe_sit.id
+WHERE
+	dt.id = 11
+	and var.nom = 'Azote Ammoniacal'
+	and to_char(sequence_chimie_schimie.date_prelevement,'YYYY') = '1966' and public.site_glacpe_sit.nom = 'Annecy'
+
+
+
+
+
+**************************************************************************************************************
+**************************************************************************************************************
+**************************************************************************************************************
+**************************************************************************************************************
+**************************************************************************************************************
+**************************************************************************************************************
+**************************************************************************************************************
+
+**************************************************************************************************************
 
 SELECT 	dt.code AS dty_code, 	var.code AS var_code, 	
 valeur_mesure_chimie_vmchimie.vmchimie_id AS value_id, 	
