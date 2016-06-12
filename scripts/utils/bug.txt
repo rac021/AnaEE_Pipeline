@@ -1,3 +1,27 @@
+
+
+SELECT 	dt.code AS dty_code, 	var.code AS var_code, 	
+valeur_mesure_chimie_vmchimie.vmchimie_id AS value_id, 	
+valeur_mesure_chimie_vmchimie.valeur AS value, 	valeur_mesure_chimie_vmchimie.mchimie_id AS mesure_id, 
+	sequence_chimie_schimie.schimie_id AS sequence_id, 	plateforme_pla.code AS platform_code, 
+		to_char( sequence_chimie_schimie.date_prelevement , 'YYYY') as date FROM 	datatype dt 	
+		INNER JOIN datatypevariableuniteglacpe dtvu 	 ON dt.id = dtvu.dty_id 	
+		INNER JOIN variable_glacpe_varg var 	 ON dtvu.var_id = var.id 	
+		INNER JOIN valeur_mesure_chimie_vmchimie 	 ON var.id = valeur_mesure_chimie_vmchimie.var_id 	
+		INNER JOIN mesure_chimie_mchimie 	 ON valeur_mesure_chimie_vmchimie.mchimie_id = mesure_chimie_mchimie.mchimie_id 
+			INNER JOIN sous_sequence_chimie_sschimie 	 ON mesure_chimie_mchimie.sschimie_id = sous_sequence_chimie_sschimie.sschimie_id 
+				INNER JOIN sequence_chimie_schimie 	 ON sous_sequence_chimie_sschimie.schimie_id = sequence_chimie_schimie.schimie_id
+				INNER JOIN plateforme_pla 	 ON sous_sequence_chimie_sschimie.loc_id = plateforme_pla.loc_id WHERE 	dt.id = 11 	
+and var.nom = 'Azote Ammoniacal' and  to_char( sequence_chimie_schimie.date_prelevement , 'YYYY') = '1966' and valeur_mesure_chimie_vmchimie.vmchimie_id = 372364
+
+
+# leman est répété +ieurs fois ?
+SELECT public.plateforme_pla.code AS platform_code, public.site_glacpe_sit.code AS site_code FROM public.site_glacpe_sit 	INNER JOIN public.plateforme_pla 	 ON public.site_glacpe_sit.id = public.plateforme_pla.id
+
+
+
+
+
 SELECT
 	chimiesynthesisvalue.site AS site_code,
 	site_glacpe_sit.nom AS site_name,
