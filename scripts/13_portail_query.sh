@@ -105,20 +105,20 @@
 		    PREFIX oboe-temporal: <http://ecoinformatics.org/oboe/oboe.1.0/oboe-temporal.owl#>
 		    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-		    SELECT  ?siteName ?variableUri  ?date ?nbVariable { 
+		    SELECT  ?site ?variable ?categ ?unite ?date ?nbVariable                 { 
 		    
 	  		   :VariableSynthesis    :identifiedBy         ?idVariableSynthesis  .
 			    
-			   ?idVariableSynthesis  :relatedToVariableUri ?variableUri          .
-			   ?variableUri      	 :hasVariableName      ?variableName         .
-			   ?variableUri          :hasCategName         ?categName            .
-			   ?variableUri          :hasUnite             ?unite                .
+			   ?idVariableSynthesis  :relatedToVariableUri ?variable             .
+			   ?variable         	 :hasVariableName      ?variableName         .
+			   ?variable             :hasCategName         ?categ                .
+			   ?variable             :hasUnite             ?unite                .
 	 		   
-			   ?idVariableSynthesis  :relatedToSite        ?siteName             .
+			   ?idVariableSynthesis  :relatedToSite        ?site                 .
 	 		   ?idVariableSynthesis  :hasTotalVariable     ?nbVariable           .
 			   ?idVariableSynthesis  :observedInDate       ?date                 .
 			  		
 		    }
 		    
-		  ORDER BY ?siteName ?date '
+		  ORDER BY ?site ?date  '
 		  
