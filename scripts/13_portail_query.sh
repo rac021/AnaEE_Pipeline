@@ -86,7 +86,7 @@
 		                  oboe-core:usesStandard :Anaee-franceExperimentalSiteNamingStandard ; 
 		                  oboe-core:hasValue ?site .
 
-    	       BIND (URI( REPLACE ( CONCAT("http://anee-fr#" , ?site, "_" , ?categName, "_",?variableName, "_", ?date ) , " ", "_") ) AS ?idVariableSynthesis ) .
+    	       BIND (URI( REPLACE ( CONCAT("http://anee-fr#ola/" , ?site, "_" , ?categName, "_",?variableName, "_", ?date ) , " ", "_") ) AS ?idVariableSynthesis ) .
 
 	     }
 
