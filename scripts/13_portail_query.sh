@@ -105,7 +105,7 @@
 		    PREFIX oboe-temporal: <http://ecoinformatics.org/oboe/oboe.1.0/oboe-temporal.owl#>
 		    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-		    SELECT ?site ?categName ?variable ?unite ?date ?nbVariable           { 
+		    SELECT ?site ?categName ?variable ?unite ?date ?nbVariable  WHERE    { 
 		    
 		       ?idVariableSynthesis   a                    :VariableSynthesis    .
 		    
