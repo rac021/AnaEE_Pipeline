@@ -13,14 +13,14 @@
 
 	    CONSTRUCT { 
 
-		 :VariableSynthesis    :identifiedBy         ?idVariableSynthesis  .
+	         ?idVariableSynthesis   a                    :VariableSynthesis    .
 		    
-		 ?idVariableSynthesis  :relatedToVariableUri ?variableUri          .
-		 ?variableUri          :hasVariableName      ?variableName         .
-		 ?variableUri          :hasCategName         ?categName            .
-		 ?variableUri          :hasUnite             ?unite                .
+		 ?idVariableSynthesis  :ofVariable           ?variable             .
+		 ?variable             :hasVariableName      ?variableName         .
+		 ?variable             :hasCategName         ?categName            .
+		 ?variable             :hasUnite             ?unite                .
  		
- 		 ?idVariableSynthesis  :relatedToSite        ?siteName             .
+ 		 ?idVariableSynthesis  :relatedToSite        ?site                 .
  		 ?idVariableSynthesis  :hasTotalVariable     ?nbVariable           .
 		 ?idVariableSynthesis  :observedInDate       ?date                 .
 	    }
@@ -28,9 +28,9 @@
 	    WHERE {
 
 	      SELECT ?idVariableSynthesis 
-	             ?siteName 
+	             ?site  
 	             ?categName 
-	             ?variableUri 
+	             ?variable 
 	             ?variableName 
 	             ?unite 
 	             ?date (COUNT(*) as ?nbVariable) WHERE {
@@ -42,9 +42,9 @@
 
 	      ?measu_variable_02 a oboe-core:Measurement ; 
 		                   oboe-core:usesStandard :Anaee-franceVariableNamingStandard ; 
-		                   oboe-core:hasValue ?variableUri .
+		                   oboe-core:hasValue ?variable .
 
-	      ?variableUri rdfs:label ?variableName .
+	      ?variable rdfs:label ?variableName .
 
 	      ?obs_categ_03 a oboe-core:Observation ; 
 		              oboe-core:ofEntity :VariableCategory ; 
@@ -84,13 +84,13 @@
 
 	      ?meas_siteName_18 a oboe-core:Measurement ; 
 		                  oboe-core:usesStandard :Anaee-franceExperimentalSiteNamingStandard ; 
-		                  oboe-core:hasValue ?siteName .
+		                  oboe-core:hasValue ?site .
 
-    	       BIND (URI( REPLACE ( CONCAT("http://anee-fr#" , ?siteName, "_" , ?categName, "_",?variableName, "_", ?date ) , " ", "_") ) AS ?idVariableSynthesis ) .
+    	       BIND (URI( REPLACE ( CONCAT("http://anee-fr#" , ?site, "_" , ?categName, "_",?variableName, "_", ?date ) , " ", "_") ) AS ?idVariableSynthesis ) .
 
 	     }
 
-	     GROUP BY ?idVariableSynthesis  ?siteName ?categName ?variableUri ?variableName ?unite ?date 
+	     GROUP BY ?idVariableSynthesis  ?site ?categName ?variable ?variableName ?unite ?date 
            }
         ' \
         -H 'Accept:text/rdf+n3' > $OUT
@@ -105,19 +105,19 @@
 		    PREFIX oboe-temporal: <http://ecoinformatics.org/oboe/oboe.1.0/oboe-temporal.owl#>
 		    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-		    SELECT  ?site ?variable ?categ ?unite ?date ?nbVariable                 { 
+		    SELECT  ?site ?variable ?categName ?unite ?date ?nbVariable          { 
 		    
-	  		   :VariableSynthesis    :identifiedBy         ?idVariableSynthesis  .
-			    
-			   ?idVariableSynthesis  :relatedToVariableUri ?variable             .
-			   ?variable         	 :hasVariableName      ?variableName         .
-			   ?variable             :hasCategName         ?categ                .
-			   ?variable             :hasUnite             ?unite                .
-	 		   
-			   ?idVariableSynthesis  :relatedToSite        ?site                 .
-	 		   ?idVariableSynthesis  :hasTotalVariable     ?nbVariable           .
-			   ?idVariableSynthesis  :observedInDate       ?date                 .
-			  		
+		       ?idVariableSynthesis   a                    :VariableSynthesis    .
+		    
+		       ?idVariableSynthesis  :ofVariable           ?variable             .
+		       ?variable             :hasVariableName      ?variableName         .
+		       ?variable             :hasCategName         ?categName            .
+		       ?variable             :hasUnite             ?unite                .
+	 		
+	 	       ?idVariableSynthesis  :relatedToSite        ?site                 .
+	 	       ?idVariableSynthesis  :hasTotalVariable     ?nbVariable           .
+		       ?idVariableSynthesis  :observedInDate       ?date                 .
+	  		
 		    }
 		    
 		  ORDER BY ?site ?date  '
