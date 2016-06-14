@@ -16,8 +16,8 @@
 	         ?idVariableSynthesis   a                    :VariableSynthesis    .
 		    
 		 ?idVariableSynthesis  :ofVariable           ?variable             .
-		 ?variable             :hasVariableName      ?variableName         .
 		 ?variable             :hasCategName         ?categName            .
+		 ?variable             :hasVariableName      ?variableName         .
 		 ?variable             :hasUnite             ?unite                .
  		
  		 ?idVariableSynthesis  :relatedToSite        ?site                 .
@@ -105,13 +105,13 @@
 		    PREFIX oboe-temporal: <http://ecoinformatics.org/oboe/oboe.1.0/oboe-temporal.owl#>
 		    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-		    SELECT  ?site ?variable ?categName ?unite ?date ?nbVariable          { 
+		    SELECT ?site ?categName ?variable ?unite ?date ?nbVariable           { 
 		    
 		       ?idVariableSynthesis   a                    :VariableSynthesis    .
 		    
 		       ?idVariableSynthesis  :ofVariable           ?variable             .
-		       ?variable             :hasVariableName      ?variableName         .
 		       ?variable             :hasCategName         ?categName            .
+		       ?variable             :hasVariableName      ?variableName         .
 		       ?variable             :hasUnite             ?unite                .
 	 		
 	 	       ?idVariableSynthesis  :relatedToSite        ?site                 .
