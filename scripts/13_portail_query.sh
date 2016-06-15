@@ -22,7 +22,8 @@
  		 
  		 ?category             :hasCategoryName      ?categoryName         .
  		 ?idVariableSynthesis  :hasSite              ?site                 .
- 		 ?site		       :hasSiteType          ?siteType             . 
+ 		 ?site		       :hasSiteName          ?siteName             . 
+ 		 ?site		       :hasSiteType          ?siteType             .
  		 ?idVariableSynthesis  :hasNbData            ?nbData               .
 		 ?idVariableSynthesis  :hasYear              ?year                 .
 	    }
@@ -122,22 +123,23 @@
 		    PREFIX oboe-temporal: <http://ecoinformatics.org/oboe/oboe.1.0/oboe-temporal.owl#>
 		    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-		    SELECT ?site ?siteType ?categoryName ?variable ?unit ?year ?nbData  WHERE { 
+		    SELECT ?site ?siteName ?siteType ?category ?categoryName ?variable ?variableName ?unit ?year ?nbData  WHERE { 
 		    
-		       ?idVariableSynthesis   a                    :Variable             .
-		    
-		       ?idVariableSynthesis  :ofVariable           ?variable             .
-		       ?variable             :hasCategoryName      ?categoryName         .
-		       ?variable             :hasVariableName      ?variableName         .
-		       ?variable             :hasUnit              ?unit                 .
-	 		
-	 	       ?idVariableSynthesis  :hasSite              ?site                 .
-	 	       ?idVariableSynthesis  :hasNbData            ?nbData               .
-		       ?idVariableSynthesis  :hasYear              ?year                 .
-		       
-		       ?site		     :hasSiteType          ?siteType             . 
-	  		
+		         ?idVariableSynthesis   a                    :Variable             .
+			    
+			 ?idVariableSynthesis  :ofVariable           ?variable             .
+			 ?variable             :hasCategory          ?category             .
+			 ?variable             :hasVariableName      ?variableName         .
+			 ?variable             :hasUnit              ?unit                 .
+	 		 
+	 		 ?category             :hasCategoryName      ?categoryName         .
+	 		 ?idVariableSynthesis  :hasSite              ?site                 .
+	 		 ?site		       :hasSiteName          ?siteName             . 
+	 		 ?site		       :hasSiteType          ?siteType             .
+	 		 ?idVariableSynthesis  :hasNbData            ?nbData               .
+			 ?idVariableSynthesis  :hasYear              ?year                 .
 		    }
 		    
-		  ORDER BY ?site ?year  '
+		    ORDER BY ?site ?year  '
 		  
+		   
