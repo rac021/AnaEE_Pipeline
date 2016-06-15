@@ -13,7 +13,7 @@
 
 	    CONSTRUCT { 
 
-	         ?idVariableSynthesis   a                    :VariableSynthesis    .
+	         ?idVariable   a                    :VariableSynthesis    .
 		    
 		 ?idVariableSynthesis  :ofVariable           ?variable             .
 		 ?variable             :hasCategName         ?categName            .
@@ -22,7 +22,7 @@
  		
  		 ?idVariableSynthesis  :relatedToSite        ?site                 .
  		 ?idVariableSynthesis  :hasTotalVariable     ?nbVariable           .
-		 ?idVariableSynthesis  :observedInDate       ?date                 .
+		 ?idVariableSynthesis  :observedInDate       ?year                 .
 	    }
 
 	    WHERE {
@@ -33,7 +33,7 @@
 	             ?variable 
 	             ?variableName 
 	             ?unite 
-	             ?date (COUNT(*) as ?nbVariable) WHERE {
+	             ?year (COUNT(*) as ?nbVariable) WHERE {
 
 	       ?obs_var_1 a oboe-core:Observation ; 
 		            oboe-core:ofEntity :Variable ; 
@@ -72,7 +72,7 @@
 		                    oboe-core:hasMeasurement ?measu_date_15 .
 
 	      ?measu_date_15 a oboe-core:Measurement ;
-		               oboe-core:hasValue ?date .
+		               oboe-core:hasValue ?year .
 
 	      ?obs_exPlot_15 a oboe-core:Observation ; 
 		               oboe-core:ofEntity :ExperimentalPlot ; 
@@ -86,11 +86,11 @@
 		                  oboe-core:usesStandard :Anaee-franceExperimentalSiteNamingStandard ; 
 		                  oboe-core:hasValue ?site .
 
-    	       BIND (URI( REPLACE ( CONCAT("http://anee-fr#ola/" , ?site, "_" , ?categName, "_",?variableName, "_", ?date ) , " ", "_") ) AS ?idVariableSynthesis ) .
+    	       BIND (URI( REPLACE ( CONCAT("http://anee-fr#ola/" , ?site, "_" , ?categName, "_",?variableName, "_", ?year ) , " ", "_") ) AS ?idVariableSynthesis ) .
 
 	     }
 
-	     GROUP BY ?idVariableSynthesis  ?site ?categName ?variable ?variableName ?unite ?date 
+	     GROUP BY ?idVariableSynthesis  ?site ?categName ?variable ?variableName ?unite ?year 
            }
         ' \
         -H 'Accept:text/rdf+n3' > $OUT
@@ -105,7 +105,7 @@
 		    PREFIX oboe-temporal: <http://ecoinformatics.org/oboe/oboe.1.0/oboe-temporal.owl#>
 		    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-		    SELECT ?site ?categName ?variable ?unite ?date ?nbVariable  WHERE    { 
+		    SELECT ?site ?categName ?variable ?unite ?year ?nbVariable  WHERE    { 
 		    
 		       ?idVariableSynthesis   a                    :VariableSynthesis    .
 		    
@@ -116,9 +116,9 @@
 	 		
 	 	       ?idVariableSynthesis  :relatedToSite        ?site                 .
 	 	       ?idVariableSynthesis  :hasTotalVariable     ?nbVariable           .
-		       ?idVariableSynthesis  :observedInDate       ?date                 .
+		       ?idVariableSynthesis  :observedInDate       ?year                 .
 	  		
 		    }
 		    
-		  ORDER BY ?site ?date  '
+		  ORDER BY ?site ?year  '
 		  
