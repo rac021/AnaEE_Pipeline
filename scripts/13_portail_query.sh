@@ -30,7 +30,7 @@
 
 	    WHERE {
 
-	      SELECT ?idVariableSynthesis 
+	     SELECT ?idVariableSynthesis 
 	             ?site  
 	             ?siteName
 	             ?siteType
@@ -39,36 +39,37 @@
 	             ?variable 
 	             ?variableName 
 	             ?unit
-	             ?year (COUNT(*) as ?nbData) WHERE {
-
-	       ?obs_var_1 a oboe-core:Observation ; 
+	             ?year 
+	             (COUNT(*) as ?nbData) WHERE    {
+	             
+	      ?obs_var_1 a oboe-core:Observation ; 
 		            oboe-core:ofEntity :Variable ; 
 		            oboe-core:hasMeasurement ?measu_variable_02 ; 
 		            oboe-core:hasContext ?obs_categ_03 , ?obs_var_05 .
-
+		            
 	      ?measu_variable_02 a oboe-core:Measurement ; 
 		                   oboe-core:usesStandard :Anaee-franceVariableNamingStandard ; 
 		                   oboe-core:hasValue ?variable .
-
+		                   
 	      ?variable rdfs:label ?variableName .
-
+	      
 	      ?obs_categ_03 a oboe-core:Observation ; 
 		              oboe-core:ofEntity :VariableCategory ; 
 		              oboe-core:hasMeasurement ?measu_categName_4 .  
-
+		              
 	      ?measu_categName_4 a oboe-core:Measurement ; 
 		                   oboe-core:usesStandard :Anaee-franceVariableCategoryNamingStandard ; 
 		                   oboe-core:hasValue ?category .
-
+		                   
 	      ?category rdfs:label ?categoryName .
-
+	      
 	      ?obs_var_05 a oboe-core:Observation ; 
 		            oboe-core:ofEntity ?notVariableCategory ; 
 		            oboe-core:hasMeasurement ?measu_unit_06 ;
 		            oboe-core:hasContext+ ?obs_timeinstant_13 , ?obs_exPlot_15 .
-
+		            
 	      FILTER ( NOT EXISTS {  ?notVariableCategory  a  :VariableCategory . })   .
-
+	      
 	      ?measu_unit_06 a oboe-core:Measurement ; 
 		               oboe-core:usesStandard ?unit .
 		
@@ -78,38 +79,39 @@
 		                    oboe-core:ofEntity 
 		                    oboe-temporal:TimeInstant ; 
 		                    oboe-core:hasMeasurement ?measu_date_15 .
-
-	      ?measu_date_15 a oboe-core:Measurement ;
-		               oboe-core:hasValue ?year .
-
+	      
+              ?measu_date_15 a oboe-core:Measurement ;
+	 	               oboe-core:hasValue ?date .
+                   
 	      ?obs_exPlot_15 a oboe-core:Observation ; 
 		               oboe-core:ofEntity :ExperimentalPlot ; 
 		               oboe-core:hasContext ?obs_site_17   .
-
+		               
 	      ?obs_site_17 a oboe-core:Observation ; 
 		             oboe-core:ofEntity :ExperimentalSite ;
 		             oboe-core:hasContext ?obs_type_site_24 ;
 		             oboe-core:hasMeasurement ?meas_siteName_18 .
-
+		             
 	      ?obs_type_site_24 a oboe-core:Observation ; 
 		                  oboe-core:ofEntity ?siteType .
 	
-	       FILTER ( NOT EXISTS { ?obs_type_site_24 oboe-core:ofEntity :ExperimentalNetwork . }) . 
+	      FILTER ( NOT EXISTS { ?obs_type_site_24 oboe-core:ofEntity :ExperimentalNetwork . }) . 
 	      
 	      ?meas_siteName_18 a oboe-core:Measurement ; 
 		                  oboe-core:usesStandard :Anaee-franceExperimentalSiteNamingStandard ; 
 		                  oboe-core:hasValue ?siteNameStandard .
-	       
-	      BIND (URI( REPLACE ( CONCAT("http://www.anaee-france.fr/ontology/anaee-france_ontology" , ?siteNameStandard ) , " ", "_") ) AS ?site ) .
-	       
-    	      BIND (URI( REPLACE ( CONCAT("http://anee-fr#ola/" , ?siteNameStandard, "_" , ?categoryName, "_",?variableName, "_", ?year ) , " ", "_") ) AS ?idVariableSynthesis ) .
-	      
-	      ?site rdfs:label ?siteName .
-	       
-	     }
-
-	     GROUP BY ?idVariableSynthesis ?site ?siteName ?siteType ?category ?categoryName ?variable ?variableName ?unit ?year 
-           }
+	    
+              BIND(YEAR(?date) as ?year).
+                 
+              BIND (URI( REPLACE ( CONCAT("http://www.anaee-france.fr/ontology/anaee-france_ontology" , ?siteNameStandard ) , " ", "_") ) AS ?site ) .
+	   
+              BIND (URI( REPLACE ( CONCAT("http://anee-fr#ola/" , ?siteNameStandard, "_" , ?categoryName, "_",?variableName, "_", str(?year) ) , " ", "_") ) AS ?idVariableSynthesis ) .
+       
+              ?site rdfs:label ?siteName .
+         }
+	     
+	 GROUP BY ?idVariableSynthesis ?site ?siteName ?siteType ?category ?categoryName ?variable ?variableName ?unit ?year
+	}
         ' \
         -H 'Accept:text/rdf+n3' > $OUT
    
