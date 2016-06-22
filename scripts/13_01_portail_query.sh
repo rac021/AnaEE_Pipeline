@@ -27,6 +27,10 @@
  	     ?site		   :hasLocalSiteName      ?localSiteName        . 
              ?site		   :hasAnaeeSiteName      ?anaeeSiteName        .           
  	     ?site		   :hasSiteType           ?siteType             .
+ 	     
+ 	     ?site		   :hasInfra              ?infra                .
+ 	     ?infra                :hasInfraName          ?infraName            .
+ 	     
  	     ?idVariableSynthesis  :hasNbData             ?nbData               .
 	     ?idVariableSynthesis  :hasYear               ?year                 .
 	     
@@ -34,7 +38,9 @@
    
            WHERE {
          
-	    SELECT ?idVariableSynthesis 
+	    SELECT ?infra
+	           ?infraName
+	           ?idVariableSynthesis 
 	           ?site  
 	           ?anaeeSiteName
 	           ?localSiteName	
@@ -97,16 +103,27 @@
 			          oboe-core:ofEntity :ExperimentalPlot ; 
 			          oboe-core:hasContext ?obs_site_32   .
 			               
-		      ?obs_site_32 a oboe-core:Observation ; 
-			             oboe-core:ofEntity :ExperimentalSite ;
-			             oboe-core:hasContext ?obs_type_site_37 ;
-			             oboe-core:hasMeasurement ?meas_siteNameStandard_34, ?meas_siteName_33 .
+	        ?obs_site_32 a oboe-core:Observation ; 
+	   	               oboe-core:ofEntity :ExperimentalSite ;
+			       oboe-core:hasContext ?obs_type_site_37 ;
+			       oboe-core:hasContext ?obs_expNetWork_36 ;
+			       oboe-core:hasMeasurement ?meas_siteNameStandard_34, ?meas_siteName_33 .
 			 
 	        ?obs_type_site_37 a oboe-core:Observation ; 
 			            oboe-core:ofEntity ?siteType .
 	                   
 	        FILTER ( NOT EXISTS { ?obs_type_site_37 oboe-core:ofEntity :ExperimentalNetwork . }) . 
 	         
+	        ?obs_type_site_36 a oboe-core:Observation ; 
+			            oboe-core:ofEntity :ExperimentalNetwork ;
+			            oboe-core:hasMeasurement ?measu_expNetWorkName_36.
+		
+		?measu_expNetWorkName_36 a oboe-core:Measurement ; 
+			                    oboe-core:usesStandard :Anaee-franceExperimentalNetworkNamingStandard ; 
+			                    oboe-core:hasValue ?infra .
+			            
+		?infra rdfs:label ?infraName .
+		
 	        ?meas_siteNameStandard_34 a oboe-core:Measurement ; 
 			                    oboe-core:usesStandard :Anaee-franceExperimentalSiteNamingStandard ; 
 			                    oboe-core:hasValue ?anaeeSiteNameStandard .
@@ -129,8 +146,8 @@
 	                                     str(?year) ) , " ", "_") ) AS ?idVariableSynthesis ) 
 	      }  
 
-            GROUP BY ?idVariableSynthesis ?site ?anaeeSiteName ?localSiteName?siteType ?category 
-                     ?categoryName ?variable ?anaeeVariableName  ?localVariableName ?unit ?year
+            GROUP BY ?infra ?infraName ?idVariableSynthesis ?site ?anaeeSiteName ?localSiteName?siteType 
+                     ?category ?categoryName ?variable ?anaeeVariableName  ?localVariableName ?unit ?year
           }
 
     ' \
@@ -146,7 +163,8 @@
   		    PREFIX oboe-temporal: <http://ecoinformatics.org/oboe/oboe.1.0/oboe-temporal.owl#>
   		    PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
   
-  		    SELECT ?site 
+  		    SELECT ?infraName
+  		           ?site 
   		           ?anaeeSiteName
   		           ?localSiteName 
   		           ?siteType 
@@ -158,6 +176,7 @@
   		           ?unit 
   		           ?year 
   		           ?nbData 
+  		           
   		    WHERE  {  
       		    
 		      	    ?idVariableSynthesis   a                      :Variable             .
@@ -174,6 +193,9 @@
 		       	     ?site		   :hasLocalSiteName      ?localSiteName        . 
 		             ?site		   :hasAnaeeSiteName      ?anaeeSiteName        .           
 		       	     ?site		   :hasSiteType           ?siteType             .
+		       	     ?site		   :hasInfra              ?infra                .
+ 	     		     ?infra                :hasInfraName          ?infraName            .
+ 	     
 		       	     ?idVariableSynthesis  :hasNbData             ?nbData               .
 		      	     ?idVariableSynthesis  :hasYear               ?year                 .
   		    }
