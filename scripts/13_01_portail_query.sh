@@ -106,7 +106,7 @@
 	        ?obs_site_32 a oboe-core:Observation ; 
 	   	               oboe-core:ofEntity :ExperimentalSite ;
 			       oboe-core:hasContext ?obs_type_site_37 ;
-			       oboe-core:hasContext ?obs_expNetWork_36 ;
+			       oboe-core:hasContext ?obs_expNetWork_35 ;
 			       oboe-core:hasMeasurement ?meas_siteNameStandard_34, ?meas_siteName_33 .
 			 
 	        ?obs_type_site_37 a oboe-core:Observation ; 
@@ -114,9 +114,9 @@
 	                   
 	        FILTER ( NOT EXISTS { ?obs_type_site_37 oboe-core:ofEntity :ExperimentalNetwork . }) . 
 	         
-	        ?obs_type_site_36 a oboe-core:Observation ; 
-			            oboe-core:ofEntity :ExperimentalNetwork ;
-			            oboe-core:hasMeasurement ?measu_expNetWorkName_36.
+	        ?obs_expNetWork_35 a oboe-core:Observation ; 
+			             oboe-core:ofEntity :ExperimentalNetwork ;
+			             oboe-core:hasMeasurement ?measu_expNetWorkName_36.
 		
 		?measu_expNetWorkName_36 a oboe-core:Measurement ; 
 			                    oboe-core:usesStandard :Anaee-franceExperimentalNetworkNamingStandard ; 
