@@ -59,7 +59,7 @@
 	        ?obs_var_1 a oboe-core:Observation ; 
 			                 oboe-core:ofEntity ?undefinedVariable ; 
 			                 oboe-core:hasMeasurement ?measu_unitAndValue_02 ; 
-			                 oboe-core:hasContext ?obs_variable_03 ;
+			                 :hasVariableContext ?obs_variable_03 ;
 	                                 oboe-core:hasContext+ ?obs_timeInstant_25 , ?obs_expPlot_27 .             
 	                              
 	        ?measu_unitAndValue_02 a oboe-core:Measurement ; 
