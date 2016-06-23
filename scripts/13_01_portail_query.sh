@@ -19,8 +19,9 @@
 	     ?variable             :hasCategory           ?category             .
              ?variable             :hasAnaeeVariableName  ?anaeeVariableName    .
              ?variable             :hasLocalVariableName  ?localVariableName    .
-         
 	     ?variable             :hasUnit               ?unit                 .
+	     
+	     ?unit                 :hasAnaeeUnitName      ?anaeeUnitName        .
  	 
  	     ?category             :hasCategoryName       ?categoryName         .
  	     ?idVariableSynthesis  :hasSite               ?site                 .
@@ -44,13 +45,15 @@
 	           ?site  
 	           ?anaeeSiteName
 	           ?localSiteName	
-		   ?siteType				
+		   ?siteType
+		   ?siteTypeName
 	           ?category
 	           ?categoryName 
 	           ?variable 
 	           ?anaeeVariableName
 		   ?localVariableName
 	           ?unit
+	           ?anaeeUnitName
 	           ?year 
 		   (COUNT(*) as ?nbData) 
 		   
@@ -64,7 +67,9 @@
 	                              
 	        ?measu_unitAndValue_02 a oboe-core:Measurement ; 
 			                 oboe-core:usesStandard ?unit .
-	                  
+	       
+	        ?unit rdfs:label ?anaeeUnitName .
+	        
 	        ?obs_variable_03 a oboe-core:Observation ; 
 			           oboe-core:ofEntity :Variable ; 
 			           oboe-core:hasMeasurement ?measu_variableStandardName_04 ; 
@@ -111,7 +116,9 @@
 			 
 	        ?obs_type_site_37 a oboe-core:Observation ; 
 			            oboe-core:ofEntity ?siteType .
-	                   
+	        
+	        ?siteType rdfs:label ?siteTypeName ;
+	         
 	        FILTER ( NOT EXISTS { ?obs_type_site_37 oboe-core:ofEntity :ExperimentalNetwork . }) . 
 	         
 	        ?obs_expNetWork_35 a oboe-core:Observation ; 
@@ -146,8 +153,9 @@
 	                                     str(?year) ) , " ", "_") ) AS ?idVariableSynthesis ) 
 	      }  
 
-            GROUP BY ?infra ?infraName ?idVariableSynthesis ?site ?anaeeSiteName ?localSiteName?siteType 
-                     ?category ?categoryName ?variable ?anaeeVariableName  ?localVariableName ?unit ?year
+            GROUP BY ?infra ?infraName ?idVariableSynthesis ?site ?anaeeSiteName ?localSiteName 
+                     ?siteType ?siteTypeName ?category ?categoryName ?variable ?anaeeVariableName
+                     ?localVariableName ?unit ?anaeeUnitName ?year
           }
 
     ' \
@@ -174,6 +182,7 @@
   		           ?anaeeVariableName
   		           ?localVariableName 
   		           ?unit 
+  		           ?anaeeUnitName
   		           ?year 
   		           ?nbData 
   		           
@@ -185,9 +194,10 @@
 		      	     ?variable             :hasCategory           ?category             .
 		             ?variable             :hasAnaeeVariableName  ?anaeeVariableName    .
 		             ?variable             :hasLocalVariableName  ?localVariableName    .
-		               
 		      	     ?variable             :hasUnit               ?unit                 .
 		       	 
+		       	     ?unit                 :hasAnaeeUnitName      ?anaeeUnitName        .
+		       	     
 		       	     ?category             :hasCategoryName       ?categoryName         .
 		       	     ?idVariableSynthesis  :hasSite               ?site                 .
 		       	     ?site		   :hasLocalSiteName      ?localSiteName        . 
