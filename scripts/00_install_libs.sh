@@ -27,7 +27,7 @@ DIRECTORY_DATA_YEDGEN="yedGen"
 DIRECTORY_DATA_CONFIG="conf"
 
 # Do not touch the YEDGEN_COMPILE_NAME
-YEDGEN_COMPILE_NAME="YedODBA-3.14.2-1.0-SNAPSHOT-jar-with-dependencies.jar"
+YEDGEN_COMPILE_NAME="yedGen-1.0-SNAPSHOT-jar-with-dependencies.jar"
 YEDGEN_TARGET_NAME="yedGen.jar"
 YEDGEN_EXP_LOCATION="src/main/resources/*"
 
@@ -117,7 +117,7 @@ echo
 sleep 2
 tput setaf 7
 
-git clone https://github.com/rac021/obdaYedGen-3.14.2.git $ROOT_PATH/$DIRECTORY_LIBS/$TMP
+git clone https://github.com/rac021/yedGen.git $ROOT_PATH/$DIRECTORY_LIBS/$TMP
 
 cd $ROOT_PATH/$DIRECTORY_LIBS/$TMP
 
