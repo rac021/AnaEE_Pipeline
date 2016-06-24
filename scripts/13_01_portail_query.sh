@@ -60,86 +60,88 @@
 	    WHERE  {
 		      
 	        ?obs_var_1 a oboe-core:Observation ; 
-			                 oboe-core:ofEntity ?undefinedVariable ; 
-			                 oboe-core:hasMeasurement ?measu_unitAndValue_02 ; 
-			                 :hasVariableContext ?obs_variable_03 ;
-	                                 oboe-core:hasContext+ ?obs_timeInstant_25 , ?obs_expPlot_27 .             
+			     oboe-core:ofEntity ?undefinedVariable ; 
+			     oboe-core:hasMeasurement ?measu_unitAndValue_02 ; 
+			     :hasVariableContext ?obs_variable_03 ;
+	                     oboe-core:hasContext+ ?obs_timeInstant_55 , ?obs_expPlot_57 .             
 	                              
 	        ?measu_unitAndValue_02 a oboe-core:Measurement ; 
 			                 oboe-core:usesStandard ?unit .
 	       
 	        ?unit rdfs:label ?anaeeUnitName .
-	        
+	         
+	        FILTER (lang(?anaeeUnitName) = 'en') .
+	          
 	        ?obs_variable_03 a oboe-core:Observation ; 
 			           oboe-core:ofEntity :Variable ; 
-			           oboe-core:hasMeasurement ?measu_variableStandardName_04 ; 
-	                           oboe-core:hasMeasurement ?measu_variableLocalName_07 ; 
-			           oboe-core:hasContext ?obs_categ_05 .
+			           oboe-core:hasMeasurement ?measu_variableStandardName_05 ; 
+	                           oboe-core:hasMeasurement ?measu_variableLocalName_04 ; 
+			           oboe-core:hasContext ?obs_categ_06 .
 	         
-	        ?obs_categ_05 a oboe-core:Observation ; 
+	        ?obs_categ_06 a oboe-core:Observation ; 
 			        oboe-core:ofEntity :VariableCategory ; 
-			        oboe-core:hasMeasurement ?measu_categName_06 .  
+			        oboe-core:hasMeasurement ?measu_categName_07 .  
 	              
-	        ?measu_categName_06 a oboe-core:Measurement ; 
+	        ?measu_categName_07 a oboe-core:Measurement ; 
 			              oboe-core:usesStandard :Anaee-franceVariableCategoryNamingStandard ; 
 			              oboe-core:hasValue ?category .
 	                  
 	        ?category rdfs:label ?categoryName .
 	        
-	        ?measu_variableLocalName_07 a oboe-core:Measurement ; 
+	        ?measu_variableLocalName_04 a oboe-core:Measurement ; 
 	   	                              oboe-core:usesStandard :NamingStandard ; 
 			                      oboe-core:hasValue ?localVariableName .
 	
 	        ?variable rdfs:label ?anaeeVariableName .
 	            
-	        ?measu_variableStandardName_04 a oboe-core:Measurement ; 
+	        ?measu_variableStandardName_05 a oboe-core:Measurement ; 
 	   	                                 oboe-core:usesStandard :Anaee-franceVariableNamingStandard ; 
 			                         oboe-core:hasValue ?variable .
 	                  
-	        ?obs_timeInstant_25 a oboe-core:Observation ; 
+	        ?obs_timeInstant_55 a oboe-core:Observation ; 
 			              oboe-core:ofEntity 
 			              oboe-temporal:TimeInstant ; 
-			              oboe-core:hasMeasurement ?measu_date_26 .
+			              oboe-core:hasMeasurement ?measu_date_56 .
 		      
-	        ?measu_date_26 a oboe-core:Measurement ;
+	        ?measu_date_56 a oboe-core:Measurement ;
 		 	         oboe-core:hasValue ?date .
 	                   
-	        ?obs_expPlot_27 a oboe-core:Observation ; 
+	        ?obs_expPlot_57 a oboe-core:Observation ; 
 			          oboe-core:ofEntity :ExperimentalPlot ; 
-			          oboe-core:hasContext ?obs_site_32   .
+			          oboe-core:hasContext ?obs_site_62   .
 			               
-	        ?obs_site_32 a oboe-core:Observation ; 
+	        ?obs_site_62 a oboe-core:Observation ; 
 	   	               oboe-core:ofEntity :ExperimentalSite ;
-			       oboe-core:hasContext ?obs_type_site_37 ;
-			       oboe-core:hasContext ?obs_expNetWork_35 ;
-			       oboe-core:hasMeasurement ?meas_siteNameStandard_34, ?meas_siteName_33 .
+			       oboe-core:hasContext ?obs_type_site_67 ;
+			       oboe-core:hasContext ?obs_expNetWork_65 ;
+			       oboe-core:hasMeasurement ?meas_siteNameStandard_64, ?meas_siteName_63 .
 			 
-	        ?obs_type_site_37 a oboe-core:Observation ; 
+	        ?obs_type_site_67 a oboe-core:Observation ; 
 			            oboe-core:ofEntity ?siteType .
 	        
 	        ?siteType rdfs:label ?siteTypeName ;
 	         
-	        FILTER ( NOT EXISTS { ?obs_type_site_37 oboe-core:ofEntity :ExperimentalNetwork . }) . 
+	        FILTER ( NOT EXISTS { ?obs_type_site_67 oboe-core:ofEntity :ExperimentalNetwork . }) . 
 	         
-	        ?obs_expNetWork_35 a oboe-core:Observation ; 
+	        ?obs_expNetWork_65 a oboe-core:Observation ; 
 			             oboe-core:ofEntity :ExperimentalNetwork ;
-			             oboe-core:hasMeasurement ?measu_expNetWorkName_36.
+			             oboe-core:hasMeasurement ?measu_expNetWorkName_66.
 		
-		?measu_expNetWorkName_36 a oboe-core:Measurement ; 
+		?measu_expNetWorkName_66 a oboe-core:Measurement ; 
 			                    oboe-core:usesStandard :Anaee-franceExperimentalNetworkNamingStandard ; 
 			                    oboe-core:hasValue ?infra .
 			            
 		?infra rdfs:label ?infraName .
 		
-	        ?meas_siteNameStandard_34 a oboe-core:Measurement ; 
+	        ?meas_siteNameStandard_64 a oboe-core:Measurement ; 
 			                    oboe-core:usesStandard :Anaee-franceExperimentalSiteNamingStandard ; 
 			                    oboe-core:hasValue ?anaeeSiteNameStandard .
 		    
-	        ?meas_siteName_33 a oboe-core:Measurement ; 
+	        ?meas_siteName_63 a oboe-core:Measurement ; 
 			            oboe-core:usesStandard :NamingStandard ; 
 			            oboe-core:hasValue ?localSiteName .
 		               
-	        BIND(YEAR(?date) as ?year).         
+	        BIND(YEAR(?date) AS ?year).         
 	                  
 	        BIND (URI( REPLACE ( CONCAT("http://www.anaee-france.fr/ontology/anaee-france_ontology" , 
 	                                     ?anaeeSiteNameStandard ) , " ", "_") ) AS ?site ) .
