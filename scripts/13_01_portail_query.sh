@@ -120,6 +120,8 @@
 			            oboe-core:ofEntity ?siteType .
 	        
 	        ?siteType rdfs:label ?siteTypeName ;
+	        
+	        FILTER (lang(?siteTypeName ) = 'en') .
 	         
 	        FILTER ( NOT EXISTS { ?obs_type_site_67 oboe-core:ofEntity :ExperimentalNetwork . }) . 
 	         
