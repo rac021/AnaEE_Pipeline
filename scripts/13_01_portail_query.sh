@@ -28,7 +28,7 @@
  	     ?site		   :hasLocalSiteName      ?localSiteName        . 
              ?site		   :hasAnaeeSiteName      ?anaeeSiteName        .           
  	     ?site		   :hasSiteType           ?siteType             .
- 	     
+ 	     ?site		   :hasSiteTypeName       ?siteTypeName         .
  	     ?site		   :hasInfra              ?infra                .
  	     ?infra                :hasInfraName          ?infraName            .
  	     
@@ -180,6 +180,7 @@
   		           ?anaeeSiteName
   		           ?localSiteName 
   		           ?siteType 
+  		           ?siteTypeName 
   		           ?category 
   		           ?categoryName
   		           ?variable 
@@ -207,6 +208,7 @@
 		       	     ?site		   :hasLocalSiteName      ?localSiteName        . 
 		             ?site		   :hasAnaeeSiteName      ?anaeeSiteName        .           
 		       	     ?site		   :hasSiteType           ?siteType             .
+		       	     ?site		   :hasSiteTypeName       ?siteTypeName         .
 		       	     ?site		   :hasInfra              ?infra                .
  	     		     ?infra                :hasInfraName          ?infraName            .
  	     
