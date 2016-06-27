@@ -70,7 +70,7 @@
 	       
 	        ?unit rdfs:label ?anaeeUnitName .
 	         
-	        FILTER (lang(?anaeeUnitName) = 'en') .
+	        FILTER (lang(?anaeeUnitName) = "en") .
 	          
 	        ?obs_variable_03 a oboe-core:Observation ; 
 			           oboe-core:ofEntity :Variable ; 
@@ -121,7 +121,7 @@
 	        
 	        ?siteType rdfs:label ?siteTypeName ;
 	        
-	        FILTER (lang(?siteTypeName ) = 'en') .
+	        FILTER (lang(?siteTypeName ) = "en") .
 	         
 	        FILTER ( NOT EXISTS { ?obs_type_site_67 oboe-core:ofEntity :ExperimentalNetwork . }) . 
 	         
