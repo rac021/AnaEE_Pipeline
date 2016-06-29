@@ -2,7 +2,13 @@
 
     CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     NANO_END_POINT_FILE="$CURRENT_PATH/conf/nanoEndpoint"
-    DATA_DIR="../data/corese"
+    
+    if [ $# -eq 1 ] ; then
+      DATA_DIR=$1
+    else
+      # Default Folder
+      DATA_DIR="../data/corese"
+    fi 
     
     cd $CURRENT_PATH
     
