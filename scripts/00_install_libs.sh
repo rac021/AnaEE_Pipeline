@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ $# -eq 1 ] ; then
+  DATA_BASE=$1
+fi
+
 tput setaf 2
 echo 
 echo -e " ##################################### "
@@ -156,7 +160,12 @@ git clone https://github.com/rac021/ontop-matarializer.git $ROOT_PATH/$DIRECTORY
 
 cd $ROOT_PATH/$DIRECTORY_LIBS/$TMP
 
-mvn clean install assembly:single
+if [ "$DATA_BASE" != "" ] ; then 
+   mvn -P $DATA_BASE clean install assembly:single
+else 
+   # Postresql as default database
+   mvn clean install assembly:single
+fi
 
 echo
 
