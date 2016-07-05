@@ -41,14 +41,15 @@ if [ $# -eq 7 -o $# -eq 8 ] ; then
   
 else
     echo
-    echo " Invalid arguments :  please pass exactly Seven arguments "
-    echo " arg_1             :  Image_docker_name                   "
-    echo " arg_2             :  IP HOST_1                           "
-    echo " arg_3             :  IP HOST_2                           "
-    echo " arg_4             :  IP HOST_2                           "
-    echo " arg_5             :  Blazegraph_namespace                "
-    echo " arg_6             :  Ports  number                       "
-    echo " arg_7             :  READ-WRITE MODE ( ro : rw   )       "        
+    echo " Invalid arguments :  please pass Seven or Eight arguments "
+    echo " arg_1             :  Image_docker_name                    "
+    echo " arg_2             :  IP HOST_1                            "
+    echo " arg_3             :  IP HOST_2                            "
+    echo " arg_4             :  IP HOST_2                            "
+    echo " arg_5             :  Blazegraph_namespace                 "
+    echo " arg_6             :  Ports  number                        "
+    echo " arg_7             :  READ-WRITE MODE ( ro : rw   )        "
+    echo " arg_8             :  DATA_BASE { [postgresql] - mysql }   "
     echo
 fi
 
