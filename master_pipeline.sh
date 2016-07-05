@@ -11,8 +11,9 @@
 # $5 NAME_SPACE  
 # $6 PORT 
 # $7 RW-MODE
+# $8 DATAB_BASE { [postgresql] - mysql } 
 
-if [ $# -eq 7 ] ; then
+if [ $# -eq 7 -o $# -eq 8 ] ; then
 
    chmod -R +x scripts/*
    
@@ -20,7 +21,7 @@ if [ $# -eq 7 ] ; then
   
   ./scripts/utils/create_database.sh
    
-  ./scripts/00_install_libs.sh 
+  ./scripts/00_install_libs.sh $8
 
   ./scripts/01_infra_build.sh  $1
 
