@@ -153,11 +153,13 @@ echo " ################################## "
 echo " ### Install Ontop-Materializer ### "
 echo " ################################## "
 echo "                                    "
+
 if [ "$DATA_BASE" != "" ] ; then 
   echo -e "\e[90m    Database : $DATA_BASE  \e[32m "
 else
   echo -e "\e[90m    Database : porstgreSQL \e[32m "
-  
+fi
+
 echo
 
 sleep 2
