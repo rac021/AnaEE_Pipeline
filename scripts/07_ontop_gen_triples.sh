@@ -31,7 +31,7 @@
      exit 3
   fi
   
-  echo -e "\e[90m Strating Generation... \e[39m "
+  echo -e "\e[90m Starting Generation... \e[39m "
   echo
   
   java  -Xms1024M -Xmx2048M -cp ../libs/Ontop-Materializer.jar ontop.Main_1_18 \
