@@ -7,7 +7,7 @@
  LOCAL_IP="127.0.0.1"
  IMAGE_NAME="nginx-ecoinformatics"
  HOST="ecoinformatics.org"
- FOLDER_DOCKER_FILE="docker"
+ FOLDER_DOCKER_FILE="docker_nginx_server"
 
  CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
  cd $CURRENT_PATH/$FOLDER_DOCKER_FILE
