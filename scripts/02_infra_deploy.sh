@@ -38,6 +38,16 @@ if [ $# -eq 7 ] ; then
    STATUS_FILE="$CURRENT_PATH/conf/status"
    NANO_END_POINT_FILE="$CURRENT_PATH/conf/nanoEndpoint"
  
+   EXIT() {
+      parent_script=`ps -ocommand= -p $PPID | awk -F/ '{print $NF}' | awk '{print $1}'`
+      if [ $parent_script = "bash" ] ; then
+          exit 2
+      else
+          kill -9 `ps --pid $$ -oppid=`;
+          exit 2
+      fi
+   }
+  
    isFreePort() {
       PORT=$1
       if ! lsof -i:$PORT > /dev/null
@@ -47,7 +57,7 @@ if [ $# -eq 7 ] ; then
         echo
         echo -e " Port $PORT is in use, please release it to continue "
         echo
-        exit 3
+        EXIT
       fi
    }
     
@@ -82,7 +92,7 @@ if [ $# -eq 7 ] ; then
         echo
         echo "$RUNNING"
         echo
-        exit 3
+        EXIT
      fi	
      echo "$HOST" >> $HOST_FILE
      sleep 5
@@ -92,7 +102,7 @@ if [ $# -eq 7 ] ; then
       echo
       echo " DEFAULT_MODE can only have 'rw' OR 'ro' values !!"
       echo
-      exit 2
+      EXIT
    fi 
     
    # Default interface
