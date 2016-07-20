@@ -2,6 +2,16 @@
 
 if [ $# -eq 1 ] ; then
 
+    EXIT() {
+    parent_script=`ps -ocommand= -p $PPID | awk -F/ '{print $NF}' | awk '{print $1}'`
+        if [ $parent_script = "bash" ] ; then
+          exit 2
+        else
+          kill -9 `ps --pid $$ -oppid=`;
+          exit 2
+        fi
+    }
+  
     removeAllContainerBasedOnImage() {
         IMAGE=$1
         echo
@@ -41,7 +51,7 @@ if [ $# -eq 1 ] ; then
 	
     if [ ! -e $DOCKER_FILE_PATH ]; then
         echo " $CURRENT_PATH Not found !! Has Project cloned from Git ? "
-        exit 2 
+        EXIT
     fi
 	
     if docker history -q $DOCKER_BLZ_IMAGE >/dev/null 2>&1 ; then
