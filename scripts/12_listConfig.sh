@@ -1,10 +1,34 @@
 #!/bin/bash
-      
+
+    EXIT() {
+      parent_script=`ps -ocommand= -p $PPID | awk -F/ '{print $NF}' | awk '{print $1}'`
+      if [ $parent_script = "bash" ] ; then
+          exit 2
+      else
+          kill -9 `ps --pid $$ -oppid=`;
+          exit 2
+      fi
+    }
+  
     CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     HOSTS_FILE="$CURRENT_PATH/conf/hosts"
     STATUS_FILE="$CURRENT_PATH/conf/status"
     NANO_END_POINT_FILE="$CURRENT_PATH/conf/nanoEndpoint"
-       
+    
+    if [ -f $STATUS_FILE ] ; then
+      echo
+      echo " File : $STATUS_FILE not found ! "
+      echo
+      EXIT
+    fi
+    
+    if [ -f $HOSTS_FILE ] ; then
+      echo
+      echo " File : $HOSTS_FILE not found ! "
+      echo
+      EXIT
+    fi
+    
     STATUS=`cat $STATUS_FILE `
     
     if [ $STATUS == 1 ]; then 
