@@ -4,6 +4,16 @@
   OUTPUT="../mapping/mapping.obda"
   EXTENSION=".graphml"
    
+  EXIT() {
+    parent_script=`ps -ocommand= -p $PPID | awk -F/ '{print $NF}' | awk '{print $1}'`
+    if [ $parent_script = "bash" ] ; then
+        exit 2
+    else
+        kill -9 `ps --pid $$ -oppid=`;
+        exit 2
+    fi
+  }
+  
   tput setaf 2
   echo 
   echo -e " ######################################### "
@@ -25,7 +35,7 @@
 
   if [ ! -d $INPUT ] ; then
      echo -e "\e[91m $INPUT is not a valid Directory ! \e[39m "
-     exit 3
+     EXIT
   fi
 
   echo -e "\e[90m Strating Generation... \e[39m "
