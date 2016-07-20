@@ -28,7 +28,17 @@
         SUBNET="mynet123"
 
         LOOP=" while true; do sleep 1000; done "
-         
+        
+        EXIT() {
+          parent_script=`ps -ocommand= -p $PPID | awk -F/ '{print $NF}' | awk '{print $1}'`
+          if [ $parent_script = "bash" ] ; then
+              exit 2
+          else
+              kill -9 `ps --pid $$ -oppid=`;
+              exit 2
+          fi
+        }
+        
         isFreePort() {
           PORT=$1
           if ! lsof -i:$PORT > /dev/null
@@ -38,13 +48,13 @@
             echo
             echo -e " Port $PORT is in use, please release it to continue "
             echo
-            exit 3
+            EXIT
           fi
         }
         
         if [ "$DEFAULT_MODE" != "ro" ] && [ "$DEFAULT_MODE" != "rw" ] ; then 
-        echo "DEFAULT_MODE can only have 'rw' OR 'ro' values !!"
-        exit 2
+            echo "DEFAULT_MODE can only have 'rw' OR 'ro' values !!"
+            EXIT
         fi 
 
         if docker history -q $BLZ_IMAGE >/dev/null 2>&1; then
@@ -65,7 +75,7 @@
                echo " or just STOP and START Cluster "
                echo
                tput setaf 7
-               exit 3
+               EXIT
             fi
             
             tput setaf 2
@@ -163,7 +173,7 @@
                    echo
                    echo "$RUNNING"
                    echo
-                   exit 3
+                   EXIT
                 fi
                 
                 echo "$NAME_INSTANCE:$IP:$PORT:$NAMESPACE:$DEFAULT_MODE" >> $NANO_END_POINT_FILE
