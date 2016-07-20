@@ -1,5 +1,15 @@
 #!/bin/bash
 
+    EXIT() {
+        parent_script=`ps -ocommand= -p $PPID | awk -F/ '{print $NF}' | awk '{print $1}'`
+        if [ $parent_script = "bash" ] ; then
+            exit 2
+        else
+            kill -9 `ps --pid $$ -oppid=`;
+            exit 2
+        fi
+    }
+  
     CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     DATA_DIR="../data/corese"
     
@@ -51,7 +61,7 @@
              echo
              echo -e "\e[31m ENDPOINT $ENDPOINT Not reachable !! \e[39m"
              echo
-             exit 3
+             EXIT
              
           fi
            
@@ -79,7 +89,7 @@
         
       if [ ! -d $DATA_DIR ] ; then
          echo -e "\e[91m $DATA_DIR is not valid Directory ! \e[39m "
-         exit 3
+         EXIT
       fi
             
       # Remove the sparql file automatically created by blazegraph
