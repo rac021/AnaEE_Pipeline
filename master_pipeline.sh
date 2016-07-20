@@ -17,7 +17,7 @@ if [ $# -eq 7 -o $# -eq 8 ] ; then
 
    chmod -R +x scripts/*
    
-  ./scripts/utils/check_commands.sh
+  ./scripts/utils/check_commands.sh java curl psql-mysql maven docker
   
   ./scripts/utils/create_database.sh
    
