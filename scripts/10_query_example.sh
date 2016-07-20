@@ -1,5 +1,15 @@
 #!/bin/bash
 
+  EXIT() {
+    parent_script=`ps -ocommand= -p $PPID | awk -F/ '{print $NF}' | awk '{print $1}'`
+    if [ $parent_script = "bash" ] ; then
+        exit 2
+    else
+        kill -9 `ps --pid $$ -oppid=`;
+        exit 2
+    fi
+  }
+  
   CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
   NANO_END_POINT_FILE="$CURRENT_PATH/conf/nanoEndpoint"
     
@@ -30,7 +40,7 @@
           if [ $COUNT -eq 20 ] ; then
               echo -e " \e[31m ENDPOINT $ENDPOINT Not reachable !! \e[39m"
               echo
-              exit 3
+              EXIT
           fi
        fi
            
