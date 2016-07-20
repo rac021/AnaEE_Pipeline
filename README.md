@@ -33,7 +33,7 @@ Included Projects :
 
 -    [https://github.com/rac021/blazegraph_1_5_3_cluster_2_nodes]( https://github.com/rac021/blazegraph_1_5_3_cluster_2_nodes)
    
--    [https://github.com/rac021/obdaYedGen-3.14.2]( https://github.com/rac021/obdaYedGen-3.14.2)
+-    [https://github.com/rac021/yedGen]( https://github.com/rac021/yedGen.git)
    
 -    [https://github.com/rac021/CoreseInfer]( https://github.com/rac021/CoreseInfer)
    
