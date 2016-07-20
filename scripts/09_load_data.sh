@@ -1,5 +1,15 @@
 #!/bin/bash
 
+    EXIT() {
+        parent_script=`ps -ocommand= -p $PPID | awk -F/ '{print $NF}' | awk '{print $1}'`
+        if [ $parent_script = "bash" ] ; then
+            exit 2
+        else
+            kill -9 `ps --pid $$ -oppid=`;
+            exit 2
+        fi
+    }
+  
     CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
     NANO_END_POINT_FILE="$CURRENT_PATH/conf/nanoEndpoint"
     
@@ -22,7 +32,7 @@
            echo -e "\e[91m No EndPoint Read-Write mode found \e[39m "
            echo -e " \e[93m   -> $NANO_END_POINT_FILE \e[39m "
            echo
-           exit 3
+           EXIT
         fi
         
         IFS=’:’ read -ra INFO_NANO <<< "$FIRST_END_POINT" 
@@ -63,7 +73,7 @@
               echo
               echo -e "\e[31m ENDPOINT $ENDPOINT Not reachable !! \e[39m"
               echo
-              exit 3
+              EXIT
            fi
            
         done
@@ -89,7 +99,7 @@
         
         if [ ! -d $DATA_DIR ] ; then
            echo -e "\e[91m $DATA_DIR is not valid Directory ! \e[39m "
-           exit 3
+           EXIT
         fi
             
         # Remove a sparql file automatically created by blazegraph
