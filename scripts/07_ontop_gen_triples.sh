@@ -1,11 +1,24 @@
 #!/bin/bash
-    
+
+  XMS="-Xms1024M"
+  XMX="-Xmx2048M"
+  
   OWL="../mapping/ontology.owl"
   OBDA="../mapping/mapping.obda"
   OUTPUT="../data/ontop/ontopMaterializedTriples.ttl"
   QUERY="SELECT ?S ?P ?O { ?S ?P ?O } "
   TTL="-ttl"
-    
+
+  EXIT() {
+    parent_script=`ps -ocommand= -p $PPID | awk -F/ '{print $NF}' | awk '{print $1}'`
+    if [ $parent_script = "bash" ] ; then
+        exit 2
+    else
+        kill -9 `ps --pid $$ -oppid=`;
+        exit 2
+    fi
+  }
+  
   tput setaf 2
   echo 
   echo -e " ######################################### "
@@ -28,13 +41,13 @@
  
   if [ ! -f $OWL ]  || [ ! -f $OBDA ]  ; then
      echo -e "\e[91m Missing OWL or OBDA Files ! \e[39m "
-     exit 3
+     EXIT
   fi
   
   echo -e "\e[90m Starting Generation... \e[39m "
   echo
   
-  java  -Xms1024M -Xmx2048M -cp ../libs/Ontop-Materializer.jar ontop.Main_1_18 \
+  java   $XMS  $XMX -cp ../libs/Ontop-Materializer.jar ontop.Main_1_18         \
   -owl  "$OWL"                                                                 \
   -obda "$OBDA"                                                                \
   -out  "$OUTPUT"                                                              \
