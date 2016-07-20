@@ -1,5 +1,14 @@
 #!/bin/bash
    
+    EXIT() {
+       parent_script=`ps -ocommand= -p $PPID | awk -F/ '{print $NF}' | awk '{print $1}'`
+       if [ $parent_script = "bash" ] ; then
+           exit 2
+       else
+           kill -9 `ps --pid $$ -oppid=`;
+           exit 2
+       fi
+    }
     checkIfContainersAreRunning() {
      
      for LINE in `cat $1`; do
@@ -11,13 +20,13 @@
        if [ $? -eq 1 ]; then        
          echo -e "\e[91m UNKNOWN - Container $CONTAINER does not exist. \e[37m "
          echo
-         exit 3
+         EXIT
        fi
 
        if [ "$RUNNING" == "false" ]; then
          echo -e "\e[91m CRITICAL - Container $CONTAINER is not running. \e[37m "
          echo
-         exit 2
+         EXIT
        fi
      done
     } 
@@ -53,7 +62,7 @@
           echo " or just STOP and START Cluster "
           echo
           tput setaf 7
-          exit 3
+          EXIT
         fi
         
         tput setaf 2
