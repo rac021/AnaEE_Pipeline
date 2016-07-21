@@ -40,15 +40,15 @@ if [ $# -eq 7 -o $# -eq 8 ] ; then
 
   ./scripts/03_infra_attach_services.sh $BLZ_MAGE blz_client 192.168.56.200 1 $NAME_SPACE $PORT $RW_MODE
   
-  ./scripts/06_gen_mapping.sh
+  ./scripts/07_gen_mapping.sh
   
-  ./scripts/07_ontop_gen_triples.sh
+  ./scripts/08_ontop_gen_triples.sh
   
-  ./scripts/08_corese_infer.sh
+  ./scripts/09_corese_infer.sh
   
-  ./scripts/09_load_data.sh
+  ./scripts/10_load_data.sh
   
-  ./scripts/10_query_example.sh
+  ./scripts/11_query_demo.sh
   
 else
     echo
