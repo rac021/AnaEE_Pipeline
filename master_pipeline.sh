@@ -15,19 +15,30 @@
 
 if [ $# -eq 7 -o $# -eq 8 ] ; then
 
+   BLZ_MAGE="$1"
+   IP_HOST_1="$2"
+   IP_HOST_2="$3"
+   IP_HOST_3="$4"
+   NAME_SPACE="$5"
+   PORT="$6"
+   RW_MODE="$7"
+   
+   DATABASE=${8:-psql}
+   TYPE_INSTALL="full_graphs"
+   
    chmod -R +x scripts/*
    
   ./scripts/utils/check_commands.sh java curl psql-mysql maven docker
   
   ./scripts/utils/create_database.sh
    
-  ./scripts/00_install_libs.sh $8
+  ./scripts/00_install_libs.sh $DATABASE $TYPE_INSTALL
 
-  ./scripts/01_infra_build.sh  $1
+  ./scripts/01_infra_build.sh  $BLZ_MAGE
 
-  ./scripts/02_infra_deploy.sh $1 $2 $3 $4 $5 $6 $7
+  ./scripts/02_infra_deploy.sh $BLZ_MAGE $IP_HOST_1 $IP_HOST_2 $IP_HOST_3 $NAME_SPACE $PORT $RW_MODE
 
-  ./scripts/03_infra_attach_services.sh $1 blz_client 192.168.56.200 1 $5 $6 $7
+  ./scripts/03_infra_attach_services.sh $BLZ_MAGE blz_client 192.168.56.200 1 $NAME_SPACE $PORT $RW_MODE
   
   ./scripts/06_gen_mapping.sh
   
