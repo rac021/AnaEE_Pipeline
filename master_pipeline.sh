@@ -24,7 +24,7 @@ if [ $# -eq 7 -o $# -eq 8 ] ; then
    RW_MODE="$7"
    
    DATABASE=${8:-psql}
-   TYPE_INSTALL="full_graphs"
+   TYPE_INSTALL="demo"
    
    chmod -R +x scripts/*
    
