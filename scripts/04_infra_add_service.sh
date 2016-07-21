@@ -29,13 +29,15 @@
         LOOP=" while true; do sleep 1000; done "
       
         EXIT() {
-          parent_script=`ps -ocommand= -p $PPID | awk -F/ '{print $NF}' | awk '{print $1}'`
-          if [ $parent_script = "bash" ] ; then
-              exit 2
-          else
-              kill -9 `ps --pid $$ -oppid=`;
-              exit 2
-          fi
+         parent_script=`ps -ocommand= -p $PPID | awk -F/ '{print $NF}' | awk '{print $1}'`
+         if [ $parent_script = "bash" ] ; then
+             echo; echo -e " \e[90m exited by : $0 \e[39m " ; echo
+             exit 2
+         else
+             echo ; echo -e " \e[90m exited by : $0 \e[39m " ; echo
+             kill -9 `ps --pid $$ -oppid=`;
+             exit 2
+         fi
         }
   
         isFreePort() {
@@ -46,7 +48,6 @@
           else
             echo
             echo -e " Port $PORT is in use, please release it to continue "
-            echo
             EXIT
           fi
         }
@@ -127,7 +128,6 @@
             if [[ "$RUNNING" =~ "Error" ]] ; then
                echo
                echo "$RUNNING"
-               echo
                EXIT
             fi    
                 
