@@ -141,8 +141,11 @@ if [ $# -eq 7 ] ; then
          # docker network rm $SUBNET
      fi
 
+     fuser -k 7777/tcp
      isFreePort 7777
+     fuser -k 8888/tcp
      isFreePort 8888
+     fuser -k 9999/tcp
      isFreePort 9999
      
      removeAllContainerBasedOnImage $BLZ_IMAGE
