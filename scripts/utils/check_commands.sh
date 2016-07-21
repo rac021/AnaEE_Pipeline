@@ -1,6 +1,6 @@
 #!/bin/bash
 
-  # java - curl - [psql-mysql] - maven - docker
+  # java - curl - [psql-mysql] - maven  - docker
   
   tput setaf 2
   echo 
@@ -15,6 +15,18 @@
   script_name="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
   parent_script=`ps -ocommand= -p $PPID | awk -F/ '{print $NF}' | awk '{print $1}'`
   
+  EXIT() {
+    parent_script=`ps -ocommand= -p $PPID | awk -F/ '{print $NF}' | awk '{print $1}'`
+    if [ $parent_script = "bash" ] ; then
+        echo; echo -e " \e[90m exited by : $0 \e[39m " ; echo
+        exit 2
+    else
+        echo ; echo -e " \e[90m exited by : $0 \e[39m " ; echo
+        kill -9 `ps --pid $$ -oppid=`;
+        exit 2
+    fi
+  }
+        
   checkCommand() {
     com=$1
     if which $com >/dev/null ; then        
@@ -34,12 +46,7 @@
        echo
        echo -e "\e[91m $comm  : Command not found. Aborting \e[39m" ; 
        echo
-       if [ $parent_script = "bash" ] ; then
-           exit 2
-       else
-           kill -9 `ps --pid $$ -oppid=`;
-           exit 2
-       fi
+       EXIT
     fi   
   }
   
