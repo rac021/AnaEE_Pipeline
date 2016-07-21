@@ -1,14 +1,17 @@
 #!/bin/bash
    
     EXIT() {
-       parent_script=`ps -ocommand= -p $PPID | awk -F/ '{print $NF}' | awk '{print $1}'`
-       if [ $parent_script = "bash" ] ; then
-           exit 2
-       else
-           kill -9 `ps --pid $$ -oppid=`;
-           exit 2
-       fi
+      parent_script=`ps -ocommand= -p $PPID | awk -F/ '{print $NF}' | awk '{print $1}'`
+      if [ $parent_script = "bash" ] ; then
+          echo; echo -e " \e[90m exited by : $0 \e[39m " ; echo
+          exit 2
+      else
+          echo ; echo -e " \e[90m exited by : $0 \e[39m " ; echo
+          kill -9 `ps --pid $$ -oppid=`;
+          exit 2
+      fi
     }
+    
     checkIfContainersAreRunning() {
      
      for LINE in `cat $1`; do
@@ -19,13 +22,11 @@
             
        if [ $? -eq 1 ]; then        
          echo -e "\e[91m UNKNOWN - Container $CONTAINER does not exist. \e[37m "
-         echo
          EXIT
        fi
 
        if [ "$RUNNING" == "false" ]; then
          echo -e "\e[91m CRITICAL - Container $CONTAINER is not running. \e[37m "
-         echo
          EXIT
        fi
      done
@@ -49,7 +50,13 @@
     NANO_END_POINT_FILE="$CURRENT_PATH/conf/nanoEndpoint"
     
     if [ "$1" = "start" ] ; then 
-       
+    
+        if [ ! -f $STATUS_FILE ]  ; then
+           echo
+           echo -e "\e[91m Missing $STATUS_FILE ! \e[39m "
+           EXIT
+        fi
+        
         STATUS=`cat $STATUS_FILE `
         
         if [ $STATUS = "1" ] ; then
@@ -79,7 +86,18 @@
         echo -e " \e[37m** NanoEndpoint List  "
         echo -e "   \e[90m $NANO_END_POINT_FILE "
         echo
-
+        
+        if [ ! -f $HOSTS_FILE  ]  ; then
+           echo
+           echo -e "\e[91m Missing $HOSTS_FILE ! \e[39m "
+           EXIT
+        fi
+        if [ ! -f $NANO_END_POINT_FILE ]  ; then
+           echo
+           echo -e "\e[91m Missing $NANO_END_POINT_FILE ! \e[39m "
+           EXIT
+        fi
+        
         checkIfContainersAreRunning $HOSTS_FILE  
         checkIfContainersAreRunning $NANO_END_POINT_FILE 
         
@@ -140,8 +158,8 @@
       echo -e " \e[90m Cluster List ** "
       echo -e " \e[90m $HOSTS_FILE "
         
-      for CONTAINER in $(cat $HOSTS_FILE)  
-      do
+      for CONTAINER in $(cat $HOSTS_FILE) ; do
+      
         tput setaf 6
         echo 
         echo " -> Stopping Node $CONTAINER "
