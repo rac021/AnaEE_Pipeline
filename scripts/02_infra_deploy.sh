@@ -55,13 +55,13 @@ if [ $# -eq 7 ] ; then
    }
   
    isFreePort() {
-      PORT=$1
-      if ! lsof -i:$PORT > /dev/null
+      CHECK_PORT=$1
+      if ! lsof -i:$CHECK_PORT > /dev/null
       then
         isFree="true"
       else
         echo
-        echo -e " Port $PORT is in use, please release it to continue "
+        echo -e " Port $CHECK_PORT is in use, please release it to continue "
         EXIT
       fi
    }
@@ -83,7 +83,8 @@ if [ $# -eq 7 ] ; then
      PORT=$3
      FORWARD_PORT=$4
      # --privileged=true -i -v /data1/Downloads:/Downloads 
-     echo -e "\e[36m Run Container $HOST \e[39m "
+     echo -e "\e[36m Run Container $HOST  [ local_port : $PORT ] [ forward_port : $FORWARD_PORT ] \e[39m "
+     sleep 1
      RUNNING=$( docker run -d --net mynet123 --name $HOST     \
        	                   --memory-swappiness=0	      \
 	                   --add-host $HOST_0:$IP_HOST_0      \
