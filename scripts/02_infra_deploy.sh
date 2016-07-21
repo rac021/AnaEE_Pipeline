@@ -22,6 +22,10 @@ if [ $# -eq 7 ] ; then
    IP_HOST_1=$3
    IP_HOST_2=$4
 
+   FORWARD_PORT_0="6981"
+   FORWARD_PORT_1="6982"
+   FORWARD_PORT_2="6983"
+   
    # Get NameSpace
    NAMESPACE=$5
    # Get Port Number
@@ -141,12 +145,12 @@ if [ $# -eq 7 ] ; then
          # docker network rm $SUBNET
      fi
 
-     fuser -k 7777/tcp
-     isFreePort 7777
-     fuser -k 8888/tcp
-     isFreePort 8888
-     fuser -k 9999/tcp
-     isFreePort 9999
+     fuser -k $FORWARD_PORT_0/tcp
+     isFreePort $FORWARD_PORT_0
+     fuser -k $FORWARD_PORT_1/tcp
+     isFreePort $FORWARD_PORT_1
+     fuser -k $FORWARD_PORT_2/tcp
+     isFreePort $FORWARD_PORT_2
      
      removeAllContainerBasedOnImage $BLZ_IMAGE
  
@@ -154,9 +158,9 @@ if [ $# -eq 7 ] ; then
      > $STATUS_FILE
      > $NANO_END_POINT_FILE
     
-     runContainer  $HOST_2  $IP_HOST_2 $PORT 7777
-     runContainer  $HOST_1  $IP_HOST_1 $PORT 8888
-     runContainer  $HOST_0  $IP_HOST_0 $PORT 9999
+     runContainer  $HOST_2  $IP_HOST_2 $PORT $FORWARD_PORT_2
+     runContainer  $HOST_1  $IP_HOST_1 $PORT $FORWARD_PORT_1
+     runContainer  $HOST_0  $IP_HOST_0 $PORT $FORWARD_PORT_0
 	
      echo
      echo -e "\e[94m waiting for blazegraph Cluster.. ~ 10s  \e[39m "
