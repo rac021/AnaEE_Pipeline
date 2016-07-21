@@ -58,7 +58,6 @@ if [ $# -eq 7 ] ; then
       else
         echo
         echo -e " Port $PORT is in use, please release it to continue "
-        echo
         EXIT
       fi
    }
@@ -93,7 +92,6 @@ if [ $# -eq 7 ] ; then
      if [[ "$RUNNING" =~ "Error" ]]; then
         echo
         echo "$RUNNING"
-        echo
         EXIT
      fi	
      echo "$HOST" >> $HOST_FILE
@@ -103,7 +101,6 @@ if [ $# -eq 7 ] ; then
    if [ "$DEFAULT_MODE" != "ro" ] && [ "$DEFAULT_MODE" != "rw" ] ; then 
       echo
       echo " DEFAULT_MODE can only have 'rw' OR 'ro' values !!"
-      echo
       EXIT
    fi 
     
