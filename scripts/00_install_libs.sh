@@ -1,7 +1,17 @@
 #!/bin/bash
 
-if [ $# -eq 1 ] ; then
-  DATA_BASE=$1
+# DATABSE : spql - mysql 
+# DEMO    : demo - splited_graphs - full_graphs
+
+if [[ $# == 1 && $1 != "demo" && $1 != "splited_graphs" && $1 != "full_graphs" ]] ; then
+    DATA_BASE=$1
+    DEMO=${2:-"splited_graphs"}
+elif [[ $# == 1 && ( $1 == "demo" || $1 == "splited_graphs" || $1 == "full_graphs" ) ]] ; then
+    DATA_BASE="psql"
+    DEMO=$1
+elif [ $# -eq 2 ] ; then
+    DATA_BASE=$1
+    DEMO=$2
 fi
 
 tput setaf 2
@@ -44,6 +54,11 @@ ONTOP_EXP_LOCATION="src/main/resources/mapping/*"
 CORESE_COMPILE_NAME="CoreseInferMaven-1.0.0-jar-with-dependencies.jar "
 CORESE_TARGET_NAME="CoreseInfer.jar"
 CORESE_EXP_LOCATION="src/main/resources/*"
+
+# Do not touch the CORESE_COMPILE_NAME
+BLAZEGRAPH_LOCATION="Blazegraph"
+BLAZEGRAPH_TARGET_NAME="Blazegraph_2.1.jar"
+BLAZEGRAPG_INFO_INSTALL="BLZ_INFO_INSTALL"
 
 # Each program has its own documentation located in 
 # $DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_ [ YEDGEN | ONTOP | CORESE ]
@@ -105,6 +120,10 @@ if [ ! -d "$ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN/$EXAMPLES" ];
 mkdir -p $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN/$EXAMPLES
 echo -e " \e[90m created folder : $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN/$EXAMPLES \e[32m  "
 fi
+if [ ! -d "$ROOT_PATH/$DIRECTORY_LIBS/$BLAZEGRAPH_LOCATION" ]; then
+mkdir -p $ROOT_PATH/$DIRECTORY_LIBS/$BLAZEGRAPH_LOCATION
+echo -e " \e[90m created folder : $ROOT_PATH/$DIRECTORY_LIBS/$BLAZEGRAPH_LOCATION \e[32m  "
+fi
 
 rm -rf $ROOT_PATH/$DIRECTORY_LIBS/$TMP
 
@@ -129,18 +148,34 @@ mvn clean install assembly:single
 
 echo 
 
-mv -v $ROOT_PATH/$DIRECTORY_LIBS/$TMP/target/$YEDGEN_COMPILE_NAME \
-      $ROOT_PATH/$DIRECTORY_LIBS/$YEDGEN_TARGET_NAME
+mv -fv $ROOT_PATH/$DIRECTORY_LIBS/$TMP/target/$YEDGEN_COMPILE_NAME \
+       $ROOT_PATH/$DIRECTORY_LIBS/$YEDGEN_TARGET_NAME
 
-mv -v $ROOT_PATH/$DIRECTORY_LIBS/$TMP/$YEDGEN_EXP_LOCATION \
-      $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN/$EXAMPLES
+mv -fv $ROOT_PATH/$DIRECTORY_LIBS/$TMP/$YEDGEN_EXP_LOCATION \
+       $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN/$EXAMPLES
 
-mv -v $ROOT_PATH/$DIRECTORY_LIBS/$TMP/$DOCUMENTATION_FILE_NAME \
-      $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN
+mv -fv $ROOT_PATH/$DIRECTORY_LIBS/$TMP/$DOCUMENTATION_FILE_NAME \
+       $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN
 
-cp -R $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN/$EXAMPLES/* \
-      $ROOT_PATH/$DIRECTORY_DATA/$DIRECTORY_DATA_YEDGEN
-     
+# cp -R $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN/$EXAMPLES/* \
+#       $ROOT_PATH/$DIRECTORY_DATA/$DIRECTORY_DATA_YEDGEN
+
+if   [ $DEMO == "demo" ] ; then 
+
+  cp -rf $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN/$EXAMPLES/demo/*.* \
+         $ROOT_PATH/$DIRECTORY_DATA/$DIRECTORY_DATA_YEDGEN
+
+elif [ $DEMO == "splited_graphs" ] ; then 
+
+  cp -rf $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN/$EXAMPLES/ola_mapping/splited_graphs/* \
+         $ROOT_PATH/$DIRECTORY_DATA/$DIRECTORY_DATA_YEDGEN
+        
+elif [ $DEMO == "full_graphs" ] ; then 
+
+  cp -rf $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN/$EXAMPLES/ola_mapping/full_graphs/byCategory/physicochimie/dissolvedAmmoniumNitrogenMassConcentration/*.* \
+         $ROOT_PATH/$DIRECTORY_DATA/$DIRECTORY_DATA_YEDGEN
+fi
+
 rm -rf $ROOT_PATH/$DIRECTORY_LIBS/$TMP/* $ROOT_PATH/$DIRECTORY_LIBS/$TMP/.git
 
 ##################################
@@ -161,7 +196,7 @@ else
 fi
 
 echo
-
+ 
 sleep 2
 tput setaf 7
 
@@ -169,28 +204,28 @@ git clone https://github.com/rac021/ontop-matarializer.git $ROOT_PATH/$DIRECTORY
 
 cd $ROOT_PATH/$DIRECTORY_LIBS/$TMP
 
-if [ "$DATA_BASE" != "" ] ; then 
-   mvn -P $DATA_BASE clean install assembly:single
-else 
-   # Postresql as default database
-   mvn clean install assembly:single
-fi
+ if [ "$DATA_BASE" != "" ] ; then 
+     mvn -P $DATA_BASE clean install assembly:single
+ else 
+     # Postresql as default database
+     mvn clean install assembly:single
+ fi
 
 echo
 
-mv -v $ROOT_PATH/$DIRECTORY_LIBS/$TMP/target/$ONTOP_COMPILE_NAME \
-      $ROOT_PATH/$DIRECTORY_LIBS/$ONTOP_TARGET_NAME
+mv -fv $ROOT_PATH/$DIRECTORY_LIBS/$TMP/target/$ONTOP_COMPILE_NAME \
+       $ROOT_PATH/$DIRECTORY_LIBS/$ONTOP_TARGET_NAME
       
-mv -v $ROOT_PATH/$DIRECTORY_LIBS/$TMP/$ONTOP_EXP_LOCATION \
-      $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_ONTOP/$EXAMPLES
+mv -fv $ROOT_PATH/$DIRECTORY_LIBS/$TMP/$ONTOP_EXP_LOCATION \
+       $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_ONTOP/$EXAMPLES
   
-mv -v $ROOT_PATH/$DIRECTORY_LIBS/$TMP/$DOCUMENTATION_FILE_NAME \
-      $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_ONTOP
+mv -fv $ROOT_PATH/$DIRECTORY_LIBS/$TMP/$DOCUMENTATION_FILE_NAME \
+       $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_ONTOP
   
-cp    $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_ONTOP/$EXAMPLES/ontology.owl \
-      $ROOT_PATH/$DIRECTORY_MAPPING/ 
+cp -fr  $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_ONTOP/$EXAMPLES/ontology.owl \
+        $ROOT_PATH/$DIRECTORY_MAPPING/ 
    
-rm -rf $ROOT_PATH/$DIRECTORY_LIBS/$TMP/* $ROOT_PATH/$DIRECTORY_LIBS/$TMP/.git
+rm -rf  $ROOT_PATH/$DIRECTORY_LIBS/$TMP/* $ROOT_PATH/$DIRECTORY_LIBS/$TMP/.git
 
 ##################################
 ###### Install CoreseInfer #######
@@ -213,14 +248,14 @@ mvn clean install assembly:single
 
 echo
 
-mv -v $ROOT_PATH/$DIRECTORY_LIBS/$TMP/target/$CORESE_COMPILE_NAME \
-      $ROOT_PATH/$DIRECTORY_LIBS/$CORESE_TARGET_NAME
+mv -fv $ROOT_PATH/$DIRECTORY_LIBS/$TMP/target/$CORESE_COMPILE_NAME \
+       $ROOT_PATH/$DIRECTORY_LIBS/$CORESE_TARGET_NAME
 
-mv -v $ROOT_PATH/$DIRECTORY_LIBS/$TMP/$CORESE_EXP_LOCATION \
-      $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_CORESE/$EXAMPLES
+# mv -v $ROOT_PATH/$DIRECTORY_LIBS/$TMP/$CORESE_EXP_LOCATION \
+#      $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_CORESE/$EXAMPLES
 
-mv -v $ROOT_PATH/$DIRECTORY_LIBS/$TMP/$DOCUMENTATION_FILE_NAME \
-      $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_CORESE
+mv -fv $ROOT_PATH/$DIRECTORY_LIBS/$TMP/$DOCUMENTATION_FILE_NAME \
+       $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_CORESE
 
 rm -rf $ROOT_PATH/$DIRECTORY_LIBS/$TMP/* $ROOT_PATH/$DIRECTORY_LIBS/$TMP/.git
 
@@ -229,6 +264,7 @@ rm -rf $ROOT_PATH/$DIRECTORY_LIBS/$TMP/* $ROOT_PATH/$DIRECTORY_LIBS/$TMP/.git
 #########################
 
 rm -rf $ROOT_PATH/$DIRECTORY_LIBS/$TMP/
+
 
 tput setaf 2
 echo 
