@@ -1,18 +1,20 @@
 #!/bin/bash
-    
-  INPUT="../data/yedGen"
-  OUTPUT="../mapping/mapping.obda"
-  EXTENSION=".graphml"
-   
+  
+  INPUT=${1:-"../data/yedGen"} 
+  OUTPUT=${2:-"../mapping/mapping.obda"}
+  EXTENSION=${3:-".graphml"}
+  
   EXIT() {
-    parent_script=`ps -ocommand= -p $PPID | awk -F/ '{print $NF}' | awk '{print $1}'`
-    if [ $parent_script = "bash" ] ; then
-        exit 2
-    else
-        kill -9 `ps --pid $$ -oppid=`;
-        exit 2
-    fi
-  }
+     parent_script=`ps -ocommand= -p $PPID | awk -F/ '{print $NF}' | awk '{print $1}'`
+     if [ $parent_script = "bash" ] ; then
+         echo; echo -e " \e[90m exited by : $0 \e[39m " ; echo
+         exit 2
+     else
+         echo ; echo -e " \e[90m exited by : $0 \e[39m " ; echo
+         kill -9 `ps --pid $$ -oppid=`;
+         exit 2
+     fi
+  } 
   
   tput setaf 2
   echo 
