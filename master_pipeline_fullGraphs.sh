@@ -28,6 +28,8 @@ if [ $# -eq 7 -o $# -eq 8 ] ; then
    
    chmod -R +x scripts/*
    
+  ./scripts/06_docker_nginx.sh stop
+   
   ./scripts/utils/check_commands.sh java curl psql-mysql mvn docker
    
   ./scripts/00_install_libs.sh $DATABASE $TYPE_INSTALL
@@ -38,6 +40,8 @@ if [ $# -eq 7 -o $# -eq 8 ] ; then
 
   ./scripts/03_infra_attach_services.sh $BLZ_MAGE blz_client 192.168.56.200 1 $NAME_SPACE $PORT $RW_MODE
   
+  ./scripts/06_docker_nginx.sh start
+  
   ./scripts/07_gen_mapping.sh
   
   ./scripts/08_ontop_gen_triples.sh
@@ -47,6 +51,8 @@ if [ $# -eq 7 -o $# -eq 8 ] ; then
   ./scripts/10_load_data.sh
   
   ./scripts/13_portal_query.sh ../data/portail/ola_portal_synthesis.ttl
+  
+  ./scripts/06_docker_nginx.sh stop
   
 else
     echo
