@@ -11,10 +11,12 @@
   }
   
   CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-  NANO_END_POINT_FILE="$CURRENT_PATH/conf/nanoEndpoint"
-  
+  cd $CURRENT_PATH
   OUT=${1:-"../data/portail/ola_portal_synthesis.ttl"}
   mkdir -p "$(dirname "$OUT")"
+ 
+  NANO_END_POINT_FILE="$CURRENT_PATH/conf/nanoEndpoint"
+  
   
   if [ -f $NANO_END_POINT_FILE ] ; then
     
