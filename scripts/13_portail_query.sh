@@ -14,6 +14,7 @@
   NANO_END_POINT_FILE="$CURRENT_PATH/conf/nanoEndpoint"
   
   OUT=${1:-"../data/portail/ola_portal_synthesis.ttl"}
+  mkdir -p "$(dirname "$OUT")"
   
   if [ -f $NANO_END_POINT_FILE ] ; then
     
