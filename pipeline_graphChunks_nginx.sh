@@ -24,7 +24,8 @@ if [ $# -eq 7 -o $# -eq 8 ] ; then
    RW_MODE="$7"
    
    DATABASE=${8:-psql}
-   TYPE_INSTALL="splited_graphs"
+   
+   TYPE_INSTALL="graphChunks"
    
    YED_GEN_FOLDER="data/yedGen"
    EXTENSION_FILE="graphml"
