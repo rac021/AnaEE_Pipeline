@@ -1,12 +1,15 @@
 #!/bin/bash
 
-# DATABSE : spql - mysql 
-# DEMO    : demo - splited_graphs - full_graphs
+# DATABSE       : spql - mysql 
+# TYPE_INSTALL  : demo - fullGraph - graphChunks - patternGraphChunks
 
-if [[ $# == 1 && $1 != "demo" && $1 != "splited_graphs" && $1 != "full_graphs" ]] ; then
+if [ $# == 0 ] ; then
+    DATA_BASE="psql"
+    DEMO="demo"
+elif [[ $# == 1 && $1 != "demo" && $1 != "fullGraph" && $1 != "graphChunks" &&  $1 != "patternGraphChunks" ]] ; then
     DATA_BASE=$1
-    DEMO=${2:-"splited_graphs"}
-elif [[ $# == 1 && ( $1 == "demo" || $1 == "splited_graphs" || $1 == "full_graphs" ) ]] ; then
+    DEMO=${2:-"graphChunks"}
+elif [[ $# == 1 && ( $1 == "demo" || $1 == "fullGraph" || $1 == "graphChunks" ||  $1 == "patternGraphChunks" ) ]] ; then
     DATA_BASE="psql"
     DEMO=$1
 elif [ $# -eq 2 ] ; then
@@ -160,17 +163,24 @@ mv -fv $ROOT_PATH/$DIRECTORY_LIBS/$TMP/$DOCUMENTATION_FILE_NAME \
 # cp -R $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN/$EXAMPLES/* \
 #       $ROOT_PATH/$DIRECTORY_DATA/$DIRECTORY_DATA_YEDGEN
 
+# demo - fullGraph - graphChunks - patternGraphChunks
+ 
 if   [ $DEMO == "demo" ] ; then 
 
   cp -rf $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN/$EXAMPLES/demo/*.* \
          $ROOT_PATH/$DIRECTORY_DATA/$DIRECTORY_DATA_YEDGEN
 
-elif [ $DEMO == "splited_graphs" ] ; then 
+elif [ $DEMO == "graphChunks" ] ; then 
 
   cp -rf $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN/$EXAMPLES/ola_mapping/splited_graphs/* \
          $ROOT_PATH/$DIRECTORY_DATA/$DIRECTORY_DATA_YEDGEN
-        
-elif [ $DEMO == "full_graphs" ] ; then 
+
+elif [ $DEMO == "patternGraphChunks" ] ; then 
+              
+  cp -rf $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN/$EXAMPLES/ola_mapping/pattern_splited_graphs/* \
+         $ROOT_PATH/$DIRECTORY_DATA/$DIRECTORY_DATA_YEDGEN
+         
+elif [ $DEMO == "fullGraph" ] ; then 
 
   cp -rf $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN/$EXAMPLES/ola_mapping/full_graphs/byCategory/physicochimie/dissolvedAmmoniumNitrogenMassConcentration/*.* \
          $ROOT_PATH/$DIRECTORY_DATA/$DIRECTORY_DATA_YEDGEN
@@ -258,6 +268,7 @@ mv -fv $ROOT_PATH/$DIRECTORY_LIBS/$TMP/$DOCUMENTATION_FILE_NAME \
        $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_CORESE
 
 rm -rf $ROOT_PATH/$DIRECTORY_LIBS/$TMP/* $ROOT_PATH/$DIRECTORY_LIBS/$TMP/.git
+
 
 #########################
 #### Clean TMP folder ###
