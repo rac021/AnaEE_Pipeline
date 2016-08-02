@@ -153,8 +153,11 @@
 	     	   	                              oboe-core:usesStandard :NamingStandard ; 
 			            	              oboe-core:hasValue ?localVariableName .
 		
-		        ?variable rdfs:label ?anaeeVariableName .
-		            
+		        # ?variable rdfs:label ?anaeeVariableName .
+		         
+		        OPTIONAL { ?variable rdfs:label ?anaeeVariableName . }
+	 		BIND ( IF (BOUND (?anaeeVariableName), ?anaeeVariableName, "NULL_anaeeVariableName" )  AS ?anaeeVariableName  ) .
+	   
 		        ?measu_variableStandardName_05 a oboe-core:Measurement ; 
 		   	                                 oboe-core:usesStandard :Anaee-franceVariableNamingStandard ; 
 				                         oboe-core:hasValue ?variable .
