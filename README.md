@@ -19,14 +19,16 @@
 
 Ex :
 
-    ./master_pipeline.sh  \
-      blz_img             \
-      192.168.56.10       \
-      192.168.56.20       \
-      192.168.56.30       \
-      ola                 \
-      9999                \
+```
+❯    ./pipeline_fullGraph.sh \
+      blz_img                \
+      192.168.56.10          \
+      192.168.56.20          \
+      192.168.56.30          \
+      ola                    \
+      9999                   \
       rw
+```
      
      
 Included Projects : 
