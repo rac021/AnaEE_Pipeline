@@ -17,7 +17,7 @@
 -    `$7 : READ-WRITE MODE ( ro - rw )`
 
 
-Ex :
+**Example :**
 
 ```
 ❯    ./pipeline_fullGraph.sh \
@@ -31,7 +31,7 @@ Ex :
 ```
      
      
-Included Projects : 
+**Included Projects :** 
 
 -    [https://github.com/rac021/blazegraph_1_5_3_cluster_2_nodes]( https://github.com/rac021/blazegraph_1_5_3_cluster_2_nodes)
    
@@ -43,7 +43,7 @@ Included Projects :
    
    
 
-Requirements :
+**Requirements :**
 
 -    `JAVA 8`
     
