@@ -172,17 +172,17 @@ if   [ $DEMO == "demo" ] ; then
 
 elif [ $DEMO == "graphChunks" ] ; then 
 
-  cp -rf $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN/$EXAMPLES/ola_mapping/splited_graphs/* \
+  cp -rf $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN/$EXAMPLES/ola_mapping/graphChunks/* \
          $ROOT_PATH/$DIRECTORY_DATA/$DIRECTORY_DATA_YEDGEN
 
 elif [ $DEMO == "patternGraphChunks" ] ; then 
               
-  cp -rf $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN/$EXAMPLES/ola_mapping/pattern_splited_graphs/* \
+  cp -rf $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN/$EXAMPLES/ola_mapping/patternGraphChunks/* \
          $ROOT_PATH/$DIRECTORY_DATA/$DIRECTORY_DATA_YEDGEN
          
 elif [ $DEMO == "fullGraph" ] ; then 
 
-  cp -rf $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN/$EXAMPLES/ola_mapping/full_graphs/byCategory/physicochimie/dissolvedAmmoniumNitrogenMassConcentration/*.* \
+  cp -rf $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN/$EXAMPLES/ola_mapping/fullGraph/byCategory/physicochimie/dissolvedAmmoniumNitrogenMassConcentration/*.* \
          $ROOT_PATH/$DIRECTORY_DATA/$DIRECTORY_DATA_YEDGEN
 fi
 
