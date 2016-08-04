@@ -118,7 +118,7 @@ if [ $# -eq 7 -o $# -eq 8 ] ; then
                   rm $ONTOP_FOLDER/*.*  2> /dev/null
                   rm $ONTOP_FOLDER/*    2> /dev/null
                   rm $CORESE_FOLDER/*.* 2> /dev/null 
-              		rm $CORESE_FOLDER/*   2> /dev/null
+              	   rm $CORESE_FOLDER/*   2> /dev/null
               		 
              done
          fi
