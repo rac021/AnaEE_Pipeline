@@ -25,7 +25,7 @@ if [ $# -eq 7 -o $# -eq 8 ] ; then
    
    DATABASE=${8:-psql}
    
-   TYPE_INSTALL="graphChunks"
+   TYPE_INSTALL="patternGraphChunks"
    
    YED_GEN_FOLDER="data/yedGen"
    EXTENSION_FILE="graphml"
