@@ -26,10 +26,10 @@
       192.168.56.20          \
       192.168.56.30          \
       ola                    \
-      6981                   \
+      6985                   \
       rw
 ```
-     
+*Note : Ports 6981 6982 6983 are reserved*
      
 **Included Projects :** 
 
