@@ -9,3 +9,4 @@ docker run --net host --name kitematic \
 -v /tmp/.X11-unix:/tmp/.X11-unix \
 -v /var/run/docker.sock:/var/run/docker.sock \
 --privileged=true -t jonadev95/kitematic-docker
+
