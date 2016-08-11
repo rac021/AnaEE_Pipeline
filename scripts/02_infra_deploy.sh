@@ -174,7 +174,7 @@ if [ $# -eq 7 ] ; then
    else
       echo " Image '$BLZ_IMAGE' not found !! "
       echo " Run script 01_infra_build.sh before "
-      echo 
+      EXIT
    fi
      
 else
