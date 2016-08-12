@@ -53,5 +53,7 @@
     
 -    `Postgres`
 
--    `Docker 1.10 and +`
+-    `Docker 1.10 and + ` [https://docs.docker.com/engine/installation/binaries]( https://docs.docker.com/engine/installation/binaries)
+     
+     
 
