@@ -149,7 +149,7 @@
                 
                 IP=$i1"."$i2"."$i3"."$i4
             
-                NAME_INSTANCE=$BNAME_CONTAINER"_"$IP
+                NAME_INSTANCE=$BNAME_CONTAINER"_"$IP"_blz"
                 
                 EXIST=$(docker inspect --format="{{ .Name }}" $NAME_INSTANCE 2> /dev/null)
                 if [ ! -z $EXIST ]; then 
