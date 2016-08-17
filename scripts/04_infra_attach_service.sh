@@ -12,7 +12,13 @@
 
         # Get Image Docker Name
         BLZ_IMAGE=$1
+        
         CONTAINER_NAME=$2
+        
+        if [[ "$S" != *_blz ]] ; then
+            CONTAINER_NAME=$2"_blz"
+        fi
+        
         IP=$3
         # Get NameSpace
         NAMESPACE=$4
