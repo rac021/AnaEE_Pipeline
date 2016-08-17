@@ -94,14 +94,24 @@
                 -c "./bigdata start; while true; do sleep 1000; done  "
          
      docker run -d --net mynet123                                                         \
-                -l traefik.backend=blz                                                    \
-                -l traefik.frontend.rule=Host:client.blz                                  \
+                -l traefik.backend=client_blz_backend                                     \
+                -l traefik.frontend.rule=Host:client.blz.localhost                        \
                 --name  client_01_blz                                                     \
                 --ip    192.168.56.200                                                    \
-                -p      9999:9999                                                         \
+                -p      9990:9999                                                         \
+                --expose 9999                                                             \
                 --memory-swappiness=0                                                     \
                 --entrypoint /bin/bash -it rac021/blz_cluster_2_nodes                     \
                 -c " ./nanoSparqlServer.sh 9999 ola rw ;  while true; do sleep 1000; done "
                            
+     docker run -d --net mynet123                                                         \
+                -l traefik.backend=client_blz_backend                                     \
+                -l traefik.frontend.rule=Host:client.blz.localhost                        \
+                --name  client_02_blz                                                     \
+                --ip    192.168.56.210                                                    \
+                -p      9995:9999                                                         \
+                --memory-swappiness=0                                                     \
+                --entrypoint /bin/bash -it rac021/blz_cluster_2_nodes                     \
+                -c " ./nanoSparqlServer.sh 9999 ola rw ;  while true; do sleep 1000; done "
 ```
  
