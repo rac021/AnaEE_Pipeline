@@ -56,6 +56,7 @@ if [ $# -eq 7 -o $# -eq 8 ] ; then
 
    ./scripts/03_infra_attach_services.sh $BLZ_MAGE blz_client 192.168.56.200 1 $NAME_SPACE $PORT $RW_MODE
   
+    # ./scripts/04_infra_attach_service.sh $BLZ_MAGE client_01_blz 192.168.56.221 $NAME_SPACE $PORT $RW_MODE
   
    if [ ! -f $CONNEXION_FILE  ]; then
       echo
