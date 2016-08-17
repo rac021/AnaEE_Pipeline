@@ -99,7 +99,7 @@
                 -p      9999:9999                                                         \
                 --memory-swappiness=0                                                     \
                 --entrypoint /bin/bash -it rac021/blz_cluster_2_nodes                     \
-                -c " ./nanoSparqlServer.sh 9999 ola rw ;  while true; do sleep 1000; done "         
+                -c " ./nanoSparqlServer.sh 9999 ola rw ;  while true; do sleep 1000; done "
                            
 ```
  
