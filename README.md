@@ -56,14 +56,14 @@
 -    `Docker 1.10 and + ` [https://docs.docker.com/engine/installation/binaries]( https://docs.docker.com/engine/installation/binaries)
      
     
- 
+ ----------------------------------------------------
 
- Quick setup ( using Docker Hub image ) no need scripts ; change Ips if needed : 
+**Quick setup ( using Docker Hub image ) no need scripts ; change Ips if needed :**
  
  ```
 ❯    docker network create --subnet=192.168.56.250/24 mynet123
 
-     docker run -d --net mynet123 --name blz_host_0                      \
+     docker run -d --net mynet123 --name blz_host_0                             \
                    --memory-swappiness=0	                                \
 	                  --add-host blz_host_0:192.168.56.10                   \
 	                  --add-host blz_host_1:192.168.56.20                   \
@@ -73,7 +73,7 @@
 	                  -it --entrypoint /bin/bash rac021/blz_cluster_2_nodes \
                    -c "./bigdata start; while true; do sleep 1000; done  "
                    
-     docker run -d --net mynet123 --name blz_host_1                      \
+     docker run -d --net mynet123 --name blz_host_1                             \
                    --memory-swappiness=0	                                \
 	                  --add-host blz_host_0:192.168.56.10                   \
 	                  --add-host blz_host_1:192.168.56.20                   \
@@ -83,7 +83,7 @@
 	                  -it --entrypoint /bin/bash rac021/blz_cluster_2_nodes \
                    -c "./bigdata start; while true; do sleep 1000; done  "
 
-     docker run -d --net mynet123 --name blz_host_2                      \
+     docker run -d --net mynet123 --name blz_host_2                             \
                    --memory-swappiness=0	                                \
 	                  --add-host blz_host_0:192.168.56.10                   \
 	                  --add-host blz_host_1:192.168.56.20                   \
@@ -93,7 +93,7 @@
 	                  -it --entrypoint /bin/bash rac021/blz_cluster_2_nodes \
                    -c "./bigdata start; while true; do sleep 1000; done  "
          
-	    docker run -d --net mynet123                                                            \
+	    docker run -d --net mynet123                                                     \
                    --name  client_01_blz                                                     \
                    --ip    192.168.56.200                                                    \
                    -p      9999:9999                                                         \
