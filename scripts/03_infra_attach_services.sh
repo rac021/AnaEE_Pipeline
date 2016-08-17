@@ -89,7 +89,7 @@
             echo -e " ##  SUBNET          : $SUBNET             "
             echo
             echo -e " ##  BLZ_IMAGE       : $BLZ_IMAGE          "
-            echo -e " ##  BN_CONTAINERNBR : $BNAME_CONTAINER    "
+            echo -e " ##  BN_CONTAINER    : $BNAME_CONTAINER    "
             echo -e " ##  START_IP        : $START_IP           "
             echo -e " ##  PORT            : $PORT               "
             echo -e " ##  NBR_INSTANCE    : $NUMBER_INSTANCE    "
@@ -122,7 +122,7 @@
                 if [ ! -z $EXIST ]; then 
                   echo
                   echo " Container $NANO_END_POINT_HOST  already exists, remove... "
-                  docker  rm  -f  $NANO_END_POINT_HOST > /dev/null
+                  docker  rm  -f   $NANO_END_POINT_HOST > /dev/null
                   echo " Container $NANO_END_POINT_HOST  removed !! "
                   CLEANED=true
                 fi
