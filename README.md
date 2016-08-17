@@ -94,6 +94,8 @@
                 -c "./bigdata start; while true; do sleep 1000; done  "
          
      docker run -d --net mynet123                                                         \
+                -l traefik.backend=blz                                                    \
+		              -l traefik.frontend.rule=Host:client.blz                                  \
                 --name  client_01_blz                                                     \
                 --ip    192.168.56.200                                                    \
                 -p      9999:9999                                                         \
