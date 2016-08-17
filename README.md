@@ -65,33 +65,33 @@
 
      docker run -d --net mynet123 --name blz_host_0                   \
                 --memory-swappiness=0	                              \
-	        --add-host blz_host_0:192.168.56.10                   \
-	        --add-host blz_host_1:192.168.56.20                   \
-	        --add-host blz_host_2:192.168.56.30                   \
-	        --ip 192.168.56.10 -p  6981:9999                      \
-	        --expose 9999                                         \
-	        -it --entrypoint /bin/bash rac021/blz_cluster_2_nodes \
+                --add-host blz_host_0:192.168.56.10                   \
+                --add-host blz_host_1:192.168.56.20                   \
+                --add-host blz_host_2:192.168.56.30                   \
+                --ip 192.168.56.10 -p  6981:9999                      \
+                --expose 9999                                         \
+                -it --entrypoint /bin/bash rac021/blz_cluster_2_nodes \
                 -c "./bigdata start; while true; do sleep 1000; done  "
                    
      docker run -d --net mynet123 --name blz_host_1                   \
                 --memory-swappiness=0	                              \
-	        --add-host blz_host_0:192.168.56.10                   \
-	        --add-host blz_host_1:192.168.56.20                   \
-	        --add-host blz_host_2:192.168.56.30                   \
-	        --ip 192.168.56.20 -p  6982:9999                      \
-	        --expose 9999                                         \
-	        -it --entrypoint /bin/bash rac021/blz_cluster_2_nodes \
+                --add-host blz_host_0:192.168.56.10                   \
+                --add-host blz_host_1:192.168.56.20                   \
+                --add-host blz_host_2:192.168.56.30                   \
+                --ip 192.168.56.20 -p  6982:9999                      \
+                --expose 9999                                         \
+                -it --entrypoint /bin/bash rac021/blz_cluster_2_nodes \
                 -c "./bigdata start; while true; do sleep 1000; done  "
 
      docker run -d --net mynet123 --name blz_host_2                   \
                 --memory-swappiness=0	                              \
-	        --add-host blz_host_0:192.168.56.10                   \
-	        --add-host blz_host_1:192.168.56.20                   \
-	        --add-host blz_host_2:192.168.56.30                   \
-	        --ip 192.168.56.30 -p  6983:9999                      \
-	        --expose 9999                                         \
-	        -it --entrypoint /bin/bash rac021/blz_cluster_2_nodes \
-                 -c "./bigdata start; while true; do sleep 1000; done  "
+                --add-host blz_host_0:192.168.56.10                   \
+                --add-host blz_host_1:192.168.56.20                   \
+                --add-host blz_host_2:192.168.56.30                   \
+                --ip 192.168.56.30 -p  6983:9999                      \
+                --expose 9999                                         \
+                -it --entrypoint /bin/bash rac021/blz_cluster_2_nodes \
+                -c "./bigdata start; while true; do sleep 1000; done  "
          
      docker run -d --net mynet123                                                         \
                 --name  client_01_blz                                                     \
