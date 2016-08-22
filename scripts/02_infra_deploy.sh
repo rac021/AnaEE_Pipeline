@@ -3,12 +3,15 @@
 # Note :
 # Do not touch HOST_NAME
 # Docker version min : 1.10 
-# $1 blazegraph nameSpace 
+# $1 BLZ_IMAGE 
+# $2 IP_HOST_0
+# $3 IP_HOST_1
+# $4 IP_HOST_2
+# $5 NAMESPACE
 # $2 NameSpace
-# $3 PORT Number
-# $4 RW Mode
+# $6 PORT Number
 
-if [ $# -eq 7 ] ; then
+if [ $# -eq 6 ] ; then
 
    # Get Image Docker Name
    BLZ_IMAGE=$1
@@ -30,11 +33,7 @@ if [ $# -eq 7 ] ; then
    NAMESPACE=$5
    # Get Port Number
    PORT=$6
-   # Get Default Mode : 
-   # 'rw' for read-write Mode
-   # 'ro' for readOnly Mode. 
-   DEFAULT_MODE=$7
-	
+   
    LOOP=" while true; do sleep 1000; done "
 
    CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -103,12 +102,6 @@ if [ $# -eq 7 ] ; then
      sleep 5
    }
 
-   if [ "$DEFAULT_MODE" != "ro" ] && [ "$DEFAULT_MODE" != "rw" ] ; then 
-      echo
-      echo " DEFAULT_MODE can only have 'rw' OR 'ro' values !!"
-      EXIT
-   fi 
-    
    # Default interface
    SUBNET="mynet123"
 	
@@ -127,7 +120,6 @@ if [ $# -eq 7 ] ; then
    echo -e " ##  HOST_2    : $HOST_2 : $IP_HOST_2  "
    echo -e " ##  NAMESPACE : $NAMESPACE            "
    echo -e " ##  PORT      : $PORT                 "
-   echo -e " ##  MODE      : $DEFAULT_MODE         "
    echo
    echo -e " ##################################### "
    echo 
@@ -179,14 +171,13 @@ if [ $# -eq 7 ] ; then
      
 else
     echo
-    echo " Invalid arguments :  Please pass exactly Seven arguments "
+    echo " Invalid arguments :  Please pass exactly Six arguments   "
     echo " arg_1             :  Image_docker_name                   "
     echo " arg_2             :  IP Container HOST_1                 "
     echo " arg_3             :  IP Container HOST_2                 "
     echo " arg_4             :  IP Container HOST_3                 "
     echo " arg_5             :  Blazegraph_namespace                "
     echo " arg_6             :  Ports  number                       "
-    echo " arg_7             :  READ-WRITE MODE ( ro : rw   )       "   
     echo
 fi
 
