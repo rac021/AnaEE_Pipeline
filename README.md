@@ -122,7 +122,7 @@
 
 ### **Pipeline description**
  
-   As needs, scripts [pipeline_fullGraph.sh]( https://github.com/rac021/AnaEE_StandAlone/blob/master/pipeline_fullGraph.sh), [pipeline_graphChunks.sh]( https://github.com/rac021/AnaEE_StandAlone/blob/master/pipeline_graphChunks.sh) , [pipeline_patternGraphChunks.sh]( https://github.com/rac021/AnaEE_StandAlone/blob/master/pipeline_patternGraphChunks.sh) *orchestrate the pipeline*
+   As needs, scripts [pipeline_fullGraph.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/pipeline_fullGraph.sh), [pipeline_graphChunks.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/pipeline_graphChunks.sh) , [pipeline_patternGraphChunks.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/pipeline_patternGraphChunks.sh) *orchestrate the pipeline*
            
 #### * **Scripts ( folder scripts )**
 
