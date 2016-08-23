@@ -8,10 +8,10 @@
 # $3 IP_HOST_1
 # $4 IP_HOST_2
 # $5 NAMESPACE
-# $2 NameSpace
-# $6 PORT Number
+# $6 SUBNET_NAME [ Optionnal ]
+# $7 SUBNET_RANGE [ Optionnal ]
 
-if [ $# -eq 6 ] ; then
+if [ $# -ge 5 ] ; then
 
    # Get Image Docker Name
    BLZ_IMAGE=$1
@@ -25,14 +25,12 @@ if [ $# -eq 6 ] ; then
    IP_HOST_1=$3
    IP_HOST_2=$4
 
-   FORWARD_PORT_0="6981"
-   FORWARD_PORT_1="6982"
-   FORWARD_PORT_2="6983"
-   
    # Get NameSpace
    NAMESPACE=$5
-   # Get Port Number
-   PORT=$6
+  
+   # Default interface mynet123
+   SUBNET=${6:-"mynet123"}
+   SUBNET_RANGE=${7:-"192.168.56.250/24"} 
    
    LOOP=" while true; do sleep 1000; done "
 
@@ -53,18 +51,6 @@ if [ $# -eq 6 ] ; then
       fi
    }
   
-   isFreePort() {
-      CHECK_PORT=$1
-      if ! lsof -i:$CHECK_PORT > /dev/null
-      then
-        isFree="true"
-      else
-        echo
-        echo -e " Port $CHECK_PORT is in use, please release it to continue "
-        EXIT
-      fi
-   }
-    
    removeAllContainerBasedOnImage() {
       IMAGE=$1
       echo
@@ -79,18 +65,15 @@ if [ $# -eq 6 ] ; then
    runContainer() {
      HOST=$1
      IP=$2
-     PORT=$3
-     FORWARD_PORT=$4
      # --privileged=true -i -v /data1/Downloads:/Downloads 
-     echo -e "\e[36m Run Container $HOST  [ local_port : $PORT ] [ forward_port : $FORWARD_PORT ] \e[39m "
+     echo -e "\e[36m Run Container [ $HOST ] \e[39m "
      sleep 1
      RUNNING=$( docker run -d --net mynet123 --name $HOST     \
        	                   --memory-swappiness=0	      \
 	                   --add-host $HOST_0:$IP_HOST_0      \
 	                   --add-host $HOST_1:$IP_HOST_1      \
 	                   --add-host $HOST_2:$IP_HOST_2      \
-	                   --ip $IP  -p  $FORWARD_PORT:$PORT  \
-	                   --expose $PORT                     \
+	                   --ip $IP                           \
 	                   -it --entrypoint /bin/bash $BLZ_IMAGE -c "./bigdata start; $LOOP "  2>&1 )
 
      if [[ "$RUNNING" =~ "Error" ]]; then
@@ -102,9 +85,6 @@ if [ $# -eq 6 ] ; then
      sleep 5
    }
 
-   # Default interface
-   SUBNET="mynet123"
-	
    tput setaf 2
    echo 
    echo -e " ##################################### "
@@ -119,7 +99,6 @@ if [ $# -eq 6 ] ; then
    echo -e " ##  HOST_1    : $HOST_1 : $IP_HOST_1  "
    echo -e " ##  HOST_2    : $HOST_2 : $IP_HOST_2  "
    echo -e " ##  NAMESPACE : $NAMESPACE            "
-   echo -e " ##  PORT      : $PORT                 "
    echo
    echo -e " ##################################### "
    echo 
@@ -134,26 +113,20 @@ if [ $# -eq 6 ] ; then
          echo " subnet - $SUBNET - already exists "
      else
          echo " create subnet $SUBNET "
-         docker network create --subnet=192.168.56.250/24 $SUBNET 
+         docker network create --subnet=$SUBNET_RANGE $SUBNET 
          # docker network rm $SUBNET
      fi
 
-     fuser -k $FORWARD_PORT_0/tcp
-     isFreePort $FORWARD_PORT_0
-     fuser -k $FORWARD_PORT_1/tcp
-     isFreePort $FORWARD_PORT_1
-     fuser -k $FORWARD_PORT_2/tcp
-     isFreePort $FORWARD_PORT_2
-     
+    
      removeAllContainerBasedOnImage $BLZ_IMAGE
  
      > $HOST_FILE
      > $STATUS_FILE
      > $NANO_END_POINT_FILE
     
-     runContainer  $HOST_2  $IP_HOST_2 $PORT $FORWARD_PORT_2
-     runContainer  $HOST_1  $IP_HOST_1 $PORT $FORWARD_PORT_1
-     runContainer  $HOST_0  $IP_HOST_0 $PORT $FORWARD_PORT_0
+     runContainer  $HOST_2  $IP_HOST_2
+     runContainer  $HOST_1  $IP_HOST_1
+     runContainer  $HOST_0  $IP_HOST_0
 	
      echo
      echo -e "\e[94m waiting for blazegraph Cluster.. ~ 10s  \e[39m "
@@ -171,13 +144,15 @@ if [ $# -eq 6 ] ; then
      
 else
     echo
-    echo " Invalid arguments :  Please pass exactly Six arguments   "
-    echo " arg_1             :  Image_docker_name                   "
-    echo " arg_2             :  IP Container HOST_1                 "
-    echo " arg_3             :  IP Container HOST_2                 "
-    echo " arg_4             :  IP Container HOST_3                 "
-    echo " arg_5             :  Blazegraph_namespace                "
-    echo " arg_6             :  Ports  number                       "
+    echo " Invalid arguments :  Please pass at least Five arguments        "
+    echo " arg_1             :  Image_docker_name                          "
+    echo " arg_2             :  IP Container HOST_1                        "
+    echo " arg_3             :  IP Container HOST_2                        "
+    echo " arg_4             :  IP Container HOST_3                        "
+    echo " arg_5             :  Blazegraph_namespace                       "
+    echo " Optionnal         :                                             "
+    echo " SUBNET            :  SUBNET_NAME ( Default : mynet123           "
+    echo " SUBNET_RANGE      :  SUBNET_RANGE ( Default : 192.168.56.250/24 "
     echo
 fi
 
