@@ -139,8 +139,12 @@
      - Install [ Install Traefik reverse proxy]( https://github.com/rac021/Traefik_reverse_proxy) : **libs/traefik**     
 
 
-*  **[01_infra_build.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/01_infra_build.sh)**
+*  **[01_infra_build.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/01_infra_build.sh)** [ BLZ_IMAGE_NAME ]
 
+     - Remove **DOCKER_BLZ_IMAGE** if already exists.
+     - Buid BlazeGraph Docker image based on the [Dockerfile]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/Docker/Dockerfile)  
+
+     
 *  **[02_infra_deploy.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/02_infra_deploy.sh)**
 
 *  **[03_infra_attach_services.sh](https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/03_infra_attach_services.sh)**
