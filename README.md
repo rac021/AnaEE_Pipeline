@@ -157,17 +157,17 @@
  [ Img-Name - BName-Container - StartIP - NbrInstances - NameSpace - Port - RW-Mode ]  
 
      - Optionnal Arguments : SUBNET_NAME - Interface - TRAEFIK_BACKEND -  TRAEFIK_FRONTEND
-     - Img-Name : Image of the BlazzeGraph Docker built by **01_infra_build.sh**
-     - BName-Container : Each container will be created with name : BName-Container"_"$IP++"_blz"
+     - Img-Name : Name of the BlazzeGraph Image built by the script **01_infra_build.sh**
+     - BName-Container : Each container will be created with name : BName-Container "_" $IP++ "_blz"
      - StartIP : Assign **IP = startIP** to **Conainer_1**, **IP = startIP + 1** to **Conainer_2** ...
-     - NbrInstances : number of instances that will be deploy
-     - NameSpace : Name Space 
-     - Port : Port that will be used by the nanoSparqlServer ( in the docker container )
-     - RW-MODE : if **rw** then **Read-Write**. if **ro** then *Read-Only* Mode
+     - NbrInstances : number of instances that will be deployed
+     - NameSpace : Name Space that will be used in the cluster
+     - Port : Port that will be used by **nanoSparqlServer** ( in the docker container )
+     - RW-MODE : if **rw** then enable **Read-Write**. if **ro** then enable *Read-Only* Mode
      - Default Subnet Name : **mynet123**
      - Default TRAEFIK_BACKEND : **client_blz_backend**
      - Default TRAEFIK_FRONTEND_RULE : **Host:client.blz.localhost**
-     - For each service, Write, "Name_Container:IP:Port:NameSpace:RW-Mode" >> **scripts/conf/nanoEndpoint**
+     - For each service, Write : "Name_Container:IP:Port:NameSpace:RW-Mode" in **scripts/conf/nanoEndpoint**
 
 *  **[04_infra_attach_service.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/04_infra_attach_service.sh)**
 
