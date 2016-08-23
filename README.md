@@ -128,6 +128,17 @@
 
 *  **[00_install_libs.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/00_install_libs.sh)**
 
+     - Create needed folders
+     - Default database : Postgresql 
+     - Install [yedGen]( https://github.com/rac021/yedGen) : **libs/yedGen.jar**
+     - Copy yedGen documentation + examples to **libs/Docs**
+     - Install [ontop-matarializer]( https://github.com/rac021/ontop-matarializer) : **libs/Ontop-Materializer.jar**
+     - Copy Ontop-Materializer documentation + examples to **libs/ontop**
+     - Install [CoreseInfer]( https://github.com/rac021/CoreseInfer) : **libs/CoreseInfer.jar**
+     - Copy CoreseInfer documentation + examples to **libs/corese**
+     - Install [ Install Traefik reverse proxy]( https://github.com/rac021/Traefik_reverse_proxy) : **libs/traefik**     
+
+
 *  **[01_infra_build.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/01_infra_build.sh)**
 
 *  **[02_infra_deploy.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/02_infra_deploy.sh)**
