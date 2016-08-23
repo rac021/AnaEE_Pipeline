@@ -50,7 +50,7 @@
     echo -e " CLUSTER STATUS :  \e[42m \e[30m $STAT_SHOW \e[39m \e[49m  "
     echo
     echo
-    echo " *********************** "
+    echo " ----------------------- "
     echo " Cluster Hosts Name      "
     echo " ----------------------- "
     
@@ -65,10 +65,10 @@
     done 
     
     echo
-    echo " *********************** "
+    echo " ----------------------- "
     echo " Cluster Clients Name    "
     echo " ----------------------- "
-    echo
+    
     tput setaf 6
     
     for LINE in `cat $NANO_END_POINT_FILE`; do
@@ -86,6 +86,8 @@
       echo
     
     done
+    
+    echo
     
     tput setaf 7       
     
