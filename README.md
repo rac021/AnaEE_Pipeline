@@ -88,7 +88,9 @@
                 --ip 192.168.56.30                                    \
                 -it --entrypoint /bin/bash rac021/blz_cluster_2_nodes \
                 -c "./bigdata start; while true; do sleep 1000; done  "
-         
+        
+ ------------------------------------------------------------------------------------------
+
      docker run -d --net mynet123                                                         \
                 -l traefik.backend=client_blz_backend                                     \
                 -l traefik.frontend.rule=Host:client.blz.localhost                        \
