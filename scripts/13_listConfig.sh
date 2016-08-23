@@ -11,18 +11,19 @@
     }
   
     CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+    cd $CURRENT_PATH
     HOSTS_FILE="$CURRENT_PATH/conf/hosts"
     STATUS_FILE="$CURRENT_PATH/conf/status"
     NANO_END_POINT_FILE="$CURRENT_PATH/conf/nanoEndpoint"
     
-    if [ -f $STATUS_FILE ] ; then
+    if [ ! -f $STATUS_FILE ] ; then
       echo
       echo " File : $STATUS_FILE not found ! "
       echo
       EXIT
     fi
     
-    if [ -f $HOSTS_FILE ] ; then
+    if [ ! -f $HOSTS_FILE ] ; then
       echo
       echo " File : $HOSTS_FILE not found ! "
       echo
@@ -67,7 +68,7 @@
     echo " *********************** "
     echo " Cluster Clients Name    "
     echo " ----------------------- "
-    
+    echo
     tput setaf 6
     
     for LINE in `cat $NANO_END_POINT_FILE`; do
