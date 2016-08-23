@@ -67,6 +67,9 @@ BLAZEGRAPG_INFO_INSTALL="BLZ_INFO_INSTALL"
 # $DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_ [ YEDGEN | ONTOP | CORESE ]
 DOCUMENTATION_FILE_NAME="README.md"
 
+# Do not touch the Traefik_reverse_proxy
+Traefik_LOCATION="Traefik"
+
 if [ ! -d "$ROOT_PATH/$DIRECTORY_LIBS" ]; then
 mkdir -p $ROOT_PATH/$DIRECTORY_LIBS
 echo -e " \e[90m created folder : $ROOT_PATH/$DIRECTORY_LIBS \e[32m "
@@ -126,6 +129,10 @@ fi
 if [ ! -d "$ROOT_PATH/$DIRECTORY_LIBS/$BLAZEGRAPH_LOCATION" ]; then
 mkdir -p $ROOT_PATH/$DIRECTORY_LIBS/$BLAZEGRAPH_LOCATION
 echo -e " \e[90m created folder : $ROOT_PATH/$DIRECTORY_LIBS/$BLAZEGRAPH_LOCATION \e[32m  "
+fi
+if [ ! -d "$ROOT_PATH/$DIRECTORY_LIBS/$Traefik_LOCATION" ]; then
+mkdir -p $ROOT_PATH/$DIRECTORY_LIBS/$Traefik_LOCATION
+echo -e " \e[90m created folder : $ROOT_PATH/$DIRECTORY_LIBS/$Traefik_LOCATION \e[32m  "
 fi
 
 rm -rf $ROOT_PATH/$DIRECTORY_LIBS/$TMP
@@ -269,6 +276,21 @@ mv -fv $ROOT_PATH/$DIRECTORY_LIBS/$TMP/$DOCUMENTATION_FILE_NAME \
 
 rm -rf $ROOT_PATH/$DIRECTORY_LIBS/$TMP/* $ROOT_PATH/$DIRECTORY_LIBS/$TMP/.git
 
+
+#############################################
+###### Install Traefik_reverse_proxy ########
+#############################################
+
+tput setaf 2
+echo 
+echo " ##################################### "
+echo " ### Install Traefik reverse proxy ### "
+echo " ##################################### "
+echo 
+sleep 2
+tput setaf 7
+
+git clone https://github.com/rac021/Traefik_reverse_proxy.git $ROOT_PATH/$DIRECTORY_LIBS/$Traefik_LOCATION 
 
 #########################
 #### Clean TMP folder ###
