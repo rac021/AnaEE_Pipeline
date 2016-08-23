@@ -163,7 +163,7 @@
      - NbrInstances : number of instances that will be deployed
      - NameSpace : Name Space that will be used in the cluster
      - Port : Port that will be used by **nanoSparqlServer** ( in the docker container )
-     - RW-MODE : if **rw** then enable **Read-Write**. if **ro** then enable *Read-Only* Mode
+     - RW-MODE : if **rw** then enable **Read-Write** Mode. if **ro** then enable **Read-Only** Mode
      - Default Subnet Name : **mynet123**
      - Default TRAEFIK_BACKEND : **client_blz_backend**
      - Default TRAEFIK_FRONTEND_RULE : **Host:client.blz.localhost**
