@@ -68,7 +68,7 @@ BLAZEGRAPG_INFO_INSTALL="BLZ_INFO_INSTALL"
 DOCUMENTATION_FILE_NAME="README.md"
 
 # Do not touch the Traefik_reverse_proxy
-Traefik_LOCATION="Traefik"
+Traefik_LOCATION="traefik"
 
 if [ ! -d "$ROOT_PATH/$DIRECTORY_LIBS" ]; then
 mkdir -p $ROOT_PATH/$DIRECTORY_LIBS
