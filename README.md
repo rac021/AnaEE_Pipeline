@@ -145,7 +145,15 @@
      - Buid BlazeGraph Docker image based on the [Dockerfile]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/Docker/Dockerfile)  
 
      
-*  **[02_infra_deploy.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/02_infra_deploy.sh)**
+*  **[02_infra_deploy.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/02_infra_deploy.sh)** [ BLZ_IMAGE_NAME  IP-Host-0  IP-Host-1  IP-Host-2  NameSpace Port ] Subnet { Optionnal }
+
+     - Default Subnet : **mynet123**
+     - Remove all containers based on images : BLZ_IMAGE_NAME
+     - Release Ports **6981 6982 6983** on **host**  on local machine 
+     - FORWARD_PORT : 6981 for container BLZ_HOST_0
+     - FORWARD_PORT : 6982 for container BLZ_HOST_1
+     - FORWARD_PORT : 6983 for container BLZ_HOST_2
+     - Write Hosts [ blz_host_0 , blz_host_1 , blz_host_2 ] in **scripts/conf/hosts**
 
 *  **[03_infra_attach_services.sh](https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/03_infra_attach_services.sh)**
 
