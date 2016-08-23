@@ -52,6 +52,7 @@ if [ $# -ge 5 ] ; then
    }
   
    removeAllContainerBasedOnImage() {
+   	
       IMAGE=$1
       echo
       echo -e " Remove all containers based on images  $IMAGE "
@@ -63,6 +64,7 @@ if [ $# -ge 5 ] ; then
    } 
      
    runContainer() {
+   	
      HOST=$1
      IP=$2
      # --privileged=true -i -v /data1/Downloads:/Downloads 
