@@ -157,6 +157,7 @@
  [ Img-Name - BName-Container - StartIP - NbrInstances - NameSpace - Port - RW-Mode ]  
 
      - Optionnal Arguments : SUBNET_NAME - Interface - TRAEFIK_BACKEND -  TRAEFIK_FRONTEND
+     - if **One Argument** is passed and **Arg = clearAll** , then all Services will be removed
      - Img-Name : Name of the BlazzeGraph Image built by the script **01_infra_build.sh**
      - BName-Container : Each container will be created with name : BName-Container "_" $IP++ "_blz"
      - StartIP : Assign **IP = startIP** to **Conainer_1**, **IP = startIP + 1** to **Conainer_2** ...
