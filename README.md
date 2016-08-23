@@ -143,14 +143,19 @@
      - Buid BlazeGraph Docker image based on the [Dockerfile]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/Docker/Dockerfile)  
 
      
-*  **[02_infra_deploy.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/02_infra_deploy.sh)** [ Blz-Img-Name - IP_0 - IP_1 - IP_2 - NameSpace ]  Subnet_Name - Subnet_Range { Optionnal }
+*  **[02_infra_deploy.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/02_infra_deploy.sh)** [ Img-Name - IP_0 - IP_1 - IP_2 - NameSpace ]  Subnet_Name - Subnet_Range { Optionnal }
 
+     - Img-Name : Name of the BlazeGraph Image built by the script **01_infra_build.sh**
+     - IP_0 : IP Adress that will be assigned to the Containet_Host_0
+     - IP_1 : IP Adress that will be assigned to the Containet_Host_1
+     - IP_2 : IP Adress that will be assigned to the Containet_Host_2
+     - NameSpace : Name Space that will be used in the cluster
      - Default SUBNET_NAME : **mynet123**
      - Default SUBNET_RANGE : **192.168.56.250/24**
-     - Remove all containers based on images : BLZ_IMAGE_NAME
-     - Host_Name_0 : blz_host_0 [ Do not change ]
-     - Host_Name_1 : blz_host_1 [ Do not change ]
-     - Host_Name_2 : blz_host_2 [ Do not change ]
+     - The script will remove all containers based on images **BLZ_IMAGE_NAME** before starting Build
+     - Host_Name_0 = blz_host_0 [ Do not change ]
+     - Host_Name_1 = blz_host_1 [ Do not change ]
+     - Host_Name_2 = blz_host_2 [ Do not change ]
      - Write Hosts [ blz_host_0 , blz_host_1 , blz_host_2 ] in **scripts/conf/hosts**
 
 *  **[03_infra_attach_services.sh](https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/03_infra_attach_services.sh)**
@@ -158,7 +163,7 @@
 
      - Optionnal Arguments : SUBNET_NAME - Interface - TRAEFIK_BACKEND -  TRAEFIK_FRONTEND
      - if **One Argument** is passed and **Arg = clearAll** , then all Services will be removed
-     - Img-Name : Name of the BlazzeGraph Image built by the script **01_infra_build.sh**
+     - Img-Name : Name of the BlazeGraph Image built by the script **01_infra_build.sh**
      - BName-Container : Each container will be created with name : BName-Container "_" $IP++ "_blz"
      - StartIP : Assign **IP = startIP** to **Conainer_1**, **IP = startIP + 1** to **Conainer_2** ...
      - NbrInstances : number of instances that will be deployed
