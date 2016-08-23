@@ -49,7 +49,7 @@ if [ $# -eq 7 -o $# -eq 8 ] ; then
   
   ./scripts/10_load_data.sh
   
-  ./scripts/13_portal_query.sh ../data/portail/ola_portal_synthesis.ttl
+  ./scripts/12_synthesis_portal.sh ../data/portail/ola_portal_synthesis.ttl
   
   
 else
