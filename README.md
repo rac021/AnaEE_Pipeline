@@ -148,6 +148,9 @@
      - Default SUBNET_NAME : **mynet123**
      - Default SUBNET_RANGE : **192.168.56.250/24**
      - Remove all containers based on images : BLZ_IMAGE_NAME
+     - Host_Name_0 : blz_host_0 [ Do not change ]
+     - Host_Name_1 : blz_host_1 [ Do not change ]
+     - Host_Name_2 : blz_host_2 [ Do not change ]
      - Write Hosts [ blz_host_0 , blz_host_1 , blz_host_2 ] in **scripts/conf/hosts**
 
 *  **[03_infra_attach_services.sh](https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/03_infra_attach_services.sh)**
