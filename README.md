@@ -116,3 +116,58 @@
                 
 ```
  
+
+----------------------------------------------------
+
+
+### **Pipeline description**
+ 
+   As needs, scripts [pipeline_fullGraph.sh]( https://github.com/rac021/AnaEE_StandAlone/blob/master/pipeline_fullGraph.sh), [pipeline_graphChunks.sh]( https://github.com/rac021/AnaEE_StandAlone/blob/master/pipeline_graphChunks.sh) , [pipeline_patternGraphChunks.sh]( https://github.com/rac021/AnaEE_StandAlone/blob/master/pipeline_patternGraphChunks.sh) *orchestrate the pipeline*
+           
+#### * **Scripts ( folder scripts )**
+
+*  **[00_install_libs.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/00_install_libs.sh)**
+
+*  **[01_infra_build.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/01_infra_build.sh)**
+
+*  **[02_infra_deploy.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/02_infra_deploy.sh)**
+
+*  **[03_infra_attach_services.sh](https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/03_infra_attach_services.sh)**
+
+*  **[04_infra_attach_service.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/04_infra_attach_service.sh)**
+
+*  **[05_infra_start_stop.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/05_infra_start_stop.sh)**
+
+*  **[06_docker_nginx.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/06_docker_nginx.sh)**
+
+*  **[07_gen_mapping.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/07_gen_mapping.sh)**
+
+*  **[08_ontop_gen_triples.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/08_ontop_gen_triples.sh)**
+
+*  **[09_corese_infer.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/09_corese_infer.sh)**
+
+*  **[10_load_data.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/10_load_data.sh)**
+
+*  **[11_query_demo.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/11_query_demo.sh)**
+
+*  **[12_synthesis_portal.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/12_synthesis_portal.sh)**
+
+*  **[13_listServices.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/13_listServices.sh)**
+
+*  **[14_listConfig.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/14_listConfig.sh)**
+
+*  **[15_monitoring_kitematic.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/15_monitoring_kitematic.sh)**
+
+   
+----------------------------------------------------
+
+## Summary
+
+![pipeline_01](https://cloud.githubusercontent.com/assets/7684497/17776064/4f954b40-655b-11e6-9d23-7f02c64c6ea9.png)
+
+
+
+## Archi AnaEE :
+
+![archi_anaee](https://cloud.githubusercontent.com/assets/7684497/17859243/1535f7ac-6889-11e6-82d0-cd213fd66f88.png)
+
