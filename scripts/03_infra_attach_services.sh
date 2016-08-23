@@ -8,7 +8,7 @@
 # $3 PORT Number
 # $4 RW Mode
 
-   if [ $# -eq 7 ] ; then
+   if [ $# -lt 7 ] ; then
 
         # Get Image Docker Name
         BLZ_IMAGE=$1
@@ -24,9 +24,12 @@
         # 'ro' for readOnly Mode. 
         DEFAULT_MODE=$7
 
-        # Default interface
-        SUBNET="mynet123"
-
+        # Default interface mynet123
+        SUBNET=${8:-"mynet123"} 
+       
+        TRAEFIK_BACKEND=${9:-"client_blz_backend"} 
+        TRAEFIK_FRONTEND_RULE=${10:-"Host:client.blz.localhost"}
+        
         LOOP=" while true; do sleep 1000; done "
         
         EXIT() {
@@ -162,6 +165,8 @@
                 isFreePort $HOST_PORT
                 
                 RUNNING=$( docker run  -d                                                      \
+                           -l traefik.backend=$TRAEFIK_BACKEND                                 \
+                           -l traefik.frontend.rule=$TRAEFIK_FRONTEND_RULE                     \
                            --net  $SUBNET                                                      \
                            --name $NAME_INSTANCE                                               \
                            --ip   $IP                                                          \
@@ -203,14 +208,18 @@
     
    else
         echo
-        echo " Invalid arguments :  Please pass exactly Seven arguments "
-        echo " arg_1             :  Image_docker_name                   "
-        echo " arg_2             :  Base name Container                 "
-        echo " arg_3             :  Start IP                            "
-        echo " arg_4             :  Number Instances                    "
-        echo " arg_5             :  NameSpace                           "
-        echo " arg_6             :  Port                                "
-        echo " arg_7             :  READ-WRITE MODE ( ro : rw   )       "   
+        echo " Invalid arguments :  Please pass at least Seven arguments                          "
+        echo " arg_1             :  Image_docker_name                                             "
+        echo " arg_2             :  Base name Container                                           "
+        echo " arg_3             :  Start IP                                                      "
+        echo " arg_4             :  Number Instances                                              "
+        echo " arg_5             :  NameSpace                                                     "
+        echo " arg_6             :  Port                                                          "
+        echo " arg_7             :  READ-WRITE MODE ( ro : rw   )                                 " 
+        echo " Optionnal         :                                                                "
+        echo " arg_8             :  Interface ( Default : mynet123 )                              " 
+        echo " arg_9             :  TRAEFIK_BACKEND ( Default : client_blz_backend )              " 
+        echo " arg_10            :  TRAEFIK_FRONTEND_RULE ( Default : Host:client.blz.localhost ) " 
         echo
    fi
 
