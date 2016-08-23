@@ -129,7 +129,7 @@
 *  **[00_install_libs.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/00_install_libs.sh)**
 
      - Create needed folders
-     - Default database : Postgresql 
+     - Default database : Postgresql. Supported database : Postgresql, mySql
      - Install [yedGen]( https://github.com/rac021/yedGen) : **libs/yedGen.jar**
      - Copy yedGen documentation + examples to **libs/Docs**
      - Install [ontop-matarializer]( https://github.com/rac021/ontop-matarializer) : **libs/Ontop-Materializer.jar**
