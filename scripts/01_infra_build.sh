@@ -24,11 +24,6 @@ if [ $# -eq 1 ] ; then
     # Docker Image
     DOCKER_BLZ_IMAGE=$1
 
-    # Hosts Names 
-    HOST_0="blz_host_0"
-    HOST_1="blz_host_1"
-    HOST_2="blz_host_2"
- 
     tput setaf 2
     echo 
     echo -e " ################################# "
@@ -37,9 +32,6 @@ if [ $# -eq 1 ] ; then
     echo -e " \e[90m$0        \e[32m            "
     echo
     echo -e " ##  BLZ_IMAGE : $DOCKER_BLZ_IMAGE "
-    echo -e " ##  HOST_0    : $HOST_0           "
-    echo -e " ##  HOST_1    : $HOST_1           "
-    echo -e " ##  HOST_2    : $HOST_2           "
     echo
     echo -e " ################################# "
     echo 
