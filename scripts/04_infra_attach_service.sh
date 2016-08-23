@@ -24,9 +24,15 @@
         # 'ro' for readOnly Mode. 
         DEFAULT_MODE=$6
         
-        # Default interface
-        SUBNET="mynet123"
+        # Default interface mynet123
+        SUBNET=${7:-"mynet123"} 
 
+        TRAEFIK_BACKEND="client_blz_backend"
+        TRAEFIK_FRONTEND_RULE="Host:client.blz.localhost"
+        
+        TRAEFIK_BACKEND=${8:-"client_blz_backend"} 
+        TRAEFIK_FRONTEND_RULE=${9:-"Host:client.blz.localhost"}
+        
         LOOP=" while true; do sleep 1000; done "
       
         EXIT() {
@@ -118,6 +124,8 @@
             isFreePort $PORT
                
             RUNNING=$( docker run  -d                                                    \
+                       -l traefik.backend=$TRAEFIK_BACKEND                               \
+                       -l traefik.frontend.rule=$TRAEFIK_FRONTEND_RULE                   \
                        --net  $SUBNET                                                    \
                        --name $CONTAINER_NAME                                            \
                        --ip   $IP                                                        \
@@ -170,12 +178,16 @@
     
    else
         echo
-        echo " Invalid arguments :  Please pass exactly Six arguments   "
-        echo " arg_1             :  Image_docker_name                   "
-        echo " arg_2             :  Container Name                      "
-        echo " arg_3             :  IP                                  "
-        echo " arg_4             :  NameSpace                           "
-        echo " arg_5             :  Port                                "
-        echo " arg_6             :  READ-WRITE MODE ( ro : rw   )       "   
+        echo " Invalid arguments :  Please pass at least Six arguments                            "
+        echo " arg_1             :  Image_docker_name                                             "
+        echo " arg_2             :  Container Name                                                "
+        echo " arg_3             :  IP                                                            "
+        echo " arg_4             :  NameSpace                                                     "
+        echo " arg_5             :  Port                                                          "
+        echo " arg_6             :  READ-WRITE MODE ( ro : rw   )                                 "
+        echo " Optionnal         :                                                                "
+        echo " arg_7             :  Interface ( Default : mynet123 )                              "
+        echo " arg_8             :  TRAEFIK_BACKEND ( Default : client_blz_backend )              "
+        echo " arg_9             :  TRAEFIK_FRONTEND_RULE ( Default : Host:client.blz.localhost ) "
         echo
    fi
