@@ -8,6 +8,41 @@
 # $3 PORT Number
 # $4 RW Mode
 
+   CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+   
+   HOSTS_FILE="$CURRENT_PATH/conf/hosts"
+   NANO_END_POINT_FILE="$CURRENT_PATH/conf/nanoEndpoint"
+   
+   EXIT() {
+      parent_script=`ps -ocommand= -p $PPID | awk -F/ '{print $NF}' | awk '{print $1}'`
+      if [ $parent_script = "bash" ] ; then
+          echo; echo -e " \e[90m exited by : $0 \e[39m " ; echo
+          exit 2
+      else
+          echo ; echo -e " \e[90m exited by : $0 \e[39m " ; echo
+          kill -9 `ps --pid $$ -oppid=`;
+          exit 2
+     fi
+   }
+   
+   DISPLAY_MESSAGE() {
+      echo
+      echo " Invalid arguments :  Please pass exactly One or at least Seven arguments           "
+      echo " arg_1             :  Image_docker_name  / or / clearAll                            "
+      echo " arg_2             :  Base name Container                                           "
+      echo " arg_3             :  Start IP                                                      "
+      echo " arg_4             :  Number Instances                                              "
+      echo " arg_5             :  NameSpace                                                     "
+      echo " arg_6             :  Port                                                          "
+      echo " arg_7             :  READ-WRITE MODE ( ro : rw   )                                 " 
+      echo " Optionnal         :                                                                "
+      echo " arg_8             :  Interface ( Default : mynet123 )                              " 
+      echo " arg_9             :  TRAEFIK_BACKEND ( Default : client_blz_backend )              " 
+      echo " arg_10            :  TRAEFIK_FRONTEND_RULE ( Default : Host:client.blz.localhost ) " 
+      echo 
+   }   
+   
+   
    if [ $# -ge 7 ] ; then
 
         # Get Image Docker Name
@@ -31,19 +66,7 @@
         TRAEFIK_FRONTEND_RULE=${10:-"Host:client.blz.localhost"}
         
         LOOP=" while true; do sleep 1000; done "
-        
-        EXIT() {
-          parent_script=`ps -ocommand= -p $PPID | awk -F/ '{print $NF}' | awk '{print $1}'`
-          if [ $parent_script = "bash" ] ; then
-              echo; echo -e " \e[90m exited by : $0 \e[39m " ; echo
-              exit 2
-          else
-              echo ; echo -e " \e[90m exited by : $0 \e[39m " ; echo
-              kill -9 `ps --pid $$ -oppid=`;
-              exit 2
-          fi
-        }
-        
+       
         isFreePort() {
           PORT=$1
           if ! lsof -i:$PORT > /dev/null
@@ -63,8 +86,6 @@
 
         if docker history -q $BLZ_IMAGE >/dev/null 2>&1; then
 
-            CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-            
             STATUS_FILE="$CURRENT_PATH/conf/status"
             
             STATUS=`cat $STATUS_FILE `
@@ -104,42 +125,6 @@
             sleep 1
             tput setaf 7
 
-            # CLEAN NANO ENDPOINT FILE
-            
-            HOSTS_FILE="$CURRENT_PATH/conf/hosts"
-            NANO_END_POINT_FILE="$CURRENT_PATH/conf/nanoEndpoint"
-            CLEANED=false
-            
-            echo -e "\e[90m Cleaning existing Clients in :\e[39m "
-            echo -e "\e[90m $NANO_END_POINT_FILE \e[39m "
-             
-            for LINE in `cat $NANO_END_POINT_FILE`; do
-                        
-                IFS=’:’ read -ra INFO_NANO <<< "$LINE" 
-                NANO_END_POINT_HOST=${INFO_NANO[0]}
-                NANO_END_POINT_IP=${INFO_NANO[1]}
-                NANO_END_POINT_PORT=${INFO_NANO[2]}
-                NAME_SPACE=${INFO_NANO[3]}
-                
-                EXIST=$(docker inspect --format="{{ .Name }}" $NANO_END_POINT_HOST 2> /dev/null)
-                if [ ! -z $EXIST ]; then 
-                  echo
-                  echo " Container $NANO_END_POINT_HOST  already exists, remove... "
-                  docker  rm  -f   $NANO_END_POINT_HOST > /dev/null
-                  echo " Container $NANO_END_POINT_HOST  removed !! "
-                  CLEANED=true
-                fi
-            done
-            
-            > $NANO_END_POINT_FILE
-            
-            if [ "$CLEANED" = true ] ; then
-               echo -e " Cleanded ! "
-            else
-              echo -e " No existing EndPoint "
-            fi
-            echo
-            
             # PROCESS IP  
             IFS=’.’ read -ra S_IP <<< "$START_IP" 
             i1=${S_IP[0]} ; i2=${S_IP[1]} ; i3=${S_IP[2]}; i4=${S_IP[3]}
@@ -205,21 +190,55 @@
            echo " Image '$BLZ_IMAGE' not found !! "
            echo 
         fi
-    
+   
+   elif [ $# -eq 1 ] ; then 
+
+      if [ "$1" != "clearAll" ] ; then 
+      
+           DISPLAY_MESSAGE
+           EXIT
+      fi 
+
+      # CLEAN NANO ENDPOINT FILE
+      CLEANED=false
+      echo      
+      echo -e "\e[90m Cleaning existing Clients in :\e[39m "
+      echo -e "\e[90m $NANO_END_POINT_FILE \e[39m "
+             
+      for LINE in `cat $NANO_END_POINT_FILE`; do
+                        
+          IFS=’:’ read -ra INFO_NANO <<< "$LINE" 
+          NANO_END_POINT_HOST=${INFO_NANO[0]}
+          NANO_END_POINT_IP=${INFO_NANO[1]}
+          NANO_END_POINT_PORT=${INFO_NANO[2]}
+          NAME_SPACE=${INFO_NANO[3]}
+                
+          EXIST=$(docker inspect --format="{{ .Name }}" $NANO_END_POINT_HOST 2> /dev/null)
+          if [ ! -z $EXIST ]; then 
+            echo
+            echo " Container $NANO_END_POINT_HOST  already exists, remove... "
+            docker  rm  -f   $NANO_END_POINT_HOST > /dev/null
+            echo " Container $NANO_END_POINT_HOST  removed !! "
+            CLEANED=true
+          fi
+      done
+            
+      > $NANO_END_POINT_FILE
+            
+      if [ "$CLEANED" = true ] ; then
+         echo
+         echo -e " Cleanded ! "
+         echo
+      else
+        echo
+        echo -e " No existing EndPoint "
+        echo
+      fi
+      echo
+ 
    else
-        echo
-        echo " Invalid arguments :  Please pass at least Seven arguments                          "
-        echo " arg_1             :  Image_docker_name                                             "
-        echo " arg_2             :  Base name Container                                           "
-        echo " arg_3             :  Start IP                                                      "
-        echo " arg_4             :  Number Instances                                              "
-        echo " arg_5             :  NameSpace                                                     "
-        echo " arg_6             :  Port                                                          "
-        echo " arg_7             :  READ-WRITE MODE ( ro : rw   )                                 " 
-        echo " Optionnal         :                                                                "
-        echo " arg_8             :  Interface ( Default : mynet123 )                              " 
-        echo " arg_9             :  TRAEFIK_BACKEND ( Default : client_blz_backend )              " 
-        echo " arg_10            :  TRAEFIK_FRONTEND_RULE ( Default : Host:client.blz.localhost ) " 
-        echo
+   
+       DISPLAY_MESSAGE
+       EXIT
    fi
 
