@@ -3,10 +3,15 @@
 # Note :
 # Do not touch HOST_NAME
 # Docker version min : 1.10 
-# $1 blazegraph nameSpace 
-# $2 NameSpace
-# $3 PORT Number
-# $4 RW Mode
+# $1 BLZ_IMAGE 
+# $2 CONTAINER_NAME
+# $3 IP
+# $4 NAMESPACE
+# $5 PORT Number
+# $6 DEFAULT_MODE
+# $7 SUBNET
+# $8 TRAEFIK_BACKEND
+# $9 TRAEFIK_FRONTEND_RULE
 
    if [ $# -ge 6 ] ; then
 
@@ -27,9 +32,6 @@
         # Default interface mynet123
         SUBNET=${7:-"mynet123"} 
 
-        TRAEFIK_BACKEND="client_blz_backend"
-        TRAEFIK_FRONTEND_RULE="Host:client.blz.localhost"
-        
         TRAEFIK_BACKEND=${8:-"client_blz_backend"} 
         TRAEFIK_FRONTEND_RULE=${9:-"Host:client.blz.localhost"}
         
