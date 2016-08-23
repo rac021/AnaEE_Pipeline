@@ -8,7 +8,7 @@
 # $3 PORT Number
 # $4 RW Mode
 
-   if [ $# -eq 6 ] ; then
+   if [ $# -ge 6 ] ; then
 
         # Get Image Docker Name
         BLZ_IMAGE=$1
