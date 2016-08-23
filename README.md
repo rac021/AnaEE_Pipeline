@@ -141,7 +141,7 @@
      - Buid BlazeGraph Docker image based on the [Dockerfile]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/Docker/Dockerfile)  
 
      
-*  **[02_infra_deploy.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/02_infra_deploy.sh)** [ BLZ-IMG_NAME  IP-0  IP-1  IP-2  NameSpace ]  SUBNET_NAME SUBNET_RANGE { Optionnal }
+*  **[02_infra_deploy.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/02_infra_deploy.sh)** [ BLZ-IMG-NAME  IP_0  IP_1  IP_2  NameSpace ]  SUBNET_NAME SUBNET_RANGE { Optionnal }
 
      - Default SUBNET_NAME : **mynet123**
      - Default SUBNET_RANGE : **192.168.56.250/24**
