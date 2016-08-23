@@ -3,10 +3,16 @@
 # Note :
 # Do not touch HOST_NAME
 # Docker version min : 1.10 
-# $1 blazegraph nameSpace 
-# $2 NameSpace
-# $3 PORT Number
-# $4 RW Mode
+# $1  Image_docker_name  / or / clearAll
+# $2  Base name Container 
+# $3  PStart IP
+# $4  Number Instances
+# $5  NameSpace
+# $6  Port
+# $7  READ-WRITE MODE : ro - rw
+# $8  Interface ( Default : mynet123 )
+# $9  TRAEFIK_BACKEND ( Default : client_blz_backend ) 
+# $10 TRAEFIK_FRONTEND_RULE ( Default : Host:client.blz.localhost )
 
    CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
    
