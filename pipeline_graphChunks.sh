@@ -54,7 +54,7 @@ if [ $# -eq 7 -o $# -eq 8 ] ; then
 
    ./scripts/02_infra_deploy.sh $BLZ_MAGE $IP_HOST_1 $IP_HOST_2 $IP_HOST_3 $NAME_SPACE $PORT
 
-   ./scripts/03_infra_deploy_services.sh $BLZ_MAGE blz_client 192.168.56.200 1 $NAME_SPACE $PORT $RW_MODE
+   ./scripts/03_infra_attach_services.sh $BLZ_MAGE blz_client 192.168.56.200 1 $NAME_SPACE $PORT $RW_MODE
   
     # ./scripts/04_infra_attach_service.sh $BLZ_MAGE client_01_blz 192.168.56.221 $NAME_SPACE $PORT $RW_MODE
   
