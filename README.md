@@ -286,6 +286,10 @@
      
 *  **[13_listServices.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/13_listServices.sh)**
 
+     - List all available services in the blazeGraph cluster.
+     - Take **0** argument
+     - Relies on **scripts/conf/hosts**
+     
 *  **[14_listConfig.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/14_listConfig.sh)**
 
 *  **[15_monitoring_kitematic.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/15_monitoring_kitematic.sh)**
