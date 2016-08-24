@@ -294,7 +294,7 @@
 
      - List all cluster Host names + IP + Ports + Clients
      - Take **0** argument
-     - Relies on **scripts/conf/hosts"**
+     - Relies on **scripts/conf/hosts**
      - Relies on **scripts/conf/status**
      - Relies on **scripts/conf/nanoEndpoint**
     
