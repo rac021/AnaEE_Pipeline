@@ -221,9 +221,38 @@
      
 *  **[07_gen_mapping.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/07_gen_mapping.sh)**
 
+     - Take 0 or * ( with max arguments = 3 )
+     - **$1 INPUT :** path of graph files. Optionnal.Default **data/yedGen/**
+     - **$2 OUTPUT :** obda file(s). Optionnal. Default **mapping/mapping.obda**
+     - **$3 EXTENSION :** Extension of the graph files that wil be processed. Optionnal. Default **.graphml**
+     - Refer to [https://github.com/rac021/yedGen]( https://github.com/rac021/yedGen)
+     
 *  **[08_ontop_gen_triples.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/08_ontop_gen_triples.sh)**
 
+     - Take 0 or * ( with max arguments = 7 )
+     - **$1 OWL :** Path of the Ontology(ies). Optionnal. Default  **mapping/ontology.owl**
+     - **$2 OBDA :** Path of the obda mapping file. Optionnal. Default **mapping/mapping.obda**
+     - **$3 OUTPUT :** Path output data. Optionnal. Default **data/ontop/ontopMaterializedTriples.ttl**
+     - **$4 QUERY :** Query that will be executed. Optionnal. Default **SELECT ?S ?P ?O { ?S ?P ?O }**
+     - **$5 TTL :** if **-ttl** then, enable **turtle format**, else xml. Optionnal. Default  **-ttl**
+     - **$6 XMS :** Optionnal. Default **-Xms2048M**
+     - **$7 XMX :** Optionnal. Default **-Xms2048M**
+     - Refer to [https://github.com/rac021/ontop-matarializer]( https://github.com/rac021/ontop-matarializer)
+     
 *  **[09_corese_infer.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/09_corese_infer.sh)**
+
+     - Used to infer triples
+     - Take 0 or * ( with max arguments = 8 )
+     - **$1 OWL :** Path of the Ontology(ies). Optionnal. Default  **mapping/ontology.owl**
+     - **$2 TTL :** Path of the triples file. Optionnal. Default **data/ontop/ontopMaterializedTriples.ttl**
+     - **$3 QUERY :** Query that will be executed. Optionnal. Default **SELECT ?S ?P ?O { ?S ?P ?O }**
+     - **$4 OUTPUT :** Directory where output results.
+     - **$5 f :** Fragments. Number of triples per file. if = 0 then unlimited. Optionnal. Default **100000**
+     - **$6 F :** Output Format. **ttl**. Supported XML, CSV. Optionnal. Default : **ttl**
+     - **$7 XMS :**  Optionnal. Default **-Xms2048M**
+     - **$8 XMX :**  Optionnal. Default **-Xms2048M**
+     - Refer to [https://github.com/rac021/CoreseInfer]( https://github.com/rac021/CoreseInfer)
+     
 
 *  **[10_load_data.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/10_load_data.sh)**
 
