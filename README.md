@@ -310,6 +310,13 @@
 
 ![pipeline_doc](https://cloud.githubusercontent.com/assets/7684497/17931196/7ac44556-6a0a-11e6-8f29-a2d8d369802a.jpg)
 
+----------------------------------------------------
+
+## workflow :
+
+![archi_pipeline](https://cloud.githubusercontent.com/assets/7684497/17937287/d79f57fe-6a21-11e6-9e34-7a8f89c6461f.png)
+
+----------------------------------------------------
 
 ## Archi SI AnaEE :
 
