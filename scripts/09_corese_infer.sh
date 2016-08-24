@@ -1,14 +1,13 @@
 #!/bin/bash
-    
-  XMS="-Xms1024M"
-  XMX="-Xmx2048M"
-  
-  OWL="../mapping/ontology.owl"
-  TTL="../data/ontop/ontopMaterializedTriples.ttl"
-  QUERY=" SELECT ?S ?P ?O { ?S ?P ?O } "
-  OUTPUT="../data/corese"
-  f="100000"
-  F="ttl"
+   
+  OWL=${1:-"../mapping/ontology.owl"}
+  TTL=${2:-"../data/ontop/ontopMaterializedTriples.ttl"}
+  QUERY=${3:-" SELECT ?S ?P ?O { ?S ?P ?O } "}
+  OUTPUT=${4:-"../data/corese"}
+  f=${5:-"100000"}
+  F=${6:-"ttl"}
+  XMS=${7:-"-Xms2048M"}
+  XMX=${8:-"-Xmx2048M"}
 
   EXIT() {
     parent_script=`ps -ocommand= -p $PPID | awk -F/ '{print $NF}' | awk '{print $1}'`
