@@ -311,7 +311,7 @@
 ![pipeline_doc](https://cloud.githubusercontent.com/assets/7684497/17931196/7ac44556-6a0a-11e6-8f29-a2d8d369802a.jpg)
 
 
-## Archi AnaEE :
+## Archi SI AnaEE :
 
-![archi_anaee](https://cloud.githubusercontent.com/assets/7684497/17859243/1535f7ac-6889-11e6-82d0-cd213fd66f88.png)
+![archi_si](https://cloud.githubusercontent.com/assets/7684497/17937033/140233de-6a21-11e6-82f7-081572e71ed0.jpg)
 
