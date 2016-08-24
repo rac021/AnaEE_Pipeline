@@ -139,7 +139,7 @@
      - Install [ Install Traefik reverse proxy]( https://github.com/rac021/Traefik_reverse_proxy) : **libs/traefik**     
 
 
-*  **[01_infra_build.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/01_infra_build.sh)** [ BLZ_IMAGE_NAME ]
+*  **[01_infra_build.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/01_infra_build.sh)**
 
      - Take 1 argument
      - **$1 BLZ_IMAGE_NAME :** Name of the BlazeGraph Image to build.
