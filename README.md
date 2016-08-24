@@ -256,6 +256,12 @@
 
 *  **[10_load_data.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/10_load_data.sh)**
 
+     - Used to load data on the blazeGraph endpoint.
+     - Take 0 or 1 argument
+     - **$1 DATA_DIR :** Directory where files to load are located. Optionnal. Default **data/corese**
+     - Relies on **scripts/conf/nanoEndpoint** file
+     - inform if endPoint not reachable
+
 *  **[11_query_demo.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/11_query_demo.sh)**
 
 *  **[12_synthesis_portal.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/12_synthesis_portal.sh)**
