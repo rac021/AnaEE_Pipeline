@@ -301,7 +301,8 @@
 *  **[15_monitoring_kitematic.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/15_monitoring_kitematic.sh)**
 
      - Docker GUI
-     - Take **0** argument 
+     - Take **0** argument
+     - Must have a Docker Hub Account
    
 ----------------------------------------------------
 
