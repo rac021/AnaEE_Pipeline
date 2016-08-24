@@ -198,12 +198,12 @@
 
      - Take exactly One argument
      - if **$1 = start** : for each
-          - container of the cluster do : ./bigdata start
-          - blazeGraph service container of the cluster do : ./nanoSparqlServer.sh Port NameSpace RW-Mode
+          - container of the cluster do : **./bigdata start**
+          - blazeGraph service container of the cluster do : **./nanoSparqlServer.sh Port NameSpace RW-Mode**
           - Wite **1** in **scripts/conf/status**
      - if **$1 = stop** : for each
-          - container of the cluster do : ./bigdata stop
-          - blazeGraph service container of the cluster do :  ./bigdata stop ( will kill nanoSparqlServer process )
+          - container of the cluster do : **./bigdata stop**
+          - blazeGraph service container of the cluster do :  **./bigdata stop** ( will kill nanoSparqlServer process )
           - Wite **0** in **scripts/conf/status**
                     
 *  **[06_docker_nginx.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/06_docker_nginx.sh)**
