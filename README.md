@@ -308,8 +308,7 @@
 
 ## Summary
 
-![pipeline_01](https://cloud.githubusercontent.com/assets/7684497/17776064/4f954b40-655b-11e6-9d23-7f02c64c6ea9.png)
-
+![pipeline_doc](https://cloud.githubusercontent.com/assets/7684497/17931196/7ac44556-6a0a-11e6-8f29-a2d8d369802a.jpg)
 
 
 ## Archi AnaEE :
