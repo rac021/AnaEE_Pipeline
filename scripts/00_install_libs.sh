@@ -5,16 +5,16 @@
 
 if [ $# == 0 ] ; then
     DATA_BASE="psql"
-    DEMO="demo"
+    TYPE_INSTALL="demo"
 elif [[ $# == 1 && $1 != "demo" && $1 != "fullGraph" && $1 != "graphChunks" &&  $1 != "patternGraphChunks" ]] ; then
     DATA_BASE=$1
-    DEMO=${2:-"graphChunks"}
+    TYPE_INSTALL=${2:-"graphChunks"}
 elif [[ $# == 1 && ( $1 == "demo" || $1 == "fullGraph" || $1 == "graphChunks" ||  $1 == "patternGraphChunks" ) ]] ; then
     DATA_BASE="psql"
-    DEMO=$1
+    TYPE_INSTALL=$1
 elif [ $# -eq 2 ] ; then
     DATA_BASE=$1
-    DEMO=$2
+    TYPE_INSTALL=$2
 fi
 
 tput setaf 2
@@ -172,22 +172,22 @@ mv -fv $ROOT_PATH/$DIRECTORY_LIBS/$TMP/$DOCUMENTATION_FILE_NAME \
 
 # demo - fullGraph - graphChunks - patternGraphChunks
  
-if   [ $DEMO == "demo" ] ; then 
+if   [ $TYPE_INSTALL == "demo" ] ; then 
 
   cp -rf $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN/$EXAMPLES/demo/*.* \
          $ROOT_PATH/$DIRECTORY_DATA/$DIRECTORY_DATA_YEDGEN
 
-elif [ $DEMO == "graphChunks" ] ; then 
+elif [ $TYPE_INSTALL == "graphChunks" ] ; then 
 
   cp -rf $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN/$EXAMPLES/ola_mapping/graphChunks/* \
          $ROOT_PATH/$DIRECTORY_DATA/$DIRECTORY_DATA_YEDGEN
 
-elif [ $DEMO == "patternGraphChunks" ] ; then 
+elif [ $TYPE_INSTALL == "patternGraphChunks" ] ; then 
               
   cp -rf $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN/$EXAMPLES/ola_mapping/patternGraphChunks/* \
          $ROOT_PATH/$DIRECTORY_DATA/$DIRECTORY_DATA_YEDGEN
          
-elif [ $DEMO == "fullGraph" ] ; then 
+elif [ $TYPE_INSTALL == "fullGraph" ] ; then 
 
   cp -rf $ROOT_PATH/$DIRECTORY_LIBS/$DOCS/$DIRECTORY_DATA_YEDGEN/$EXAMPLES/ola_mapping/fullGraph/byCategory/physicochimie/dissolvedAmmoniumNitrogenMassConcentration/*.* \
          $ROOT_PATH/$DIRECTORY_DATA/$DIRECTORY_DATA_YEDGEN
