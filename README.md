@@ -208,6 +208,17 @@
                     
 *  **[06_docker_nginx.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/06_docker_nginx.sh)**
 
+     - Take 0 or * ( with max arguments = 8 )
+     - **$1 DEFAULT_IP :** IP of the Nginx container. Optionnal. Default **192.168.56.110**
+     - **$2 SUBNET :** Optionnal. Default : **mynet123**
+     - **$3 SUBNET_RANGE :** Optionnal. Default : **192.168.56.250/24**
+     - **$4 DEFAULT_PORT :** Nginx Port. Optionnal. Default : **80**
+     - **$5 LOCAL_IP :** IP OF THE LocalHost. Optionnal. Default **127.0.0.1**
+     - **$6 IMAGE_NAME :** Name of the Nginx Container. Optionnal. Default : **nginx-ecoinformatics**
+     - **$7 HOST :** Host that will be add to **/etc/hosts** in the Host Machine. Optionnal. Default : **ecoinformatics.org**
+     - **$8 FOLDER_DOCKER_FILE :** localtion of the wb files. Optionnal. Default : **docker_nginx_server**
+     - The script will remove the container based on images **IMAGE_NAME** if already exists
+     
 *  **[07_gen_mapping.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/07_gen_mapping.sh)**
 
 *  **[08_ontop_gen_triples.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/08_ontop_gen_triples.sh)**
