@@ -125,9 +125,11 @@
 #### * **Scripts ( folder scripts )**
 
 *  **[00_install_libs.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/00_install_libs.sh)**
-
+     - Take 0, 1 or 2 arguments
+     - **$1 DATA_BASE :** Postgresql / mySql 
+     - **$2 TYPE_INSTALL :** demo / graphChunks / patternGraphChunks
      - Create needed folders
-     - Default database : Postgresql. Supported database : Postgresql, mySql
+     - Default database : Postgresql. Supported database : mySql
      - Install [yedGen]( https://github.com/rac021/yedGen) : **libs/yedGen.jar**
      - Copy yedGen documentation + examples to **libs/Docs**
      - Install [ontop-matarializer]( https://github.com/rac021/ontop-matarializer) : **libs/Ontop-Materializer.jar**
@@ -139,19 +141,22 @@
 
 *  **[01_infra_build.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/01_infra_build.sh)** [ BLZ_IMAGE_NAME ]
 
+     - Take 1 argument
+     - **$1 BLZ_IMAGE_NAME :** Name of the BlazeGraph Image to build.
      - Remove **DOCKER_BLZ_IMAGE** if already exists.
      - Buid BlazeGraph Docker image based on the [Dockerfile]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/Docker/Dockerfile)  
 
      
-*  **[02_infra_deploy.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/02_infra_deploy.sh)** [ Img-Name - IP_0 - IP_1 - IP_2 - NameSpace ]  Subnet_Name - Subnet_Range { Optionnal }
+*  **[02_infra_deploy.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/02_infra_deploy.sh)** 
 
-     - Img-Name : Name of the BlazeGraph Image built by the script **01_infra_build.sh**
-     - IP_0 : IP Adress that will be assigned to the Containet_Host_0
-     - IP_1 : IP Adress that will be assigned to the Containet_Host_1
-     - IP_2 : IP Adress that will be assigned to the Containet_Host_2
-     - NameSpace : Name Space that will be used in the cluster
-     - Default SUBNET_NAME : **mynet123**
-     - Default SUBNET_RANGE : **192.168.56.250/24**
+     - Take at least 5 arguments 
+     - **$1 BLZ_IMAGE_NAME :** Name of the BlazeGraph Image built by the script **01_infra_build.sh**.
+     - **$2 IP_HOST_0 :**  IP Adress that will be assigned to the Container_Host_0
+     - **$3 IP_HOST_1 :**  IP Adress that will be assigned to the Container_Host_1
+     - **$4 IP_HOST_2 :**  IP Adress that will be assigned to the Container_Host_2
+     - **$5 NameSpace :**  Name Space that will be used in the cluster
+     - **$6 SUBNET_NAME :**  Optionnal. Default : **mynet123**
+     - **$7 SUBNET_RANGE :**  Optionnal. Default : **192.168.56.250/24**
      - The script will remove all containers based on images **BLZ_IMAGE_NAME** before starting Build
      - Host_Name_0 = blz_host_0 [ Do not change ]
      - Host_Name_1 = blz_host_1 [ Do not change ]
@@ -159,20 +164,19 @@
      - Write Hosts [ blz_host_0 , blz_host_1 , blz_host_2 ] in **scripts/conf/hosts**
 
 *  **[03_infra_attach_services.sh](https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/03_infra_attach_services.sh)**
- [ Img-Name - BName-Container - StartIP - NbrInstances - NameSpace - Port - RW-Mode ]  
 
-     - Optionnal Arguments : SUBNET_NAME - Interface - TRAEFIK_BACKEND -  TRAEFIK_FRONTEND
-     - if **One Argument** is passed and **Arg = clearAll** , then all Services will be removed
-     - Img-Name : Name of the BlazeGraph Image built by the script **01_infra_build.sh**
-     - BName-Container : Each container will be created with name : BName-Container "_" $IP++ "_blz"
-     - StartIP : Assign **IP = startIP** to **Conainer_1**, **IP = startIP + 1** to **Conainer_2** ...
-     - NbrInstances : number of instances that will be deployed
-     - NameSpace : Name Space that will be used in the cluster
-     - Port : Port that will be used by **nanoSparqlServer** ( in the docker container )
-     - RW-MODE : if **rw** then enable **Read-Write** Mode. if **ro** then enable **Read-Only** Mode
-     - Default Subnet Name : **mynet123**
-     - Default TRAEFIK_BACKEND : **client_blz_backend**
-     - Default TRAEFIK_FRONTEND_RULE : **Host:client.blz.localhost**
+     - Take exactly One or at least Seven arguments
+     - **$1 BLZ_IMAGE_NAME :** Name of the BlazeGraph Image built by the script **01_infra_build.sh**.
+     - **$2 Base-Name-Container :**  Each container will be created with name : Base-Name-Container "_" $IP++ "_blz"
+     - **$3 StartIP :**  Assign **IP = startIP** to **Conainer_1**, **IP = startIP + 1** to **Conainer_2** ...
+     - **$4 NbrInstances :**  number of instances that will be deployed
+     - **$5 NameSpace :**  Name Space that will be used in the cluster
+     - **$6 Port :**  Port that will be used by **nanoSparqlServer** ( in the docker container )
+     - **$7 RW-Mode :**  if **rw** then enable **Read-Write** Mode. if **ro** then enable **Read-Only** Mode
+     - **$8 SUBNET :** Optionnal. Default : **mynet123**
+     - **$9 TRAEFIK_BACKEND :** Optionnal. Default TRAEFIK_BACKEND : **client_blz_backend**
+     - **$10 TRAEFIK_FRONTEND_RULE :**  Optionnal. Default TRAEFIK_FRONTEND_RULE : **Host:client.blz.localhost**
+     - if **One Argument** is passed and **$1 = clearAll** , then all Services will be removed
      - For each service, Write : "Name_Container:IP:Port:NameSpace:RW-Mode" in **scripts/conf/nanoEndpoint**
 
 *  **[04_infra_attach_service.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/04_infra_attach_service.sh)**
