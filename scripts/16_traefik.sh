@@ -8,8 +8,12 @@
  
  cd ../libs/traefik
 
-if [ "$1" = "start" ] ; then 
+if [ "$1" = "start" ] ; then
   ./traefik --configFile=traefik.toml &
+  sleep 1
+  echo
+  echo -e " Dashboard \e[93m http://localhost:8081/dashboard \e[39m "
+  echo
 
 elif [ "$1" = "stop" ] ; then 
    pkill traefik
