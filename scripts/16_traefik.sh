@@ -12,6 +12,8 @@ if [ "$1" = "start" ] ; then
   ./traefik --configFile=traefik.toml &
   sleep 1
   echo
+  echo -e "\e[90m Blazegraph Load Balancer default frentend-route : http://client.blz.localhost:8000 \e[39m "
+  echo
   echo -e " Dashboard \e[93m http://localhost:8081/dashboard \e[39m "
   echo
 
