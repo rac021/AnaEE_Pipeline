@@ -1,13 +1,13 @@
 #/bin/bash
 
- DEFAULT_IP="192.168.56.110"
- SUBNET="mynet123"
- PLAGE_SUBNET="192.168.56.250/24"
- DEFAULT_PORT="80"
- LOCAL_IP="127.0.0.1"
- IMAGE_NAME="nginx-ecoinformatics"
- HOST="ecoinformatics.org"
- FOLDER_DOCKER_FILE="docker_nginx_server"
+ DEFAULT_IP=${1:-"192.168.56.110"}
+ SUBNET=${2:-"mynet123"}
+ SUBNET_RANGE=${3:-"192.168.56.250/24"}
+ DEFAULT_PORT=${4:-"80"}
+ LOCAL_IP=${5:-"127.0.0.1"}
+ IMAGE_NAME=${6:-"nginx-ecoinformatics"}
+ HOST=${7:-"ecoinformatics.org"}
+ FOLDER_DOCKER_FILE=${8:-"docker_nginx_server"}
 
  CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
  cd $CURRENT_PATH/$FOLDER_DOCKER_FILE
@@ -30,7 +30,7 @@
            echo " subnet - $SUBNET - already exists "
     else
            echo " create subnet $SUBNET "
-           docker network create --subnet=$PLAGE_SUBNET $SUBNET 
+           docker network create --subnet=$SUBNET_RANGE $SUBNET 
            # docker network rm $SUBNET
     fi
     
