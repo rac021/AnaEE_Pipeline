@@ -174,12 +174,25 @@
      - **$6 Port :**  Port that will be used by **nanoSparqlServer** ( in the docker container )
      - **$7 RW-Mode :**  if **rw** then enable **Read-Write** Mode. if **ro** then enable **Read-Only** Mode
      - **$8 SUBNET :** Optionnal. Default : **mynet123**
-     - **$9 TRAEFIK_BACKEND :** Optionnal. Default TRAEFIK_BACKEND : **client_blz_backend**
-     - **$10 TRAEFIK_FRONTEND_RULE :**  Optionnal. Default TRAEFIK_FRONTEND_RULE : **Host:client.blz.localhost**
+     - **$9 TRAEFIK_BACKEND :** Optionnal. Default : **client_blz_backend**
+     - **$10 TRAEFIK_FRONTEND_RULE :**  Optionnal. Default : **Host:client.blz.localhost**
      - if **One Argument** is passed and **$1 = clearAll** , then all Services will be removed
      - For each service, Write : "Name_Container:IP:Port:NameSpace:RW-Mode" in **scripts/conf/nanoEndpoint**
 
 *  **[04_infra_attach_service.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/04_infra_attach_service.sh)**
+
+     - Take exactly Six arguments
+     - **$1 BLZ_IMAGE_NAME :** Name of the BlazeGraph Image built by the script **[01_infra_build.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/01_infra_build.sh)**.
+     - **$2 CONTAINER_NAME :**  Name of the container that will be created.
+     - **$3 StartIP :**  Assign **IP = startIP** to **Conainer_1**, **IP = startIP + 1** to **Conainer_2** ...
+     - **$4 NameSpace :**  Name Space that will be used in the cluster
+     - **$5 Port :**  Port that will be used by **nanoSparqlServer** ( in the docker container )
+     - **$6 RW-Mode :**  if **rw** then enable **Read-Write** Mode. if **ro** then enable **Read-Only** Mode
+     - **$7 SUBNET :** Optionnal. Default : **mynet123**
+     - **$8 TRAEFIK_BACKEND :** Optionnal. Default : **client_blz_backend**
+     - **$9 TRAEFIK_FRONTEND_RULE :**  Optionnal. Default : **Host:client.blz.localhost**
+     
+
 
 *  **[05_infra_start_stop.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/05_infra_start_stop.sh)**
 
