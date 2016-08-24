@@ -3,10 +3,12 @@
     EXIT() {
       parent_script=`ps -ocommand= -p $PPID | awk -F/ '{print $NF}' | awk '{print $1}'`
       if [ $parent_script = "bash" ] ; then
-          exit 2
+        echo; echo -e " \e[90m exited by : $0 \e[39m " ; echo
+        exit 2
       else
-          kill -9 `ps --pid $$ -oppid=`;
-          exit 2
+        echo ; echo -e " \e[90m exited by : $0 \e[39m " ; echo
+        kill -9 `ps --pid $$ -oppid=`;
+        exit 2
       fi
     }
   
