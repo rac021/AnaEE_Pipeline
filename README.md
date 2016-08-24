@@ -222,7 +222,7 @@
      - **$8 HOST :** Host that will be add to **/etc/hosts** in the Host Machine. Optionnal. Default : **ecoinformatics.org**
      - **$9 FOLDER_DOCKER_FILE :** localtion of the wb files. Optionnal. Default : **docker_nginx_server**
      - The script will remove the container based on images **IMAGE_NAME** if already exists
-      - Build and run **nginx-ecoinformatics** docker image 
+     - Build and run **nginx-ecoinformatics** docker image Based on the  [Dockerfile]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/docker_nginx_server/Dockerfile)
      - Ontologies accessible locally
      - If start : add **"127.0.0.1 ecoinformatics.org"** to **/etc/hosts**
      - If stop : remove **"127.0.0.1 ecoinformatics.org"** from **/etc/hosts**
