@@ -29,7 +29,7 @@
 
         if [ -z $FIRST_END_POINT ] ; then 
            echo
-           echo -e "\e[91m No EndPoint Read-Write mode found \e[39m "
+           echo -e "\e[91m No EndPoint with Read-Write mode found \e[39m "
            echo -e " \e[93m   -> $NANO_END_POINT_FILE \e[39m "
            echo
            EXIT
