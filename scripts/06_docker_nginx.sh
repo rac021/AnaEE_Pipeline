@@ -1,13 +1,13 @@
 #/bin/bash
 
- DEFAULT_IP=${1:-"192.168.56.110"}
- SUBNET=${2:-"mynet123"}
- SUBNET_RANGE=${3:-"192.168.56.250/24"}
- DEFAULT_PORT=${4:-"80"}
- LOCAL_IP=${5:-"127.0.0.1"}
- IMAGE_NAME=${6:-"nginx-ecoinformatics"}
- HOST=${7:-"ecoinformatics.org"}
- FOLDER_DOCKER_FILE=${8:-"docker_nginx_server"}
+ DEFAULT_IP=${2:-"192.168.56.110"}
+ SUBNET=${3:-"mynet123"}
+ SUBNET_RANGE=${4:-"192.168.56.250/24"}
+ DEFAULT_PORT=${5:-"80"}
+ LOCAL_IP=${6:-"127.0.0.1"}
+ IMAGE_NAME=${7:-"nginx-ecoinformatics"}
+ HOST=${8:-"ecoinformatics.org"}
+ FOLDER_DOCKER_FILE=${9:-"docker_nginx_server"}
 
  CURRENT_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
  cd $CURRENT_PATH/$FOLDER_DOCKER_FILE
