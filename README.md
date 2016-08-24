@@ -191,11 +191,21 @@
      - **$7 SUBNET :** Optionnal. Default : **mynet123**
      - **$8 TRAEFIK_BACKEND :** Optionnal. Default : **client_blz_backend**
      - **$9 TRAEFIK_FRONTEND_RULE :**  Optionnal. Default : **Host:client.blz.localhost**
-     
-
+     - The script will remove the container based on images **CONTAINER_NAME** if already exists
+     - Write : "CONTAINER_NAME:IP:Port:NameSpace:RW-Mode" in **scripts/conf/nanoEndpoint**
 
 *  **[05_infra_start_stop.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/05_infra_start_stop.sh)**
 
+     - Take exactly One argument
+     - if **$1 = start** : for each
+          - container of the cluster do : ./bigdata start
+          - blazeGraph service container of the cluster do : ./nanoSparqlServer.sh Port NameSpace RW-Mode
+          - Wite **1** in **scripts/conf/status**
+     - if **$1 = stop** : for each
+          - container of the cluster do : ./bigdata stop
+          - blazeGraph service container of the cluster do :  ./bigdata stop ( will kill nanoSparqlServer process )
+          - Wite **0** in **scripts/conf/status**
+                    
 *  **[06_docker_nginx.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/06_docker_nginx.sh)**
 
 *  **[07_gen_mapping.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/07_gen_mapping.sh)**
