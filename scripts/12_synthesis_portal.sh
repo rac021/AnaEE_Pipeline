@@ -97,7 +97,7 @@
 	 	    ?idVariableSynthesis  :hasNbData             ?nbData               .
 		    ?idVariableSynthesis  :hasYear               ?year                 .
 		     
-		   } 
+	      } 
 	      WHERE {
 	         
 		    SELECT ?infra
