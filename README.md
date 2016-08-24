@@ -125,6 +125,7 @@
 #### * **Scripts ( folder scripts )**
 
 *  **[00_install_libs.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/00_install_libs.sh)**
+
      - Take 0, 1 or 2 arguments
      - **$1 DATA_BASE :** Postgresql / mySql 
      - **$2 TYPE_INSTALL :** demo / graphChunks / patternGraphChunks
@@ -165,7 +166,7 @@
 
 *  **[03_infra_attach_services.sh](https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/03_infra_attach_services.sh)**
 
-     - Take exactly One or at least Seven arguments
+     - Take 1 or * ( with max arguments = 7 )
      - **$1 BLZ_IMAGE_NAME :** Name of the BlazeGraph Image built by the script **[01_infra_build.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/01_infra_build.sh)**.
      - **$2 Base-Name-Container :**  Each container will be created with name : Base-Name-Container "_" $IP++ "_blz"
      - **$3 StartIP :**  Assign **IP = startIP** to **Conainer_1**, **IP = startIP + 1** to **Conainer_2** ...
@@ -208,16 +209,23 @@
                     
 *  **[06_docker_nginx.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/06_docker_nginx.sh)**
 
-     - Take 0 or * ( with max arguments = 8 )
-     - **$1 DEFAULT_IP :** IP of the Nginx container. Optionnal. Default **192.168.56.110**
-     - **$2 SUBNET :** Optionnal. Default : **mynet123**
-     - **$3 SUBNET_RANGE :** Optionnal. Default : **192.168.56.250/24**
-     - **$4 DEFAULT_PORT :** Nginx Port. Optionnal. Default : **80**
-     - **$5 LOCAL_IP :** IP OF THE LocalHost. Optionnal. Default **127.0.0.1**
-     - **$6 IMAGE_NAME :** Name of the Nginx Container. Optionnal. Default : **nginx-ecoinformatics**
-     - **$7 HOST :** Host that will be add to **/etc/hosts** in the Host Machine. Optionnal. Default : **ecoinformatics.org**
-     - **$8 FOLDER_DOCKER_FILE :** localtion of the wb files. Optionnal. Default : **docker_nginx_server**
+     - Used to solves some proxy problems
+     - Take 1 or * ( with max arguments = 9 )
+     - if **$1 = start** : start nginx docker container
+     - if **$1 = stop** : stop nginx docker container
+     - **$2 DEFAULT_IP :** IP of the Nginx container. Optionnal. Default **192.168.56.110**
+     - **$3 SUBNET :** Optionnal. Default : **mynet123**
+     - **$4 SUBNET_RANGE :** Optionnal. Default : **192.168.56.250/24**
+     - **$5 DEFAULT_PORT :** Nginx Port. Optionnal. Default : **80**
+     - **$6 LOCAL_IP :** IP OF THE LocalHost. Optionnal. Default **127.0.0.1**
+     - **$7 IMAGE_NAME :** Name of the Nginx Container. Optionnal. Default : **nginx-ecoinformatics**
+     - **$8 HOST :** Host that will be add to **/etc/hosts** in the Host Machine. Optionnal. Default : **ecoinformatics.org**
+     - **$9 FOLDER_DOCKER_FILE :** localtion of the wb files. Optionnal. Default : **docker_nginx_server**
      - The script will remove the container based on images **IMAGE_NAME** if already exists
+      - Build and run **nginx-ecoinformatics** docker image 
+     - Ontologies accessible locally
+     - If start : add **"127.0.0.1 ecoinformatics.org"** to **/etc/hosts**
+     - If stop : remove **"127.0.0.1 ecoinformatics.org"** from **/etc/hosts**
      
 *  **[07_gen_mapping.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/07_gen_mapping.sh)**
 
@@ -264,8 +272,18 @@
 
 *  **[11_query_demo.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/11_query_demo.sh)**
 
+     - Query blazeGraph endPoint using a spaql query demo.
+     - Take **0** argument
+     - Output Result on **console**
+     
 *  **[12_synthesis_portal.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/12_synthesis_portal.sh)**
 
+     - Create Synthesis for portal
+     - Take **1** argument
+     - **$1 OUT :** Directory where result file will be localed. Optionnal. Default **../data/portail/ola_portal_synthesis.ttl**
+     - Relies on **scripts/conf/nanoEndpoint** file
+     - inform if endPoint not reachable
+     
 *  **[13_listServices.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/13_listServices.sh)**
 
 *  **[14_listConfig.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/14_listConfig.sh)**
