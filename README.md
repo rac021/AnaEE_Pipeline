@@ -312,7 +312,7 @@
 
 ----------------------------------------------------
 
-## workflow :
+## Workflow ( triples production + Inference ) :
 
 ![archi_pipeline](https://cloud.githubusercontent.com/assets/7684497/17937287/d79f57fe-6a21-11e6-9e34-7a8f89c6461f.png)
 
