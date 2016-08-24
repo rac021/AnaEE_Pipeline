@@ -150,7 +150,7 @@
 *  **[02_infra_deploy.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/02_infra_deploy.sh)** 
 
      - Take at least 5 arguments 
-     - **$1 BLZ_IMAGE_NAME :** Name of the BlazeGraph Image built by the script **01_infra_build.sh**.
+     - **$1 BLZ_IMAGE_NAME :** Name of the BlazeGraph Image built by the script **[01_infra_build.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/01_infra_build.sh)**.
      - **$2 IP_HOST_0 :**  IP Adress that will be assigned to the Container_Host_0
      - **$3 IP_HOST_1 :**  IP Adress that will be assigned to the Container_Host_1
      - **$4 IP_HOST_2 :**  IP Adress that will be assigned to the Container_Host_2
@@ -166,7 +166,7 @@
 *  **[03_infra_attach_services.sh](https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/03_infra_attach_services.sh)**
 
      - Take exactly One or at least Seven arguments
-     - **$1 BLZ_IMAGE_NAME :** Name of the BlazeGraph Image built by the script **01_infra_build.sh**.
+     - **$1 BLZ_IMAGE_NAME :** Name of the BlazeGraph Image built by the script **[01_infra_build.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/01_infra_build.sh)**.
      - **$2 Base-Name-Container :**  Each container will be created with name : Base-Name-Container "_" $IP++ "_blz"
      - **$3 StartIP :**  Assign **IP = startIP** to **Conainer_1**, **IP = startIP + 1** to **Conainer_2** ...
      - **$4 NbrInstances :**  number of instances that will be deployed
