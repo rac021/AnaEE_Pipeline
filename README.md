@@ -292,6 +292,12 @@
      
 *  **[14_listConfig.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/14_listConfig.sh)**
 
+     - List all cluster Host names + IP + Ports + Clients
+     - Take **0** argument
+     - Relies on **scripts/conf/hosts"**
+     - Relies on **scripts/conf/status**
+     - Relies on **scripts/conf/nanoEndpoint**
+    
 *  **[15_monitoring_kitematic.sh]( https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/15_monitoring_kitematic.sh)**
 
    
