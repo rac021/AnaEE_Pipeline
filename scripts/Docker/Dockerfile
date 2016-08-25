@@ -41,3 +41,4 @@ WORKDIR /nas/bigdata/benchmark/bin
 
 ENTRYPOINT ./bigdata
 
+
