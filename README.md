@@ -321,7 +321,7 @@
 
 ----------------------------------------------------
 
-## Workflow ( triples production + Inference ) :
+## [Workflow Ontop - Corese - triples generation](https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/doc/02_workflow_ontop_corese.graphml)
 
 ![archi_pipeline](https://cloud.githubusercontent.com/assets/7684497/17937287/d79f57fe-6a21-11e6-9e34-7a8f89c6461f.png)
 
