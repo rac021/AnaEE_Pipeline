@@ -315,7 +315,7 @@
    
 ----------------------------------------------------
 
-## ![Summary](https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/doc/01_pipeline_scripts.graphml) 
+## [Summary](https://github.com/rac021/AnaEE_Pipeline/blob/master/scripts/doc/01_pipeline_scripts.graphml) 
 
 ![pipeline_doc](https://cloud.githubusercontent.com/assets/7684497/17931196/7ac44556-6a0a-11e6-8f29-a2d8d369802a.jpg)
 
