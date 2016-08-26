@@ -114,13 +114,13 @@
 
  ------------------------------------------------------------------------------------------
  
- docker exec client_01_blz tail -F -n 30 ---disable-inotify --retry -s 10  /nas/bigdata/benchmark/log/error.log
- docker exec client_01_blz tail -F -n 30 ---disable-inotify --retry -s 10 /nas/bigdata/benchmark/log/detail.log
- docker exec client_01_blz tail -F -n 30 ---disable-inotify --retry -s 10  /nas/bigdata/benchmark/log/event.log
+     docker exec cl_01_blz tail -Fn 30 ---disable-inotify --retry -s 10  /nas/bigdata/benchmark/log/error.log
+     docker exec cl_01_blz tail -Fn 30 ---disable-inotify --retry -s 10 /nas/bigdata/benchmark/log/detail.log
+     docker exec cl_01_blz tail -Fn 30 ---disable-inotify --retry -s 10  /nas/bigdata/benchmark/log/event.log
      
- docker exec client_02_blz tail -F -n 30 ---disable-inotify --retry -s 10  /nas/bigdata/benchmark/log/error.log
- docker exec client_02_blz tail -F -n 30 ---disable-inotify --retry -s 10 /nas/bigdata/benchmark/log/detail.log
- docker exec client_02_blz tail -F -n 30 ---disable-inotify --retry -s 10  /nas/bigdata/benchmark/log/event.log
+     docker exec cl_02_blz tail -Fn 30 ---disable-inotify --retry -s 10  /nas/bigdata/benchmark/log/error.log
+     docker exec cl_02_blz tail -Fn 30 ---disable-inotify --retry -s 10 /nas/bigdata/benchmark/log/detail.log
+     docker exec cl_02_blz tail -Fn 30 ---disable-inotify --retry -s 10  /nas/bigdata/benchmark/log/event.log
    
 ```
  
