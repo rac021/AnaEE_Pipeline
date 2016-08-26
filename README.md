@@ -94,7 +94,7 @@
      docker run -d --net mynet123                                                         \
                 -l traefik.backend=client_blz_backend                                     \
                 -l traefik.frontend.rule=Host:client.blz.localhost                        \
-                --name  client_01_blz                                                     \
+                --name  cl_01_blz                                                         \
                 --ip    192.168.56.200                                                    \
                 -p      9990:9999                                                         \
                 --expose 9999                                                             \
@@ -105,7 +105,7 @@
      docker run -d --net mynet123                                                         \
                 -l traefik.backend=client_blz_backend                                     \
                 -l traefik.frontend.rule=Host:client.blz.localhost                        \
-                --name  client_02_blz                                                     \
+                --name  cl_02_blz                                                         \
                 --ip    192.168.56.210                                                    \
                 -p      9995:9999                                                         \
                 --memory-swappiness=0                                                     \
@@ -114,13 +114,13 @@
 
  ------------------------------------------------------------------------------------------
  
-   docker exec cl_01_blz tail -Fn 30 ---disable-inotify --retry -s 10  /nas/bigdata/benchmark/log/error.log
-   docker exec cl_01_blz tail -Fn 30 ---disable-inotify --retry -s 10 /nas/bigdata/benchmark/log/detail.log
-   docker exec cl_01_blz tail -Fn 30 ---disable-inotify --retry -s 10  /nas/bigdata/benchmark/log/event.log
+ docker exec cl_01_blz tail -Fn 30 ---disable-inotify --retry -s 10  /nas/bigdata/benchmark/log/error.log
+ docker exec cl_01_blz tail -Fn 30 ---disable-inotify --retry -s 10 /nas/bigdata/benchmark/log/detail.log
+ docker exec cl_01_blz tail -Fn 30 ---disable-inotify --retry -s 10  /nas/bigdata/benchmark/log/event.log
      
-   docker exec cl_02_blz tail -Fn 30 ---disable-inotify --retry -s 10  /nas/bigdata/benchmark/log/error.log
-   docker exec cl_02_blz tail -Fn 30 ---disable-inotify --retry -s 10 /nas/bigdata/benchmark/log/detail.log
-   docker exec cl_02_blz tail -Fn 30 ---disable-inotify --retry -s 10  /nas/bigdata/benchmark/log/event.log
+ docker exec cl_02_blz tail -Fn 30 ---disable-inotify --retry -s 10  /nas/bigdata/benchmark/log/error.log
+ docker exec cl_02_blz tail -Fn 30 ---disable-inotify --retry -s 10 /nas/bigdata/benchmark/log/detail.log
+ docker exec cl_02_blz tail -Fn 30 ---disable-inotify --retry -s 10  /nas/bigdata/benchmark/log/event.log
    
 ```
  
