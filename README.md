@@ -35,12 +35,12 @@
 -    [https://github.com/rac021/blazegraph_1_5_3_cluster_2_nodes]( https://github.com/rac021/blazegraph_1_5_3_cluster_2_nodes)
    
 -    [https://github.com/rac021/yedGen]( https://github.com/rac021/yedGen.git)
-   
+
+-    [https://github.com/rac021/ontop-matarializer]( https://github.com/rac021/ontop-matarializer)
+
 -    [https://github.com/rac021/CoreseInfer]( https://github.com/rac021/CoreseInfer)
    
--    [https://github.com/rac021/ontop-matarializer]( https://github.com/rac021/ontop-matarializer)
-   
--    [ Traefik Reverse proxy + load balancer ]( https://github.com/rac021/Traefik_reverse_proxy)   
+-    [https://github.com/rac021/Traefik_reverse_proxy]( https://github.com/rac021/Traefik_reverse_proxy)   
 
 **Requirements :**
 
