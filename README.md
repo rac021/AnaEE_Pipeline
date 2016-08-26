@@ -40,7 +40,7 @@
 
 -    [https://github.com/rac021/CoreseInfer]( https://github.com/rac021/CoreseInfer)
    
--    [https://github.com/rac021/Traefik_reverse_proxy]( https://github.com/rac021/Traefik_reverse_proxy)   
+-    [https://github.com/rac021/traefik_reverse_proxy]( https://github.com/rac021/traefik_reverse_proxy)   
 
 **Requirements :**
 
