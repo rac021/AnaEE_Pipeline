@@ -114,9 +114,9 @@
 
  ------------------------------------------------------------------------------------------
  
-   docker exec client_01_blz tail -f /nas/bigdata/benchmark/log/error.log
+     docker exec client_01_blz tail -f /nas/bigdata/benchmark/log/error.log
    
-   docker exec client_02_blz tail -f /nas/bigdata/benchmark/log/error.log
+     docker exec client_02_blz tail -f /nas/bigdata/benchmark/log/error.log
    
 ```
  
