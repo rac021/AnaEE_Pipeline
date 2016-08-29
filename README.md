@@ -57,7 +57,7 @@
     
  ----------------------------------------------------
 
-**Quick setup ( using Docker Hub image ) no need scripts ; change IPs and ports if needed :**
+**Quick setup ( using  [Docker Hub image](https://hub.docker.com/r/rac021/blz_cluster_2_nodes) ) no need scripts ; change IPs and ports if needed :**
  
  ```
 ❯    docker network create --subnet=192.168.56.250/24 mynet123
