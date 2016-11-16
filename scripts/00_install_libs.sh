@@ -44,7 +44,7 @@ DIRECTORY_DATA_YEDGEN="yedGen"
 DIRECTORY_DATA_CONFIG="conf"
 
 # Do not touch the YEDGEN_COMPILE_NAME
-YEDGEN_COMPILE_NAME="yedGen-1.0-SNAPSHOT-jar-with-dependencies.jar"
+YEDGEN_COMPILE_NAME="yedGen_2.0-1.0-SNAPSHOT-jar-with-dependencies.jar"
 YEDGEN_TARGET_NAME="yedGen.jar"
 YEDGEN_EXP_LOCATION="src/main/resources/*"
 
