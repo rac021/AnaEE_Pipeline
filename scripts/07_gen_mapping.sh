@@ -42,7 +42,7 @@
 
   echo -e "\e[90m Strating Generation... \e[39m "
   
-  java -cp ../libs/yedGen.jar Main -d $INPUT -out $OUTPUT -ext $EXTENSION
+  java -cp ../libs/yedGen.jar entypoint.Main -d $INPUT -out $OUTPUT -ext $EXTENSION -ig
 
   echo -e "\e[36m Mapping generated in : $OUTPUT \e[39m "
   echo
