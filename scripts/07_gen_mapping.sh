@@ -3,6 +3,8 @@
   INPUT=${1:-"../data/yedGen"} 
   OUTPUT=${2:-"../mapping/mapping.obda"}
   EXTENSION=${3:-".graphml"}
+  CSV_FILE=${4:-"-csv ../data/csv-files/ola.csv"}
+  INCLUDE_GRAPH_VARIAVLES=${5:-""}
   
   EXIT() {
      parent_script=`ps -ocommand= -p $PPID | awk -F/ '{print $NF}' | awk '{print $1}'`
@@ -42,7 +44,7 @@
 
   echo -e "\e[90m Strating Generation... \e[39m "
   
-  java -cp ../libs/yedGen.jar entypoint.Main -d $INPUT -out $OUTPUT -ext $EXTENSION -ig
+  java -cp ../libs/yedGen.jar entypoint.Main -d $INPUT -out $OUTPUT -ext $EXTENSION $CSV_FILE $INCLUDE_GRAPH_VARIAVLES
 
   echo -e "\e[36m Mapping generated in : $OUTPUT \e[39m "
   echo
