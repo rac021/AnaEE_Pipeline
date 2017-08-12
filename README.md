@@ -64,7 +64,7 @@
 ❯    docker network create --subnet=192.168.56.250/24 mynet123
 
      docker run -d --net mynet123 --name blz_host_0                   \
-                --memory-swappiness=0	                              \
+                --memory-swappiness=0	                             \
                 --add-host blz_host_0:192.168.56.10                   \
                 --add-host blz_host_1:192.168.56.20                   \
                 --add-host blz_host_2:192.168.56.30                   \
@@ -73,7 +73,7 @@
                 -c "./bigdata start; while true; do sleep 1000; done  "
                    
      docker run -d --net mynet123 --name blz_host_1                   \
-                --memory-swappiness=0	                              \
+                --memory-swappiness=0	                             \
                 --add-host blz_host_0:192.168.56.10                   \
                 --add-host blz_host_1:192.168.56.20                   \
                 --add-host blz_host_2:192.168.56.30                   \
@@ -82,7 +82,7 @@
                 -c "./bigdata start; while true; do sleep 1000; done  "
 
      docker run -d --net mynet123 --name blz_host_2                   \
-                --memory-swappiness=0	                              \
+                --memory-swappiness=0	                             \
                 --add-host blz_host_0:192.168.56.10                   \
                 --add-host blz_host_1:192.168.56.20                   \
                 --add-host blz_host_2:192.168.56.30                   \
